@@ -13,7 +13,46 @@ try {
 }
 
 $db = new Database(Config::get('DB_PATH'));
+
+// Handle search
+$searchQuery = $_GET['search'] ?? '';
 $laws = $db->getLatestLaws(50);
+
+// Filter laws if search query is provided
+if (!empty($searchQuery)) {
+    $searchLower = mb_strtolower($searchQuery, 'UTF-8');
+    $filteredLaws = [];
+    
+    foreach ($laws as $law) {
+        $titleLower = mb_strtolower($law['title'], 'UTF-8');
+        $match = false;
+        
+        // Check if search matches title
+        if (strpos($titleLower, $searchLower) !== false) {
+            $match = true;
+        }
+        
+        // Check if search matches tags
+        if (!$match && !empty($law['ai_summary'])) {
+            $summary = json_decode($law['ai_summary'], true);
+            if ($summary && isset($summary['tags']) && is_array($summary['tags'])) {
+                foreach ($summary['tags'] as $tag) {
+                    $tagLower = mb_strtolower($tag, 'UTF-8');
+                    if (strpos($tagLower, $searchLower) !== false) {
+                        $match = true;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if ($match) {
+            $filteredLaws[] = $law;
+        }
+    }
+    
+    $laws = $filteredLaws;
+}
 
 ?>
 <!DOCTYPE html>
@@ -58,6 +97,48 @@ $laws = $db->getLatestLaws(50);
             font-weight: 400;
             line-height: 1.7;
             flex: 1;
+        }
+        .search-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .search-button {
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .search-button:hover {
+            background: #2980b9;
+        }
+        .search-results-info {
+            margin-top: 15px;
+            color: #7f8c8d;
+            font-size: 0.9em;
         }
         .law-item {
             padding: 20px;
@@ -141,10 +222,37 @@ $laws = $db->getLatestLaws(50);
             <p class="tagline">Zrozumiteľné analýzy slovenských zákonov, ktoré vám pomôžu pochopiť, ako vás ovplyvnia a ako môžete na ne reagovať.</p>
         </div>
         
+        <div class="search-container">
+            <form method="GET" action="" class="search-box">
+                <input 
+                    type="text" 
+                    name="search" 
+                    class="search-input" 
+                    placeholder="Hľadať zákony podľa názvu alebo tagov (napr. financie, školstvo, dane...)" 
+                    value="<?php echo htmlspecialchars($searchQuery); ?>"
+                >
+                <button type="submit" class="search-button">Hľadať</button>
+            </form>
+            <?php if (!empty($searchQuery)): ?>
+                <div class="search-results-info">
+                    Nájdených: <?php echo count($laws); ?> zákon<?php echo count($laws) === 1 ? '' : (count($laws) >= 2 && count($laws) <= 4 ? 'y' : 'ov'); ?> 
+                    pre "<?php echo htmlspecialchars($searchQuery); ?>"
+                    <a href="index.php" style="margin-left: 10px; color: #3498db;">Zrušiť vyhľadávanie</a>
+                </div>
+            <?php endif; ?>
+        </div>
+        
         <?php if (empty($laws)): ?>
             <div class="empty">
-                <p>Zatiaľ neboli spracované žiadne zákony.</p>
-                <p style="margin-top: 10px; font-size: 0.9em;">Spustite <code>php bin/cron.php</code> na spracovanie.</p>
+                <?php if (!empty($searchQuery)): ?>
+                    <p>Pre vyhľadávanie "<?php echo htmlspecialchars($searchQuery); ?>" neboli nájdené žiadne zákony.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">
+                        <a href="index.php" style="color: #3498db;">Zobraziť všetky zákony</a>
+                    </p>
+                <?php else: ?>
+                    <p>Zatiaľ neboli spracované žiadne zákony.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Spustite <code>php bin/cron.php</code> na spracovanie.</p>
+                <?php endif; ?>
             </div>
         <?php else: ?>
             <?php foreach ($laws as $law): ?>
