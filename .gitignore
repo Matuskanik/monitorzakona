@@ -1,0 +1,40 @@
+# Composer
+/vendor/
+composer.phar
+composer.lock
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+public/data/*.db
+
+# Storage and logs
+/storage/
+/logs/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# PHP
+*.cache
+.phpunit.result.cache
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup

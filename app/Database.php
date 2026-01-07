@@ -1,0 +1,234 @@
+<?php
+
+namespace App;
+
+class Database
+{
+    private \PDO $pdo;
+
+    public function __construct(string $dbPath)
+    {
+        // Convert relative paths to absolute paths relative to project root
+        if (!str_starts_with($dbPath, '/')) {
+            // Find project root (where vendor/autoload.php is)
+            $projectRoot = dirname(__DIR__);
+            $dbPath = $projectRoot . '/' . $dbPath;
+        }
+        
+        $dir = dirname($dbPath);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $this->pdo = new \PDO('sqlite:' . $dbPath);
+        $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+        $this->bootstrap();
+    }
+
+    private function bootstrap(): void
+    {
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS laws (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                master_id TEXT NOT NULL UNIQUE,
+                title TEXT NOT NULL,
+                approval_date TEXT,
+                source_url TEXT NOT NULL,
+                content_hash TEXT NOT NULL,
+                ai_summary TEXT,
+                processing_status TEXT DEFAULT 'pending',
+                text_extracted INTEGER DEFAULT 0,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+        
+        // Migrate existing tables to add new columns if they don't exist
+        try {
+            $this->pdo->exec("ALTER TABLE laws ADD COLUMN processing_status TEXT DEFAULT 'pending'");
+        } catch (\PDOException $e) {
+            // Column already exists, ignore
+        }
+        
+        try {
+            $this->pdo->exec("ALTER TABLE laws ADD COLUMN text_extracted INTEGER DEFAULT 0");
+        } catch (\PDOException $e) {
+            // Column already exists, ignore
+        }
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS attachments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                law_id INTEGER NOT NULL,
+                filename TEXT NOT NULL,
+                filepath TEXT NOT NULL,
+                source_url TEXT,
+                file_type TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (law_id) REFERENCES laws(id) ON DELETE CASCADE
+            )
+        ");
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS processing_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                master_id TEXT NOT NULL,
+                status TEXT NOT NULL,
+                message TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+    }
+
+    public function getPdo(): \PDO
+    {
+        return $this->pdo;
+    }
+
+    public function findLawByMasterId(string $masterId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM laws WHERE master_id = ?");
+        $stmt->execute([$masterId]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function saveLaw(array $data): int
+    {
+        $existing = $this->findLawByMasterId($data['master_id']);
+        
+        $processingStatus = $data['processing_status'] ?? 'completed';
+        $textExtracted = isset($data['text_extracted']) ? ($data['text_extracted'] ? 1 : 0) : 1;
+        
+        if ($existing) {
+            $stmt = $this->pdo->prepare("
+                UPDATE laws 
+                SET title = ?, approval_date = ?, source_url = ?, content_hash = ?, 
+                    ai_summary = ?, processing_status = ?, text_extracted = ?, updated_at = CURRENT_TIMESTAMP
+                WHERE master_id = ?
+            ");
+            $stmt->execute([
+                $data['title'],
+                $data['approval_date'],
+                $data['source_url'],
+                $data['content_hash'],
+                $data['ai_summary'] ?? null,
+                $processingStatus,
+                $textExtracted,
+                $data['master_id']
+            ]);
+            return $existing['id'];
+        } else {
+            $stmt = $this->pdo->prepare("
+                INSERT INTO laws (master_id, title, approval_date, source_url, content_hash, ai_summary, processing_status, text_extracted)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ");
+            $stmt->execute([
+                $data['master_id'],
+                $data['title'],
+                $data['approval_date'],
+                $data['source_url'],
+                $data['content_hash'],
+                $data['ai_summary'] ?? null,
+                $processingStatus,
+                $textExtracted
+            ]);
+            return $this->pdo->lastInsertId();
+        }
+    }
+
+    public function saveAttachment(int $lawId, array $data): void
+    {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO attachments (law_id, filename, filepath, source_url, file_type)
+            VALUES (?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            $lawId,
+            $data['filename'],
+            $data['filepath'],
+            $data['source_url'] ?? null,
+            $data['file_type'] ?? null
+        ]);
+    }
+
+    public function getAttachments(int $lawId): array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM attachments WHERE law_id = ? ORDER BY created_at");
+        $stmt->execute([$lawId]);
+        return $stmt->fetchAll();
+    }
+
+    public function logProcessing(string $masterId, string $status, ?string $message = null): void
+    {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO processing_log (master_id, status, message)
+            VALUES (?, ?, ?)
+        ");
+        $stmt->execute([$masterId, $status, $message]);
+    }
+
+    public function getLatestLaws(int $limit = 50): array
+    {
+        // Order by approval_date (date of publication) descending, then by created_at
+        // Since approval_date is in Slovak format (DD. MM. YYYY), we need to parse it
+        // We'll use a subquery to convert the date format for proper sorting
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM laws 
+            ORDER BY 
+                CASE 
+                    WHEN approval_date IS NOT NULL AND approval_date != '' THEN
+                        -- Convert Slovak date format (DD. MM. YYYY) to sortable format
+                        -- Extract year, month, day and create YYYY-MM-DD format
+                        substr('0000' || substr(approval_date, -4), -4) || '-' ||
+                        substr('00' || substr(approval_date, length(approval_date) - 7, 2), -2) || '-' ||
+                        substr('00' || substr(approval_date, 1, 2), -2)
+                    ELSE '0000-00-00'
+                END DESC,
+                created_at DESC
+            LIMIT ?
+        ");
+        $stmt->execute([$limit]);
+        $laws = $stmt->fetchAll();
+        
+        // Additional PHP sorting as fallback for edge cases
+        usort($laws, function($a, $b) {
+            $dateA = $this->parseSlovakDate($a['approval_date'] ?? '');
+            $dateB = $this->parseSlovakDate($b['approval_date'] ?? '');
+            
+            if ($dateA == $dateB) {
+                // If dates are equal, sort by created_at
+                $createdA = strtotime($a['created_at'] ?? '1970-01-01');
+                $createdB = strtotime($b['created_at'] ?? '1970-01-01');
+                return $createdB <=> $createdA; // DESC
+            }
+            
+            return $dateB <=> $dateA; // DESC
+        });
+        
+        return $laws;
+    }
+    
+    private function parseSlovakDate(?string $date): string
+    {
+        if (empty($date)) {
+            return '0000-00-00';
+        }
+        
+        // Parse Slovak date format: "DD. MM. YYYY" or "D. M. YYYY"
+        // Remove extra spaces and normalize
+        $date = trim($date);
+        $date = preg_replace('/\s+/', ' ', $date);
+        
+        // Try to parse the date
+        if (preg_match('/(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})/', $date, $matches)) {
+            $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
+            $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
+            $year = $matches[3];
+            return "{$year}-{$month}-{$day}";
+        }
+        
+        return '0000-00-00';
+    }
+}
+
