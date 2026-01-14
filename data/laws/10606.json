@@ -1,0 +1,76 @@
+{
+    "id": 1,
+    "master_id": "10606",
+    "title": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti a o zmene a doplnení niektorých zákonov, vrátený prezidentom Slovenskej republiky na opätovné prerokovanie Národnou radou Slovenskej republiky",
+    "approval_date": "11. 12. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10606",
+    "created_at": "2026-01-14 15:43:09",
+    "updated_at": "2026-01-14 15:43:09",
+    "summary": {
+        "tags": [
+            "justícia",
+            "sociálna politika"
+        ],
+        "summary_paragraph": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti zavádza nový nezávislý orgán, ktorý má za cieľ chrániť práva obetí trestných činov a oznamovateľov. Tento úrad nahradí súčasný Úrad na ochranu oznamovateľov protispoločenskej činnosti, pričom jeho pôsobnosť sa rozšíri o oblasť ochrany obetí trestných činov. Zákon bol však vrátený prezidentom na opätovné prerokovanie, pričom prezident vyjadril obavy o nedostatočnú prípravu a legislatívnu transparentnosť procesu. Kľúčové zmeny zahŕňajú zriadenie nového úradu, ktorý má za úlohu zabezpečiť efektívnejšiu ochranu obetí, avšak existujú obavy, že zriadenie nového úradu môže viesť k rozdrobeniu ochrany a zhoršeniu situácie obetí v prechodnom období. Zákon by mal nadobudnúť účinnosť po jeho schválení Národnou radou, pričom je potrebné zabezpečiť aj dostatočné financovanie a personálne kapacity nového úradu.",
+        "affected_groups": [
+            {
+                "group": "obetí trestných činov",
+                "impact": "Získajú prístup k novému úradu, ktorý by mal poskytovať lepšiu ochranu a podporu, avšak v prechodnom období môže dôjsť k zhoršeniu situácie kvôli nedostatočným kapacitám."
+            },
+            {
+                "group": "oznamovatelia protispoločenskej činnosti",
+                "impact": "Budú mať zabezpečenú ochranu, avšak môžu čeliť nejasnostiam v procese, keďže nový úrad ešte nebude plne funkčný."
+            },
+            {
+                "group": "zamestnávatelia",
+                "impact": "Môžu čeliť obmedzeniam v ochrane svojich práv, keďže zmeny v zákone oslabujú ich postavenie v procese preskúmavania ochrany."
+            },
+            {
+                "group": "štátni zamestnanci v oblasti ochrany obetí",
+                "impact": "Môžu sa ocitnúť v neistote ohľadom svojich pracovných miest, keďže prechádzajú na nový úrad, ktorý ešte nemá zabezpečené personálne kapacity."
+            },
+            {
+                "group": "verejnosť",
+                "impact": "Môže mať obavy o transparentnosť a efektívnosť legislatívneho procesu, čo môže ovplyvniť dôveru v právny systém."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zriadenie nového úradu",
+                "explanation": "Poskytne centralizovanú ochranu obetiam trestných činov, čo môže zlepšiť ich situáciu a prístup k pomoci."
+            },
+            {
+                "positive": "Rozšírená pôsobnosť",
+                "explanation": "Nový úrad bude mať širšie kompetencie, čo môže viesť k lepšiemu zabezpečeniu práv obetí a oznamovateľov."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Nedostatočné prípravy na fungovanie nového úradu",
+                "explanation": "Môže viesť k chaosu a zhoršeniu situácie obetí trestných činov, keďže úrad nebude mať potrebné kapacity a zdroje."
+            },
+            {
+                "negative": "Oslabenie postavenia zamestnávateľov",
+                "explanation": "Zmeny v zákone môžu znížiť ochranu zamestnávateľov a ich práva v procese preskúmavania ochrany."
+            }
+        ],
+        "how_to_react": [
+            {
+                "action": "Sledujte správy o prerokovaní zákona v Národnej rade.",
+                "details": "Zostaňte informovaní o termínoch a výsledkoch rokovaní, aby ste vedeli, kedy zákon nadobudne účinnosť."
+            },
+            {
+                "action": "Zúčastnite sa verejných diskusií a vypočutí.",
+                "details": "Zapojte sa do diskusií o ochrane obetí a oznamovateľov, aby ste vyjadrili svoje názory a obavy."
+            },
+            {
+                "action": "Pripravte sa na možné zmeny vo vašich právach.",
+                "details": "Ak ste zamestnávateľ alebo oznamovateľ, informujte sa o nových pravidlách a pripravte sa na možné zmeny vo vašich povinnostiach."
+            }
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}
