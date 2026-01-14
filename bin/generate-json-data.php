@@ -47,8 +47,8 @@ $stmt = $pdo->query("
 
 $laws = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-// Create data/laws directory
-$lawsDir = __DIR__ . '/../data/laws';
+// Create public/data/laws directory (for Cloudflare Pages)
+$lawsDir = __DIR__ . '/../public/data/laws';
 if (!is_dir($lawsDir)) {
     mkdir($lawsDir, 0755, true);
 }
@@ -113,8 +113,8 @@ foreach ($laws as $law) {
     ];
 }
 
-// Save index.json
-$indexFile = __DIR__ . '/../data/index.json';
+// Save index.json in public/data (for Cloudflare Pages)
+$indexFile = __DIR__ . '/../public/data/index.json';
 file_put_contents(
     $indexFile,
     json_encode($indexData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)

@@ -59,7 +59,7 @@ jobs:
       
       - name: Create necessary directories
         run: |
-          mkdir -p data storage/logs storage/snapshots
+          mkdir -p data storage/logs storage/snapshots public/data/laws
       
       - name: Run cron job to process laws
         run: php bin/cron.php
@@ -76,8 +76,8 @@ jobs:
           # Pull latest changes before pushing to avoid conflicts
           git pull --rebase origin v2 || git pull origin v2
           
-          # Add JSON files
-          git add data/laws/*.json data/index.json 2>/dev/null || true
+          # Add JSON files (in public/data for Cloudflare Pages)
+          git add public/data/laws/*.json public/data/index.json 2>/dev/null || true
           
           # Check if there are changes to commit
           if git diff --staged --quiet; then
