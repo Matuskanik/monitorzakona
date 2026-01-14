@@ -307,7 +307,11 @@
                     return;
                 }
 
-                const response = await fetch(`data/laws/${encodeURIComponent(masterId)}.json`);
+                // Try absolute path first, then relative
+                let response = await fetch(`/data/laws/${encodeURIComponent(masterId)}.json`);
+                if (!response.ok) {
+                    response = await fetch(`data/laws/${encodeURIComponent(masterId)}.json`);
+                }
                 if (!response.ok) {
                     throw new Error('Law not found');
                 }
