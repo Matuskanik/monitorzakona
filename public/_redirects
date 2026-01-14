@@ -3,5 +3,8 @@
 /law.php /law.html 301
 /prompts.php /prompts.html 301
 
+# Allow data directory to be served (don't redirect JSON files)
+/data/* 200
+
 # SPA fallback - redirect all unknown routes to index.html
 /* /index.html 200
