@@ -31,9 +31,7 @@ Thumbs.db
 
 # PHP
 *.cache
-.phpunit.result.cache
-
-# Temporary files
+.phpunit.result.cache# Temporary files
 *.tmp
 *.temp
 *.bak
