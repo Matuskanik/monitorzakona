@@ -73,7 +73,11 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # Remove any untracked files in public/data that might conflict
+          git clean -fd public/data/ 2>/dev/null || true
+          
           # Pull latest changes before pushing to avoid conflicts
+          git fetch origin v2
           git pull --rebase origin v2 || git pull origin v2
           
           # Add JSON files (in public/data for Cloudflare Pages)
