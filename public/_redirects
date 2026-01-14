@@ -3,8 +3,6 @@
 /law.php /law.html 301
 /prompts.php /prompts.html 301
 
-# Allow data directory to be served (don't redirect JSON files)
-/data/* 200
-
 # SPA fallback - redirect all unknown routes to index.html
+# Note: /data/* paths are served directly by Cloudflare Pages, so they won't match this rule
 /* /index.html 200
