@@ -16,6 +16,8 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Allow writing to repository
     
     steps:
       - name: Checkout repository
@@ -70,10 +72,18 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/laws/*.json data/index.json
+          
+          # Pull latest changes before pushing to avoid conflicts
+          git pull --rebase origin v2 || git pull origin v2
+          
+          # Add JSON files
+          git add data/laws/*.json data/index.json 2>/dev/null || true
+          
+          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Auto-update: Generate law data JSON files [skip ci]"
-            git push
+            # Push with retry logic
+            git push origin v2 || (git pull --rebase origin v2 && git push origin v2)
           fi
