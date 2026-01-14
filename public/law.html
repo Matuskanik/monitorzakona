@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor zákona</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        .meta {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        .meta a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .meta a:hover {
+            text-decoration: underline;
+        }
+        .section {
+            margin-bottom: 35px;
+        }
+        .section-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        .section-content {
+            color: #555;
+            line-height: 1.8;
+        }
+        .section-content ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .attachments {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+        .attachments ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        .attachments li {
+            padding: 8px 0;
+            color: #7f8c8d;
+        }
+        .attachments a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .attachments a:hover {
+            text-decoration: underline;
+        }
+        .disclaimer {
+            margin-top: 30px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+            font-size: 0.9em;
+        }
+        .positive-item {
+            color: #27ae60;
+        }
+        .negative-item {
+            color: #e74c3c;
+        }
+        .law-tags {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .law-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Späť na zoznam</a>
+        
+        <div id="lawContent">
+            <div class="loading">Načítavam zákon...</div>
+        </div>
+    </div>
+
+    <script>
+        // Tag color mapping (same as PHP version)
+        const tagColors = {
+            'financie': '#e74c3c',
+            'školstvo': '#3498db',
+            'zdravotníctvo': '#2ecc71',
+            'dane': '#f39c12',
+            'práca': '#9b59b6',
+            'bydlenie': '#1abc9c',
+            'doprava': '#34495e',
+            'životné prostredie': '#16a085',
+            'sociálne zabezpečenie': '#e67e22',
+            'občianske práva': '#c0392b'
+        };
+
+        function getTagColor(tag) {
+            const tagLower = tag.toLowerCase();
+            return tagColors[tagLower] || '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function nl2br(text) {
+            if (!text) return '';
+            return escapeHtml(text).replace(/\n/g, '<br>');
+        }
+
+        function renderLaw(law) {
+            const summary = law.summary || {};
+            const tags = summary.tags || [];
+            const attachments = law.attachments || [];
+
+            let tagsHtml = '';
+            if (tags.length > 0) {
+                tagsHtml = '<div class="law-tags">';
+                tags.forEach(tag => {
+                    const color = getTagColor(tag);
+                    tagsHtml += `<span class="law-tag" style="background-color: ${color};">${escapeHtml(tag)}</span>`;
+                });
+                tagsHtml += '</div>';
+            }
+
+            let attachmentsHtml = '';
+            if (attachments.length > 0) {
+                attachmentsHtml = '<div class="attachments"><div class="section-title">Prílohy</div><ul>';
+                attachments.forEach(att => {
+                    attachmentsHtml += '<li>';
+                    attachmentsHtml += escapeHtml(att.filename);
+                    if (att.source_url) {
+                        attachmentsHtml += ` (<a href="${escapeHtml(att.source_url)}" target="_blank">zdroj</a>)`;
+                    }
+                    attachmentsHtml += '</li>';
+                });
+                attachmentsHtml += '</ul></div>';
+            }
+
+            const approvalDate = law.approval_date || '';
+            const textExtracted = law.text_extracted !== false;
+            const processingStatus = law.processing_status || 'completed';
+
+            let statusHtml = '';
+            if (!textExtracted && processingStatus === 'no_text_extracted') {
+                statusHtml = '<p style="color: #e67e22; font-weight: bold; margin-top: 10px;">⚠ Text z tohto zákona nebol možné automaticky extrahovať (naskenované dokumenty). Pre detailnú analýzu by bolo potrebné OCR.</p>';
+            } else if (textExtracted && processingStatus === 'completed') {
+                statusHtml = '<p style="color: #27ae60; font-weight: bold; margin-top: 10px;">✓ Text úspešne extrahovaný pomocou OCR technológie</p>';
+            }
+
+            const html = `
+                ${tagsHtml}
+                <h1>${escapeHtml(law.title)}</h1>
+                
+                <div class="meta">
+                    ${approvalDate ? `<p><strong>Schválené:</strong> ${escapeHtml(approvalDate)}</p>` : ''}
+                    <p><strong>Zdroj:</strong> <a href="${escapeHtml(law.source_url)}" target="_blank">NR SR</a></p>
+                    ${statusHtml}
+                </div>
+
+                ${summary.summary_paragraph ? `
+                <div class="section">
+                    <div class="section-title">Zhrnutie</div>
+                    <div class="section-content">
+                        ${nl2br(summary.summary_paragraph)}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${summary.affected_groups && summary.affected_groups.length > 0 ? `
+                <div class="section">
+                    <div class="section-title">Ovplyvnené skupiny</div>
+                    <div class="section-content">
+                        <ul>
+                            ${summary.affected_groups.map(group => `<li>${escapeHtml(group)}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                ` : ''}
+
+                ${summary.positives && summary.positives.length > 0 ? `
+                <div class="section">
+                    <div class="section-title">Pozitíva</div>
+                    <div class="section-content">
+                        <ul>
+                            ${summary.positives.map(positive => `<li class="positive-item">${escapeHtml(positive)}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                ` : ''}
+
+                ${summary.negatives && summary.negatives.length > 0 ? `
+                <div class="section">
+                    <div class="section-title">Negatíva</div>
+                    <div class="section-content">
+                        <ul>
+                            ${summary.negatives.map(negative => `<li class="negative-item">${escapeHtml(negative)}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                ` : ''}
+
+                ${summary.how_to_react && summary.how_to_react.length > 0 ? `
+                <div class="section">
+                    <div class="section-title">Ako reagovať</div>
+                    <div class="section-content">
+                        <ul>
+                            ${summary.how_to_react.map(reaction => `<li>${escapeHtml(reaction)}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                ` : ''}
+
+                ${attachmentsHtml}
+
+                ${summary.disclaimer ? `
+                <div class="disclaimer">
+                    ${nl2br(summary.disclaimer)}
+                </div>
+                ` : ''}
+
+                <div class="footer" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; text-align: center; color: #95a5a6; font-size: 0.9em;">
+                    <p>Automaticky monitorované z <a href="https://www.nrsr.sk/web/default.aspx?SectionId=184" target="_blank" style="color: #3498db; text-decoration: none;">NR SR</a></p>
+                    <p style="margin-top: 10px;">
+                        <a href="prompts.html" style="color: #3498db; text-decoration: none;">Použité prompty</a> | Autor: Matúš Kaník
+                    </p>
+                </div>
+            `;
+
+            document.getElementById('lawContent').innerHTML = html;
+            document.title = `${law.title} - Monitor zákona`;
+        }
+
+        async function loadLaw() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const masterId = urlParams.get('master_id');
+                
+                if (!masterId) {
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                const response = await fetch(`data/laws/${encodeURIComponent(masterId)}.json`);
+                if (!response.ok) {
+                    throw new Error('Law not found');
+                }
+                
+                const law = await response.json();
+                renderLaw(law);
+            } catch (error) {
+                console.error('Error loading law:', error);
+                document.getElementById('lawContent').innerHTML = `
+                    <div class="error">
+                        <p>Zákon sa nepodarilo načítať.</p>
+                        <p style="margin-top: 10px;">
+                            <a href="index.html" style="color: #3498db;">Späť na zoznam</a>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        loadLaw();
+    </script>
+</body>
+</html>

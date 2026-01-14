@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects
+/index.php /index.html 301
+/law.php /law.html 301
+/prompts.php /prompts.html 301
+
+# SPA fallback - redirect all unknown routes to index.html
+/* /index.html 200

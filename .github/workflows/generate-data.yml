@@ -1,0 +1,79 @@
+name: Generate Law Data
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches:
+      - v2
+    paths:
+      - 'bin/**'
+      - 'app/**'
+      - '.github/workflows/generate-data.yml'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: true
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: curl, zip, pdo_sqlite, dom, xml, mbstring
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-slk
+      
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+      
+      - name: Setup environment
+        run: |
+          if [ ! -f .env ]; then
+            echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+            echo "DB_PATH=data/sentinel.db" >> .env
+            echo "STORAGE_PATH=storage" >> .env
+            echo "LOG_PATH=storage/logs" >> .env
+            echo "NR_SR_LIST_URL=https://www.nrsr.sk/web/default.aspx?SectionId=184" >> .env
+            echo "REQUEST_DELAY_SECONDS=3" >> .env
+            echo "MAX_RETRIES=3" >> .env
+            echo "RETRY_DELAY_SECONDS=5" >> .env
+            echo "OPENAI_MODEL=gpt-4o-mini" >> .env
+            echo "OPENAI_MAX_TOKENS=2000" >> .env
+            echo "BASE_URL=https://your-domain.pages.dev" >> .env
+          fi
+      
+      - name: Create necessary directories
+        run: |
+          mkdir -p data storage/logs storage/snapshots
+      
+      - name: Run cron job to process laws
+        run: php bin/cron.php
+        continue-on-error: true
+      
+      - name: Generate JSON data files
+        run: php bin/generate-json-data.php
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/laws/*.json data/index.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update: Generate law data JSON files [skip ci]"
+            git push
+          fi

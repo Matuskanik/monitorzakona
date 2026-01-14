@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor zákona</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .logo {
+            max-width: 600px;
+            width: auto;
+            height: auto;
+            flex-shrink: 0;
+        }
+        .tagline {
+            font-size: 1.2em;
+            color: #444;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.7;
+            flex: 1;
+        }
+        .search-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .search-button {
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .search-button:hover {
+            background: #2980b9;
+        }
+        .search-results-info {
+            margin-top: 15px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .law-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+            background: #f9f9f9;
+            transition: transform 0.2s;
+        }
+        .law-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .law-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        .law-title a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .law-title a:hover {
+            text-decoration: underline;
+        }
+        .law-tags {
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .law-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+        .law-date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .law-date-label {
+            font-weight: 600;
+            color: #34495e;
+        }
+        .law-source {
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+        .law-source a {
+            color: #7f8c8d;
+            text-decoration: none;
+        }
+        .law-source a:hover {
+            text-decoration: underline;
+        }
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo.png" alt="Monitor zákona" class="logo">
+            <p class="tagline">Zrozumiteľné analýzy slovenských zákonov, ktoré vám pomôžu pochopiť, ako vás ovplyvnia a ako môžete na ne reagovať.</p>
+        </div>
+        
+        <div class="search-container">
+            <form method="GET" action="" class="search-box" id="searchForm">
+                <input 
+                    type="text" 
+                    name="search" 
+                    class="search-input" 
+                    id="searchInput"
+                    placeholder="Hľadať zákony podľa názvu alebo tagov (napr. financie, školstvo, dane...)" 
+                >
+                <button type="submit" class="search-button">Hľadať</button>
+            </form>
+            <div class="search-results-info" id="searchResultsInfo" style="display: none;"></div>
+        </div>
+        
+        <div id="lawsContainer">
+            <div class="loading">Načítavam zákony...</div>
+        </div>
+        
+        <div class="footer">
+            <p>Automaticky monitorované z <a href="https://www.nrsr.sk/web/default.aspx?SectionId=184" target="_blank">NR SR</a></p>
+            <p style="margin-top: 10px;">
+                <a href="prompts.html">Použité prompty</a> | Autor: Matúš Kaník
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Tag color mapping (same as PHP version)
+        const tagColors = {
+            'financie': '#e74c3c',
+            'školstvo': '#3498db',
+            'zdravotníctvo': '#2ecc71',
+            'dane': '#f39c12',
+            'práca': '#9b59b6',
+            'bydlenie': '#1abc9c',
+            'doprava': '#34495e',
+            'životné prostredie': '#16a085',
+            'sociálne zabezpečenie': '#e67e22',
+            'občianske práva': '#c0392b'
+        };
+
+        function getTagColor(tag) {
+            const tagLower = tag.toLowerCase();
+            return tagColors[tagLower] || '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'dátum nie je dostupný';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('sk-SK', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            } catch (e) {
+                return dateString;
+            }
+        }
+
+        function renderLaws(laws, searchQuery = '') {
+            const container = document.getElementById('lawsContainer');
+            const searchInfo = document.getElementById('searchResultsInfo');
+            
+            if (laws.length === 0) {
+                container.innerHTML = `
+                    <div class="empty">
+                        ${searchQuery 
+                            ? `<p>Pre vyhľadávanie "${escapeHtml(searchQuery)}" neboli nájdené žiadne zákony.</p>
+                               <p style="margin-top: 10px; font-size: 0.9em;">
+                                   <a href="index.html" style="color: #3498db;">Zobraziť všetky zákony</a>
+                               </p>`
+                            : '<p>Zatiaľ neboli spracované žiadne zákony.</p>'
+                        }
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            laws.forEach(law => {
+                const tags = law.tags || [];
+                let tagsHtml = '';
+                if (tags.length > 0) {
+                    tagsHtml = '<div class="law-tags">';
+                    tags.forEach(tag => {
+                        const color = getTagColor(tag);
+                        tagsHtml += `<span class="law-tag" style="background-color: ${color};">${escapeHtml(tag)}</span>`;
+                    });
+                    tagsHtml += '</div>';
+                }
+
+                const approvalDate = law.approval_date || '';
+                const createdDate = formatDate(law.created_at);
+
+                html += `
+                    <div class="law-item">
+                        ${tagsHtml}
+                        <div class="law-title">
+                            <a href="law.html?master_id=${encodeURIComponent(law.master_id)}">
+                                ${escapeHtml(law.title)}
+                            </a>
+                        </div>
+                        <div class="law-date">
+                            ${approvalDate ? `<span class="law-date-label">Zverejnené:</span> ${escapeHtml(approvalDate)}` : '<span class="law-date-label">Zverejnené:</span> dátum nie je dostupný'}
+                            ${createdDate ? `| <span class="law-date-label">Spracované:</span> ${createdDate}` : ''}
+                        </div>
+                        <div class="law-source">
+                            <a href="${escapeHtml(law.source_url)}" target="_blank">
+                                Zdroj: NR SR →
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            if (searchQuery) {
+                const count = laws.length;
+                const suffix = count === 1 ? '' : (count >= 2 && count <= 4 ? 'y' : 'ov');
+                searchInfo.innerHTML = `
+                    Nájdených: ${count} zákon${suffix} pre "${escapeHtml(searchQuery)}"
+                    <a href="index.html" style="margin-left: 10px; color: #3498db;">Zrušiť vyhľadávanie</a>
+                `;
+                searchInfo.style.display = 'block';
+            } else {
+                searchInfo.style.display = 'none';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function filterLaws(laws, searchQuery) {
+            if (!searchQuery) return laws;
+            
+            const searchLower = searchQuery.toLowerCase();
+            return laws.filter(law => {
+                const titleLower = law.title.toLowerCase();
+                if (titleLower.includes(searchLower)) return true;
+                
+                const tags = law.tags || [];
+                return tags.some(tag => tag.toLowerCase().includes(searchLower));
+            });
+        }
+
+        // Load laws from JSON
+        async function loadLaws() {
+            try {
+                const response = await fetch('data/index.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load laws');
+                }
+                const laws = await response.json();
+                
+                // Get search query from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const searchQuery = urlParams.get('search') || '';
+                
+                // Set search input value
+                document.getElementById('searchInput').value = searchQuery;
+                
+                // Filter and render
+                const filteredLaws = filterLaws(laws, searchQuery);
+                renderLaws(filteredLaws, searchQuery);
+            } catch (error) {
+                console.error('Error loading laws:', error);
+                document.getElementById('lawsContainer').innerHTML = `
+                    <div class="empty">
+                        <p>Chyba pri načítavaní zákonov. Skúste obnoviť stránku.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Handle search form submission
+        document.getElementById('searchForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const searchQuery = document.getElementById('searchInput').value.trim();
+            const url = searchQuery ? `index.html?search=${encodeURIComponent(searchQuery)}` : 'index.html';
+            window.location.href = url;
+        });
+
+        // Load laws on page load
+        loadLaws();
+    </script>
+</body>
+</html>

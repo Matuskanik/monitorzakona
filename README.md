@@ -154,8 +154,15 @@ Or more frequently (every 2 hours):
 
 ### Web Interface
 
+**Traditional PHP deployment:**
 - **List page:** `http://your-domain/index.php`
 - **Law detail:** `http://your-domain/law.php?id=1`
+
+**Static site deployment (recommended - $0 cost):**
+- **List page:** `http://your-domain/index.html`
+- **Law detail:** `http://your-domain/law.html?master_id=XXX`
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for Cloudflare Pages setup instructions.
 
 ## Project Structure
 
@@ -173,8 +180,18 @@ Sentinel/
 │   ├── cron.php             # Worker script
 │   └── selfcheck.php        # Self-check utility
 ├── public/
-│   ├── index.php            # Law list page
-│   └── law.php              # Law detail page
+│   ├── index.php            # Law list page (PHP version)
+│   ├── index.html           # Law list page (static version)
+│   ├── law.php              # Law detail page (PHP version)
+│   ├── law.html             # Law detail page (static version)
+│   └── _redirects           # Cloudflare Pages redirects
+├── .github/
+│   └── workflows/
+│       └── generate-data.yml # GitHub Actions workflow
+├── data/
+│   ├── laws/                # Individual law JSON files
+│   │   └── {master_id}.json
+│   └── index.json           # Law list index (generated)
 ├── storage/
 │   ├── logs/                # Application logs
 │   ├── snapshots/           # HTML snapshots
