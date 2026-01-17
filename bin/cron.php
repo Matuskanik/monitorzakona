@@ -67,18 +67,18 @@ if (!is_dir($snapshotDir)) {
 file_put_contents($snapshotDir . '/source_list_' . date('Y-m-d_H-i-s') . '.html', $listHtml);
 
 // Parse laws
-$laws = $scraper->parseListPage($listHtml);
+$allLaws = $scraper->parseListPage($listHtml);
 
-if (empty($laws)) {
+if (empty($allLaws)) {
     $logger->warning("No laws found on list page");
     echo "WARNING: No laws found on list page\n";
     exit(0);
 }
 
-// Process up to 20 newest laws (that aren't already processed)
-// The processor will skip laws that haven't changed (based on content hash)
-$laws = array_slice($laws, 0, 20);
-$logger->info("Found " . count($laws) . " law(s) to process (processing up to 20 newest)");
+// Get up to 20 newest laws from the website
+// We'll process all of them - the processor will skip only if content hasn't changed
+$laws = array_slice($allLaws, 0, 20);
+$logger->info("Found " . count($allLaws) . " total laws on list page, processing up to 20 newest");
 
 // Process each law
 $processed = 0;
