@@ -238,7 +238,16 @@
                     <div class="section-title">Ovplyvnené skupiny</div>
                     <div class="section-content">
                         <ul>
-                            ${summary.affected_groups.map(group => `<li>${escapeHtml(group)}</li>`).join('')}
+                            ${summary.affected_groups.map(group => {
+                                if (typeof group === 'string') {
+                                    return `<li>${escapeHtml(group)}</li>`;
+                                } else if (group && typeof group === 'object') {
+                                    const groupText = group.group || group.name || '';
+                                    const impactText = group.impact || group.explanation || '';
+                                    return `<li><strong>${escapeHtml(groupText)}</strong>${impactText ? ': ' + escapeHtml(impactText) : ''}</li>`;
+                                }
+                                return `<li>${escapeHtml(String(group))}</li>`;
+                            }).join('')}
                         </ul>
                     </div>
                 </div>
@@ -249,7 +258,16 @@
                     <div class="section-title">Pozitíva</div>
                     <div class="section-content">
                         <ul>
-                            ${summary.positives.map(positive => `<li class="positive-item">${escapeHtml(positive)}</li>`).join('')}
+                            ${summary.positives.map(positive => {
+                                if (typeof positive === 'string') {
+                                    return `<li class="positive-item">${escapeHtml(positive)}</li>`;
+                                } else if (positive && typeof positive === 'object') {
+                                    const positiveText = positive.positive || positive.name || '';
+                                    const explanationText = positive.explanation || positive.impact || '';
+                                    return `<li class="positive-item"><strong>${escapeHtml(positiveText)}</strong>${explanationText ? ': ' + escapeHtml(explanationText) : ''}</li>`;
+                                }
+                                return `<li class="positive-item">${escapeHtml(String(positive))}</li>`;
+                            }).join('')}
                         </ul>
                     </div>
                 </div>
@@ -260,7 +278,16 @@
                     <div class="section-title">Negatíva</div>
                     <div class="section-content">
                         <ul>
-                            ${summary.negatives.map(negative => `<li class="negative-item">${escapeHtml(negative)}</li>`).join('')}
+                            ${summary.negatives.map(negative => {
+                                if (typeof negative === 'string') {
+                                    return `<li class="negative-item">${escapeHtml(negative)}</li>`;
+                                } else if (negative && typeof negative === 'object') {
+                                    const negativeText = negative.negative || negative.name || '';
+                                    const explanationText = negative.explanation || negative.impact || '';
+                                    return `<li class="negative-item"><strong>${escapeHtml(negativeText)}</strong>${explanationText ? ': ' + escapeHtml(explanationText) : ''}</li>`;
+                                }
+                                return `<li class="negative-item">${escapeHtml(String(negative))}</li>`;
+                            }).join('')}
                         </ul>
                     </div>
                 </div>

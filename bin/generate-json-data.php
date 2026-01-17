@@ -21,7 +21,7 @@ try {
 $db = new Database(Config::get('DB_PATH'));
 $pdo = $db->getPdo();
 
-// Get all laws
+// Get 20 latest laws (chronologically from newest)
 $stmt = $pdo->query("
     SELECT l.*, 
            GROUP_CONCAT(
@@ -43,6 +43,7 @@ $stmt = $pdo->query("
             ELSE '0000-00-00'
         END DESC,
         l.created_at DESC
+    LIMIT 20
 ");
 
 $laws = $stmt->fetchAll(\PDO::FETCH_ASSOC);

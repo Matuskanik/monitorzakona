@@ -75,9 +75,10 @@ if (empty($laws)) {
     exit(0);
 }
 
-// Limit to newest 1 law only
-$laws = array_slice($laws, 0, 1);
-$logger->info("Found " . count($laws) . " law(s) to process (limited to newest 1)");
+// Process up to 20 newest laws (that aren't already processed)
+// The processor will skip laws that haven't changed (based on content hash)
+$laws = array_slice($laws, 0, 20);
+$logger->info("Found " . count($laws) . " law(s) to process (processing up to 20 newest)");
 
 // Process each law
 $processed = 0;
