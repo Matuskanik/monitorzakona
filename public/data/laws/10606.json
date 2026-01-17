@@ -4,60 +4,69 @@
     "title": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti a o zmene a doplnení niektorých zákonov, vrátený prezidentom Slovenskej republiky na opätovné prerokovanie Národnou radou Slovenskej republiky",
     "approval_date": "11. 12. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10606",
-    "created_at": "2026-01-14 22:34:43",
-    "updated_at": "2026-01-14 22:34:43",
+    "created_at": "2026-01-17 17:43:10",
+    "updated_at": "2026-01-17 17:43:10",
     "summary": {
         "tags": [
             "justícia",
             "sociálna politika"
         ],
-        "summary_paragraph": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti zavádza nový úrad, ktorý má za cieľ zlepšiť ochranu obetí trestných činov a oznamovateľov. Tento úrad nahradí existujúci Úrad na ochranu oznamovateľov protispoločenskej činnosti a rozšíri jeho pôsobnosť o oblasť ochrany obetí trestných činov. Zákon bol schválený v skrátenom legislatívnom konaní, čo vyvolalo obavy o jeho dostatočnú prípravu a konzultácie s odbornou verejnosťou. Prezident Slovenskej republiky vrátil zákon na opätovné prerokovanie, pričom vyjadril pochybnosti o dodržaní legislatívnych pravidiel a o reálnych potrebách na zmenu. Kľúčovými bodmi sú zriadenie nového úradu, zrušenie súčasného úradu a potreba zabezpečiť adekvátne personálne a finančné zdroje pre jeho fungovanie. Zákon má potenciál ovplyvniť ochranu obetí trestných činov, avšak jeho implementácia môže byť problematická, ak nebudú splnené podmienky na jeho efektívne fungovanie.",
+        "summary_paragraph": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti zavádza nový úrad, ktorý má za cieľ zlepšiť ochranu obetí trestných činov a oznamovateľov. Tento úrad nahradí súčasný Úrad na ochranu oznamovateľov protispoločenskej činnosti a rozšíri jeho pôsobnosť o oblasť ochrany obetí trestných činov. Zákon bol vrátený prezidentom na opätovné prerokovanie, pričom prezident vyjadril obavy o nedostatočnú prípravu a transparentnosť legislatívneho procesu. Kľúčovými zmenami sú zriadenie nového úradu a zrušenie súčasného, čo môže viesť k dočasnému zhoršeniu ochrany obetí. Zákon sa snaží reagovať na nedostatky v súčasnej legislatíve, avšak jeho implementácia môže byť problematická z dôvodu nedostatočných finančných a personálnych kapacít. Dôležité je, že zákon sa snaží o zrovnoprávnenie postavenia zamestnancov a zamestnávateľov v procese ochrany oznamovateľov, čo môže mať významný dopad na pracovné prostredie.",
         "affected_groups": [
             {
                 "group": "obetí trestných činov",
-                "impact": "Získajú prístup k novému úradu, ktorý by mal zabezpečiť lepšiu ochranu a podporu, avšak prechod na nový systém môže spôsobiť dočasné zhoršenie služieb."
+                "impact": "Získajú prístup k novému úradu, ktorý by mal zabezpečiť lepšiu ochranu a odškodnenie, avšak v prechodnom období môže dôjsť k zhoršeniu služieb."
             },
             {
                 "group": "oznamovatelia protispoločenskej činnosti",
-                "impact": "Budú mať zabezpečenú ochranu, avšak zmeny v legislatíve môžu spôsobiť neistotu v ich právach a povinnostiach."
+                "impact": "Budú mať možnosť získať ochranu, avšak nové pravidlá môžu byť menej výhodné ako predchádzajúce, čo môže viesť k obavám z odvetných opatrení."
             },
             {
                 "group": "zamestnávatelia",
-                "impact": "Môžu čeliť novým povinnostiam a zmenám v ochrane zamestnancov, čo môže ovplyvniť ich právne postavenie."
+                "impact": "Získajú možnosť preskúmania ochrany oznamovateľov, avšak ich postavenie v procese môže byť oslabené, čo môže viesť k obavám z právnych následkov."
             },
             {
                 "group": "štátni zamestnanci v novom úrade",
-                "impact": "Budú musieť byť adekvátne vyškolení a pripravení na nové úlohy, čo môže byť problematické v prípade nedostatku skúsených pracovníkov."
+                "impact": "Môžu čeliť nedostatku školení a podpory, čo môže ovplyvniť ich schopnosť efektívne vykonávať nové úlohy."
             },
             {
                 "group": "verejnosť",
-                "impact": "Môže sa znížiť dôvera v systém ochrany obetí, ak sa prechod na nový úrad neuskutoční hladko."
+                "impact": "Môže mať obavy o transparentnosť a efektívnosť nového úradu, čo môže ovplyvniť dôveru v systém ochrany práv."
             }
         ],
         "positives": [
             {
-                "positive": "Zlepšenie ochrany obetí trestných činov",
-                "explanation": "Nový úrad by mal zabezpečiť lepšiu koordináciu a efektívnejšiu pomoc obetiam, čo môže viesť k rýchlejšiemu a účinnejšiemu odškodneniu."
+                "positive": "Zriadenie nového úradu",
+                "explanation": "Nový úrad by mal zabezpečiť lepšiu koordináciu a ochranu obetí trestných činov a oznamovateľov, čo môže viesť k efektívnejšiemu riešeniu ich problémov."
             },
             {
-                "positive": "Zvýšenie právnej ochrany oznamovateľov",
-                "explanation": "Zákon posilňuje ochranu oznamovateľov, čo môže motivovať viac ľudí k hláseniu protispoločenskej činnosti."
+                "positive": "Zrovnoprávnenie zamestnancov a zamestnávateľov",
+                "explanation": "Nové pravidlá môžu prispieť k spravodlivejšiemu prístupu v prípadoch oznamovania protispoločenskej činnosti, čo môže znížiť strach zamestnancov z odvetných opatrení."
             }
         ],
         "negatives": [
             {
-                "negative": "Riziko zhoršenia služieb pre obete",
-                "explanation": "Prechod na nový úrad môže spôsobiť dočasné zhoršenie dostupnosti a kvality služieb pre obete trestných činov."
+                "negative": "Nedostatočné personálne a finančné zabezpečenie nového úradu",
+                "explanation": "Bez dostatočných zdrojov môže nový úrad zlyhať v poskytovaní potrebnej pomoci obetiam a oznamovateľom, čo môže viesť k ich ďalšiemu zraniteľnému postaveniu."
             },
             {
-                "negative": "Nedostatočné personálne a finančné zabezpečenie",
-                "explanation": "Ak nový úrad nebude mať dostatočné zdroje, jeho schopnosť efektívne fungovať a poskytovať pomoc môže byť ohrozená."
+                "negative": "Možné zhoršenie ochrany obetí",
+                "explanation": "Prechod na nový úrad môže spôsobiť dočasné prerušenie služieb a zhoršenie ochrany obetí trestných činov, čo môže mať vážne následky pre ich psychickú a materiálnu pohodu."
             }
         ],
         "how_to_react": [
-            "Ak ste obeťou trestného činu, sledujte informácie o novom úrade a jeho službách, aby ste vedeli, kde hľadať pomoc.",
-            "Zamestnávatelia by mali prehodnotiť svoje interné politiky a zabezpečiť, aby boli v súlade s novými legislatívnymi požiadavkami.",
-            "Oznamovatelia by mali byť informovaní o svojich právach a možnostiach ochrany, aby sa cítili bezpečne pri hlásení protispoločenskej činnosti."
+            {
+                "advice": "Sledujte vývoj legislatívy a zmeny v ochrane obetí trestných činov.",
+                "details": "Zostaňte informovaní o novinkách a pripravte sa na možné zmeny v prístupoch k ochrane obetí."
+            },
+            {
+                "advice": "V prípade potreby sa obráťte na právne poradenstvo.",
+                "details": "Ak ste obeťou trestného činu alebo oznamovateľom, vyhľadajte odbornú pomoc, aby ste sa informovali o svojich právach a možnostiach."
+            },
+            {
+                "advice": "Zúčastnite sa verejných diskusií a podujatí týkajúcich sa ochrany obetí.",
+                "details": "Zapojte sa do diskusií, aby ste vyjadrili svoje názory a obavy, a pomohli tak formovať budúcu legislatívu."
+            }
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },
