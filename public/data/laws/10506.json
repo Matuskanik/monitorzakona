@@ -1,0 +1,67 @@
+{
+    "id": 8,
+    "master_id": "10506",
+    "title": "Vládny návrh zákona o označeniach pôvodu výrobkov a zemepisných označeniach výrobkov a o zmene a doplnení zákona Národnej rady Slovenskej republiky č. 145/1995 Z. z. o správnych poplatkoch v znení neskorších predpisov",
+    "approval_date": "26. 9. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10506",
+    "created_at": "2026-01-18 07:10:39",
+    "updated_at": "2026-01-18 07:10:39",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie"
+        ],
+        "summary_paragraph": "Nový zákon o označeniach pôvodu výrobkov a zemepisných označeniach výrobkov, ktorý predložila vláda Slovenskej republiky, prináša zásadné zmeny v oblasti ochrany a registrácie výrobkov s chráneným označením pôvodu. Tento zákon upravuje vnútroštátne postupy pre podanie žiadostí o zápis označenia pôvodu a zemepisného označenia, ako aj námietkového konania. Kľúčovým aspektom je, že žiadosti o zápis budú musieť spĺňať špecifikácie, ktoré budú odborné posúdené ministerstvom pôdohospodárstva. Zákon tiež zavádza lehoty na podávanie námietok, ktoré musia byť podané do dvoch mesiacov od zverejnenia žiadosti vo vestníku. Tento krok je dôležitý pre ochranu slovenských výrobkov na trhu a zabezpečenie ich kvality. Zákon nadobudne účinnosť v septembri 2025, pričom prechodné ustanovenia zabezpečia, že doterajšie ochrany zostanú v platnosti do právoplatnosti rozhodnutí Európskej únie. Týmto spôsobom sa posilní konkurencieschopnosť slovenských výrobkov a ich ochrana na medzinárodnom trhu.",
+        "affected_groups": [
+            {
+                "group": "výrobcovia potravín",
+                "impact": "Budú musieť podávať žiadosti o zápis označenia pôvodu, čo si vyžaduje dodatočné administratívne úsilie a odborné posúdenie ich výrobkov."
+            },
+            {
+                "group": "remeselníci a priemyselní výrobcovia",
+                "impact": "Budú mať možnosť chrániť svoje výrobky prostredníctvom zemepisných označení, čo môže zvýšiť ich hodnotu na trhu."
+            },
+            {
+                "group": "spotrebitelia",
+                "impact": "Získajú lepšiu ochranu a informácie o pôvode výrobkov, čo im umožní robiť informovanejšie rozhodnutia pri nákupe."
+            },
+            {
+                "group": "obchodníci",
+                "impact": "Budú musieť byť oboznámení s novými pravidlami a zabezpečiť, aby predávané výrobky mali riadne označenia pôvodu."
+            },
+            {
+                "group": "právnici a odborníci na duševné vlastníctvo",
+                "impact": "Budú mať viac práce s poradenstvom výrobcov a spracovaním námietok v súvislosti s novými pravidlami."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšená ochrana slovenských výrobkov",
+                "explanation": "Zákon posilňuje ochranu výrobkov s chráneným označením pôvodu, čo môže viesť k zvýšeniu ich predaja a konkurencieschopnosti."
+            },
+            {
+                "positive": "Jasnejšie pravidlá pre registráciu",
+                "explanation": "Zavedenie presných postupov a lehôt pre podávanie žiadostí a námietok zjednoduší proces pre výrobcov a zlepší transparentnosť."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené administratívne náklady",
+                "explanation": "Výrobcovia budú musieť investovať čas a prostriedky do podávania žiadostí a dodatočných posúdení, čo môže byť pre malé podniky zaťažujúce."
+            },
+            {
+                "negative": "Možnosť zamietnutia žiadostí",
+                "explanation": "Ak žiadosť o zápis nespĺňa podmienky, môže byť zamietnutá, čo môže viesť k strate investícií a času pre výrobcov."
+            }
+        ],
+        "how_to_react": [
+            "Od septembra 2025 sa oboznámte s novými pravidlami a pripravte sa na podanie žiadosti o zápis označenia pôvodu pre vaše výrobky.",
+            "Získajte odborné poradenstvo od právnikov alebo odborníkov na duševné vlastníctvo, aby ste zabezpečili, že vaša žiadosť bude spĺňať všetky požiadavky.",
+            "Sledujte zverejnenie žiadostí vo vestníku a buďte pripravení podať námietky, ak sa domnievate, že vaše práva sú ohrozené."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

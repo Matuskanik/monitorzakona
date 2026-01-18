@@ -1,0 +1,69 @@
+{
+    "id": 4,
+    "master_id": "10505",
+    "title": "Vládny návrh zákona o evidencii tržieb a o zmene a doplnení niektorých zákonov",
+    "approval_date": "26. 9. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10505",
+    "created_at": "2026-01-18 07:08:11",
+    "updated_at": "2026-01-18 07:08:11",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie"
+        ],
+        "summary_paragraph": "Zákon o evidencii tržieb, ktorý predložila vláda Slovenskej republiky, zavádza nové povinnosti pre predávajúcich pri evidencii tržieb za predaj tovaru a poskytovanie služieb. Hlavným cieľom je zlepšiť transparentnosť a efektivitu daňového systému prostredníctvom zavedenia pokladníc eKasa, ktoré budú musieť predávajúci používať na všetkých predajných miestach. Zákon stanovuje, že predávajúci sú povinní evidovať tržby bez zbytočného odkladu a zasielať údaje do systému eKasa. Dôležitým aspektom je aj certifikácia pokladničných programov a chránených dátových úložísk, ktorú vykonáva finančné riaditeľstvo. Zákon nadobudne účinnosť v septembri 2025, pričom predávajúci budú mať prechodné obdobie na prispôsobenie sa novým požiadavkám. Napríklad, ak predávajúci nemôže z dôvodu technických problémov zaslať tržbu do systému, musí uložiť dátovú správu a zaslať ju do 96 hodín. Tento zákon má potenciál znížiť daňové úniky a zvýšiť príjmy štátu, avšak môže tiež vyžadovať dodatočné investície do technológie zo strany podnikateľov.",
+        "affected_groups": [
+            {
+                "group": "malí podnikatelia",
+                "impact": "Budú musieť investovať do pokladníc eKasa a prispôsobiť sa novým povinnostiam evidencie tržieb."
+            },
+            {
+                "group": "veľké obchodné reťazce",
+                "impact": "Budú musieť zabezpečiť, aby všetky ich pokladnice spĺňali nové technické požiadavky a aby zamestnanci boli školení na ich používanie."
+            },
+            {
+                "group": "zákazníci",
+                "impact": "Získajú väčšiu ochranu pri nákupe, pretože pokladničné doklady budú musieť byť správne evidované a overiteľné."
+            },
+            {
+                "group": "finančné inštitúcie",
+                "impact": "Môžu očakávať zvýšený dopyt po službách súvisiacich s implementáciou a údržbou pokladníc eKasa."
+            },
+            {
+                "group": "daňové úrady",
+                "impact": "Získajú nové nástroje na monitorovanie tržieb a zníženie daňových únikov."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšená transparentnosť",
+                "explanation": "Zákon prispeje k zníženiu daňových únikov, pretože všetky tržby budú musieť byť evidované a zasielané do systému."
+            },
+            {
+                "positive": "Jednoduchšie overenie dokladov",
+                "explanation": "Zákazníci budú mať možnosť overiť pravosť pokladničných dokladov pomocou QR kódu, čo zvyšuje ochranu spotrebiteľov."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Finančné zaťaženie pre podnikateľov",
+                "explanation": "Malí podnikatelia môžu mať problém s nákladmi na implementáciu pokladníc eKasa a školenie zamestnancov."
+            },
+            {
+                "negative": "Technické problémy",
+                "explanation": "Môže dôjsť k problémom s internetovým pripojením, čo môže ovplyvniť schopnosť predávajúcich zasielať tržby včas."
+            }
+        ],
+        "how_to_react": [
+            "Skontrolujte, či vaša pokladnica spĺňa požiadavky zákona a ak nie, začnite s jej modernizáciou čo najskôr.",
+            "Zabezpečte školenie zamestnancov na používanie pokladníc eKasa, aby sa predišlo problémom pri evidencii tržieb.",
+            "Do septembra 2025 si pripravte všetky potrebné dokumenty a certifikácie, ktoré budete potrebovať na prevádzku pokladnice eKasa.",
+            "V prípade technických problémov s internetovým pripojením, okamžite podajte žiadosť o povolenie odkladu zasielania údajov na daňový úrad.",
+            "Sledujte webovú stránku finančného riaditeľstva pre aktuálne informácie a pokyny týkajúce sa certifikácie pokladničných programov."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

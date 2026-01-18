@@ -1,0 +1,69 @@
+{
+    "id": 7,
+    "master_id": "10501",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 331/2005 Z. z. o orgánoch štátnej správy vo veciach drogových prekurzorov a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "26. 9. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10501",
+    "created_at": "2026-01-18 07:10:02",
+    "updated_at": "2026-01-18 07:10:02",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie"
+        ],
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 331/2005 Z. z. o orgánoch štátnej správy vo veciach drogových prekurzorov, sa zameriava na presun kompetencií z Ministerstva hospodárstva na Ministerstvo zdravotníctva. Tento krok je dôležitý pre centralizáciu agendy drogových prekurzorov, čo by malo viesť k efektívnejšiemu riadeniu a koordinácii protidrogovej politiky. Zmeny sa dotknú aj názvov niektorých orgánov, ako je premenovanie Colného riaditeľstva na Finančné riaditeľstvo. Zákon nadobudne účinnosť 1. januára 2026, pričom konania začaté pred týmto dátumom budú dokončené podľa predpisov účinných do 31. decembra 2025. Týmto spôsobom sa zabezpečí kontinuita v správe a kontrole drogových prekurzorov, čo je kľúčové pre ochranu verejného zdravia a bezpečnosti.",
+        "affected_groups": [
+            {
+                "group": "zamestnanci Ministerstva hospodárstva",
+                "impact": "Budú musieť prejsť na Ministerstvo zdravotníctva, čo môže ovplyvniť ich pracovné pozície a zodpovednosti."
+            },
+            {
+                "group": "prevádzkovatelia a používatelia drogových prekurzorov",
+                "impact": "Budú musieť dodržiavať nové pravidlá a procesy, ktoré zavádza Ministerstvo zdravotníctva."
+            },
+            {
+                "group": "orgány štátnej správy",
+                "impact": "Zmeny v kompetenciách môžu ovplyvniť ich spoluprácu a procesy v oblasti kontroly a regulácie drogových prekurzorov."
+            },
+            {
+                "group": "verejnosť",
+                "impact": "Zvýšená efektivita v boji proti drogám môže viesť k lepšiemu ochrane verejného zdravia."
+            },
+            {
+                "group": "Európska komisia",
+                "impact": "Zmeny v správe a evidencii môžu ovplyvniť správy a údaje, ktoré Slovensko poskytuje na medzinárodnej úrovni."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zlepšenie koordinácie protidrogovej politiky",
+                "explanation": "Centralizácia kompetencií na Ministerstve zdravotníctva by mala viesť k efektívnejšiemu riadeniu a lepšiemu prepojeniu medzi rôznymi orgánmi."
+            },
+            {
+                "positive": "Zvýšená transparentnosť a efektivita",
+                "explanation": "Jednotné riadenie agendy drogových prekurzorov môže zjednodušiť procesy a znížiť byrokraciu."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Možné prechodné problémy pri presune kompetencií",
+                "explanation": "Zamestnanci a prevádzkovatelia môžu čeliť nejasnostiam a chaosu počas prechodu na nové pravidlá."
+            },
+            {
+                "negative": "Zvýšené nároky na Ministerstvo zdravotníctva",
+                "explanation": "Ministerstvo môže byť preťažené novými úlohami a zodpovednosťami, čo môže ovplyvniť jeho schopnosť efektívne fungovať."
+            }
+        ],
+        "how_to_react": [
+            "Zamestnanci Ministerstva hospodárstva by mali sledovať oznámenia o presune a pripraviť sa na možné zmeny v pracovných pozíciách.",
+            "Prevádzkovatelia drogových prekurzorov by mali začať získať informácie o nových pravidlách a požiadavkách, ktoré budú zavedené Ministerstvom zdravotníctva.",
+            "Verejnosť by mala byť informovaná o zmenách v protidrogovej politike a sledovať správy o účinnosti nových opatrení.",
+            "Orgány štátnej správy by mali zorganizovať školenia a informačné stretnutia na tému nových kompetencií a procesov.",
+            "Európska komisia by mala byť informovaná o zmenách v správe drogových prekurzorov a ich dopade na medzinárodnú spoluprácu."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

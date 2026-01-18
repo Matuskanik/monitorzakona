@@ -1,0 +1,76 @@
+{
+    "id": 11,
+    "master_id": "10424",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10424",
+    "created_at": "2026-01-18 07:12:36",
+    "updated_at": "2026-01-18 07:12:36",
+    "summary": {
+        "tags": [
+            "vzdelávanie",
+            "podnikanie"
+        ],
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave, prináša významné zmeny v oblasti odborného vzdelávania na Slovensku. Hlavným cieľom týchto zmien je zlepšiť kvalitu odborného vzdelávania a praxe, pričom sa rozširuje aj pôsobnosť stredných priemyselných škôl. Nové ustanovenia zavádzajú odborné stáže a digitálne odborné praxe, ktoré budú organizované pod vedením vysokoškolských učiteľov a odborných inštruktorov. Tieto zmeny sú dôležité, pretože umožňujú žiakom získať praktické skúsenosti priamo v odbore, čím sa zvyšuje ich zamestnateľnosť. Zákon nadobudne účinnosť v auguste 2025, pričom prechodné obdobia budú upravené v súlade s novými pravidlami. Kľúčovými bodmi sú aj zmluvy o odbornej stáži medzi strednými a vysokými školami, ktoré posilnia spoluprácu medzi vzdelávacími inštitúciami a zamestnávateľmi.",
+        "affected_groups": [
+            {
+                "group": "žiaci stredných odborných a priemyselných škôl",
+                "impact": "Získajú prístup k odborným stáži a digitálnym praxiam, čo im umožní získať praktické skúsenosti a zlepšiť svoje šance na trhu práce."
+            },
+            {
+                "group": "zamestnávatelia v oblasti odborného vzdelávania",
+                "impact": "Budú mať povinnosť zabezpečiť praktické vyučovanie a spolupracovať so strednými školami, čo môže zvýšiť ich administratívne zaťaženie."
+            },
+            {
+                "group": "vysoké školy",
+                "impact": "Budú musieť uzatvárať zmluvy o odbornej stáži so strednými školami, čím sa posilní ich úloha v odbornom vzdelávaní."
+            },
+            {
+                "group": "pedagogickí zamestnanci",
+                "impact": "Budú musieť prispôsobiť svoje vyučovacie metódy novým požiadavkám a získať nové zručnosti na vedenie odborných stáží."
+            },
+            {
+                "group": "rodičia žiakov",
+                "impact": "Môžu očakávať, že ich deti získajú kvalitnejšie vzdelanie a praktické zručnosti, čo zlepší ich budúce zamestnanie."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zlepšenie praktických zručností žiakov",
+                "explanation": "Žiaci budú mať možnosť získať praktické skúsenosti priamo v odbore, čo zvyšuje ich zamestnateľnosť."
+            },
+            {
+                "positive": "Posilnenie spolupráce medzi školami a zamestnávateľmi",
+                "explanation": "Zmluvy o odbornej stáži umožnia lepšiu koordináciu medzi vzdelávacími inštitúciami a zamestnávateľmi, čo môže viesť k lepšiemu prispôsobeniu vzdelávania potrebám trhu práce."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené administratívne zaťaženie pre zamestnávateľov",
+                "explanation": "Zamestnávatelia budú musieť splniť nové požiadavky na poskytovanie praktického vyučovania, čo môže viesť k dodatočným nákladom a administratívnym povinnostiam."
+            },
+            {
+                "negative": "Nedostatok kvalifikovaných učiteľov",
+                "explanation": "Ak nebude dostatok kvalifikovaných učiteľov na vedenie odborných stáží, môže to ovplyvniť kvalitu vzdelávania a praxe."
+            }
+        ],
+        "how_to_react": [
+            {
+                "advice": "Ak ste žiak, informujte sa o možnostiach odbornej stáže na vašej škole a zistite, aké sú požiadavky na jej absolvovanie.",
+                "details": "Kontaktujte svojho učiteľa odborného vzdelávania a zistite, aké kroky musíte podniknúť na zapojenie sa do programu."
+            },
+            {
+                "advice": "Zamestnávatelia by mali začať pripravovať potrebné dokumenty na zabezpečenie praktického vyučovania.",
+                "details": "Zistite, aké zmluvy a dohody budete musieť uzatvoriť so strednými školami a aké sú podmienky pre ich uzatvorenie."
+            },
+            {
+                "advice": "Vysoké školy by mali začať vypracovávať zmluvy o odbornej stáži so strednými školami.",
+                "details": "Zorganizujte stretnutie s predstaviteľmi stredných škôl a dohodnite sa na podmienkach spolupráce."
+            }
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

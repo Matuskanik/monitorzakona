@@ -1,0 +1,84 @@
+{
+    "id": 5,
+    "master_id": "10507",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 222/2004 Z. z. o dani z pridanej hodnoty v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "26. 9. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10507",
+    "created_at": "2026-01-18 07:08:52",
+    "updated_at": "2026-01-18 07:08:52",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie"
+        ],
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 222/2004 Z. z. o dani z pridanej hodnoty, prináša viaceré dôležité zmeny, ktoré sa týkajú registrácie daňových skupín a ich správy. Hlavnou zmenou je zavedenie možnosti registrácie skupiny z úradnej moci, ak sa zistí, že členovia skupiny sa snažia obchádzať platenie dane. Daňový úrad Banská Bystrica bude mať právo vyzvať predpokladaných členov skupiny na určenie spoločného zástupcu, pričom ak tak neurobia, určí ho úrad sám. Taktiež sa mení spôsob, akým sa spravujú zmeny v registrácii skupiny, a zavádzajú sa nové povinnosti pre zástupcov skupín. Zmeny nadobudnú účinnosť od 1. januára 2026, čo dáva podnikateľom čas na prispôsobenie sa novým pravidlám. Dôležité je, že ak člen skupiny prestane spĺňať podmienky, zástupca je povinný bezodkladne podať žiadosť o zmenu registrácie, inak môže čeliť pokute do výšky 10 000 eur. Tieto zmeny sú významné pre podnikateľov, ktorí sú členmi daňových skupín, a môžu ovplyvniť ich daňové povinnosti a administratívne zaťaženie.",
+        "affected_groups": [
+            {
+                "group": "členovia daňových skupín",
+                "impact": "Budú musieť byť aktívni pri určovaní spoločného zástupcu a reagovať na výzvy daňového úradu, inak im hrozí registrácia z úradnej moci."
+            },
+            {
+                "group": "daňoví poradcovia",
+                "impact": "Budú musieť prispôsobiť svoje služby novým pravidlám a informovať svojich klientov o zmenách v registrácii skupín."
+            },
+            {
+                "group": "malé a stredné podniky",
+                "impact": "Môžu čeliť zvýšenému administratívnemu zaťaženiu pri správe daňových skupín a musia si byť vedomé nových pokút za nesplnenie povinností."
+            },
+            {
+                "group": "daňové úrady",
+                "impact": "Budú mať viac právomocí pri registrácii skupín a budú musieť zabezpečiť dodržiavanie nových pravidiel."
+            },
+            {
+                "group": "zástupcovia skupín",
+                "impact": "Budú mať nové povinnosti a zodpovednosť za správu registrácie skupiny a musia byť pripravení na možné pokuty."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšená transparentnosť",
+                "explanation": "Zavedenie registrácie z úradnej moci môže znížiť daňové úniky a zabezpečiť spravodlivejšie podmienky pre všetkých podnikateľov."
+            },
+            {
+                "positive": "Jasnejšie pravidlá",
+                "explanation": "Nové pravidlá pre registráciu a správu skupín môžu pomôcť zjednodušiť procesy a znížiť nejasnosti v súvislosti s daňovými povinnosťami."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené administratívne zaťaženie",
+                "explanation": "Podnikatelia budú musieť venovať viac času a zdrojov na dodržiavanie nových pravidiel a správy registrácie skupín."
+            },
+            {
+                "negative": "Riziko pokút",
+                "explanation": "Nedodržanie nových povinností môže viesť k pokutám do výšky 10 000 eur, čo môže mať vážne finančné dôsledky pre podniky."
+            }
+        ],
+        "how_to_react": [
+            {
+                "action": "Skontrolujte, či ste členom daňovej skupiny.",
+                "details": "Ak ste členom skupiny, uistite sa, že ste informovaní o nových pravidlách a povinnostiach, ktoré sa na vás vzťahujú."
+            },
+            {
+                "action": "Určte spoločného zástupcu.",
+                "details": "Ak ste vyzvaní daňovým úradom, do ôsmich dní určte spoločného zástupcu a informujte o tom úrad."
+            },
+            {
+                "action": "Zabezpečte si poradenstvo.",
+                "details": "Zvážte konzultáciu s daňovým poradcom, aby ste sa uistili, že rozumiete novým povinnostiam a ako ich splniť."
+            },
+            {
+                "action": "Pripravte sa na možné zmeny.",
+                "details": "Sledujte informácie od daňového úradu a pripravte sa na zmeny v registrácii a správe skupín."
+            },
+            {
+                "action": "Zaznamenajte si lehoty.",
+                "details": "Uistite sa, že ste si zaznamenali dôležité lehoty, ako je osem dní na určenie zástupcu a 15 dní na vyjadrenie k výzve."
+            }
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

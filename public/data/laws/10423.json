@@ -1,0 +1,67 @@
+{
+    "id": 9,
+    "master_id": "10423",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 138/2019 Z. z. o pedagogických zamestnancoch a odborných zamestnancoch a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10423",
+    "created_at": "2026-01-18 07:11:20",
+    "updated_at": "2026-01-18 07:11:20",
+    "summary": {
+        "tags": [
+            "podnikanie",
+            "školstvo"
+        ],
+        "summary_paragraph": "Zákon č. 138/2019 Z. z. o pedagogických zamestnancoch a odborných zamestnancoch prechádza významnými zmenami, ktoré sa dotknú predovšetkým pedagogických zamestnancov a odborných zamestnancov v školstve. Tieto zmeny sa zameriavajú na úpravu kvalifikačných predpokladov, pracovných podmienok a kariérneho postupu pedagogických zamestnancov. Napríklad, novinkou je, že učitelia materských škôl budú mať špecifické výnimky týkajúce sa kvalifikačných požiadaviek, čo môže uľahčiť prístup do profesie. Zákon tiež zavádza povinnosť absolvovať kurzy prvej pomoci a krízového manažmentu pre pedagogických zamestnancov, čo zvyšuje ich pripravenosť na nepredvídané situácie. Zmeny nadobudnú účinnosť v auguste 2025, pričom prechodné obdobia pre niektoré povinnosti budú stanovené na dva roky. Tieto úpravy sú dôležité, pretože zvyšujú kvalitu vzdelávania a zabezpečujú lepšiu ochranu detí a žiakov v školskom prostredí.",
+        "affected_groups": [
+            {
+                "group": "pedagogickí zamestnanci",
+                "impact": "Budú musieť splniť nové kvalifikačné predpoklady, vrátane absolvovania špecializovaných kurzov, čo môže ovplyvniť ich kariérny postup."
+            },
+            {
+                "group": "učitelia materských škôl",
+                "impact": "Získajú výnimky z niektorých kvalifikačných požiadaviek, čo môže uľahčiť ich zamestnanie a prístup k profesijnému rozvoju."
+            },
+            {
+                "group": "riaditelia škôl",
+                "impact": "Budú mať väčšie právomoci pri určovaní pracovných podmienok a kariérneho postupu zamestnancov, čo môže ovplyvniť organizačnú štruktúru škôl."
+            },
+            {
+                "group": "študenti a žiaci",
+                "impact": "Zvýšenie kvality vzdelávania a bezpečnosti v školách, čo priamo ovplyvní ich vzdelávací proces a celkový rozvoj."
+            },
+            {
+                "group": "rodičia",
+                "impact": "Budú mať väčšiu istotu v kvalite vzdelávania a bezpečnosti svojich detí v školskom prostredí."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšenie kvality vzdelávania",
+                "explanation": "Nové požiadavky na vzdelanie a odborné kurzy zabezpečia, že pedagogickí zamestnanci budú lepšie pripravení na svoju prácu."
+            },
+            {
+                "positive": "Flexibilita pre učiteľov materských škôl",
+                "explanation": "Výnimky z kvalifikačných požiadaviek umožnia rýchlejšie zaplnenie voľných miest a prístup k profesii pre viac uchádzačov."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené nároky na zamestnancov",
+                "explanation": "Nové požiadavky môžu byť pre niektorých zamestnancov ťažko splniteľné, čo môže viesť k odchodu z profesie."
+            },
+            {
+                "negative": "Náklady na vzdelávanie",
+                "explanation": "Pedagogickí zamestnanci budú musieť investovať do kurzov a školení, čo môže byť finančne náročné."
+            }
+        ],
+        "how_to_react": [
+            "Pedagogickí zamestnanci by mali začať s plánovaním absolvovania potrebných kurzov a školení, aby splnili nové kvalifikačné požiadavky do augusta 2025.",
+            "Riaditelia škôl by mali zhodnotiť aktuálne zloženie svojich zamestnancov a pripraviť plán na zabezpečenie potrebného vzdelania a školení pre svojich zamestnancov.",
+            "Rodičia by mali sledovať zmeny v školskom systéme a informovať sa o nových požiadavkách a zmenách, ktoré môžu ovplyvniť vzdelávanie ich detí."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

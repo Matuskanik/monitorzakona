@@ -1,0 +1,67 @@
+{
+    "id": 15,
+    "master_id": "10345",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 108/2024 Z. z. o ochrane spotrebiteľa a o zmene a doplnení niektorých zákonov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "4. 6. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10345",
+    "created_at": "2026-01-18 07:15:24",
+    "updated_at": "2026-01-18 07:15:24",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie"
+        ],
+        "summary_paragraph": "Zákon č. 108/2024 Z. z. o ochrane spotrebiteľa a jeho novelizácia, ktorá sa predpokladá v roku 2025, prináša významné zmeny v oblasti ochrany spotrebiteľov a obchodných praktík. Hlavným cieľom týchto zmien je zvýšiť transparentnosť a zodpovednosť obchodníkov voči spotrebiteľom, čo môže mať pozitívny dopad na dôveru v trh. Novela zavádza povinnosť obchodníkov jasne informovať o zárukách, opraviteľnosti tovaru a environmentálnych aspektoch produktov. Napríklad, ak výrobca poskytuje záruku na životnosť tovaru dlhšiu ako dva roky, musí túto informáciu sprístupniť spotrebiteľom. Zákon tiež zavádza nové definície, ako sú 'značka udržateľnosti' a 'certifikačný systém', čo môže pomôcť spotrebiteľom lepšie sa orientovať v ekologických aspektoch produktov. Zmeny nadobudnú účinnosť od 1. januára 2026, pričom prechodné obdobie pre niektoré ustanovenia je do konca roka 2025. Tieto zmeny sú dôležité, pretože posilňujú práva spotrebiteľov a zvyšujú zodpovednosť obchodníkov, čím sa zlepšuje celková kvalita a bezpečnosť produktov na trhu.",
+        "affected_groups": [
+            {
+                "group": "spotrebitelia",
+                "impact": "Budú mať právo na jasnejšie informácie o zárukách a opraviteľnosti tovaru, čo im umožní lepšie sa rozhodovať pri nákupe."
+            },
+            {
+                "group": "obchodníci",
+                "impact": "Budú musieť dodržiavať prísnejšie pravidlá týkajúce sa informovania spotrebiteľov, čo môže zvýšiť ich administratívne náklady."
+            },
+            {
+                "group": "výrobcovia",
+                "impact": "Budú povinní poskytovať informácie o opraviteľnosti a zárukách, čo môže ovplyvniť ich výrobné procesy a marketing."
+            },
+            {
+                "group": "opravy a servisy",
+                "impact": "Budú musieť prispôsobiť svoje služby novým požiadavkám na informovanie spotrebiteľov o opravách a nákladoch."
+            },
+            {
+                "group": "environmentálne organizácie",
+                "impact": "Získajú nástroje na presadzovanie udržateľnosti a transparentnosti v obchodných praktikách."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšená transparentnosť",
+                "explanation": "Spotrebitelia budú mať prístup k jasnejším informáciám o produktoch, čo im umožní lepšie rozhodovanie."
+            },
+            {
+                "positive": "Podpora udržateľnosti",
+                "explanation": "Zavedenie značiek udržateľnosti a certifikačných systémov môže podporiť ekologické produkty a znížiť negatívny dopad na životné prostredie."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené náklady pre obchodníkov",
+                "explanation": "Obchodníci budú musieť investovať do nových systémov a školení, čo môže zvýšiť ich prevádzkové náklady."
+            },
+            {
+                "negative": "Možné zložitosti pri implementácii",
+                "explanation": "Nové požiadavky môžu byť pre niektorých obchodníkov zložité na implementáciu, čo môže viesť k nejasnostiam a chybám."
+            }
+        ],
+        "how_to_react": [
+            "Obchodníci by mali začať pripravovať svoje interné procesy na zmenu zákona, vrátane školení zamestnancov o nových povinnostiach.",
+            "Spotrebitelia by mali sledovať zmeny v informovaní o zárukách a opraviteľnosti tovaru a vyžadovať tieto informácie pri nákupe.",
+            "Výrobcovia by mali prehodnotiť svoje marketingové stratégie a zabezpečiť, aby informácie o zárukách a opraviteľnosti boli jasne komunikované."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

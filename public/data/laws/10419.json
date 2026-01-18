@@ -1,0 +1,67 @@
+{
+    "id": 14,
+    "master_id": "10419",
+    "title": "Vládny návrh zákona o financovaní škôl a školských zariadení",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10419",
+    "created_at": "2026-01-18 07:14:33",
+    "updated_at": "2026-01-18 07:14:33",
+    "summary": {
+        "tags": [
+            "školstvo",
+            "financie"
+        ],
+        "summary_paragraph": "Zákon o financovaní škôl a školských zariadení, ktorý bol predložený Národnej rade Slovenskej republiky, upravuje zdroje a účely financovania vzdelávacích inštitúcií v Slovenskej republike. Tento zákon zavádza normatívne a nenormatívne financovanie, pričom normatívne financovanie sa týka pridelovania prostriedkov na zabezpečenie výchovy a vzdelávania, zatiaľ čo nenormatívne financovanie sa zameriava na špecifické potreby a projekty škôl. Zákon tiež definuje, aké zdroje môžu školy a školské zariadenia využívať, vrátane prostriedkov zo štátneho rozpočtu, príspevkov od zriaďovateľov a iných externých zdrojov. Dôležitým aspektom je aj zohľadnenie inflácie pri výpočte finančných prostriedkov, čo zabezpečuje, že školy budú mať dostatočné financie na prevádzku aj v prípade rastúcich nákladov. Zákon nadobudne účinnosť v auguste 2025 a jeho implementácia môže mať významný dopad na kvalitu vzdelávania a dostupnosť prostriedkov pre školy, čo je kľúčové pre zabezpečenie kvalitného vzdelávania pre všetkých žiakov.",
+        "affected_groups": [
+            {
+                "group": "riaditelia škôl",
+                "impact": "Budú musieť prispôsobiť rozpočet a hospodárenie podľa nových pravidiel financovania, čo môže vyžadovať dodatočné školenia a prispôsobenie administratívnych procesov."
+            },
+            {
+                "group": "učitelia",
+                "impact": "Môžu získať stabilnejšie financovanie na mzdy a prevádzku, čo môže prispieť k zlepšeniu pracovných podmienok a motivácie."
+            },
+            {
+                "group": "rodičia",
+                "impact": "Môžu očakávať zlepšenie kvality vzdelávania a dostupnosti školských služieb, avšak aj zvýšenie príspevkov na úhradu nákladov na vzdelávanie."
+            },
+            {
+                "group": "žáci so špeciálnymi potrebami",
+                "impact": "Zákon zabezpečuje, že aj školy pre žiakov so špeciálnymi potrebami budú mať prístup k adekvátnemu financovaniu, čo môže zlepšiť ich vzdelávacie podmienky."
+            },
+            {
+                "group": "zriaďovatelia škôl",
+                "impact": "Budú musieť zabezpečiť transparentnosť a efektívnosť pri rozdeľovaní finančných prostriedkov, čo môže vyžadovať zmeny v ich administratívnych praktikách."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšené financovanie pre školy",
+                "explanation": "Zákon zabezpečuje, že školy dostanú adekvátne prostriedky na pokrytie svojich nákladov, čo môže viesť k zlepšeniu kvality vzdelávania."
+            },
+            {
+                "positive": "Zohľadnenie inflácie",
+                "explanation": "Zohľadnenie inflácie pri výpočte financovania zabezpečuje, že školy nebudú čeliť poklesu reálnych prostriedkov, čo je dôležité pre ich udržateľnosť."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené administratívne nároky",
+                "explanation": "Zákon môže vyžadovať dodatočné administratívne úkony a školenia pre riaditeľov a zamestnancov, čo môže viesť k dodatočným nákladom."
+            },
+            {
+                "negative": "Možné zvýšenie príspevkov od rodičov",
+                "explanation": "Rodičia môžu čeliť vyšším príspevkom na úhradu nákladov na vzdelávanie, čo môže byť pre niektoré rodiny finančne náročné."
+            }
+        ],
+        "how_to_react": [
+            "Riaditelia škôl by mali do 30 dní od nadobudnutia účinnosti zákona prehodnotiť a prispôsobiť svoje rozpočty podľa nových pravidiel financovania.",
+            "Učitelia by mali absolvovať školenie o nových pravidlách financovania a hospodárenia, aby sa zabezpečila ich efektívna implementácia.",
+            "Rodičia by mali sledovať informácie od škôl o možných zmenách v príspevkoch a financovaní a pripraviť sa na diskusie s riaditeľmi škôl."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

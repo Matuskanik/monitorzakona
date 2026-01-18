@@ -1,0 +1,76 @@
+{
+    "id": 16,
+    "master_id": "10357",
+    "title": "Vládny návrh zákona, ktorým sa mení zákon č. 78/2015 Z. z. o kontrole výkonu niektorých rozhodnutí technickými prostriedkami a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "7. 7. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10357",
+    "created_at": "2026-01-18 07:15:59",
+    "updated_at": "2026-01-18 07:15:59",
+    "summary": {
+        "tags": [
+            "justícia",
+            "ekonomika"
+        ],
+        "summary_paragraph": "Návrh zákona, ktorý sa mení zákon č. 78/2015 Z. z. o kontrole výkonu niektorých rozhodnutí technickými prostriedkami, má za cieľ zefektívniť ukladanie alternatívnych trestov a zlepšiť podmienky pre ich výkon. Zákon nadobudne účinnosť 1. novembra 2025 a jeho prijatie je reakciou na dlhodobé problémy s nízkou mierou ukladania týchto trestov, ktoré sú spôsobené nedostatočnými podmienkami na kontrolu odsúdených. Vypustením niektorých odsekov a legislatívnymi zmenami sa má dosiahnuť flexibilnejšie a efektívnejšie využívanie technických prostriedkov, čo by malo viesť k zvýšeniu počtu ukladania alternatívnych trestov, ako je domáce väzenie alebo povinné práce. Zákonodarca sa snaží zlepšiť situáciu, keďže doterajšie podmienky neumožnili plné využitie potenciálu systému elektronického monitorovania. Prijatie tohto zákona je v súlade s cieľmi vlády v oblasti trestnej politiky a má podporiť prevenciu trestnej činnosti v spoločnosti.",
+        "affected_groups": [
+            {
+                "group": "odsúdení a obvinení",
+                "impact": "Budú mať väčšiu šancu na ukladanie alternatívnych trestov, čo im umožní vyhnúť sa väzeniu a vykonávať tresty v domácom prostredí."
+            },
+            {
+                "group": "súdy a sudcovia",
+                "impact": "Budú musieť prispôsobiť svoje rozhodovanie novým podmienkam a získať školenie na efektívne ukladanie alternatívnych trestov."
+            },
+            {
+                "group": "Ministerstvo spravodlivosti",
+                "impact": "Bude zodpovedné za implementáciu a monitorovanie nových technických prostriedkov a ich efektívne využívanie."
+            },
+            {
+                "group": "verejnosť",
+                "impact": "Môže očakávať zníženie počtu osôb vo väzení, čo môže prispieť k zníženiu nákladov na väzenstvo a zlepšeniu bezpečnosti v spoločnosti."
+            },
+            {
+                "group": "právnici a obhajcovia",
+                "impact": "Budú musieť byť informovaní o nových možnostiach a podmienkach ukladania alternatívnych trestov, aby mohli efektívne zastupovať svojich klientov."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšenie počtu alternatívnych trestov",
+                "explanation": "Zákon umožní častejšie využívanie alternatívnych trestov, čo môže znížiť preplnenosť väzníc a poskytnúť odsúdeným druhú šancu."
+            },
+            {
+                "positive": "Efektívnejšie využívanie technických prostriedkov",
+                "explanation": "Vypustenie niektorých legislatívnych obmedzení umožní flexibilnejšie a rýchlejšie nasadenie technológie na monitorovanie odsúdených."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Nedostatočné školenie sudcov",
+                "explanation": "Ak sudcovia nebudú adekvátne školení, môže to viesť k nesprávnemu ukladaniu alternatívnych trestov a zníženiu ich efektivity."
+            },
+            {
+                "negative": "Možné technické problémy",
+                "explanation": "Zavedenie nových technických prostriedkov môže čelí problémom s implementáciou a údržbou, čo môže ovplyvniť ich funkčnosť."
+            }
+        ],
+        "how_to_react": [
+            {
+                "action": "Informujte sa o nových alternatívnych trestoch",
+                "details": "Od 1. novembra 2025 sa oboznámte s novými možnosťami alternatívnych trestov a ich podmienkami na stránkach Ministerstva spravodlivosti."
+            },
+            {
+                "action": "Zúčastnite sa školení",
+                "details": "Súdy a právnici by mali vyhľadávať školenia o nových praktikách a technických prostriedkoch na monitorovanie odsúdených."
+            },
+            {
+                "action": "Sledujte legislatívne zmeny",
+                "details": "Pravidelne kontrolujte aktualizácie a zmeny v zákonoch týkajúcich sa alternatívnych trestov a technických prostriedkov na oficiálnych vládnych stránkach."
+            }
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

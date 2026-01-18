@@ -1,0 +1,76 @@
+{
+    "id": 18,
+    "master_id": "10375",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 566/2001 Z. z. o cenných papieroch a investičných službách a o zmene a doplnení niektorých zákonov (zákon o cenných papieroch) v znení neskorších predpisov a ktorým sa mení a dopĺňa zákon č. 429/2002 Z. z. o burze cenných papierov v znení neskorších predpisov",
+    "approval_date": "19. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10375",
+    "created_at": "2026-01-18 07:17:09",
+    "updated_at": "2026-01-18 07:17:09",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie"
+        ],
+        "summary_paragraph": "Návrh zákona, ktorý sa mení a dopĺňa zákon č. 566/2001 Z. z. o cenných papieroch a investičných službách, prináša viaceré dôležité zmeny, ktoré ovplyvnia fungovanie obchodníkov s cennými papiermi a investičných služieb na Slovensku. Medzi kľúčové zmeny patrí definícia systematického internalizátora, ktorý bude musieť dodržiavať nové pravidlá pri obchodovaní na vlastný účet. Zákon tiež zavádza nové požiadavky na obchodníkov s cennými papiermi, ktorí budú musieť predkladať Národnej banke Slovenska podrobné plány a analýzy týkajúce sa rizík a ďalších podnikateľských činností. Zmeny sa dotknú aj regulácie investičného prieskumu, kde sa kladie dôraz na transparentnosť a kvalitu poskytovaných informácií. Tieto zmeny nadobudnú účinnosť v auguste 2025, čo dáva obchodníkom čas na prispôsobenie sa novým požiadavkám. Celkovým cieľom týchto zmien je zvýšiť stabilitu a transparentnosť finančného trhu na Slovensku.",
+        "affected_groups": [
+            {
+                "group": "obchodníci s cennými papiermi",
+                "impact": "Budú musieť prispôsobiť svoje obchodné praktiky novým definíciám a pravidlám, vrátane povinnosti predkladať plány a analýzy rizík."
+            },
+            {
+                "group": "investori",
+                "impact": "Získajú prístup k transparentnejším a kvalitnejším informáciám o investičných prieskumoch, čo im umožní lepšie rozhodovať o svojich investíciách."
+            },
+            {
+                "group": "Národná banka Slovenska",
+                "impact": "Bude mať rozšírené právomoci na dohľad nad obchodníkmi a ich činnosťami, vrátane posudzovania plánov a analýz rizík."
+            },
+            {
+                "group": "emitenti cenných papierov",
+                "impact": "Budú musieť dodržiavať nové pravidlá týkajúce sa verejných ponúk a predkladať dokumenty Národnej banke Slovenska."
+            },
+            {
+                "group": "malé a stredné podniky",
+                "impact": "Môžu mať zjednodušený prístup na kapitálové trhy vďaka novým reguláciám, ktoré podporujú investície do ich rozvoja."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšená transparentnosť",
+                "explanation": "Nové pravidlá týkajúce sa investičného prieskumu zabezpečia, že investori budú mať prístup k presnejším a jasnejším informáciám."
+            },
+            {
+                "positive": "Lepšie riadenie rizík",
+                "explanation": "Obchodníci budú povinní vypracovať podrobné plány riadenia rizík, čo prispeje k stabilite finančného trhu."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené administratívne náklady",
+                "explanation": "Obchodníci s cennými papiermi budú musieť investovať do nových systémov a procesov na splnenie nových požiadaviek, čo môže zvýšiť ich náklady."
+            },
+            {
+                "negative": "Možné obmedzenie konkurencie",
+                "explanation": "Nové regulácie môžu byť náročné pre menších obchodníkov, čo môže viesť k zníženiu konkurencie na trhu."
+            }
+        ],
+        "how_to_react": [
+            {
+                "advice": "Obchodníci by mali do konca roka 2025 prehodnotiť svoje obchodné modely a prispôsobiť ich novým reguláciám.",
+                "details": "Zvážte konzultáciu s odborníkmi na compliance, aby ste zabezpečili súlad s novými požiadavkami."
+            },
+            {
+                "advice": "Investori by mali sledovať zmeny v reguláciách a vyhľadávať informácie o nových investičných prieskumoch.",
+                "details": "Zamerajte sa na transparentnosť a kvalitu informácií, ktoré dostávate od svojich obchodníkov."
+            },
+            {
+                "advice": "Emitenti cenných papierov by mali začať pripravovať potrebné dokumenty pre Národnú banku Slovenska.",
+                "details": "Uistite sa, že všetky dokumenty sú v súlade s novými požiadavkami pred ich predložením."
+            }
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

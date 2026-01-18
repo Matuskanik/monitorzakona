@@ -1,0 +1,67 @@
+{
+    "id": 12,
+    "master_id": "10418",
+    "title": "Vládny návrh zákona o vysokých školách a o zmene a doplnení niektorých zákonov (vysokoškolský zákon)",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10418",
+    "created_at": "2026-01-18 07:13:13",
+    "updated_at": "2026-01-18 07:13:13",
+    "summary": {
+        "tags": [
+            "vzdelávanie",
+            "školstvo"
+        ],
+        "summary_paragraph": "Návrh zákona o vysokých školách, ktorý predložila vláda Slovenskej republiky, prináša zásadné zmeny v oblasti vysokoškolského vzdelávania. Tento zákon sa zameriava na definovanie poslania, úloh a postavenia vysokých škôl, ako aj na zabezpečenie akademických slobôd a práv. Kľúčovým aspektom je posilnenie akademickej integrity a autonómie vysokých škôl, čo znamená, že vysoké školy budú mať väčšiu slobodu pri rozhodovaní o svojich vnútorných záležitostiach bez vonkajších zásahov. Zákon tiež upravuje financovanie vysokých škôl a ich spoluprácu s inými inštitúciami, čím sa snaží podporiť inováciu a rozvoj vzdelávania. Dôležitou novinkou je aj zavedenie pravidiel pre využívanie umelej inteligencie vo vzdelávacom procese, čo môže mať významný dopad na spôsob, akým sa vyučuje a študuje. Zákon nadobudne účinnosť po jeho schválení Národnou radou a jeho implementácia sa očakáva v nasledujúcich akademických rokoch.",
+        "affected_groups": [
+            {
+                "group": "študenti vysokých škôl",
+                "impact": "Budú mať zabezpečené väčšie akademické slobody a práva, ako aj prístup k novým technológiam a inováciám vo vzdelávaní."
+            },
+            {
+                "group": "zamestnanci vysokých škôl",
+                "impact": "Získajú väčšiu autonómiu pri rozhodovaní o výučbe a výskume, čo môže prispieť k ich profesijnému rozvoju."
+            },
+            {
+                "group": "zriaďovatelia vysokých škôl",
+                "impact": "Budú musieť prispôsobiť svoje postupy a pravidlá v súlade s novými legislatívnymi požiadavkami, čo môže ovplyvniť ich financovanie."
+            },
+            {
+                "group": "zamestnávatelia",
+                "impact": "Budú mať možnosť spolupracovať s vysokými školami na inovatívnych projektoch a praxiach, čo môže zlepšiť kvalitu absolventov."
+            },
+            {
+                "group": "akademické inštitúcie",
+                "impact": "Budú musieť dodržiavať nové pravidlá týkajúce sa akademickej integrity a spolupráce, čo môže ovplyvniť ich akreditáciu."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Posilnenie akademickej slobody",
+                "explanation": "Zákon zabezpečuje, že členovia akademickej obce budú mať právo na slobodu výskumu a vyučovania, čo môže viesť k vyššej kvalite vzdelávania."
+            },
+            {
+                "positive": "Zavedenie pravidiel pre umelú inteligenciu",
+                "explanation": "Týmto sa podporí modernizácia vzdelávacieho procesu a umožní sa efektívnejšie využívanie technológií v štúdiu."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Možné zvýšenie administratívneho zaťaženia",
+                "explanation": "Vysoké školy budú musieť splniť nové legislatívne požiadavky, čo môže viesť k zvýšeniu administratívnych nákladov."
+            },
+            {
+                "negative": "Nedostatočné financovanie",
+                "explanation": "Ak nebude zabezpečené adekvátne financovanie, môže to ovplyvniť kvalitu vzdelávania a výskumu na vysokých školách."
+            }
+        ],
+        "how_to_react": [
+            "Študenti by mali sledovať zmeny v pravidlách a požiadavkách na svojich vysokých školách a aktívne sa zapájať do diskusií o nových praktikách.",
+            "Zamestnanci vysokých škôl by mali využiť nové príležitosti na profesijný rozvoj a zapojiť sa do výskumných projektov, ktoré podporujú ich akademickú slobodu.",
+            "Zriaďovatelia vysokých škôl by mali pripraviť plány na implementáciu nových legislatívnych požiadaviek a zabezpečiť potrebné financovanie na ich realizáciu."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

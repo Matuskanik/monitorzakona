@@ -1,0 +1,76 @@
+{
+    "id": 17,
+    "master_id": "10355",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 544/2002 Z. z. o Horskej záchrannej službe v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "3. 7. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10355",
+    "created_at": "2026-01-18 07:16:34",
+    "updated_at": "2026-01-18 07:16:34",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie"
+        ],
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 544/2002 Z. z. o Horskej záchrannej službe, reaguje na potrebu zefektívniť a upraviť pravidlá týkajúce sa výkonu záchrannej činnosti v horských oblastiach. Zákon sa zameriava na zabránenie zneužívaniu označenia 'Horská záchranná služba' a jej znaku, čím sa zabezpečí, že len oprávnené osoby budú môcť vykonávať činnosti spojené s touto službou. Kľúčové zmeny zahŕňajú presnejšie definovanie úloh a oprávnení Horskej záchrannej služby, ako aj zavedenie disciplinárnej právomoci vo vzťahu k horským vodcom. Nové ustanovenia tiež rozširujú rozsah vodcovskej činnosti o vedenie kurzov technickej pomoci v horách. Zákon nadobudne účinnosť 1. januára 2026, pričom pre osoby s odbornou spôsobilosťou, ktoré nie sú členmi asociácie, je do 30. júna 2026 umožnené vykonávať činnosť aj bez registrácie. Tieto zmeny sú dôležité pre zlepšenie bezpečnosti a efektivity záchranných akcií v náročných horských podmienkach.",
+        "affected_groups": [
+            {
+                "group": "horskí záchranári",
+                "impact": "Budú musieť dodržiavať nové pravidlá a predpisy týkajúce sa označenia a činnosti Horskej záchrannej služby, čo môže ovplyvniť ich pracovné postupy."
+            },
+            {
+                "group": "horskí vodcovia",
+                "impact": "Budú musieť získať odbornú spôsobilosť a registráciu v asociácii, aby mohli vykonávať svoju činnosť legálne."
+            },
+            {
+                "group": "turisti a návštevníci hôr",
+                "impact": "Získajú väčšiu istotu v kvalite a bezpečnosti služieb, ktoré poskytujú horskí záchranári a vodcovia."
+            },
+            {
+                "group": "asociácia horských záchranárov",
+                "impact": "Bude mať nové povinnosti a právomoci, vrátane disciplinárnej zodpovednosti voči svojim členom."
+            },
+            {
+                "group": "štátne orgány",
+                "impact": "Budú musieť zabezpečiť implementáciu a kontrolu dodržiavania nových predpisov a pravidiel."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšenie bezpečnosti v horských oblastiach",
+                "explanation": "Nové pravidlá a disciplinárna právomoc prispejú k zlepšeniu kvality záchrannej činnosti a ochrany turistov."
+            },
+            {
+                "positive": "Jasnejšie pravidlá pre horských vodcov",
+                "explanation": "Definovanie odborných požiadaviek a registrácie pomôže zabezpečiť, že len kvalifikovaní jednotlivci budú vykonávať túto činnosť."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené náklady na registráciu a odbornú prípravu",
+                "explanation": "Horskí vodcovia a záchranári budú musieť investovať do získania potrebných certifikátov a registrácie, čo môže byť finančne náročné."
+            },
+            {
+                "negative": "Možné obmedzenie prístupu k záchrannej činnosti",
+                "explanation": "Osoby, ktoré nemajú odbornú spôsobilosť alebo nie sú registrované, nebudú môcť vykonávať záchranné akcie, čo môže spôsobiť problémy v prípade núdze."
+            }
+        ],
+        "how_to_react": [
+            {
+                "advice": "Ak ste horský vodca, začnite proces registrácie v asociácii do 30. júna 2026, aby ste mohli pokračovať vo svojej činnosti.",
+                "details": "Doručte písomnú žiadosť o členstvo a odbornú spôsobilosť na adresu asociácie."
+            },
+            {
+                "advice": "Získajte potrebné certifikáty a odbornú prípravu pred 1. januárom 2026.",
+                "details": "Prihláste sa na kurzy a školenia, ktoré sú potrebné na získanie odbornej spôsobilosti."
+            },
+            {
+                "advice": "Sledujte aktualizácie a informácie od Národnej asociácie horských záchranárov.",
+                "details": "Pravidelne kontrolujte webovú stránku asociácie pre nové pokyny a požiadavky."
+            }
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

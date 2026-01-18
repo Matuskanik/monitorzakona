@@ -1,0 +1,84 @@
+{
+    "id": 2,
+    "master_id": "10600",
+    "title": "Vládny návrh zákona o príspevku na pomoc pri odkázanosti na pomoc inej fyzickej osoby a o zmene a doplnení niektorých zákonov",
+    "approval_date": "28. 11. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10600",
+    "created_at": "2026-01-18 07:06:49",
+    "updated_at": "2026-01-18 07:06:49",
+    "summary": {
+        "tags": [
+            "sociálna politika",
+            "financie"
+        ],
+        "summary_paragraph": "Návrh zákona o príspevku na pomoc pri odkázanosti na pomoc inej fyzickej osoby zavádza nový systém podpory pre osoby, ktoré sú odkázané na pomoc iných. Tento zákon sa zameriava na poskytovanie príspevkov na úhradu nákladov spojených s neformálnou a formálnou starostlivosťou. Kľúčové zmeny zahŕňajú definovanie neformálnej starostlivosti, ktorá je poskytovaná neformálnymi opatrovateľmi, a formálnej starostlivosti, ktorá je poskytovaná registrovanými poskytovateľmi. Príspevok sa bude vyplácať na základe stupňa odkázanosti, pričom maximálne sumy príspevku sa pohybujú od 230 eur pre osoby so stupňom I až po 1 210 eur pre nezaopatrené deti so stupňom V. Zákon nadobudne účinnosť v januári 2026, pričom prechodné obdobie bude trvať do konca roka 2025, aby sa zabezpečila plynulá implementácia. Tento zákon je dôležitý, pretože poskytuje finančnú pomoc tým, ktorí ju najviac potrebujú, a tým zlepšuje kvalitu života odkázaných osôb.",
+        "affected_groups": [
+            {
+                "group": "osoby odkázané na pomoc",
+                "impact": "Budú mať nárok na príspevok na úhradu nákladov spojených s neformálnou a formálnou starostlivosťou, čo im umožní získať potrebnú pomoc a zlepšiť kvalitu života."
+            },
+            {
+                "group": "neformálni opatrovatelia",
+                "impact": "Môžu získať odmenu za poskytovanie starostlivosti, čo im poskytne finančnú podporu za ich prácu a úsilie."
+            },
+            {
+                "group": "formálni poskytovatelia starostlivosti",
+                "impact": "Budú musieť splniť nové požiadavky na registráciu a poskytovanie služieb, čo môže zvýšiť administratívnu záťaž."
+            },
+            {
+                "group": "rodiny s nezaopatrenými deťmi",
+                "impact": "Získajú vyššie príspevky na starostlivosť o deti so zdravotným postihnutím, čo môže pomôcť pokryť náklady na špeciálne služby."
+            },
+            {
+                "group": "úrad práce, sociálnych vecí a rodiny",
+                "impact": "Bude mať zodpovednosť za administráciu a vyplácanie príspevkov, čo môže vyžadovať zvýšenie kapacít a školení zamestnancov."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zvýšenie finančnej podpory",
+                "explanation": "Príspevky sú navrhnuté tak, aby pokryli reálne náklady na starostlivosť, čo môže výrazne zlepšiť životné podmienky odkázaných osôb."
+            },
+            {
+                "positive": "Podpora neformálnych opatrovateľov",
+                "explanation": "Zákon uznáva a odmeňuje prácu neformálnych opatrovateľov, čo môže motivovať viac ľudí, aby sa stali opatrovateľmi."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšená administratívna záťaž",
+                "explanation": "Formálni poskytovatelia starostlivosti budú musieť splniť nové registračné požiadavky, čo môže byť náročné a časovo náročné."
+            },
+            {
+                "negative": "Obmedzené financovanie",
+                "explanation": "Príspevky sú limitované a nie všetky náklady na starostlivosť môžu byť pokryté, čo môže viesť k nedostatku prostriedkov pre niektoré rodiny."
+            }
+        ],
+        "how_to_react": [
+            {
+                "action": "Zistite si podmienky nároku na príspevok",
+                "details": "Skontrolujte, či spĺňate podmienky na získanie príspevku na pomoc pri odkázanosti, vrátane stupňa odkázanosti a veku."
+            },
+            {
+                "action": "Pripravte potrebné dokumenty",
+                "details": "Získajte lekárske posudky a iné potrebné dokumenty, ktoré preukazujú vašu odkázanosť a nárok na príspevok."
+            },
+            {
+                "action": "Podajte žiadosť o príspevok",
+                "details": "Do konca roka 2025 podajte žiadosť na úrade práce, sociálnych vecí a rodiny, aby ste mohli začať dostávať príspevok od januára 2026."
+            },
+            {
+                "action": "Sledujte zmeny v legislatíve",
+                "details": "Buďte informovaní o akýchkoľvek zmenách v zákone, ktoré by mohli ovplyvniť vaše práva a povinnosti."
+            },
+            {
+                "action": "Zúčastnite sa školení a seminárov",
+                "details": "Zúčastnite sa školení organizovaných úradmi alebo neziskovými organizáciami, ktoré vám pomôžu lepšie pochopiť, ako využiť príspevok."
+            }
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

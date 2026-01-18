@@ -1,0 +1,76 @@
+{
+    "id": 13,
+    "master_id": "10422",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 245/2008 Z. z. o výchove a vzdelávaní (školský zákon) a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10422",
+    "created_at": "2026-01-18 07:13:55",
+    "updated_at": "2026-01-18 07:13:55",
+    "summary": {
+        "tags": [
+            "vzdelávanie",
+            "sociálna politika"
+        ],
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 245/2008 Z. z. o výchove a vzdelávaní, prináša významné zmeny v oblasti vzdelávania, najmä pre deti so zdravotným postihnutím a deti zo sociálne znevýhodňujúceho prostredia. Zákon rozširuje definície týchto skupín a zavádza nové podmienky pre ich vzdelávanie, čo môže zlepšiť prístup k vzdelaniu pre týchto žiakov. Kľúčové zmeny zahŕňajú aj uznávanie osobitného postavenia cirkevných a súkromných škôl, ako aj zabezpečenie etického využívania digitálnych technológií vo vzdelávaní. Tieto zmeny nadobudnú účinnosť od školského roka 2025/2026, pričom školy budú musieť prispôsobiť svoje vzdelávacie programy novým požiadavkám. Zákon taktiež kladie dôraz na rozvoj digitálnych kompetencií a emočnej gramotnosti žiakov, čo je v súlade s modernými trendmi vo vzdelávaní.",
+        "affected_groups": [
+            {
+                "group": "žiaci so zdravotným postihnutím",
+                "impact": "Budú mať prístup k individuálnym vzdelávacím programom, čo im umožní vzdelávať sa podľa svojich špecifických potrieb."
+            },
+            {
+                "group": "žiaci zo sociálne znevýhodňujúceho prostredia",
+                "impact": "Získajú podporu a prístup k diagnostickým vyšetreniam, čo môže zlepšiť ich vzdelávacie výsledky."
+            },
+            {
+                "group": "pedagógovia",
+                "impact": "Budú musieť implementovať nové metódy výučby a prispôsobiť sa zmenám v legislatíve, čo si vyžaduje ďalšie vzdelávanie a školenia."
+            },
+            {
+                "group": "rodičia detí so špeciálnymi potrebami",
+                "impact": "Budú mať možnosť zapojiť sa do procesu vzdelávania svojich detí prostredníctvom informovaného súhlasu a konzultácií."
+            },
+            {
+                "group": "školy a školské zariadenia",
+                "impact": "Budú musieť prispôsobiť svoje vzdelávacie programy a zabezpečiť etické využívanie digitálnych technológií."
+            }
+        ],
+        "positives": [
+            {
+                "positive": "Zlepšenie prístupu k vzdelaniu pre deti so zdravotným postihnutím",
+                "explanation": "Zákon zabezpečuje, že deti so zdravotným postihnutím budú mať prístup k vzdelávaniu prispôsobenému ich potrebám, čo môže viesť k lepším vzdelávacím výsledkom."
+            },
+            {
+                "positive": "Podpora detí zo sociálne znevýhodňujúceho prostredia",
+                "explanation": "Zavedenie diagnostických vyšetrení a individuálnych vzdelávacích programov môže pomôcť týmto deťom prekonať prekážky vo vzdelávaní."
+            }
+        ],
+        "negatives": [
+            {
+                "negative": "Zvýšené nároky na pedagógov",
+                "explanation": "Pedagógovia budú musieť absolvovať ďalšie školenia a prispôsobiť sa novým legislatívnym požiadavkám, čo môže byť časovo a finančne náročné."
+            },
+            {
+                "negative": "Možné nedostatočné financovanie",
+                "explanation": "Ak nebude dostatočné financovanie zo strany štátu, školy nemusia byť schopné implementovať všetky zmeny, čo môže ovplyvniť kvalitu vzdelávania."
+            }
+        ],
+        "how_to_react": [
+            {
+                "advice": "Rodičia detí so zdravotným postihnutím by mali kontaktovať školu a informovať sa o možnostiach individuálneho vzdelávacieho programu.",
+                "details": "Mali by sa do 30 dní od začiatku školského roka dohodnúť na konzultácii so školským špeciálnym pedagógom."
+            },
+            {
+                "advice": "Pedagógovia by mali absolvovať školenia o nových legislatívnych zmenách.",
+                "details": "Odporúča sa prihlásiť sa na školenia organizované ministerstvom školstva alebo odbornými inštitúciami."
+            },
+            {
+                "advice": "Školy by mali aktualizovať svoje vzdelávacie programy podľa nových požiadaviek.",
+                "details": "Do 60 dní od schválenia nového školského vzdelávacieho programu by mali zverejniť jeho obsah na webových stránkach."
+            }
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}
