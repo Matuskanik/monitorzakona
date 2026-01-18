@@ -101,21 +101,30 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Remove any untracked files in public/data that might conflict
-          git clean -fd public/data/ 2>/dev/null || true
-          
-          # Pull latest changes before pushing to avoid conflicts
-          git fetch origin v2
-          git pull --rebase origin v2 || git pull origin v2
-          
-          # Add JSON files (in public/data for Cloudflare Pages)
+          # Stage all JSON files first
           git add public/data/laws/*.json public/data/index.json 2>/dev/null || true
           
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Auto-update: Generate law data JSON files [skip ci]"
-            # Push with retry logic
-            git push origin v2 || (git pull --rebase origin v2 && git push origin v2)
+          # If there are staged changes, commit them first
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-update: Generate law data JSON files [skip ci]" || true
           fi
+          
+          # Now pull latest changes (this will merge our commit with remote)
+          git fetch origin v2
+          
+          # Try to pull with rebase, if it fails, use merge
+          if ! git pull --rebase origin v2 2>/dev/null; then
+            # If rebase fails, try regular pull
+            git pull origin v2 || true
+          fi
+          
+          # Re-add any JSON files that might have been overwritten
+          git add public/data/laws/*.json public/data/index.json 2>/dev/null || true
+          
+          # Check if there are new changes to commit after pull
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-update: Generate law data JSON files [skip ci]" || true
+          fi
+          
+          # Push changes
+          git push origin v2 || (git pull origin v2 && git push origin v2)
