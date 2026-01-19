@@ -1,4 +1,10 @@
 # Apache configuration
+DirectoryIndex index.html index.php
+
+# Allow access
+Options -Indexes
+Require all granted
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -8,8 +14,6 @@
 
 # Security: Prevent access to sensitive files
 <FilesMatch "\.(env|log|db)$">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </FilesMatch>
-
 
