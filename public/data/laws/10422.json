@@ -4,69 +4,34 @@
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 245/2008 Z. z. o výchove a vzdelávaní (školský zákon) a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
     "approval_date": "22. 8. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10422",
-    "created_at": "2026-01-18 07:13:55",
-    "updated_at": "2026-01-18 07:13:55",
+    "created_at": "2026-01-07 14:51:38",
+    "updated_at": "2026-01-07 17:37:48",
     "summary": {
         "tags": [
+            "školstvo",
             "vzdelávanie",
             "sociálna politika"
         ],
-        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 245/2008 Z. z. o výchove a vzdelávaní, prináša významné zmeny v oblasti vzdelávania, najmä pre deti so zdravotným postihnutím a deti zo sociálne znevýhodňujúceho prostredia. Zákon rozširuje definície týchto skupín a zavádza nové podmienky pre ich vzdelávanie, čo môže zlepšiť prístup k vzdelaniu pre týchto žiakov. Kľúčové zmeny zahŕňajú aj uznávanie osobitného postavenia cirkevných a súkromných škôl, ako aj zabezpečenie etického využívania digitálnych technológií vo vzdelávaní. Tieto zmeny nadobudnú účinnosť od školského roka 2025/2026, pričom školy budú musieť prispôsobiť svoje vzdelávacie programy novým požiadavkám. Zákon taktiež kladie dôraz na rozvoj digitálnych kompetencií a emočnej gramotnosti žiakov, čo je v súlade s modernými trendmi vo vzdelávaní.",
+        "summary_paragraph": "Novela školského zákona z roku 2025 prináša významné zmeny v oblasti inkluzívneho vzdelávania a rozvoja digitálnych kompetencií. Zákon rozširuje definíciu detí so zdravotným postihnutím, aby zahŕňala širšiu škálu postihnutí vrátane mentálneho, sluchového, zrakového a telesného postihnutia, ako aj autizmu a ďalších vývinových porúch. Tento krok je dôležitý pre zabezpečenie rovnakých príležitostí vo vzdelávaní pre všetky deti, čo je v súlade s medzinárodnými dohodami, ktorými je Slovensko viazané. Okrem toho, zákon kladie dôraz na rozvoj digitálnych kompetencií, čo zahŕňa schopnosť bezpečne a kriticky využívať digitálne technológie a nástroje umelej inteligencie. Tieto zmeny sú navrhnuté tak, aby pripravili študentov na výzvy modernej digitálnej spoločnosti. Zákon tiež zavádza nové pravidlá pre bilingválne vzdelávanie, kde sa kladie dôraz na výučbu v jazyku národnostných menšín, čo má podporiť kultúrnu rozmanitosť a jazykovú inklúziu. Tieto zmeny nadobudnú účinnosť od začiatku školského roka 2025/2026, pričom školy majú povinnosť prispôsobiť svoje vzdelávacie programy novým požiadavkám.",
         "affected_groups": [
-            {
-                "group": "žiaci so zdravotným postihnutím",
-                "impact": "Budú mať prístup k individuálnym vzdelávacím programom, čo im umožní vzdelávať sa podľa svojich špecifických potrieb."
-            },
-            {
-                "group": "žiaci zo sociálne znevýhodňujúceho prostredia",
-                "impact": "Získajú podporu a prístup k diagnostickým vyšetreniam, čo môže zlepšiť ich vzdelávacie výsledky."
-            },
-            {
-                "group": "pedagógovia",
-                "impact": "Budú musieť implementovať nové metódy výučby a prispôsobiť sa zmenám v legislatíve, čo si vyžaduje ďalšie vzdelávanie a školenia."
-            },
-            {
-                "group": "rodičia detí so špeciálnymi potrebami",
-                "impact": "Budú mať možnosť zapojiť sa do procesu vzdelávania svojich detí prostredníctvom informovaného súhlasu a konzultácií."
-            },
-            {
-                "group": "školy a školské zariadenia",
-                "impact": "Budú musieť prispôsobiť svoje vzdelávacie programy a zabezpečiť etické využívanie digitálnych technológií."
-            }
+            "Deti so zdravotným postihnutím - získajú lepší prístup k inkluzívnemu vzdelávaniu, čo im umožní lepšie sa integrovať do školského prostredia.",
+            "Študenti v bilingválnych školách - budú mať možnosť vzdelávať sa v jazyku národnostnej menšiny, čo podporí ich jazykové a kultúrne zručnosti.",
+            "Učitelia - budú musieť prispôsobiť svoje metódy výučby novým požiadavkám na digitálne kompetencie a inkluzívne vzdelávanie.",
+            "Rodičia detí so špeciálnymi potrebami - budú mať viac možností pre individuálne vzdelávacie programy pre svoje deti.",
+            "Školy - budú musieť aktualizovať svoje vzdelávacie programy a učebné osnovy v súlade s novými pravidlami."
         ],
         "positives": [
-            {
-                "positive": "Zlepšenie prístupu k vzdelaniu pre deti so zdravotným postihnutím",
-                "explanation": "Zákon zabezpečuje, že deti so zdravotným postihnutím budú mať prístup k vzdelávaniu prispôsobenému ich potrebám, čo môže viesť k lepším vzdelávacím výsledkom."
-            },
-            {
-                "positive": "Podpora detí zo sociálne znevýhodňujúceho prostredia",
-                "explanation": "Zavedenie diagnostických vyšetrení a individuálnych vzdelávacích programov môže pomôcť týmto deťom prekonať prekážky vo vzdelávaní."
-            }
+            "Zlepšenie inkluzívneho vzdelávania - deti so zdravotným postihnutím budú mať lepšie podmienky na vzdelávanie, čo môže viesť k ich lepšej integrácii do spoločnosti.",
+            "Podpora digitálnych kompetencií - študenti budú lepšie pripravení na digitálny svet, čo je kľúčové pre ich budúcu kariéru a osobný rozvoj."
         ],
         "negatives": [
-            {
-                "negative": "Zvýšené nároky na pedagógov",
-                "explanation": "Pedagógovia budú musieť absolvovať ďalšie školenia a prispôsobiť sa novým legislatívnym požiadavkám, čo môže byť časovo a finančne náročné."
-            },
-            {
-                "negative": "Možné nedostatočné financovanie",
-                "explanation": "Ak nebude dostatočné financovanie zo strany štátu, školy nemusia byť schopné implementovať všetky zmeny, čo môže ovplyvniť kvalitu vzdelávania."
-            }
+            "Zvýšené nároky na školy - školy budú musieť investovať do aktualizácie vzdelávacích programov a školení pre učiteľov, čo môže byť finančne náročné.",
+            "Možné preťaženie učiteľov - učitelia môžu čeliť zvýšenému tlaku na prispôsobenie sa novým vzdelávacím požiadavkám, čo môže viesť k stresu a vyhoreniu."
         ],
         "how_to_react": [
-            {
-                "advice": "Rodičia detí so zdravotným postihnutím by mali kontaktovať školu a informovať sa o možnostiach individuálneho vzdelávacieho programu.",
-                "details": "Mali by sa do 30 dní od začiatku školského roka dohodnúť na konzultácii so školským špeciálnym pedagógom."
-            },
-            {
-                "advice": "Pedagógovia by mali absolvovať školenia o nových legislatívnych zmenách.",
-                "details": "Odporúča sa prihlásiť sa na školenia organizované ministerstvom školstva alebo odbornými inštitúciami."
-            },
-            {
-                "advice": "Školy by mali aktualizovať svoje vzdelávacie programy podľa nových požiadaviek.",
-                "details": "Do 60 dní od schválenia nového školského vzdelávacieho programu by mali zverejniť jeho obsah na webových stránkach."
-            }
+            "Rodičia detí so špeciálnymi potrebami by mali kontaktovať školu a zistiť, aké možnosti individuálneho vzdelávacieho programu sú k dispozícii.",
+            "Školy by mali začať s prípravou na implementáciu nových vzdelávacích programov a zabezpečiť školenia pre učiteľov na rozvoj digitálnych kompetencií.",
+            "Učitelia by mali využiť dostupné školenia a zdroje na zlepšenie svojich zručností v oblasti inkluzívneho vzdelávania a digitálnych technológií."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

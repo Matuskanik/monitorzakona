@@ -1,63 +1,39 @@
 {
-    "id": 8,
+    "id": 10,
     "master_id": "10506",
     "title": "Vládny návrh zákona o označeniach pôvodu výrobkov a zemepisných označeniach výrobkov a o zmene a doplnení zákona Národnej rady Slovenskej republiky č. 145/1995 Z. z. o správnych poplatkoch v znení neskorších predpisov",
     "approval_date": "26. 9. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10506",
-    "created_at": "2026-01-18 07:10:39",
-    "updated_at": "2026-01-18 07:10:39",
+    "created_at": "2026-01-07 14:47:02",
+    "updated_at": "2026-01-07 17:36:13",
     "summary": {
         "tags": [
             "ekonomika",
-            "financie"
+            "právo",
+            "podnikanie"
         ],
-        "summary_paragraph": "Nový zákon o označeniach pôvodu výrobkov a zemepisných označeniach výrobkov, ktorý predložila vláda Slovenskej republiky, prináša zásadné zmeny v oblasti ochrany a registrácie výrobkov s chráneným označením pôvodu. Tento zákon upravuje vnútroštátne postupy pre podanie žiadostí o zápis označenia pôvodu a zemepisného označenia, ako aj námietkového konania. Kľúčovým aspektom je, že žiadosti o zápis budú musieť spĺňať špecifikácie, ktoré budú odborné posúdené ministerstvom pôdohospodárstva. Zákon tiež zavádza lehoty na podávanie námietok, ktoré musia byť podané do dvoch mesiacov od zverejnenia žiadosti vo vestníku. Tento krok je dôležitý pre ochranu slovenských výrobkov na trhu a zabezpečenie ich kvality. Zákon nadobudne účinnosť v septembri 2025, pričom prechodné ustanovenia zabezpečia, že doterajšie ochrany zostanú v platnosti do právoplatnosti rozhodnutí Európskej únie. Týmto spôsobom sa posilní konkurencieschopnosť slovenských výrobkov a ich ochrana na medzinárodnom trhu.",
+        "summary_paragraph": "Nový zákon o označeniach pôvodu výrobkov a zemepisných označeniach výrobkov prináša významné zmeny v oblasti ochrany a registrácie týchto označení na Slovensku. Zákon upravuje vnútroštátne postupy pri podávaní žiadostí o zápis označení pôvodu a zemepisných označení, vrátane možnosti podania námietok a zmeny špecifikácie výrobkov. Dôležitou súčasťou je aj vymáhanie práv z týchto označení, čo môže mať zásadný vplyv na výrobcov, ktorí sa snažia chrániť svoje produkty pred neoprávneným používaním. Zákon tiež stanovuje, že Úrad priemyselného vlastníctva SR a Ministerstvo pôdohospodárstva budú kľúčovými orgánmi v procese registrácie a ochrany týchto označení. Pre poľnohospodárske výrobky je potrebné odborné posúdenie a odsúhlasenie špecifikácie výrobku ministerstvom. Zákon nadobúda platnosť v septembri 2025 a obsahuje prechodné ustanovenia, ktoré zabezpečujú kontinuitu ochrany existujúcich označení až do právoplatnosti rozhodnutí príslušných európskych orgánov.",
         "affected_groups": [
-            {
-                "group": "výrobcovia potravín",
-                "impact": "Budú musieť podávať žiadosti o zápis označenia pôvodu, čo si vyžaduje dodatočné administratívne úsilie a odborné posúdenie ich výrobkov."
-            },
-            {
-                "group": "remeselníci a priemyselní výrobcovia",
-                "impact": "Budú mať možnosť chrániť svoje výrobky prostredníctvom zemepisných označení, čo môže zvýšiť ich hodnotu na trhu."
-            },
-            {
-                "group": "spotrebitelia",
-                "impact": "Získajú lepšiu ochranu a informácie o pôvode výrobkov, čo im umožní robiť informovanejšie rozhodnutia pri nákupe."
-            },
-            {
-                "group": "obchodníci",
-                "impact": "Budú musieť byť oboznámení s novými pravidlami a zabezpečiť, aby predávané výrobky mali riadne označenia pôvodu."
-            },
-            {
-                "group": "právnici a odborníci na duševné vlastníctvo",
-                "impact": "Budú mať viac práce s poradenstvom výrobcov a spracovaním námietok v súvislosti s novými pravidlami."
-            }
+            "Výrobcovia poľnohospodárskych výrobkov - budú musieť zabezpečiť odborné posúdenie a odsúhlasenie špecifikácie výrobku ministerstvom pôdohospodárstva.",
+            "Výrobcovia remeselných a priemyselných výrobkov - budú musieť podávať žiadosti o zápis výlučne prostredníctvom informačného systému EÚ.",
+            "Podnikatelia v oblasti duševného vlastníctva - budú musieť sledovať nové postupy a lehoty na podanie námietok a zmeny špecifikácií.",
+            "Právnici a advokáti - budú musieť poskytovať poradenstvo v súlade s novými právnymi predpismi a postupmi.",
+            "Spotrebitelia - môžu očakávať lepšiu ochranu a kvalitu výrobkov označených chránenými označeniami pôvodu a zemepisnými označeniami."
         ],
         "positives": [
-            {
-                "positive": "Zvýšená ochrana slovenských výrobkov",
-                "explanation": "Zákon posilňuje ochranu výrobkov s chráneným označením pôvodu, čo môže viesť k zvýšeniu ich predaja a konkurencieschopnosti."
-            },
-            {
-                "positive": "Jasnejšie pravidlá pre registráciu",
-                "explanation": "Zavedenie presných postupov a lehôt pre podávanie žiadostí a námietok zjednoduší proces pre výrobcov a zlepší transparentnosť."
-            }
+            "Zvýšená ochrana pre výrobcov - zákon poskytuje jasné postupy na ochranu označení pôvodu a zemepisných označení, čo môže zvýšiť dôveru spotrebiteľov v kvalitu výrobkov.",
+            "Harmonizácia s EÚ - zosúladenie s európskymi normami môže zjednodušiť obchodovanie v rámci EÚ a posilniť pozíciu slovenských výrobkov na medzinárodnom trhu."
         ],
         "negatives": [
-            {
-                "negative": "Zvýšené administratívne náklady",
-                "explanation": "Výrobcovia budú musieť investovať čas a prostriedky do podávania žiadostí a dodatočných posúdení, čo môže byť pre malé podniky zaťažujúce."
-            },
-            {
-                "negative": "Možnosť zamietnutia žiadostí",
-                "explanation": "Ak žiadosť o zápis nespĺňa podmienky, môže byť zamietnutá, čo môže viesť k strate investícií a času pre výrobcov."
-            }
+            "Zvýšená administratívna záťaž - výrobcovia budú musieť zvládnuť nové administratívne postupy a dodržiavať prísne lehoty, čo môže byť náročné najmä pre menšie podniky.",
+            "Možné spory a námietky - nové pravidlá môžu viesť k zvýšenému počtu sporov a námietok, čo môže predĺžiť proces registrácie a ochrany označení."
         ],
         "how_to_react": [
-            "Od septembra 2025 sa oboznámte s novými pravidlami a pripravte sa na podanie žiadosti o zápis označenia pôvodu pre vaše výrobky.",
-            "Získajte odborné poradenstvo od právnikov alebo odborníkov na duševné vlastníctvo, aby ste zabezpečili, že vaša žiadosť bude spĺňať všetky požiadavky.",
-            "Sledujte zverejnenie žiadostí vo vestníku a buďte pripravení podať námietky, ak sa domnievate, že vaše práva sú ohrozené."
+            "Výrobcovia by mali do 30 dní od nadobudnutia platnosti zákona pripraviť a podať žiadosti o zápis označení pôvodu alebo zemepisných označení na Úrad priemyselného vlastníctva SR.",
+            "Podnikatelia by mali sledovať zverejnenia vo Vestníku Úradu priemyselného vlastníctva SR a v prípade potreby podať námietky do dvoch mesiacov od zverejnenia.",
+            "Právnici by mali aktualizovať svoje znalosti o nových postupoch a poskytovať klientom poradenstvo v súlade s novými právnymi predpismi.",
+            "Výrobcovia by mali zabezpečiť odborné posúdenie špecifikácie výrobkov ministerstvom pôdohospodárstva, ak ide o poľnohospodárske výrobky.",
+            "Podnikatelia by mali využiť informačný systém EÚ na podávanie žiadostí o zápis pre nepoľnohospodárske výrobky."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

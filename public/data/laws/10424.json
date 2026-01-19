@@ -1,72 +1,37 @@
 {
-    "id": 11,
+    "id": 21,
     "master_id": "10424",
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
     "approval_date": "22. 8. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10424",
-    "created_at": "2026-01-18 07:12:36",
-    "updated_at": "2026-01-18 07:12:36",
+    "created_at": "2026-01-07 18:45:07",
+    "updated_at": "2026-01-07 18:45:07",
     "summary": {
         "tags": [
             "vzdelávanie",
-            "podnikanie"
+            "školstvo",
+            "práca"
         ],
-        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave, prináša významné zmeny v oblasti odborného vzdelávania na Slovensku. Hlavným cieľom týchto zmien je zlepšiť kvalitu odborného vzdelávania a praxe, pričom sa rozširuje aj pôsobnosť stredných priemyselných škôl. Nové ustanovenia zavádzajú odborné stáže a digitálne odborné praxe, ktoré budú organizované pod vedením vysokoškolských učiteľov a odborných inštruktorov. Tieto zmeny sú dôležité, pretože umožňujú žiakom získať praktické skúsenosti priamo v odbore, čím sa zvyšuje ich zamestnateľnosť. Zákon nadobudne účinnosť v auguste 2025, pričom prechodné obdobia budú upravené v súlade s novými pravidlami. Kľúčovými bodmi sú aj zmluvy o odbornej stáži medzi strednými a vysokými školami, ktoré posilnia spoluprácu medzi vzdelávacími inštitúciami a zamestnávateľmi.",
+        "summary_paragraph": "Novela zákona č. 61/2015 Z. z. o odbornom vzdelávaní a príprave prináša významné zmeny, ktoré sa týkajú najmä stredných odborných a priemyselných škôl. Jednou z hlavných zmien je zavedenie odbornej stáže a digitálnej odbornej praxe ako súčasti študijných odborov, čo umožní žiakom získať praktické skúsenosti priamo v školách alebo na pracoviskách zamestnávateľov. Táto zmena je dôležitá, pretože posilňuje prepojenie medzi teoretickým vzdelávaním a praktickými zručnosťami, čo môže zvýšiť zamestnateľnosť absolventov. Zákon tiež zavádza možnosť uzatvárania zmlúv o odbornej stáži medzi strednými školami a vysokými školami, čím sa otvárajú nové možnosti pre spoluprácu a prehlbovanie vedomostí žiakov. Ďalšou významnou zmenou je zavedenie agentúrneho systému duálneho vzdelávania, ktorý umožňuje zamestnávateľom poskytovať praktické vyučovanie prostredníctvom hostiteľských zamestnávateľov. Tieto zmeny nadobudnú platnosť po schválení a zverejnení v Zbierke zákonov, pričom prechodné obdobia môžu byť stanovené na základe konkrétnych ustanovení zákona.",
         "affected_groups": [
-            {
-                "group": "žiaci stredných odborných a priemyselných škôl",
-                "impact": "Získajú prístup k odborným stáži a digitálnym praxiam, čo im umožní získať praktické skúsenosti a zlepšiť svoje šance na trhu práce."
-            },
-            {
-                "group": "zamestnávatelia v oblasti odborného vzdelávania",
-                "impact": "Budú mať povinnosť zabezpečiť praktické vyučovanie a spolupracovať so strednými školami, čo môže zvýšiť ich administratívne zaťaženie."
-            },
-            {
-                "group": "vysoké školy",
-                "impact": "Budú musieť uzatvárať zmluvy o odbornej stáži so strednými školami, čím sa posilní ich úloha v odbornom vzdelávaní."
-            },
-            {
-                "group": "pedagogickí zamestnanci",
-                "impact": "Budú musieť prispôsobiť svoje vyučovacie metódy novým požiadavkám a získať nové zručnosti na vedenie odborných stáží."
-            },
-            {
-                "group": "rodičia žiakov",
-                "impact": "Môžu očakávať, že ich deti získajú kvalitnejšie vzdelanie a praktické zručnosti, čo zlepší ich budúce zamestnanie."
-            }
+            "žiaci stredných odborných a priemyselných škôl - získajú možnosť absolvovať odborné stáže a digitálne praxe, čo im umožní lepšie pripraviť sa na trh práce",
+            "zamestnávatelia v systéme duálneho vzdelávania - budú môcť poskytovať praktické vyučovanie prostredníctvom agentúrneho systému, čo môže zjednodušiť administratívu a koordináciu",
+            "vysoké školy - môžu uzatvárať zmluvy o odbornej stáži so strednými školami, čím sa posilní spolupráca a prepojenie medzi rôznymi stupňami vzdelávania",
+            "stavovské a profesijné organizácie - budú mať úlohu pri overovaní spôsobilosti zamestnávateľov a koordinácii agentúrneho systému",
+            "ministerstvo školstva - získa nové kompetencie v oblasti udeľovania oprávnení pre centrá excelentnosti odborného vzdelávania a prípravy"
         ],
         "positives": [
-            {
-                "positive": "Zlepšenie praktických zručností žiakov",
-                "explanation": "Žiaci budú mať možnosť získať praktické skúsenosti priamo v odbore, čo zvyšuje ich zamestnateľnosť."
-            },
-            {
-                "positive": "Posilnenie spolupráce medzi školami a zamestnávateľmi",
-                "explanation": "Zmluvy o odbornej stáži umožnia lepšiu koordináciu medzi vzdelávacími inštitúciami a zamestnávateľmi, čo môže viesť k lepšiemu prispôsobeniu vzdelávania potrebám trhu práce."
-            }
+            "Zvýšenie praktických zručností žiakov - odborné stáže a digitálne praxe umožnia žiakom získať cenné skúsenosti a lepšie sa pripraviť na pracovný trh.",
+            "Posilnenie spolupráce medzi školami a zamestnávateľmi - agentúrny systém duálneho vzdelávania a zmluvy o odbornej stáži podporujú efektívnejšiu spoluprácu a prepojenie vzdelávania s praxou."
         ],
         "negatives": [
-            {
-                "negative": "Zvýšené administratívne zaťaženie pre zamestnávateľov",
-                "explanation": "Zamestnávatelia budú musieť splniť nové požiadavky na poskytovanie praktického vyučovania, čo môže viesť k dodatočným nákladom a administratívnym povinnostiam."
-            },
-            {
-                "negative": "Nedostatok kvalifikovaných učiteľov",
-                "explanation": "Ak nebude dostatok kvalifikovaných učiteľov na vedenie odborných stáží, môže to ovplyvniť kvalitu vzdelávania a praxe."
-            }
+            "Zvýšená administratívna záťaž pre školy a zamestnávateľov - nové zmluvné vzťahy a systémové zmeny môžu vyžadovať viac administratívnych úkonov a koordinácie.",
+            "Možné nerovnosti v prístupe k odborným stážam - nie všetky školy a zamestnávatelia môžu byť schopní poskytnúť rovnaké príležitosti pre všetkých žiakov, čo môže viesť k nerovnostiam."
         ],
         "how_to_react": [
-            {
-                "advice": "Ak ste žiak, informujte sa o možnostiach odbornej stáže na vašej škole a zistite, aké sú požiadavky na jej absolvovanie.",
-                "details": "Kontaktujte svojho učiteľa odborného vzdelávania a zistite, aké kroky musíte podniknúť na zapojenie sa do programu."
-            },
-            {
-                "advice": "Zamestnávatelia by mali začať pripravovať potrebné dokumenty na zabezpečenie praktického vyučovania.",
-                "details": "Zistite, aké zmluvy a dohody budete musieť uzatvoriť so strednými školami a aké sú podmienky pre ich uzatvorenie."
-            },
-            {
-                "advice": "Vysoké školy by mali začať vypracovávať zmluvy o odbornej stáži so strednými školami.",
-                "details": "Zorganizujte stretnutie s predstaviteľmi stredných škôl a dohodnite sa na podmienkach spolupráce."
-            }
+            "Školy by mali začať pripravovať zmluvy o odbornej stáži s vysokými školami, aby zabezpečili možnosti pre svojich žiakov.",
+            "Zamestnávatelia, ktorí chcú vstúpiť do agentúrneho systému, by mali podať žiadosť o zápis do zoznamu agentúrnych zamestnávateľov na príslušnej stavovskej organizácii.",
+            "Žiaci a ich rodičia by sa mali informovať o možnostiach odbornej stáže a digitálnej praxe na svojich školách a aktívne sa zapájať do výberu vhodných príležitostí."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

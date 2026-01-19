@@ -1,63 +1,37 @@
 {
-    "id": 6,
+    "id": 8,
     "master_id": "10481",
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 461/2003 Z. z. o sociálnom poistení v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
     "approval_date": "22. 9. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10481",
-    "created_at": "2026-01-18 07:09:27",
-    "updated_at": "2026-01-18 07:09:27",
+    "created_at": "2026-01-07 14:45:46",
+    "updated_at": "2026-01-07 17:35:06",
     "summary": {
         "tags": [
             "sociálna politika",
-            "financie"
+            "dôchodky",
+            "poistenie"
         ],
-        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 461/2003 Z. z. o sociálnom poistení, prináša viaceré dôležité zmeny, ktoré sa dotknú rôznych skupín obyvateľstva. Hlavným cieľom týchto zmien je zlepšiť podmienky pre osoby, ktoré sa starajú o deti do šiestich rokov a zabezpečiť im dôchodkové poistenie aj v prípade, že nie sú zamestnané. Zákon zavádza nové podmienky pre prihlásenie sa na dôchodkové poistenie, pričom sa zohľadňujú aj obdobia starostlivosti o deti. Dôležitou zmenou je aj úprava vymeriavacích základov, ktoré sa budú počítať na základe nových pravidiel, čím sa zabezpečí spravodlivejšie hodnotenie dôchodkových nárokov. Zákon nadobudne účinnosť 1. januára 2026, pričom niektoré ustanovenia budú účinné až od 1. januára 2029. Tieto zmeny sú dôležité, pretože ovplyvnia nielen budúce dôchodky, ale aj prístup k sociálnym dávkam pre rodičov a opatrovateľov.",
+        "summary_paragraph": "Navrhovaný zákon prináša významné zmeny v oblasti sociálneho poistenia, ktoré sa dotýkajú najmä dôchodkového systému. Zákon upravuje podmienky dôchodkového poistenia pre osoby starajúce sa o deti, pričom zavádza nové pravidlá pre výpočet dôchodkových dávok. Napríklad, fyzické osoby, ktoré sa starajú o dieťa do šiestich rokov, budú mať možnosť prihlásiť sa na dôchodkové poistenie, ak spĺňajú určité podmienky. Zákon tiež stanovuje minimálny vymeriavací základ na úrovni 60 % všeobecného vymeriavacieho základu, čo môže ovplyvniť výšku budúcich dôchodkov. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, pričom niektoré ustanovenia budú platiť až od roku 2029. Prechodné ustanovenia zabezpečujú, že osoby, ktoré už majú nárok na dôchodok, budú posudzované podľa starých pravidiel, ak by nové pravidlá boli pre nich menej výhodné.",
         "affected_groups": [
-            {
-                "group": "rodičia s deťmi do 6 rokov",
-                "impact": "Budú mať právo na dôchodkové poistenie aj v prípade, že sa starajú o deti a nie sú zamestnaní, čo im zabezpečí lepšiu ochranu v prípade budúcich dôchodkov."
-            },
-            {
-                "group": "dôchodcovia",
-                "impact": "Zmeny v určení vymeriavacích základov môžu ovplyvniť výšku ich dôchodkov, najmä ak sa starali o deti v minulosti."
-            },
-            {
-                "group": "zamestnanci v sociálnych službách",
-                "impact": "Môžu očakávať zmeny v administratívnych procesoch pri správe dôchodkového poistenia a sociálnych dávok."
-            },
-            {
-                "group": "budúci rodičia",
-                "impact": "Získajú jasnejšie podmienky pre prihlásenie sa na dôchodkové poistenie, čo im môže uľahčiť plánovanie rodiny a kariéry."
-            },
-            {
-                "group": "opatrovatelia detí",
-                "impact": "Budú mať zabezpečené dôchodkové poistenie, čo im poskytne väčšiu finančnú stabilitu v prípade, že sa rozhodnú venovať starostlivosti o deti."
-            }
+            "Rodičia starajúci sa o deti do šiestich rokov - budú mať možnosť prihlásiť sa na dôchodkové poistenie.",
+            "Osoby s nárokom na rodičovský príspevok - ich povinné dôchodkové poistenie vznikne odo dňa vzniku nároku na príspevok.",
+            "Dôchodcovia - zmeny vo výpočte dôchodkov môžu ovplyvniť výšku ich dávok.",
+            "Zamestnanci v dôchodkovom veku - môžu byť ovplyvnení zmenami vo vymeriavacích základoch.",
+            "Osoby s dlhodobou starostlivosťou o deti - nové pravidlá môžu ovplyvniť ich dôchodkové nároky."
         ],
         "positives": [
-            {
-                "positive": "Zlepšenie podmienok pre rodičov",
-                "explanation": "Rodičia, ktorí sa starajú o deti, budú mať prístup k dôchodkovému poisteniu, čo im zabezpečí ochranu v prípade budúcich dôchodkov."
-            },
-            {
-                "positive": "Spravodlivejšie vymeriavacie základy",
-                "explanation": "Nové pravidlá na určenie vymeriavacích základov zabezpečia, že dôchodky budú spravodlivejšie a reflektujú skutočné obdobia poistenia."
-            }
+            "Zlepšenie podmienok pre rodičov starajúcich sa o deti - možnosť prihlásiť sa na dôchodkové poistenie zvyšuje ich sociálne zabezpečenie.",
+            "Zavedenie minimálneho vymeriavacieho základu - zabezpečuje, že aj osoby s nižšími príjmami budú mať nárok na dôchodok v primeranej výške."
         ],
         "negatives": [
-            {
-                "negative": "Zložitá administratíva",
-                "explanation": "Zmeny môžu viesť k zložitosti v administratívnych procesoch, čo môže spôsobiť problémy pri prihlásení sa na dôchodkové poistenie."
-            },
-            {
-                "negative": "Prechodné obdobie",
-                "explanation": "Niektoré ustanovenia nadobudnú účinnosť až od 1. januára 2029, čo môže spôsobiť neistotu pre rodičov a opatrovateľov."
-            }
+            "Komplexnosť zmien - môže spôsobiť zmätok medzi poistencami, ktorí sa musia prispôsobiť novým pravidlám.",
+            "Možné zníženie dôchodkov pre niektoré skupiny - ak nové pravidlá nebudú pre nich výhodné, môžu byť finančne znevýhodnení."
         ],
         "how_to_react": [
-            "Ak ste rodič a staráte sa o dieťa do 6 rokov, skontrolujte si, aké podmienky musíte splniť na prihlásenie sa na dôchodkové poistenie. Informácie nájdete na webovej stránke Sociálnej poisťovne.",
-            "Do 1. januára 2026 sa informujte o nových pravidlách vymeriavacích základov a pripravte si potrebné dokumenty na prihlásenie sa na dôchodkové poistenie.",
-            "Ak ste zamestnanec v sociálnych službách, sledujte zmeny v administratívnych procesoch a zúčastnite sa školení, ktoré vám pomôžu orientovať sa v nových pravidlách."
+            "Rodičia starajúci sa o deti do šiestich rokov by mali do 31. decembra 2025 podať prihlášku na dôchodkové poistenie, aby využili nové možnosti.",
+            "Osoby s nárokom na rodičovský príspevok by mali sledovať dátum vzniku nároku a zabezpečiť, že ich povinné dôchodkové poistenie je včas aktivované.",
+            "Dôchodcovia by mali konzultovať so Sociálnou poisťovňou, či nové pravidlá ovplyvnia ich dôchodok a ak áno, ako sa môžu prispôsobiť."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

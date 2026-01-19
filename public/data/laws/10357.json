@@ -4,69 +4,37 @@
     "title": "Vládny návrh zákona, ktorým sa mení zákon č. 78/2015 Z. z. o kontrole výkonu niektorých rozhodnutí technickými prostriedkami a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
     "approval_date": "7. 7. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10357",
-    "created_at": "2026-01-18 07:15:59",
-    "updated_at": "2026-01-18 07:15:59",
+    "created_at": "2026-01-07 14:55:02",
+    "updated_at": "2026-01-07 17:39:23",
     "summary": {
         "tags": [
             "justícia",
-            "ekonomika"
+            "verejná správa",
+            "právo"
         ],
-        "summary_paragraph": "Návrh zákona, ktorý sa mení zákon č. 78/2015 Z. z. o kontrole výkonu niektorých rozhodnutí technickými prostriedkami, má za cieľ zefektívniť ukladanie alternatívnych trestov a zlepšiť podmienky pre ich výkon. Zákon nadobudne účinnosť 1. novembra 2025 a jeho prijatie je reakciou na dlhodobé problémy s nízkou mierou ukladania týchto trestov, ktoré sú spôsobené nedostatočnými podmienkami na kontrolu odsúdených. Vypustením niektorých odsekov a legislatívnymi zmenami sa má dosiahnuť flexibilnejšie a efektívnejšie využívanie technických prostriedkov, čo by malo viesť k zvýšeniu počtu ukladania alternatívnych trestov, ako je domáce väzenie alebo povinné práce. Zákonodarca sa snaží zlepšiť situáciu, keďže doterajšie podmienky neumožnili plné využitie potenciálu systému elektronického monitorovania. Prijatie tohto zákona je v súlade s cieľmi vlády v oblasti trestnej politiky a má podporiť prevenciu trestnej činnosti v spoločnosti.",
+        "summary_paragraph": "Navrhovaný zákon prináša zmeny v oblasti kontroly výkonu niektorých rozhodnutí prostredníctvom technických prostriedkov, konkrétne sa zameriava na zefektívnenie využívania týchto prostriedkov pri ukladaní alternatívnych trestov. Cieľom je zvýšiť využívanie alternatívnych trestov, ako sú domáce väzenie a povinná práca, čím sa má znížiť počet osôb odsúdených na nepodmienečný trest odňatia slobody. Zákon reaguje na doterajšie nízke využívanie elektronického systému monitoringu obvinených a odsúdených osôb (ESMO) a navrhuje flexibilnejší prístup k vlastníctvu technických prostriedkov, vrátane možnosti ich prenájmu. Tieto zmeny majú nadobudnúť účinnosť od 1. novembra 2025, pričom sa očakáva, že prispejú k zníženiu nákladov na väzenstvo a zvýšia efektívnosť trestnej politiky. Zákon tiež reflektuje potrebu zlepšiť podmienky pre ukladanie alternatívnych trestov a zohľadňuje závery Najvyššieho kontrolného úradu, ktorý odporučil zvýšiť intenzitu využívania systému ESMO.",
         "affected_groups": [
-            {
-                "group": "odsúdení a obvinení",
-                "impact": "Budú mať väčšiu šancu na ukladanie alternatívnych trestov, čo im umožní vyhnúť sa väzeniu a vykonávať tresty v domácom prostredí."
-            },
-            {
-                "group": "súdy a sudcovia",
-                "impact": "Budú musieť prispôsobiť svoje rozhodovanie novým podmienkam a získať školenie na efektívne ukladanie alternatívnych trestov."
-            },
-            {
-                "group": "Ministerstvo spravodlivosti",
-                "impact": "Bude zodpovedné za implementáciu a monitorovanie nových technických prostriedkov a ich efektívne využívanie."
-            },
-            {
-                "group": "verejnosť",
-                "impact": "Môže očakávať zníženie počtu osôb vo väzení, čo môže prispieť k zníženiu nákladov na väzenstvo a zlepšeniu bezpečnosti v spoločnosti."
-            },
-            {
-                "group": "právnici a obhajcovia",
-                "impact": "Budú musieť byť informovaní o nových možnostiach a podmienkach ukladania alternatívnych trestov, aby mohli efektívne zastupovať svojich klientov."
-            }
+            "osoby odsúdené na alternatívne tresty - budú mať väčšiu šancu na uloženie alternatívnych trestov namiesto väzenia",
+            "sudcovia - budú mať viac možností a nástrojov na ukladanie alternatívnych trestov",
+            "ministerstvo spravodlivosti - bude musieť zabezpečiť efektívne využívanie technických prostriedkov a monitorovacích systémov",
+            "probační a mediační pracovníci - budú mať rozšírené možnosti pri dohľade nad odsúdenými",
+            "verejnosť - môže očakávať zníženie nákladov na väzenstvo a efektívnejšie využívanie verejných prostriedkov"
         ],
         "positives": [
-            {
-                "positive": "Zvýšenie počtu alternatívnych trestov",
-                "explanation": "Zákon umožní častejšie využívanie alternatívnych trestov, čo môže znížiť preplnenosť väzníc a poskytnúť odsúdeným druhú šancu."
-            },
-            {
-                "positive": "Efektívnejšie využívanie technických prostriedkov",
-                "explanation": "Vypustenie niektorých legislatívnych obmedzení umožní flexibilnejšie a rýchlejšie nasadenie technológie na monitorovanie odsúdených."
-            }
+            "Zvýšenie využívania alternatívnych trestov - umožní väčšiu flexibilitu v trestnej politike a môže znížiť preplnenosť väzníc.",
+            "Zníženie nákladov na väzenstvo - prenájom technických prostriedkov môže byť finančne výhodnejší ako ich vlastníctvo.",
+            "Efektívnejšie využívanie verejných prostriedkov - zákon podporuje princípy hospodárnosti a efektívnosti v trestnej politike."
         ],
         "negatives": [
-            {
-                "negative": "Nedostatočné školenie sudcov",
-                "explanation": "Ak sudcovia nebudú adekvátne školení, môže to viesť k nesprávnemu ukladaniu alternatívnych trestov a zníženiu ich efektivity."
-            },
-            {
-                "negative": "Možné technické problémy",
-                "explanation": "Zavedenie nových technických prostriedkov môže čelí problémom s implementáciou a údržbou, čo môže ovplyvniť ich funkčnosť."
-            }
+            "Možné zvýšenie administratívnej záťaže - pre sudcov a probačných pracovníkov môže byť implementácia nových systémov časovo a administratívne náročná.",
+            "Riziko nedostatočnej infraštruktúry - ak nebude dostatočne pripravená infraštruktúra na podporu nových systémov, môže to spôsobiť problémy v praxi."
         ],
         "how_to_react": [
-            {
-                "action": "Informujte sa o nových alternatívnych trestoch",
-                "details": "Od 1. novembra 2025 sa oboznámte s novými možnosťami alternatívnych trestov a ich podmienkami na stránkach Ministerstva spravodlivosti."
-            },
-            {
-                "action": "Zúčastnite sa školení",
-                "details": "Súdy a právnici by mali vyhľadávať školenia o nových praktikách a technických prostriedkoch na monitorovanie odsúdených."
-            },
-            {
-                "action": "Sledujte legislatívne zmeny",
-                "details": "Pravidelne kontrolujte aktualizácie a zmeny v zákonoch týkajúcich sa alternatívnych trestov a technických prostriedkov na oficiálnych vládnych stránkach."
-            }
+            "Sudcovia by mali absolvovať školenia o nových možnostiach ukladania alternatívnych trestov, aby mohli efektívne využívať nové nástroje.",
+            "Ministerstvo spravodlivosti by malo do 1. novembra 2025 zabezpečiť potrebné technické prostriedky a uzavrieť zmluvy na ich prenájom.",
+            "Probační pracovníci by mali byť informovaní o zmenách a pripravení na zvýšenú mieru dohľadu nad odsúdenými s alternatívnymi trestami.",
+            "Osoby odsúdené na alternatívne tresty by mali byť informované o svojich právach a povinnostiach v rámci nového systému.",
+            "Verejnosť by mala byť informovaná o výhodách a cieľoch nového zákona, aby sa zvýšila dôvera v trestný systém."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

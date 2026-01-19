@@ -4,60 +4,36 @@
     "title": "Vládny návrh zákona o vysokých školách a o zmene a doplnení niektorých zákonov (vysokoškolský zákon)",
     "approval_date": "22. 8. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10418",
-    "created_at": "2026-01-18 07:13:13",
-    "updated_at": "2026-01-18 07:13:13",
+    "created_at": "2026-01-07 14:51:00",
+    "updated_at": "2026-01-07 17:37:17",
     "summary": {
         "tags": [
             "vzdelávanie",
-            "školstvo"
+            "školstvo",
+            "právo"
         ],
-        "summary_paragraph": "Návrh zákona o vysokých školách, ktorý predložila vláda Slovenskej republiky, prináša zásadné zmeny v oblasti vysokoškolského vzdelávania. Tento zákon sa zameriava na definovanie poslania, úloh a postavenia vysokých škôl, ako aj na zabezpečenie akademických slobôd a práv. Kľúčovým aspektom je posilnenie akademickej integrity a autonómie vysokých škôl, čo znamená, že vysoké školy budú mať väčšiu slobodu pri rozhodovaní o svojich vnútorných záležitostiach bez vonkajších zásahov. Zákon tiež upravuje financovanie vysokých škôl a ich spoluprácu s inými inštitúciami, čím sa snaží podporiť inováciu a rozvoj vzdelávania. Dôležitou novinkou je aj zavedenie pravidiel pre využívanie umelej inteligencie vo vzdelávacom procese, čo môže mať významný dopad na spôsob, akým sa vyučuje a študuje. Zákon nadobudne účinnosť po jeho schválení Národnou radou a jeho implementácia sa očakáva v nasledujúcich akademických rokoch.",
+        "summary_paragraph": "Nový zákon o vysokých školách prináša komplexné úpravy v oblasti vysokoškolského vzdelávania na Slovensku. Zákon definuje základné ustanovenia týkajúce sa poslania, úloh a postavenia vysokých škôl, pričom kladie dôraz na akademickú slobodu, samosprávu a financovanie. Dôležitou súčasťou je aj úprava akademických práv a slobôd, ktoré zabezpečujú slobodu myslenia, výskumu a vyučovania bez vonkajších zásahov. Zákon tiež zavádza nové pravidlá pre vznik, zlúčenie a zrušenie vysokých škôl, pričom zdôrazňuje potrebu spolupráce medzi inštitúciami. Okrem toho sa zákon venuje aj otázkam využívania umelej inteligencie vo vzdelávacom procese, čo má podporiť inováciu a efektívnosť vo výučbe. Tieto zmeny sú navrhnuté s cieľom zvýšiť kvalitu vysokoškolského vzdelávania a prispôsobiť ho potrebám modernej spoločnosti.",
         "affected_groups": [
-            {
-                "group": "študenti vysokých škôl",
-                "impact": "Budú mať zabezpečené väčšie akademické slobody a práva, ako aj prístup k novým technológiam a inováciám vo vzdelávaní."
-            },
-            {
-                "group": "zamestnanci vysokých škôl",
-                "impact": "Získajú väčšiu autonómiu pri rozhodovaní o výučbe a výskume, čo môže prispieť k ich profesijnému rozvoju."
-            },
-            {
-                "group": "zriaďovatelia vysokých škôl",
-                "impact": "Budú musieť prispôsobiť svoje postupy a pravidlá v súlade s novými legislatívnymi požiadavkami, čo môže ovplyvniť ich financovanie."
-            },
-            {
-                "group": "zamestnávatelia",
-                "impact": "Budú mať možnosť spolupracovať s vysokými školami na inovatívnych projektoch a praxiach, čo môže zlepšiť kvalitu absolventov."
-            },
-            {
-                "group": "akademické inštitúcie",
-                "impact": "Budú musieť dodržiavať nové pravidlá týkajúce sa akademickej integrity a spolupráce, čo môže ovplyvniť ich akreditáciu."
-            }
+            "študenti vysokých škôl - budú mať väčšiu slobodu vo výbere študijných programov a môžu sa aktívne podieľať na riadení školy",
+            "vysokoškolskí učitelia - získajú viac právomocí v rámci akademickej samosprávy a budú sa podieľať na tvorbe študijných programov",
+            "súkromné vysoké školy - musia splniť nové podmienky pre získanie a udržanie štátneho súhlasu",
+            "verejné vysoké školy - môžu sa zlúčiť alebo splynúť s inými školami na základe nových pravidiel",
+            "zamestnávatelia - môžu spolupracovať s vysokými školami na tvorbe študijných programov a praxi pre študentov"
         ],
         "positives": [
-            {
-                "positive": "Posilnenie akademickej slobody",
-                "explanation": "Zákon zabezpečuje, že členovia akademickej obce budú mať právo na slobodu výskumu a vyučovania, čo môže viesť k vyššej kvalite vzdelávania."
-            },
-            {
-                "positive": "Zavedenie pravidiel pre umelú inteligenciu",
-                "explanation": "Týmto sa podporí modernizácia vzdelávacieho procesu a umožní sa efektívnejšie využívanie technológií v štúdiu."
-            }
+            "Zvýšenie akademickej slobody - umožňuje študentom a učiteľom slobodne vyjadrovať svoje názory a podieľať sa na riadení školy, čo môže viesť k inovatívnejšiemu vzdelávaniu.",
+            "Podpora využívania umelej inteligencie - môže zefektívniť vzdelávací proces a priniesť nové metódy výučby, ktoré sú prispôsobené individuálnym potrebám študentov."
         ],
         "negatives": [
-            {
-                "negative": "Možné zvýšenie administratívneho zaťaženia",
-                "explanation": "Vysoké školy budú musieť splniť nové legislatívne požiadavky, čo môže viesť k zvýšeniu administratívnych nákladov."
-            },
-            {
-                "negative": "Nedostatočné financovanie",
-                "explanation": "Ak nebude zabezpečené adekvátne financovanie, môže to ovplyvniť kvalitu vzdelávania a výskumu na vysokých školách."
-            }
+            "Zložitosť implementácie - nové pravidlá môžu byť náročné na implementáciu pre niektoré školy, čo môže spôsobiť dočasné problémy v organizácii štúdia.",
+            "Riziko zneužitia akademických slobôd - bez správneho dohľadu môže dôjsť k zneužitiu akademických slobôd, čo by mohlo negatívne ovplyvniť kvalitu vzdelávania."
         ],
         "how_to_react": [
-            "Študenti by mali sledovať zmeny v pravidlách a požiadavkách na svojich vysokých školách a aktívne sa zapájať do diskusií o nových praktikách.",
-            "Zamestnanci vysokých škôl by mali využiť nové príležitosti na profesijný rozvoj a zapojiť sa do výskumných projektov, ktoré podporujú ich akademickú slobodu.",
-            "Zriaďovatelia vysokých škôl by mali pripraviť plány na implementáciu nových legislatívnych požiadaviek a zabezpečiť potrebné financovanie na ich realizáciu."
+            "Študenti by mali sledovať zmeny vo svojich študijných programoch a aktívne sa zapájať do akademickej samosprávy, aby mohli ovplyvniť kvalitu svojho vzdelávania.",
+            "Vysokoškolskí učitelia by mali spolupracovať s vedením školy na tvorbe nových študijných programov a využívaní umelej inteligencie vo výučbe.",
+            "Súkromné vysoké školy by mali zabezpečiť, že splnia všetky nové požiadavky pre udržanie štátneho súhlasu, vrátane aktualizácie svojich vnútorných predpisov.",
+            "Verejné vysoké školy by mali zvážiť možnosti spolupráce alebo zlúčenia s inými inštitúciami, aby zlepšili svoju konkurencieschopnosť a efektívnosť.",
+            "Zamestnávatelia by mali nadviazať spoluprácu s vysokými školami na tvorbe študijných programov a ponúkať študentom prax, ktorá zodpovedá potrebám trhu práce."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

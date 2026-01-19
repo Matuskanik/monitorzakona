@@ -1,63 +1,37 @@
 {
-    "id": 1,
+    "id": 3,
     "master_id": "10606",
     "title": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti a o zmene a doplnení niektorých zákonov, vrátený prezidentom Slovenskej republiky na opätovné prerokovanie Národnou radou Slovenskej republiky",
     "approval_date": "11. 12. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10606",
-    "created_at": "2026-01-18 07:06:06",
-    "updated_at": "2026-01-18 07:06:06",
+    "created_at": "2026-01-07 11:53:08",
+    "updated_at": "2026-01-07 17:32:04",
     "summary": {
         "tags": [
-            "justicia",
-            "sociálna politika"
+            "právo",
+            "sociálna politika",
+            "verejná správa"
         ],
-        "summary_paragraph": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti zavádza nový nezávislý orgán, ktorý má za cieľ chrániť práva obetí trestných činov a oznamovateľov. Tento úrad nahradí súčasný Úrad na ochranu oznamovateľov protispoločenskej činnosti, pričom jeho pôsobnosť sa rozšíri o ochranu obetí trestných činov. Zákon bol však vrátený prezidentom na opätovné prerokovanie, pričom prezident vyjadril obavy o nedostatočnú prípravu a transparentnosť legislatívneho procesu. Kľúčovými zmenami sú zriadenie nového úradu a zrušenie súčasného, pričom sa očakáva, že nový úrad bude mať rozšírené kompetencie. Avšak, prezident upozorňuje na riziko, že nový úrad nebude mať dostatočné personálne a finančné zabezpečenie na efektívne plnenie svojich úloh, čo môže viesť k zhoršeniu ochrany obetí trestných činov. Zákon mal byť prerokovaný v skrátenom legislatívnom konaní, čo vyvolalo otázky o jeho legitímnosti a potrebnosti takéhoto postupu.",
+        "summary_paragraph": "Zákon z 9. decembra 2025 sa zameriava na zriadenie nového Úradu na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti. Tento úrad má za cieľ zlepšiť ochranu obetí trestných činov a poskytnúť lepšiu podporu oznamovateľom protispoločenskej činnosti. Zákon bol však vrátený prezidentom na opätovné prerokovanie kvôli nedostatkom v legislatívnom procese, najmä pre nedostatočnú verejnú diskusiu a absenciu pripomienkového konania. Kritika sa sústredila aj na skrátené legislatívne konanie, ktoré nebolo dostatočne odôvodnené mimoriadnymi okolnosťami. Zriadenie nového úradu môže spôsobiť dočasné zhoršenie ochrany obetí, keďže prechod kompetencií a zdrojov nebol dostatočne pripravený. Zákon tiež upravuje postavenie predsedu úradu, ktorého bude voliť Národná rada na základe verejného vypočutia. Tento krok má za cieľ zvýšiť transparentnosť a dôveru verejnosti v nový úrad.",
         "affected_groups": [
-            {
-                "group": "obetí trestných činov",
-                "impact": "Budú mať prístup k novému úradu, ktorý by mal zabezpečiť lepšiu ochranu ich práv a záujmov."
-            },
-            {
-                "group": "oznamovatelia protispoločenskej činnosti",
-                "impact": "Získajú rozšírenú ochranu a podporu pri oznamovaní protispoločenskej činnosti."
-            },
-            {
-                "group": "zamestnávatelia",
-                "impact": "Môžu čeliť novým pravidlám a podmienkam pri ochrane zamestnancov, čo môže ovplyvniť ich právne postavenie."
-            },
-            {
-                "group": "štátni zamestnanci v oblasti ochrany obetí",
-                "impact": "Môžu byť presunutí do nového úradu, avšak hrozí, že nedostanú potrebné školenie a podporu."
-            },
-            {
-                "group": "verejnosť",
-                "impact": "Môže mať obavy z nedostatočnej ochrany obetí a oznamovateľov v dôsledku nedostatočnej prípravy nového úradu."
-            }
+            "Obete trestných činov - môžu čeliť dočasnému zhoršeniu ochrany kvôli prechodu kompetencií na nový úrad.",
+            "Oznamovatelia protispoločenskej činnosti - získajú lepšiu podporu a ochranu vďaka novému úradu.",
+            "Zamestnávatelia - môžu byť ovplyvnení zmenami v právach a povinnostiach voči oznamovateľom.",
+            "Zamestnanci úradu - môžu čeliť neistote kvôli zmenám v organizačnej štruktúre a prechodu kompetencií.",
+            "Verejnosť - bude mať možnosť zúčastniť sa na verejnom vypočutí kandidátov na predsedu úradu, čo zvyšuje transparentnosť."
         ],
         "positives": [
-            {
-                "positive": "Zriadenie nového úradu",
-                "explanation": "Poskytne centralizovanú ochranu obetiam trestných činov a oznamovateľom, čo môže zlepšiť ich situáciu."
-            },
-            {
-                "positive": "Rozšírené kompetencie",
-                "explanation": "Nový úrad bude mať širšie právomoci, čo môže viesť k efektívnejšiemu riešeniu problémov obetí."
-            }
+            "Zlepšenie ochrany oznamovateľov - nový úrad poskytne lepšiu podporu a ochranu pre oznamovateľov protispoločenskej činnosti.",
+            "Zvýšenie transparentnosti - verejné vypočutie kandidátov na predsedu úradu umožní verejnosti a odborníkom klásť otázky a zúčastniť sa na procese výberu."
         ],
         "negatives": [
-            {
-                "negative": "Nedostatočné personálne a finančné zabezpečenie",
-                "explanation": "Nový úrad môže začať svoju činnosť bez potrebných zdrojov, čo ohrozuje jeho efektívnosť."
-            },
-            {
-                "negative": "Riziko zhoršenia ochrany obetí",
-                "explanation": "Prechod na nový úrad môže spôsobiť dočasné zhoršenie ochrany obetí, čo môže viesť k sekundárnej viktimizácii."
-            }
+            "Dočasné zhoršenie ochrany obetí - prechod kompetencií na nový úrad môže spôsobiť problémy v poskytovaní ochrany obetiam trestných činov.",
+            "Nedostatočná príprava - absencia prechodných ustanovení a nedostatok finančných a personálnych kapacít môže ohroziť fungovanie nového úradu."
         ],
         "how_to_react": [
-            "Ak ste obeťou trestného činu, sledujte informácie o vzniku nového úradu a pripravte sa na jeho otvorenie, aby ste mohli využiť jeho služby.",
-            "Zamestnávatelia by mali sledovať legislatívne zmeny a pripraviť sa na možné nové povinnosti pri ochrane zamestnancov.",
-            "V prípade, že máte obavy o ochranu svojich práv ako oznamovateľ, informujte sa o nových procedúrach a možnostiach, ktoré nový úrad ponúkne."
+            "Obete trestných činov by mali sledovať vývoj situácie a v prípade potreby kontaktovať existujúce štátne orgány pre podporu.",
+            "Oznamovatelia by mali byť informovaní o svojich právach a možnostiach ochrany, ktoré nový úrad poskytne.",
+            "Zamestnávatelia by mali prehodnotiť svoje interné procesy a zabezpečiť, aby boli v súlade s novými právnymi požiadavkami na ochranu oznamovateľov."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

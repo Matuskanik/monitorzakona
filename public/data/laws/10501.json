@@ -1,65 +1,36 @@
 {
-    "id": 7,
+    "id": 9,
     "master_id": "10501",
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 331/2005 Z. z. o orgánoch štátnej správy vo veciach drogových prekurzorov a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
     "approval_date": "26. 9. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10501",
-    "created_at": "2026-01-18 07:10:02",
-    "updated_at": "2026-01-18 07:10:02",
+    "created_at": "2026-01-07 14:46:25",
+    "updated_at": "2026-01-07 17:35:38",
     "summary": {
         "tags": [
-            "ekonomika",
-            "financie"
+            "zdravotníctvo",
+            "verejná správa"
         ],
-        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 331/2005 Z. z. o orgánoch štátnej správy vo veciach drogových prekurzorov, sa zameriava na presun kompetencií z Ministerstva hospodárstva na Ministerstvo zdravotníctva. Tento krok je dôležitý pre centralizáciu agendy drogových prekurzorov, čo by malo viesť k efektívnejšiemu riadeniu a koordinácii protidrogovej politiky. Zmeny sa dotknú aj názvov niektorých orgánov, ako je premenovanie Colného riaditeľstva na Finančné riaditeľstvo. Zákon nadobudne účinnosť 1. januára 2026, pričom konania začaté pred týmto dátumom budú dokončené podľa predpisov účinných do 31. decembra 2025. Týmto spôsobom sa zabezpečí kontinuita v správe a kontrole drogových prekurzorov, čo je kľúčové pre ochranu verejného zdravia a bezpečnosti.",
+        "summary_paragraph": "Navrhovaný zákon prináša významné zmeny v oblasti správy drogových prekurzorov na Slovensku. Hlavnou zmenou je presun kompetencií z Ministerstva hospodárstva na Ministerstvo zdravotníctva, čo má za cieľ centralizovať a zefektívniť protidrogovú politiku. Tento krok je dôležitý, pretože Ministerstvo zdravotníctva už v súčasnosti plní viaceré úlohy v oblasti drogovej politiky a má lepšie predpoklady na koordináciu a implementáciu opatrení. Zákon tiež aktualizuje terminológiu a názvy niektorých inštitúcií, ako napríklad nahradenie 'colného riaditeľstva' 'finančným riaditeľstvom'. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, pričom prebiehajúce konania budú dokončené podľa starých pravidiel. Zákon nemá priamy vplyv na podnikateľské prostredie ani na sociálne aspekty, ale môže mať dopad na rozpočet verejnej správy, keďže si vyžaduje presun finančných prostriedkov medzi ministerstvami.",
         "affected_groups": [
-            {
-                "group": "zamestnanci Ministerstva hospodárstva",
-                "impact": "Budú musieť prejsť na Ministerstvo zdravotníctva, čo môže ovplyvniť ich pracovné pozície a zodpovednosti."
-            },
-            {
-                "group": "prevádzkovatelia a používatelia drogových prekurzorov",
-                "impact": "Budú musieť dodržiavať nové pravidlá a procesy, ktoré zavádza Ministerstvo zdravotníctva."
-            },
-            {
-                "group": "orgány štátnej správy",
-                "impact": "Zmeny v kompetenciách môžu ovplyvniť ich spoluprácu a procesy v oblasti kontroly a regulácie drogových prekurzorov."
-            },
-            {
-                "group": "verejnosť",
-                "impact": "Zvýšená efektivita v boji proti drogám môže viesť k lepšiemu ochrane verejného zdravia."
-            },
-            {
-                "group": "Európska komisia",
-                "impact": "Zmeny v správe a evidencii môžu ovplyvniť správy a údaje, ktoré Slovensko poskytuje na medzinárodnej úrovni."
-            }
+            "zamestnanci Ministerstva hospodárstva - budú musieť prispôsobiť svoje pracovné úlohy a niektorí môžu byť presunutí na Ministerstvo zdravotníctva",
+            "zamestnanci Ministerstva zdravotníctva - získajú nové kompetencie a zodpovednosti v oblasti drogových prekurzorov",
+            "prevádzkovatelia zaoberajúci sa drogovými prekurzormi - budú musieť komunikovať s novým ministerstvom a prispôsobiť sa novým administratívnym postupom",
+            "štátni úradníci - budú musieť aktualizovať svoje postupy a dokumentáciu podľa nových pravidiel",
+            "verejnosť - môže očakávať efektívnejšiu koordináciu protidrogových opatrení"
         ],
         "positives": [
-            {
-                "positive": "Zlepšenie koordinácie protidrogovej politiky",
-                "explanation": "Centralizácia kompetencií na Ministerstve zdravotníctva by mala viesť k efektívnejšiemu riadeniu a lepšiemu prepojeniu medzi rôznymi orgánmi."
-            },
-            {
-                "positive": "Zvýšená transparentnosť a efektivita",
-                "explanation": "Jednotné riadenie agendy drogových prekurzorov môže zjednodušiť procesy a znížiť byrokraciu."
-            }
+            "Zlepšenie koordinácie protidrogovej politiky - centralizácia kompetencií na Ministerstve zdravotníctva môže viesť k efektívnejšiemu boju proti drogám.",
+            "Zjednodušenie administratívy - aktualizácia názvov a terminológie zjednoduší administratívne procesy a zlepší prehľadnosť zákona."
         ],
         "negatives": [
-            {
-                "negative": "Možné prechodné problémy pri presune kompetencií",
-                "explanation": "Zamestnanci a prevádzkovatelia môžu čeliť nejasnostiam a chaosu počas prechodu na nové pravidlá."
-            },
-            {
-                "negative": "Zvýšené nároky na Ministerstvo zdravotníctva",
-                "explanation": "Ministerstvo môže byť preťažené novými úlohami a zodpovednosťami, čo môže ovplyvniť jeho schopnosť efektívne fungovať."
-            }
+            "Možné zvýšenie administratívnej záťaže - presun kompetencií môže dočasne zvýšiť administratívnu záťaž pre zamestnancov oboch ministerstiev.",
+            "Finančné náklady - presun agendy si môže vyžiadať dodatočné finančné prostriedky na zabezpečenie hladkého prechodu kompetencií."
         ],
         "how_to_react": [
-            "Zamestnanci Ministerstva hospodárstva by mali sledovať oznámenia o presune a pripraviť sa na možné zmeny v pracovných pozíciách.",
-            "Prevádzkovatelia drogových prekurzorov by mali začať získať informácie o nových pravidlách a požiadavkách, ktoré budú zavedené Ministerstvom zdravotníctva.",
-            "Verejnosť by mala byť informovaná o zmenách v protidrogovej politike a sledovať správy o účinnosti nových opatrení.",
-            "Orgány štátnej správy by mali zorganizovať školenia a informačné stretnutia na tému nových kompetencií a procesov.",
-            "Európska komisia by mala byť informovaná o zmenách v správe drogových prekurzorov a ich dopade na medzinárodnú spoluprácu."
+            "Prevádzkovatelia zaoberajúci sa drogovými prekurzormi by mali do 31. decembra 2025 aktualizovať svoje kontaktné informácie a dokumentáciu podľa nových pravidiel Ministerstva zdravotníctva.",
+            "Zamestnanci Ministerstva hospodárstva by mali do konca roka 2025 absolvovať školenia o nových postupoch a kompetenciách, ktoré budú presunuté na Ministerstvo zdravotníctva.",
+            "Verejnosť a zainteresované strany by mali sledovať oficiálne oznámenia Ministerstva zdravotníctva o nových postupoch a pravidlách, ktoré budú zavedené od 1. januára 2026."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

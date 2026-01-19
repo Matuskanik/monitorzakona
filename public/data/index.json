@@ -1,107 +1,392 @@
 [
     {
-        "id": 1,
+        "id": 3,
         "master_id": "10606",
         "title": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti a o zmene a doplnení niektorých zákonov, vrátený prezidentom Slovenskej republiky na opätovné prerokovanie Národnou radou Slovenskej republiky",
         "approval_date": "11. 12. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10606",
-        "created_at": "2026-01-18 07:06:06",
+        "created_at": "2026-01-07 11:53:08",
         "tags": [
-            "justicia",
-            "sociálna politika"
+            "právo",
+            "sociálna politika",
+            "verejná správa"
         ],
-        "summary_preview": "Zákon z 9. decembra 2025 o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti zavádza nový nezávislý orgán, ktorý má za cieľ chrániť práva obetí trestných činov a oznamo..."
+        "summary_preview": "Zákon z 9. decembra 2025 sa zameriava na zriadenie nového Úradu na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti. Tento úrad má za cieľ zlepšiť ochranu obetí trestných činov..."
     },
     {
-        "id": 2,
+        "id": 4,
         "master_id": "10600",
         "title": "Vládny návrh zákona o príspevku na pomoc pri odkázanosti na pomoc inej fyzickej osoby a o zmene a doplnení niektorých zákonov",
         "approval_date": "28. 11. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10600",
-        "created_at": "2026-01-18 07:06:49",
+        "created_at": "2026-01-07 14:42:51",
         "tags": [
             "sociálna politika",
+            "zdravotníctvo",
             "financie"
         ],
-        "summary_preview": "Návrh zákona o príspevku na pomoc pri odkázanosti na pomoc inej fyzickej osoby zavádza nový systém podpory pre osoby, ktoré sú odkázané na pomoc iných. Tento zákon sa zameriava na poskytovanie príspev..."
+        "summary_preview": "Nový zákon o príspevku na pomoc pri odkázanosti na pomoc inej fyzickej osoby prináša významné zmeny v oblasti sociálnej starostlivosti na Slovensku. Tento zákon zavádza príspevok, ktorý má pomôcť osob..."
     },
     {
-        "id": 3,
+        "id": 5,
         "master_id": "10588",
         "title": "Vládny návrh zákona o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti a o zmene a doplnení niektorých zákonov",
         "approval_date": "24. 11. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10588",
-        "created_at": "2026-01-18 07:07:33",
+        "created_at": "2026-01-07 14:43:40",
         "tags": [
-            "justícia",
-            "sociálna politika"
+            "právo",
+            "sociálna politika",
+            "verejná správa"
         ],
-        "summary_preview": "Návrh zákona o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti sa zameriava na zriadenie nového nezávislého orgánu, ktorý prevezme agendu odškodňovania obetí a ochran..."
+        "summary_preview": "Nový zákon o Úrade na ochranu obetí trestných činov a oznamovateľov protispoločenskej činnosti prináša významné zmeny v oblasti ochrany práv týchto skupín. Zákon zriaďuje nový nezávislý úrad, ktorý pr..."
     },
     {
-        "id": 8,
+        "id": 10,
         "master_id": "10506",
         "title": "Vládny návrh zákona o označeniach pôvodu výrobkov a zemepisných označeniach výrobkov a o zmene a doplnení zákona Národnej rady Slovenskej republiky č. 145/1995 Z. z. o správnych poplatkoch v znení neskorších predpisov",
         "approval_date": "26. 9. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10506",
-        "created_at": "2026-01-18 07:10:39",
+        "created_at": "2026-01-07 14:47:02",
         "tags": [
             "ekonomika",
-            "financie"
+            "právo",
+            "podnikanie"
         ],
-        "summary_preview": "Nový zákon o označeniach pôvodu výrobkov a zemepisných označeniach výrobkov, ktorý predložila vláda Slovenskej republiky, prináša zásadné zmeny v oblasti ochrany a registrácie výrobkov s chráneným ozn..."
+        "summary_preview": "Nový zákon o označeniach pôvodu výrobkov a zemepisných označeniach výrobkov prináša významné zmeny v oblasti ochrany a registrácie týchto označení na Slovensku. Zákon upravuje vnútroštátne postupy pri..."
     },
     {
-        "id": 7,
+        "id": 9,
         "master_id": "10501",
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 331/2005 Z. z. o orgánoch štátnej správy vo veciach drogových prekurzorov a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
         "approval_date": "26. 9. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10501",
-        "created_at": "2026-01-18 07:10:02",
+        "created_at": "2026-01-07 14:46:25",
         "tags": [
-            "ekonomika",
-            "financie"
+            "zdravotníctvo",
+            "verejná správa"
         ],
-        "summary_preview": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 331/2005 Z. z. o orgánoch štátnej správy vo veciach drogových prekurzorov, sa zameriava na presun kompetencií z Ministerstva hospodárstva na Ministerstvo..."
+        "summary_preview": "Navrhovaný zákon prináša významné zmeny v oblasti správy drogových prekurzorov na Slovensku. Hlavnou zmenou je presun kompetencií z Ministerstva hospodárstva na Ministerstvo zdravotníctva, čo má za ci..."
     },
     {
-        "id": 5,
+        "id": 7,
         "master_id": "10507",
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 222/2004 Z. z. o dani z pridanej hodnoty v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
         "approval_date": "26. 9. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10507",
-        "created_at": "2026-01-18 07:08:52",
+        "created_at": "2026-01-07 14:44:58",
         "tags": [
-            "ekonomika",
-            "financie"
+            "dane",
+            "financie",
+            "podnikanie"
         ],
-        "summary_preview": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 222/2004 Z. z. o dani z pridanej hodnoty, prináša viaceré dôležité zmeny, ktoré sa týkajú registrácie daňových skupín a ich správy. Hlavnou zmenou je zav..."
+        "summary_preview": "Novela zákona o dani z pridanej hodnoty prináša významné zmeny v oblasti registrácie a správy DPH pre skupiny podnikateľov. Kľúčovou zmenou je zavedenie registrácie skupiny z úradnej moci, ktorá sa up..."
     },
     {
-        "id": 4,
+        "id": 6,
         "master_id": "10505",
         "title": "Vládny návrh zákona o evidencii tržieb a o zmene a doplnení niektorých zákonov",
         "approval_date": "26. 9. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10505",
-        "created_at": "2026-01-18 07:08:11",
+        "created_at": "2026-01-07 14:44:22",
         "tags": [
             "ekonomika",
-            "financie"
+            "financie",
+            "podnikanie"
         ],
-        "summary_preview": "Zákon o evidencii tržieb, ktorý predložila vláda Slovenskej republiky, zavádza nové povinnosti pre predávajúcich pri evidencii tržieb za predaj tovaru a poskytovanie služieb. Hlavným cieľom je zlepšiť..."
+        "summary_preview": "Nový zákon o evidencii tržieb prináša zásadné zmeny v tom, ako podnikatelia na Slovensku musia evidovať svoje tržby. Zavádza povinnosť používať systém eKasa, čo je on-line registračná pokladnica, ktor..."
     },
     {
-        "id": 6,
+        "id": 8,
         "master_id": "10481",
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 461/2003 Z. z. o sociálnom poistení v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
         "approval_date": "22. 9. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10481",
-        "created_at": "2026-01-18 07:09:27",
+        "created_at": "2026-01-07 14:45:46",
         "tags": [
             "sociálna politika",
-            "financie"
+            "dôchodky",
+            "poistenie"
         ],
-        "summary_preview": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 461/2003 Z. z. o sociálnom poistení, prináša viaceré dôležité zmeny, ktoré sa dotknú rôznych skupín obyvateľstva. Hlavným cieľom týchto zmien je zlepšiť ..."
+        "summary_preview": "Navrhovaný zákon prináša významné zmeny v oblasti sociálneho poistenia, ktoré sa dotýkajú najmä dôchodkového systému. Zákon upravuje podmienky dôchodkového poistenia pre osoby starajúce sa o deti, pri..."
+    },
+    {
+        "id": 40,
+        "master_id": "10480",
+        "title": "Vládny návrh zákona o adresnej energopomoci a o zmene a doplnení niektorých zákonov",
+        "approval_date": "19. 9. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10480",
+        "created_at": "2026-01-07 18:59:43",
+        "tags": [
+            "energetika",
+            "sociálna politika",
+            "verejná správa"
+        ],
+        "summary_preview": "Zákon o adresnej energopomoci zavádza systém cielených finančných príspevkov pre domácnosti na pokrytie časti nákladov na elektrinu, plyn a teplo. Tento zákon je dôležitý, pretože reaguje na rastúce n..."
+    },
+    {
+        "id": 41,
+        "master_id": "10474",
+        "title": "Vládny návrh zákona, ktorým sa menia a dopĺňajú niektoré zákony v súvislosti s konsolidáciou verejných financií",
+        "approval_date": "10. 9. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10474",
+        "created_at": "2026-01-07 19:00:36",
+        "tags": [
+            "ekonomika",
+            "financie",
+            "práca",
+            "dane",
+            "sociálna politika"
+        ],
+        "summary_preview": "Nový zákon, ktorý bol schválený Národnou radou Slovenskej republiky, prináša významné zmeny v oblasti konsolidácie verejných financií. Tento zákon sa dotýka viacerých oblastí, vrátane Zákonníka práce,..."
+    },
+    {
+        "id": 34,
+        "master_id": "10364",
+        "title": "Návrh poslanca Národnej rady Slovenskej republiky Ľubomíra VÁŽNEHO na vydanie zákona, ktorým sa mení a dopĺňa zákon č. 8/2009 Z. z. o cestnej premávke a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+        "approval_date": "6. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10364",
+        "created_at": "2026-01-07 18:56:28",
+        "tags": [
+            "doprava",
+            "zdravotníctvo",
+            "seniori"
+        ],
+        "summary_preview": "Navrhovaný zákon prináša niekoľko významných zmien v oblasti cestnej premávky, zameraných na zvýšenie bezpečnosti chodcov a zjednodušenie povinností pre starších vodičov. Jednou z hlavných zmien je za..."
+    },
+    {
+        "id": 42,
+        "master_id": "10397",
+        "title": "Vládny návrh zákona, ktorým sa mení zákon č. 325/2022 Z. z., ktorým sa mení a dopĺňa zákon č. 305/2013 Z. z. o elektronickej podobe výkonu pôsobnosti orgánov verejnej moci a o zmene a doplnení niektorých zákonov (zákon o e-Governmente) v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony v znení neskorších predpisov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10397",
+        "created_at": "2026-01-07 19:01:13",
+        "tags": [
+            "verejná správa",
+            "IT",
+            "legislatíva"
+        ],
+        "summary_preview": "Novela zákona o e-Governmente, ktorú predložila vláda Slovenskej republiky, posúva účinnosť niektorých ustanovení týkajúcich sa zaručenej konverzie z 1. októbra 2025 na 1. januára 2027. Zaručená konve..."
+    },
+    {
+        "id": 39,
+        "master_id": "10385",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 332/2023 Z. z. o verejnej osobnej doprave a o zmene a doplnení niektorých zákonov a ktorým sa dopĺňa zákon Národnej rady Slovenskej republiky č. 145/1995 Z. z. o správnych poplatkoch v znení neskorších predpisov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10385",
+        "created_at": "2026-01-07 18:59:14",
+        "tags": [
+            "doprava",
+            "verejná správa"
+        ],
+        "summary_preview": "Novela zákona č. 332/2023 Z. z. o verejnej osobnej doprave prináša niekoľko legislatívnych zmien, ktoré majú za cieľ zlepšiť a spresniť administratívne procesy v oblasti verejnej dopravy. Jednou z hla..."
+    },
+    {
+        "id": 38,
+        "master_id": "10386",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 317/2012 Z. z. o inteligentných dopravných systémoch v cestnej doprave a o zmene a doplnení niektorých zákonov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10386",
+        "created_at": "2026-01-07 18:58:44",
+        "tags": [
+            "doprava",
+            "IT",
+            "verejná správa"
+        ],
+        "summary_preview": "Novela zákona č. 317/2012 Z. z. o inteligentných dopravných systémoch prináša významné zmeny v oblasti cestnej dopravy, ktoré sú zamerané na zlepšenie interoperability a efektívnosti dopravných systém..."
+    },
+    {
+        "id": 37,
+        "master_id": "10394",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 580/2004 Z. z. o zdravotnom poistení a o zmene a doplnení zákona č. 95/2002 Z. z. o poisťovníctve a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa mení a dopĺňa zákon č. 581/2004 Z. z. o zdravotných poisťovniach, dohľade nad zdravotnou starostlivosťou a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10394",
+        "created_at": "2026-01-07 18:58:10",
+        "tags": [
+            "zdravotníctvo",
+            "poisťovníctvo",
+            "sociálna politika"
+        ],
+        "summary_preview": "Novela zákona o zdravotnom poistení a zdravotných poisťovniach prináša niekoľko významných zmien, ktoré majú za cieľ zlepšiť efektivitu a transparentnosť systému zdravotného poistenia na Slovensku. Je..."
+    },
+    {
+        "id": 36,
+        "master_id": "10396",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 153/2013 Z. z. o národnom zdravotníckom informačnom systéme a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10396",
+        "created_at": "2026-01-07 18:57:40",
+        "tags": [
+            "zdravotníctvo",
+            "IT",
+            "verejná správa"
+        ],
+        "summary_preview": "Novela zákona č. 153/2013 Z. z. o národnom zdravotníckom informačnom systéme prináša významné zmeny v oblasti správy zdravotníckych údajov a ich využitia. Jednou z hlavných zmien je rozšírenie funkcio..."
+    },
+    {
+        "id": 33,
+        "master_id": "10393",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 133/2013 Z. z. o stavebných výrobkoch a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10393",
+        "created_at": "2026-01-07 18:52:47",
+        "tags": [
+            "stavebníctvo",
+            "právo",
+            "ekonomika"
+        ],
+        "summary_preview": "Novela zákona č. 133/2013 Z. z. o stavebných výrobkoch prináša významné zmeny v oblasti uvádzania stavebných výrobkov na trh v Slovenskej republike. Zákon sa prispôsobuje novým európskym nariadeniam, ..."
+    },
+    {
+        "id": 32,
+        "master_id": "10391",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 507/2023 Z. z o dorovnávacej dani na zabezpečenie minimálnej úrovne zdanenia nadnárodných skupín podnikov a veľkých vnútroštátnych skupín a o doplnení zákona č. 563/2009 Z. z. o správe daní (daňový poriadok) a o zmene a doplnení niektorých zákonov v znení neskorších predpisov v znení zákona č. 355/2024 Z. z. a ktorým sa mení a dopĺňa zákon č. 442/2012 Z. z. o medzinárodnej pomoci a spolupráci pri správe daní v znení neskorších predpisov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10391",
+        "created_at": "2026-01-07 18:52:06",
+        "tags": [
+            "ekonomika",
+            "financie",
+            "dane"
+        ],
+        "summary_preview": "Nový návrh zákona, ktorý mení a dopĺňa zákon č. 507/2023 Z. z., sa zameriava na dorovnávaciu daň s cieľom zabezpečiť minimálnu úroveň zdanenia pre nadnárodné a veľké vnútroštátne skupiny podnikov. Ten..."
+    },
+    {
+        "id": 31,
+        "master_id": "10398",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 475/2005 Z. z. o výkone trestu odňatia slobody a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10398",
+        "created_at": "2026-01-07 18:51:36",
+        "tags": [
+            "justícia",
+            "väzenstvo"
+        ],
+        "summary_preview": "Novela zákona č. 475/2005 Z. z. o výkone trestu odňatia slobody prináša niekoľko dôležitých zmien, ktoré sa týkajú podmienok výkonu trestu a práv odsúdených. Zákon zavádza možnosť zriadenia otvorených..."
+    },
+    {
+        "id": 30,
+        "master_id": "10400",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 314/2018 Z. z. o Ústavnom súde Slovenskej republiky a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10400",
+        "created_at": "2026-01-07 18:50:45",
+        "tags": [
+            "justícia",
+            "ústavný súd"
+        ],
+        "summary_preview": "Navrhovaný zákon prináša niekoľko významných zmien v organizácii a fungovaní Ústavného súdu Slovenskej republiky. Jednou z hlavných zmien je zrušenie povinnej obmeny všetkých senátov ústavného súdu ka..."
+    },
+    {
+        "id": 29,
+        "master_id": "10407",
+        "title": "Návrh poslancov Národnej rady Slovenskej republiky Jána FERENČÁKA a Štefana GAŠPAROVIČA na vydanie zákona, ktorým sa dopĺňa zákon č. 583/2004 Z. z. o rozpočtových pravidlách územnej samosprávy a o zmene a doplnení niektorých zákonov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10407",
+        "created_at": "2026-01-07 18:50:20",
+        "tags": [
+            "verejná správa",
+            "financie",
+            "miestna samospráva"
+        ],
+        "summary_preview": "Navrhovaný zákon prináša dôležité zmeny v oblasti rozpočtových pravidiel územnej samosprávy na Slovensku. Hlavným cieľom je zmierniť negatívne dopady na daňové príjmy obcí a vyšších územných celkov tý..."
+    },
+    {
+        "id": 28,
+        "master_id": "10387",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 56/2018 Z. z. o posudzovaní zhody výrobku, sprístupňovaní určeného výrobku na trhu a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10387",
+        "created_at": "2026-01-07 18:49:47",
+        "tags": [
+            "ekonomika",
+            "financie",
+            "podnikanie"
+        ],
+        "summary_preview": "Novela zákona č. 56/2018 Z. z. prináša významné zmeny v oblasti posudzovania zhody výrobkov a ich sprístupňovania na trhu. Zákon sa zameriava na aktualizáciu požiadaviek na výrobky, ktoré sú uvádzané ..."
+    },
+    {
+        "id": 27,
+        "master_id": "10383",
+        "title": "Vládny návrh zákona o spotrebiteľských úveroch a o iných úveroch a pôžičkách pre spotrebiteľov a o zmene a doplnení niektorých zákonov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10383",
+        "created_at": "2026-01-07 18:49:14",
+        "tags": [
+            "financie",
+            "ekonomika"
+        ],
+        "summary_preview": "Nový zákon o spotrebiteľských úveroch prináša významné zmeny v oblasti poskytovania úverov pre spotrebiteľov na Slovensku. Tento zákon upravuje práva a povinnosti súvisiace s poskytovaním spotrebiteľs..."
+    },
+    {
+        "id": 26,
+        "master_id": "10457",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 39/2007 Z. z. o veterinárnej starostlivosti v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10457",
+        "created_at": "2026-01-07 18:48:37",
+        "tags": [
+            "zdravotníctvo",
+            "poľnohospodárstvo",
+            "verejná správa"
+        ],
+        "summary_preview": "Novela zákona o veterinárnej starostlivosti prináša významné zmeny v oblasti správy a evidencie hospodárskych zvierat a veterinárnych kontrol. Jednou z hlavných zmien je zavedenie centrálneho registra..."
+    },
+    {
+        "id": 25,
+        "master_id": "10388",
+        "title": "Vládny návrh zákona o registri užívacích vzťahov k pozemkom a o zmene a doplnení niektorých zákonov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10388",
+        "created_at": "2026-01-07 18:48:05",
+        "tags": [
+            "poľnohospodárstvo",
+            "verejná správa",
+            "dane"
+        ],
+        "summary_preview": "Nový zákon o registri užívacích vzťahov k pozemkom zavádza komplexný systém evidencie užívacích vzťahov k poľnohospodárskej pôde. Tento register má za cieľ zjednodušiť a sprehľadniť procesy spojené s ..."
+    },
+    {
+        "id": 24,
+        "master_id": "10392",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 504/2003 Z. z. o nájme poľnohospodárskych pozemkov, poľnohospodárskeho podniku a lesných pozemkov a o zmene niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10392",
+        "created_at": "2026-01-07 18:47:17",
+        "tags": [
+            "poľnohospodárstvo",
+            "právo",
+            "nájomné vzťahy"
+        ],
+        "summary_preview": "Novela zákona č. 504/2003 Z. z. prináša významné zmeny v oblasti nájmu poľnohospodárskych pozemkov, ktoré majú za cieľ zjednodušiť a sprehľadniť právne vzťahy medzi nájomcami a vlastníkmi pôdy. Jednou..."
+    },
+    {
+        "id": 21,
+        "master_id": "10424",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10424",
+        "created_at": "2026-01-07 18:45:07",
+        "tags": [
+            "vzdelávanie",
+            "školstvo",
+            "práca"
+        ],
+        "summary_preview": "Novela zákona č. 61/2015 Z. z. o odbornom vzdelávaní a príprave prináša významné zmeny, ktoré sa týkajú najmä stredných odborných a priemyselných škôl. Jednou z hlavných zmien je zavedenie odbornej st..."
+    },
+    {
+        "id": 20,
+        "master_id": "10420",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 282/2008 Z. z. o podpore práce s mládežou a o zmene a doplnení zákona č. 131/2002 Z. z. o vysokých školách a o zmene a doplnení niektorých zákonov v znení neskorších predpisov v znení neskorších predpisov",
+        "approval_date": "22. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10420",
+        "created_at": "2026-01-07 18:44:34",
+        "tags": [
+            "mládež",
+            "vzdelávanie",
+            "sociálna politika"
+        ],
+        "summary_preview": "Novela zákona č. 282/2008 Z. z. o podpore práce s mládežou prináša niekoľko významných zmien, ktoré majú za cieľ zlepšiť prácu s mládežou na Slovensku. Jednou z hlavných zmien je zavedenie spodnej vek..."
     },
     {
         "id": 14,
@@ -109,12 +394,12 @@
         "title": "Vládny návrh zákona o financovaní škôl a školských zariadení",
         "approval_date": "22. 8. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10419",
-        "created_at": "2026-01-18 07:14:33",
+        "created_at": "2026-01-07 14:53:43",
         "tags": [
             "školstvo",
             "financie"
         ],
-        "summary_preview": "Zákon o financovaní škôl a školských zariadení, ktorý bol predložený Národnej rade Slovenskej republiky, upravuje zdroje a účely financovania vzdelávacích inštitúcií v Slovenskej republike. Tento záko..."
+        "summary_preview": "Nový zákon o financovaní škôl a školských zariadení prináša komplexné úpravy v oblasti prideľovania finančných prostriedkov pre vzdelávacie inštitúcie na Slovensku. Zákon definuje normatívne a nenorma..."
     },
     {
         "id": 13,
@@ -122,12 +407,13 @@
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 245/2008 Z. z. o výchove a vzdelávaní (školský zákon) a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
         "approval_date": "22. 8. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10422",
-        "created_at": "2026-01-18 07:13:55",
+        "created_at": "2026-01-07 14:51:38",
         "tags": [
+            "školstvo",
             "vzdelávanie",
             "sociálna politika"
         ],
-        "summary_preview": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 245/2008 Z. z. o výchove a vzdelávaní, prináša významné zmeny v oblasti vzdelávania, najmä pre deti so zdravotným postihnutím a deti zo sociálne znevýhod..."
+        "summary_preview": "Novela školského zákona z roku 2025 prináša významné zmeny v oblasti inkluzívneho vzdelávania a rozvoja digitálnych kompetencií. Zákon rozširuje definíciu detí so zdravotným postihnutím, aby zahŕňala ..."
     },
     {
         "id": 12,
@@ -135,51 +421,27 @@
         "title": "Vládny návrh zákona o vysokých školách a o zmene a doplnení niektorých zákonov (vysokoškolský zákon)",
         "approval_date": "22. 8. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10418",
-        "created_at": "2026-01-18 07:13:13",
+        "created_at": "2026-01-07 14:51:00",
         "tags": [
             "vzdelávanie",
-            "školstvo"
+            "školstvo",
+            "právo"
         ],
-        "summary_preview": "Návrh zákona o vysokých školách, ktorý predložila vláda Slovenskej republiky, prináša zásadné zmeny v oblasti vysokoškolského vzdelávania. Tento zákon sa zameriava na definovanie poslania, úloh a post..."
+        "summary_preview": "Nový zákon o vysokých školách prináša komplexné úpravy v oblasti vysokoškolského vzdelávania na Slovensku. Zákon definuje základné ustanovenia týkajúce sa poslania, úloh a postavenia vysokých škôl, pr..."
     },
     {
         "id": 11,
-        "master_id": "10424",
-        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
-        "approval_date": "22. 8. 2025",
-        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10424",
-        "created_at": "2026-01-18 07:12:36",
-        "tags": [
-            "vzdelávanie",
-            "podnikanie"
-        ],
-        "summary_preview": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave, prináša významné zmeny v oblasti odborného vzdelávania na Slovensku. Hlavným cieľom týchto zmien je zlepš..."
-    },
-    {
-        "id": 10,
-        "master_id": "10420",
-        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 282/2008 Z. z. o podpore práce s mládežou a o zmene a doplnení zákona č. 131/2002 Z. z. o vysokých školách a o zmene a doplnení niektorých zákonov v znení neskorších predpisov v znení neskorších predpisov",
-        "approval_date": "22. 8. 2025",
-        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10420",
-        "created_at": "2026-01-18 07:11:56",
-        "tags": [
-            "mládež",
-            "vzdelávanie"
-        ],
-        "summary_preview": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 282/2008 Z. z. o podpore práce s mládežou, reflektuje aktuálne potreby v oblasti práce s mládežou a neformálneho vzdelávania. Zákon zavádza spodnú vekovú..."
-    },
-    {
-        "id": 9,
         "master_id": "10423",
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 138/2019 Z. z. o pedagogických zamestnancoch a odborných zamestnancoch a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
         "approval_date": "22. 8. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10423",
-        "created_at": "2026-01-18 07:11:20",
+        "created_at": "2026-01-07 14:47:40",
         "tags": [
-            "podnikanie",
-            "školstvo"
+            "školstvo",
+            "vzdelávanie",
+            "práca"
         ],
-        "summary_preview": "Zákon č. 138/2019 Z. z. o pedagogických zamestnancoch a odborných zamestnancoch prechádza významnými zmenami, ktoré sa dotknú predovšetkým pedagogických zamestnancov a odborných zamestnancov v školstv..."
+        "summary_preview": "Návrh zákona z roku 2025 prináša významné zmeny v oblasti pedagogických a odborných zamestnancov na Slovensku. Tento zákon sa zameriava na úpravu kvalifikačných požiadaviek a pracovných podmienok pre ..."
     },
     {
         "id": 18,
@@ -187,12 +449,39 @@
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 566/2001 Z. z. o cenných papieroch a investičných službách a o zmene a doplnení niektorých zákonov (zákon o cenných papieroch) v znení neskorších predpisov a ktorým sa mení a dopĺňa zákon č. 429/2002 Z. z. o burze cenných papierov v znení neskorších predpisov",
         "approval_date": "19. 8. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10375",
-        "created_at": "2026-01-18 07:17:09",
+        "created_at": "2026-01-07 14:56:37",
         "tags": [
             "ekonomika",
             "financie"
         ],
-        "summary_preview": "Návrh zákona, ktorý sa mení a dopĺňa zákon č. 566/2001 Z. z. o cenných papieroch a investičných službách, prináša viaceré dôležité zmeny, ktoré ovplyvnia fungovanie obchodníkov s cennými papiermi a in..."
+        "summary_preview": "Novela zákona o cenných papieroch a investičných službách prináša významné zmeny v oblasti obchodovania s cennými papiermi a investičných služieb na Slovensku. Jednou z hlavných zmien je zavedenie def..."
+    },
+    {
+        "id": 35,
+        "master_id": "10368",
+        "title": "Návrh poslancov Národnej rady Slovenskej republiky Michala BARTEKA, Róberta PUCIHO a Igora ŠIMKA na vydanie zákona, ktorým sa mení a dopĺňa zákon č. 8/2009 Z. z. o cestnej premávke a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+        "approval_date": "13. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10368",
+        "created_at": "2026-01-07 18:57:06",
+        "tags": [
+            "doprava",
+            "bezpečnosť"
+        ],
+        "summary_preview": "Navrhovaný zákon prináša možnosť dobrovoľného zavedenia predného brzdového svetla (PBS) zelenej farby na motorových vozidlách kategórie M (osobné vozidlá) a N (nákladné vozidlá) v Slovenskej republike..."
+    },
+    {
+        "id": 22,
+        "master_id": "10369",
+        "title": "Vládny návrh zákona o ochrane spotrebiteľa pri finančných službách na diaľku a o zmene a doplnení niektorých zákonov",
+        "approval_date": "13. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10369",
+        "created_at": "2026-01-07 18:45:57",
+        "tags": [
+            "ekonomika",
+            "financie",
+            "spotrebitelia"
+        ],
+        "summary_preview": "Nový zákon o ochrane spotrebiteľa pri finančných službách na diaľku prináša významné zmeny v oblasti práv a povinností spotrebiteľov a obchodníkov pri uzatváraní zmlúv na diaľku. Tento zákon je dôleži..."
     },
     {
         "id": 19,
@@ -200,12 +489,26 @@
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 357/2015 Z. z. o finančnej kontrole a audite a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
         "approval_date": "13. 8. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10370",
-        "created_at": "2026-01-18 07:17:44",
+        "created_at": "2026-01-07 14:57:07",
         "tags": [
             "financie",
-            "verejná správa"
+            "verejná správa",
+            "audity"
         ],
-        "summary_preview": "Zákon č. 357/2015 Z. z. o finančnej kontrole a audite prechádza významnými zmenami, ktoré sa dotýkajú spôsobu, akým orgány verejnej správy vykonávajú finančnú kontrolu a audit. Tieto zmeny sú motivova..."
+        "summary_preview": "Novela zákona č. 357/2015 Z. z. o finančnej kontrole a audite prináša významné zmeny v oblasti finančnej kontroly a auditu verejných financií. Kľúčovou zmenou je redefinícia pojmov ako finančná kontro..."
+    },
+    {
+        "id": 23,
+        "master_id": "10366",
+        "title": "Návrh skupiny poslancov Národnej rady Slovenskej republiky na vydanie zákona, ktorým sa mení a dopĺňa zákon Národnej rady Slovenskej republiky č. 300/1993 Z. z. o mene a priezvisku v znení neskorších predpisov",
+        "approval_date": "12. 8. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10366",
+        "created_at": "2026-01-07 18:46:40",
+        "tags": [
+            "právo",
+            "rodina"
+        ],
+        "summary_preview": "Navrhovaný zákon prináša významné zmeny v oblasti určovania priezviska detí, čím sa snaží odstrániť diskrimináciu medzi rodičmi, ktorí sú štátnymi občanmi Slovenskej republiky a tými, ktorí sú cudzími..."
     },
     {
         "id": 16,
@@ -213,12 +516,13 @@
         "title": "Vládny návrh zákona, ktorým sa mení zákon č. 78/2015 Z. z. o kontrole výkonu niektorých rozhodnutí technickými prostriedkami a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
         "approval_date": "7. 7. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10357",
-        "created_at": "2026-01-18 07:15:59",
+        "created_at": "2026-01-07 14:55:02",
         "tags": [
             "justícia",
-            "ekonomika"
+            "verejná správa",
+            "právo"
         ],
-        "summary_preview": "Návrh zákona, ktorý sa mení zákon č. 78/2015 Z. z. o kontrole výkonu niektorých rozhodnutí technickými prostriedkami, má za cieľ zefektívniť ukladanie alternatívnych trestov a zlepšiť podmienky pre ic..."
+        "summary_preview": "Navrhovaný zákon prináša zmeny v oblasti kontroly výkonu niektorých rozhodnutí prostredníctvom technických prostriedkov, konkrétne sa zameriava na zefektívnenie využívania týchto prostriedkov pri ukla..."
     },
     {
         "id": 17,
@@ -226,12 +530,13 @@
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 544/2002 Z. z. o Horskej záchrannej službe v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
         "approval_date": "3. 7. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10355",
-        "created_at": "2026-01-18 07:16:34",
+        "created_at": "2026-01-07 14:56:03",
         "tags": [
-            "ekonomika",
-            "financie"
+            "záchrana",
+            "bezpečnosť",
+            "právo"
         ],
-        "summary_preview": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 544/2002 Z. z. o Horskej záchrannej službe, reaguje na potrebu zefektívniť a upraviť pravidlá týkajúce sa výkonu záchrannej činnosti v horských oblastiac..."
+        "summary_preview": "Novela zákona o Horskej záchrannej službe prináša niekoľko významných zmien, ktoré majú za cieľ zlepšiť efektivitu a bezpečnosť záchrannej činnosti v horských oblastiach. Jednou z hlavných zmien je za..."
     },
     {
         "id": 15,
@@ -239,11 +544,41 @@
         "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 108/2024 Z. z. o ochrane spotrebiteľa a o zmene a doplnení niektorých zákonov a ktorým sa menia a dopĺňajú niektoré zákony",
         "approval_date": "4. 6. 2025",
         "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10345",
-        "created_at": "2026-01-18 07:15:24",
+        "created_at": "2026-01-07 14:54:27",
         "tags": [
             "ekonomika",
-            "financie"
+            "financie",
+            "spotrebitelia",
+            "životné prostredie"
         ],
-        "summary_preview": "Zákon č. 108/2024 Z. z. o ochrane spotrebiteľa a jeho novelizácia, ktorá sa predpokladá v roku 2025, prináša významné zmeny v oblasti ochrany spotrebiteľov a obchodných praktík. Hlavným cieľom týchto ..."
+        "summary_preview": "Novela zákona č. 108/2024 Z. z. o ochrane spotrebiteľa prináša významné zmeny, ktoré sa zameriavajú na posilnenie práv spotrebiteľov a podporu udržateľnosti. Jednou z hlavných zmien je zavedenie novýc..."
+    },
+    {
+        "id": 44,
+        "master_id": "10279",
+        "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 264/2022 Z. z. o mediálnych službách a o zmene a doplnení niektorých zákonov (zákon o mediálnych službách) v znení neskorších predpisov a ktorým sa mení a dopĺňa zákon č. 265/2022 Z. z. o vydavateľoch publikácií a o registri v oblasti médií a audiovízie a o zmene a doplnení niektorých zákonov (zákon o publikáciách)",
+        "approval_date": "7. 5. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10279",
+        "created_at": "2026-01-07 19:02:40",
+        "tags": [
+            "médiá",
+            "právo",
+            "regulácia"
+        ],
+        "summary_preview": "Nový návrh zákona, ktorý mení a dopĺňa existujúce zákony o mediálnych službách a vydavateľoch publikácií, prináša niekoľko dôležitých zmien. Hlavným cieľom je zosúladiť slovenskú legislatívu s nariade..."
+    },
+    {
+        "id": 43,
+        "master_id": "10268",
+        "title": "Návrh skupiny poslancov Narodnej rady Slovenskej republiky na vydanie zákona, ktorým sa mení a dopĺňa zákon č. 279/2024 Z. z. o dani z finančných transakcií a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+        "approval_date": "15. 4. 2025",
+        "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10268",
+        "created_at": "2026-01-07 19:02:07",
+        "tags": [
+            "ekonomika",
+            "financie",
+            "podnikanie"
+        ],
+        "summary_preview": "Navrhovaný zákon prináša významné zmeny v oblasti zdaňovania finančných transakcií na Slovensku. Hlavným cieľom je znížiť administratívne a finančné zaťaženie pre malé podnikateľské subjekty, konkrétn..."
     }
 ]
