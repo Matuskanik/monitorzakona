@@ -1,0 +1,43 @@
+{
+    "id": 44,
+    "master_id": "10279",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 264/2022 Z. z. o mediálnych službách a o zmene a doplnení niektorých zákonov (zákon o mediálnych službách) v znení neskorších predpisov a ktorým sa mení a dopĺňa zákon č. 265/2022 Z. z. o vydavateľoch publikácií a o registri v oblasti médií a audiovízie a o zmene a doplnení niektorých zákonov (zákon o publikáciách)",
+    "approval_date": "7. 5. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10279",
+    "created_at": "2026-01-07 19:02:40",
+    "updated_at": "2026-01-07 19:02:40",
+    "summary": {
+        "tags": [
+            "médiá",
+            "právo",
+            "regulácia"
+        ],
+        "summary_paragraph": "Nový návrh zákona, ktorý mení a dopĺňa existujúce zákony o mediálnych službách a vydavateľoch publikácií, prináša niekoľko dôležitých zmien. Hlavným cieľom je zosúladiť slovenskú legislatívu s nariadením Európskeho parlamentu a Rady (EÚ) 2024/1083, ktoré stanovuje spoločný rámec pre mediálne služby na vnútornom trhu. Zákon zavádza nové povinnosti pre poskytovateľov systémov merania sledovanosti, ktorí musia oznámiť regulátorovi svoje údaje a metodiky. Taktiež sa kladie dôraz na transparentnosť financovania štátnej reklamy, kde vysielatelia a poskytovatelia audiovizuálnych služieb musia zverejniť informácie o prijatých verejných finančných prostriedkoch. Zákon nadobudne účinnosť 8. augusta 2025, pričom poskytovatelia systémov merania sledovanosti majú povinnosť oznámiť svoje údaje do 31. októbra 2025. Tieto zmeny sú dôležité pre zvýšenie transparentnosti a regulácie mediálneho trhu, čo môže ovplyvniť široké spektrum subjektov vrátane vydavateľov, poskytovateľov mediálnych služieb a verejných inštitúcií.",
+        "affected_groups": [
+            "poskytovatelia systémov merania sledovanosti - budú musieť oznámiť regulátorovi svoje údaje a metodiky",
+            "vysielatelia a poskytovatelia audiovizuálnych služieb - musia zverejniť informácie o prijatých verejných finančných prostriedkoch na štátnu reklamu",
+            "verejnoprávni vysielatelia - budú podliehať zvýšenej kontrole a monitorovaniu zo strany regulátora",
+            "orgány verejnej moci - musia zabezpečiť transparentnosť pri prideľovaní verejných finančných prostriedkov na štátnu reklamu",
+            "vydavatelia periodických publikácií - musia zverejniť informácie o financovaní štátnej reklamy"
+        ],
+        "positives": [
+            "Zvýšená transparentnosť financovania štátnej reklamy - pomáha zabezpečiť, že verejné prostriedky sú prideľované spravodlivo a efektívne.",
+            "Zosúladenie s európskymi normami - zlepšuje právny rámec a zvyšuje dôveru v mediálny trh na Slovensku."
+        ],
+        "negatives": [
+            "Zvýšená administratívna záťaž pre poskytovateľov systémov merania sledovanosti - musia dodržiavať nové povinnosti a poskytovať detailné údaje regulátorovi.",
+            "Možné zvýšenie nákladov pre vysielateľov a poskytovateľov audiovizuálnych služieb - z dôvodu potreby zverejňovania a oznamovania finančných informácií."
+        ],
+        "how_to_react": [
+            "Poskytovatelia systémov merania sledovanosti by mali do 31. októbra 2025 oznámiť regulátorovi svoje údaje a metodiky podľa § 25a ods. 2.",
+            "Vysielatelia a poskytovatelia audiovizuálnych služieb by mali pripraviť a zverejniť informácie o prijatých verejných finančných prostriedkoch na štátnu reklamu do 31. januára nasledujúceho roka.",
+            "Orgány verejnej moci by mali zabezpečiť, aby všetky informácie o štátnej reklame boli zverejnené na ich webových sídlach a aby boli prístupné verejnosti po dobu najmenej troch rokov.",
+            "Vydavatelia periodických publikácií by mali zverejniť informácie o financovaní štátnej reklamy na svojich webových sídlach do 31. januára nasledujúceho roka.",
+            "Regulátori by mali pripraviť mechanizmy na efektívne monitorovanie a kontrolu dodržiavania nových povinností zo strany poskytovateľov mediálnych služieb."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

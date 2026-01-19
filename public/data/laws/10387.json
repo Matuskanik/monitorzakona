@@ -1,0 +1,43 @@
+{
+    "id": 28,
+    "master_id": "10387",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 56/2018 Z. z. o posudzovaní zhody výrobku, sprístupňovaní určeného výrobku na trhu a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10387",
+    "created_at": "2026-01-07 18:49:47",
+    "updated_at": "2026-01-07 18:49:47",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie",
+            "podnikanie"
+        ],
+        "summary_paragraph": "Novela zákona č. 56/2018 Z. z. prináša významné zmeny v oblasti posudzovania zhody výrobkov a ich sprístupňovania na trhu. Zákon sa zameriava na aktualizáciu požiadaviek na výrobky, ktoré sú uvádzané na trh, a to v súlade s európskymi nariadeniami. Medzi kľúčové zmeny patrí zavedenie digitálneho pasu pre určené výrobky, ktorý bude obsahovať všetky potrebné informácie o výrobku, vrátane jeho zhody s technickými predpismi. Táto zmena má za cieľ zvýšiť transparentnosť a sledovateľnosť výrobkov na trhu, čo môže byť obzvlášť dôležité pre spotrebiteľov, ktorí sa snažia získať podrobné informácie o produktoch, ktoré kupujú. Zákon tiež zavádza nové povinnosti pre výrobcov batérií, ktorí musia zabezpečiť prístup k informáciám o stave batérie v reálnom čase. Tieto zmeny nadobudnú účinnosť od januára 2026, pričom prechodné obdobie umožní dotknutým subjektom prispôsobiť sa novým požiadavkám.",
+        "affected_groups": [
+            "Výrobcovia batérií - budú musieť zabezpečiť prístup k informáciám o stave batérie v reálnom čase.",
+            "Spotrebitelia - získajú lepší prístup k informáciám o výrobkoch prostredníctvom digitálnych pasov.",
+            "Podnikatelia uvádzajúci výrobky na trh - budú musieť zabezpečiť, že ich výrobky spĺňajú nové požiadavky na zhody.",
+            "Dovozcovia - budú musieť dodržiavať nové pravidlá sprístupňovania výrobkov na trhu.",
+            "Inšpektoráty práce - budú mať rozšírené kompetencie pri dohľade nad výrobkami na trhu."
+        ],
+        "positives": [
+            "Zvýšená transparentnosť pre spotrebiteľov vďaka digitálnym pasom výrobkov, čo umožní lepšie informované rozhodovanie pri nákupe.",
+            "Zlepšenie sledovateľnosti výrobkov na trhu, čo môže prispieť k vyššej bezpečnosti a kvalite výrobkov."
+        ],
+        "negatives": [
+            "Zvýšené náklady pre výrobcov a dovozcov na prispôsobenie sa novým požiadavkám, čo môže viesť k vyšším cenám pre spotrebiteľov.",
+            "Komplikácie pre malé podniky, ktoré môžu mať obmedzené zdroje na implementáciu nových pravidiel a technológií."
+        ],
+        "how_to_react": [
+            "Výrobcovia by mali začať s implementáciou systémov na sledovanie stavu batérií a zabezpečiť, aby tieto informácie boli dostupné v reálnom čase.",
+            "Podnikatelia uvádzajúci výrobky na trh by mali skontrolovať, či ich výrobky spĺňajú nové požiadavky na zhody a zabezpečiť aktualizáciu dokumentácie.",
+            "Spotrebitelia by mali vyhľadávať výrobky s digitálnymi pasmi, aby získali lepší prehľad o ich vlastnostiach a zhode s predpismi.",
+            "Dovozcovia by mali prehodnotiť svoje procesy sprístupňovania výrobkov na trhu a zabezpečiť, že sú v súlade s novými pravidlami.",
+            "Inšpektoráty práce by mali pripraviť školenia pre svojich zamestnancov na nové kompetencie v oblasti dohľadu nad výrobkami."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

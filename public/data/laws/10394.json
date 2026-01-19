@@ -1,0 +1,43 @@
+{
+    "id": 37,
+    "master_id": "10394",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 580/2004 Z. z. o zdravotnom poistení a o zmene a doplnení zákona č. 95/2002 Z. z. o poisťovníctve a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa mení a dopĺňa zákon č. 581/2004 Z. z. o zdravotných poisťovniach, dohľade nad zdravotnou starostlivosťou a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10394",
+    "created_at": "2026-01-07 18:58:10",
+    "updated_at": "2026-01-07 18:58:10",
+    "summary": {
+        "tags": [
+            "zdravotníctvo",
+            "poisťovníctvo",
+            "sociálna politika"
+        ],
+        "summary_paragraph": "Novela zákona o zdravotnom poistení a zdravotných poisťovniach prináša niekoľko významných zmien, ktoré majú za cieľ zlepšiť efektivitu a transparentnosť systému zdravotného poistenia na Slovensku. Jednou z hlavných zmien je úprava lehoty pre podanie prihlášky na zmenu zdravotnej poisťovne, ktorá sa teraz musí doručiť do 31. januára nasledujúceho roka, ak bola podaná medzi októbrom a decembrom predchádzajúceho roka. Táto zmena má za cieľ zjednodušiť proces zmeny poisťovne a zabezpečiť, že všetky prihlášky budú spracované včas. Ďalšou dôležitou zmenou je zavedenie povinnosti pre zdravotné poisťovne elektronicky oznamovať úradu dátumy podania a prijatia prihlášok, čo zvyšuje transparentnosť a umožňuje lepšie sledovanie pohybov poistencov. Novela tiež rozširuje definíciu nezaopatreného dieťaťa a študenta, čím sa rozširuje okruh osôb, ktoré môžu byť poistené štátom. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, pričom prechodné ustanovenia zabezpečujú plynulý prechod na nový systém.",
+        "affected_groups": [
+            "študenti vysokých škôl - budú mať rozšírené možnosti byť poistení štátom, ak študujú na základe medzinárodných zmlúv",
+            "samostatne zárobkovo činné osoby - budú musieť dodržiavať nové pravidlá pre podanie prihlášok na zmenu poisťovne",
+            "zdravotné poisťovne - budú musieť elektronicky oznamovať úradu dátumy podania a prijatia prihlášok",
+            "manželia a manželky bez zárobkovej činnosti - môžu byť poistení štátom, ak spĺňajú nové podmienky",
+            "maloletí cudzinci študujúci na Slovensku - budú zahrnutí do systému verejného zdravotného poistenia"
+        ],
+        "positives": [
+            "Zlepšenie transparentnosti - elektronické oznamovanie dátumov prihlášok zvyšuje prehľadnosť a kontrolu nad zmenami poisťovní.",
+            "Rozšírenie poistenia štátom - viac osôb, vrátane študentov a nezaopatrených detí, môže byť poistených štátom, čo znižuje finančné zaťaženie rodín.",
+            "Zjednodušenie procesu zmeny poisťovne - jasné lehoty a pravidlá pre podanie a späťvzatie prihlášok uľahčujú poistencovi zmenu poisťovne."
+        ],
+        "negatives": [
+            "Zvýšená administratívna záťaž pre poisťovne - nové povinnosti oznamovania môžu zvýšiť administratívne náklady a nároky na IT systémy.",
+            "Možné zmätenie poistencov - zmeny v lehotách a podmienkach môžu byť pre niektorých poistencov mätúce, čo môže viesť k neplatným prihláškam.",
+            "Riziko neplatnosti prihlášok - ak poistenec podá viacero prihlášok bez správneho späťvzatia, všetky môžu byť považované za neplatné."
+        ],
+        "how_to_react": [
+            "Poistenec, ktorý chce zmeniť zdravotnú poisťovňu, by mal podať prihlášku do 31. decembra a späťvzatie doručiť do 31. januára nasledujúceho roka.",
+            "Zdravotné poisťovne by mali zabezpečiť, aby ich IT systémy boli pripravené na elektronické oznamovanie dátumov prihlášok do 5. novembra každého roka.",
+            "Samostatne zárobkovo činné osoby by mali pravidelne kontrolovať svoje povinnosti voči zdravotným poisťovniam, aby sa vyhli neplatnosti prihlášok."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

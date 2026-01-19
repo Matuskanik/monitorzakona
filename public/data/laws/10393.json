@@ -1,0 +1,41 @@
+{
+    "id": 33,
+    "master_id": "10393",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 133/2013 Z. z. o stavebných výrobkoch a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10393",
+    "created_at": "2026-01-07 18:52:47",
+    "updated_at": "2026-01-07 18:52:47",
+    "summary": {
+        "tags": [
+            "stavebníctvo",
+            "právo",
+            "ekonomika"
+        ],
+        "summary_paragraph": "Novela zákona č. 133/2013 Z. z. o stavebných výrobkoch prináša významné zmeny v oblasti uvádzania stavebných výrobkov na trh v Slovenskej republike. Zákon sa prispôsobuje novým európskym nariadeniam, konkrétne nariadeniu (EÚ) 2024/3110, ktoré stanovuje harmonizované pravidlá pre stavebné výrobky. Kľúčovou zmenou je zavedenie povinnosti pre výrobcov zabezpečiť posudzovanie parametrov a zhody výrobkov pred ich uvedením na trh. To znamená, že výrobcovia musia overiť, či ich výrobky spĺňajú deklarované požiadavky a parametre, čo môže zvýšiť dôveru spotrebiteľov v bezpečnosť a kvalitu stavebných výrobkov. Novela tiež zavádza koncept SK digitálneho pasu výrobku, ktorý musí byť verejne dostupný a obsahovať všetky relevantné informácie o výrobku, vrátane jeho environmentálnych vlastností. Tieto zmeny nadobudnú platnosť po schválení a zverejnení v Zbierke zákonov, pričom prechodné obdobia pre niektoré povinnosti môžu byť stanovené vykonávacími predpismi.",
+        "affected_groups": [
+            "Výrobcovia stavebných výrobkov - budú musieť zabezpečiť posudzovanie parametrov a zhody a vyhotoviť SK digitálny pas výrobku.",
+            "Distribútori stavebných výrobkov - budú musieť uchovávať dokumentáciu o výrobkoch po dobu desiatich rokov.",
+            "Spotrebitelia - získajú prístup k detailným informáciám o stavebných výrobkoch prostredníctvom SK digitálneho pasu.",
+            "Autorizované osoby - budú zodpovedné za certifikáciu a overovanie zhody výrobkov.",
+            "Orgány verejnej správy - budú musieť dohliadať na dodržiavanie nových pravidiel a spolupracovať s európskymi inštitúciami."
+        ],
+        "positives": [
+            "Zvýšená bezpečnosť a kvalita stavebných výrobkov vďaka povinnému posudzovaniu parametrov a zhody.",
+            "Lepšia informovanosť spotrebiteľov prostredníctvom SK digitálneho pasu výrobku, ktorý poskytuje detailné informácie o výrobku."
+        ],
+        "negatives": [
+            "Zvýšené náklady pre výrobcov na posudzovanie parametrov a zhody, čo môže viesť k zvýšeniu cien výrobkov.",
+            "Administratívna záťaž pre distribútorov a hospodárske subjekty, ktoré musia uchovávať rozsiahlu dokumentáciu."
+        ],
+        "how_to_react": [
+            "Výrobcovia by mali začať pripravovať potrebnú dokumentáciu a zabezpečiť posudzovanie parametrov a zhody čo najskôr, aby splnili nové požiadavky.",
+            "Distribútori by mali zriadiť systémy na uchovávanie dokumentácie o výrobkoch na obdobie desiatich rokov.",
+            "Spotrebitelia by mali vyhľadávať SK digitálny pas výrobku na webových stránkach výrobcov, aby získali informácie o bezpečnosti a kvalite výrobkov."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

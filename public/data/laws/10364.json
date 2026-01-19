@@ -1,0 +1,44 @@
+{
+    "id": 34,
+    "master_id": "10364",
+    "title": "Návrh poslanca Národnej rady Slovenskej republiky Ľubomíra VÁŽNEHO na vydanie zákona, ktorým sa mení a dopĺňa zákon č. 8/2009 Z. z. o cestnej premávke a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "6. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10364",
+    "created_at": "2026-01-07 18:56:28",
+    "updated_at": "2026-01-07 18:56:28",
+    "summary": {
+        "tags": [
+            "doprava",
+            "zdravotníctvo",
+            "seniori"
+        ],
+        "summary_paragraph": "Navrhovaný zákon prináša niekoľko významných zmien v oblasti cestnej premávky, zameraných na zvýšenie bezpečnosti chodcov a zjednodušenie povinností pre starších vodičov. Jednou z hlavných zmien je zavedenie definície rýchlosti chôdze, ktorá je stanovená na 6 km/h. Táto úprava má za cieľ znížiť počet kolízií medzi chodcami a používateľmi elektrických kolobežiek či bicyklov na chodníkoch. Zákon tiež zvyšuje vekovú hranicu pre povinné lekárske prehliadky vodičov zo 65 na 70 rokov, čím sa znižuje administratívna a finančná záťaž na seniorov. Okrem toho, preventívna prehliadka u všeobecného lekára môže nahradiť špecializovanú prehliadku, ak spĺňa zákonom stanovené kritériá. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, čo poskytuje dostatočný čas na adaptáciu všetkých dotknutých strán. Zákon reaguje na narastajúci počet nehôd a snaží sa zlepšiť bezpečnostné podmienky na chodníkoch, pričom zohľadňuje aj technologický pokrok v automobilovom priemysle.",
+        "affected_groups": [
+            "používatelia elektrických kolobežiek a bicyklov - budú musieť dodržiavať rýchlosť chôdze na chodníkoch",
+            "seniori nad 70 rokov - zníži sa frekvencia povinných lekárskych prehliadok",
+            "vodiči vo veku 65-70 rokov - budú mať menej administratívnych povinností",
+            "všeobecní lekári - budú môcť vykonávať prehliadky pre vodičov za určitých podmienok",
+            "chodci - zvýši sa ich bezpečnosť na chodníkoch"
+        ],
+        "positives": [
+            "Zvýšená bezpečnosť chodcov na chodníkoch vďaka obmedzeniu rýchlosti pre kolobežky a bicykle.",
+            "Zníženie administratívnej záťaže pre seniorov, ktorí už nebudú musieť tak často absolvovať lekárske prehliadky.",
+            "Možnosť nahradiť špecializovanú prehliadku všeobecnou prehliadkou, čo znižuje náklady a čas pre seniorov."
+        ],
+        "negatives": [
+            "Možné zvýšenie kontrol a sankcií pre používateľov kolobežiek a bicyklov, čo môže byť vnímané ako obmedzenie ich slobody pohybu.",
+            "Zmena môže vyžadovať dodatočné školenia pre všeobecných lekárov, aby mohli vykonávať prehliadky pre vodičov."
+        ],
+        "how_to_react": [
+            "Používatelia kolobežiek a bicyklov by mali začať dodržiavať novú rýchlosť chôdze na chodníkoch od 1. januára 2026.",
+            "Seniori nad 70 rokov by mali požiadať svojho všeobecného lekára o preventívnu prehliadku, ktorá môže nahradiť špecializovanú prehliadku.",
+            "Vodiči vo veku 65-70 rokov by mali sledovať zmeny v legislatíve a pripraviť sa na menej časté lekárske prehliadky.",
+            "Všeobecní lekári by mali zabezpečiť, že ich prehliadky spĺňajú kritériá stanovené zákonom pre vodičov.",
+            "Chodci by mali byť informovaní o zvýšenej bezpečnosti a dodržiavaní pravidiel zo strany používateľov kolobežiek a bicyklov."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

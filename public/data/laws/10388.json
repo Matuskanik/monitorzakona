@@ -1,0 +1,42 @@
+{
+    "id": 25,
+    "master_id": "10388",
+    "title": "Vládny návrh zákona o registri užívacích vzťahov k pozemkom a o zmene a doplnení niektorých zákonov",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10388",
+    "created_at": "2026-01-07 18:48:05",
+    "updated_at": "2026-01-07 18:48:05",
+    "summary": {
+        "tags": [
+            "poľnohospodárstvo",
+            "verejná správa",
+            "dane"
+        ],
+        "summary_paragraph": "Nový zákon o registri užívacích vzťahov k pozemkom zavádza komplexný systém evidencie užívacích vzťahov k poľnohospodárskej pôde. Tento register má za cieľ zjednodušiť a sprehľadniť procesy spojené s vyplácaním priamych podpôr, čím reaguje na potreby aplikačnej praxe a požiadavky Európskej komisie. Zákon stanovuje, že údaje o užívaní pozemkov budú mať prednosť pred inými registrami, čo môže výrazne ovplyvniť procesy pri žiadostiach o podporu. Register bude verejne prístupný a spravovaný Ministerstvom pôdohospodárstva, pričom údaje budú aktualizované z rôznych verejných informačných systémov. Zákon tiež zavádza povinnosť pre žiadateľov viesť elektronickú evidenciu pozemkov a nájomného, ktorú musia každoročne aktualizovať. Tento systém má začať fungovať od 1. januára 2028, pričom prvé zápisy do registra sa očakávajú od 1. apríla 2029.",
+        "affected_groups": [
+            "poľnohospodári - budú musieť viesť elektronickú evidenciu pozemkov a nájomného",
+            "advokáti - budú autorizovať návrhy na zápis do registra",
+            "okresné úrady - budú spravovať a aktualizovať údaje v registri",
+            "žiadatelia o priame podpory - musia byť zapísaní v registri, aby mohli získať podporu",
+            "ministerstvo pôdohospodárstva - bude zodpovedné za správu registra"
+        ],
+        "positives": [
+            "Zjednodušenie procesu žiadostí o priame podpory - register poskytne prehľadné a aktuálne údaje.",
+            "Zvýšenie transparentnosti - verejný prístup k údajom o užívaní pozemkov môže znížiť riziko podvodov.",
+            "Zníženie administratívnej záťaže - automatizácia procesu zápisu údajov do registra."
+        ],
+        "negatives": [
+            "Zvýšené náklady pre poľnohospodárov - povinnosť viesť elektronickú evidenciu môže byť finančne náročná.",
+            "Možné technické problémy - zavedenie nového informačného systému môže čeliť technickým výzvam a chybám."
+        ],
+        "how_to_react": [
+            "Poľnohospodári by mali začať pripravovať elektronickú evidenciu pozemkov a nájomného, aby boli pripravení na nové požiadavky od 1. januára 2028.",
+            "Advokáti by sa mali oboznámiť s novými povinnosťami týkajúcimi sa autorizácie návrhov na zápis do registra.",
+            "Žiadatelia o priame podpory by mali zabezpečiť, že sú zapísaní v registri užívacích vzťahov k pozemkom pred podaním žiadosti o podporu."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

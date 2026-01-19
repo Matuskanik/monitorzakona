@@ -1,0 +1,42 @@
+{
+    "id": 30,
+    "master_id": "10400",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 314/2018 Z. z. o Ústavnom súde Slovenskej republiky a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10400",
+    "created_at": "2026-01-07 18:50:45",
+    "updated_at": "2026-01-07 18:50:45",
+    "summary": {
+        "tags": [
+            "justícia",
+            "ústavný súd"
+        ],
+        "summary_paragraph": "Navrhovaný zákon prináša niekoľko významných zmien v organizácii a fungovaní Ústavného súdu Slovenskej republiky. Jednou z hlavných zmien je zrušenie povinnej obmeny všetkých senátov ústavného súdu každé tri roky, čo by malo prispieť k väčšej stabilite a kontinuitu v rozhodovaní. Táto zmena je dôležitá, pretože umožňuje sudcom lepšie sa sústrediť na riešenie zložitých ústavnoprávnych otázok bez nutnosti častých personálnych zmien. Ďalšou významnou úpravou je zrušenie požiadavky päťročnej praxe pre funkciu súdneho poradcu, čo otvára dvere talentovaným absolventom právnických fakúlt, ktorí môžu priniesť nové pohľady a energiu do rozhodovacieho procesu. Zákon tiež zavádza možnosť odmietnuť návrhy na začatie konania o súlade právnych predpisov ako zjavne neopodstatnené, čím sa zefektívňuje proces rozhodovania. Tieto zmeny nadobudnú účinnosť 1. decembra 2025, čo poskytuje dostatočný čas na prípravu a adaptáciu na nové pravidlá.",
+        "affected_groups": [
+            "sudcovia ústavného súdu - budú mať stabilnejšie pracovné prostredie bez častých zmien v senátoch",
+            "absolventi právnických fakúlt - získajú možnosť pracovať ako súdni poradcovia bez nutnosti päťročnej praxe",
+            "účastníci konania pred ústavným súdom - môžu očakávať rýchlejšie a efektívnejšie rozhodovanie",
+            "právni zástupcovia - budú menej zaťažení povinnosťou zastupovať v prípadoch, kde je možné poskytnúť právnu pomoc inak",
+            "verejnosť - môže očakávať zlepšenie kvality a rýchlosti rozhodnutí ústavného súdu"
+        ],
+        "positives": [
+            "Zvýšenie stability senátov ústavného súdu - prispieva k lepšiemu rozhodovaniu a kontinuitu v riešení prípadov.",
+            "Otvorenie pozícií súdnych poradcov pre absolventov - umožňuje prístup nových talentov a zvyšuje diverzitu odborných znalostí."
+        ],
+        "negatives": [
+            "Možné zvýšenie zaťaženia súdov - zrušenie povinnej obmeny senátov môže viesť k preťaženiu sudcov v prípade vysokého počtu prípadov.",
+            "Riziko nevyužitia skúseností - zrušenie päťročnej praxe môže viesť k nedostatku skúseností u nových súdnych poradcov."
+        ],
+        "how_to_react": [
+            "Sudcovia ústavného súdu by mali pripraviť interné školenia a workshopy na adaptáciu na nové pravidlá a zmeny v organizácii práce.",
+            "Absolventi právnických fakúlt by mali sledovať ponuky na pozície súdnych poradcov a pripraviť sa na výberové konania.",
+            "Účastníci konania by mali byť informovaní o možnosti rýchlejšieho rozhodovania a pripraviť sa na efektívnejšiu komunikáciu so súdom.",
+            "Právni zástupcovia by mali preskúmať možnosti spolupráce s Centrom právnej pomoci pre prípady, kde je to možné.",
+            "Verejnosť by mala sledovať zverejnené rozhodnutia ústavného súdu, aby bola informovaná o nových právnych názoroch a ich dôvodoch."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

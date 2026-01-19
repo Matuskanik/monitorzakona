@@ -1,0 +1,43 @@
+{
+    "id": 26,
+    "master_id": "10457",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 39/2007 Z. z. o veterinárnej starostlivosti v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10457",
+    "created_at": "2026-01-07 18:48:37",
+    "updated_at": "2026-01-07 18:48:37",
+    "summary": {
+        "tags": [
+            "zdravotníctvo",
+            "poľnohospodárstvo",
+            "verejná správa"
+        ],
+        "summary_paragraph": "Novela zákona o veterinárnej starostlivosti prináša významné zmeny v oblasti správy a evidencie hospodárskych zvierat a veterinárnych kontrol. Jednou z hlavných zmien je zavedenie centrálneho registra hospodárskych zvierat, ktorý bude obsahovať detailné údaje o vlastníkoch a držiteľoch zvierat, vrátane ich jedinečných registračných čísel. Tento systém má za cieľ zlepšiť sledovanie a kontrolu pohybu zvierat, čo je kľúčové pre prevenciu a kontrolu prenosných chorôb. Zákon tiež zavádza povinnosť pre vlastníkov hospodárskych zvierat registrovať svoje chovné zariadenia pred začatím chovu, čo má zabezpečiť lepšiu kontrolu nad podmienkami chovu a dodržiavaním veterinárnych predpisov. Novela tiež upravuje pravidlá pre vykonávanie úradných kontrol a zverejňovanie zoznamov schválených potravinárskych prevádzkarní, čím sa zvyšuje transparentnosť a bezpečnosť potravinového reťazca. Tieto zmeny nadobudnú účinnosť od januára 2026, pričom prechodné obdobie umožní dotknutým subjektom prispôsobiť sa novým požiadavkám.",
+        "affected_groups": [
+            "vlastníci hospodárskych zvierat - budú musieť registrovať svoje chovné zariadenia a dodržiavať nové evidenčné povinnosti",
+            "veterinárni lekári - budú mať povinnosť viesť záznamy o preventívnych činnostiach elektronicky",
+            "potravinárske prevádzkarne - musia byť pripravené na častejšie a dôkladnejšie úradné kontroly",
+            "regionálne veterinárne správy - zvýši sa ich zodpovednosť za kontrolu a evidenciu chovných zariadení",
+            "spotrebitelia - môžu očakávať vyššiu bezpečnosť potravín vďaka prísnejším kontrolám"
+        ],
+        "positives": [
+            "Zlepšenie sledovania a kontroly pohybu zvierat, čo pomôže v prevencii prenosných chorôb.",
+            "Zvýšená transparentnosť a bezpečnosť potravinového reťazca vďaka zverejňovaniu zoznamov schválených prevádzkarní."
+        ],
+        "negatives": [
+            "Zvýšené administratívne zaťaženie pre vlastníkov hospodárskych zvierat, ktorí musia dodržiavať nové registračné povinnosti.",
+            "Možné zvýšenie nákladov pre potravinárske prevádzkarne v dôsledku častejších kontrol a požiadaviek na dodržiavanie nových predpisov."
+        ],
+        "how_to_react": [
+            "Vlastníci hospodárskych zvierat by mali do konca roka 2025 požiadať o registráciu svojich chovných zariadení na príslušnom regionálnom úrade.",
+            "Veterinárni lekári by mali začať používať elektronické systémy na vedenie záznamov o preventívnych činnostiach a zákrokoch.",
+            "Potravinárske prevádzkarne by mali skontrolovať a aktualizovať svoje postupy, aby boli v súlade s novými kontrolnými požiadavkami.",
+            "Regionálne veterinárne správy by mali pripraviť školenia pre svojich zamestnancov na nové kontrolné postupy.",
+            "Spotrebitelia môžu sledovať zverejnené zoznamy schválených prevádzkarní na webových stránkach štátnej veterinárnej a potravinovej správy."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

@@ -1,0 +1,45 @@
+{
+    "id": 41,
+    "master_id": "10474",
+    "title": "Vládny návrh zákona, ktorým sa menia a dopĺňajú niektoré zákony v súvislosti s konsolidáciou verejných financií",
+    "approval_date": "10. 9. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10474",
+    "created_at": "2026-01-07 19:00:36",
+    "updated_at": "2026-01-07 19:00:36",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie",
+            "práca",
+            "dane",
+            "sociálna politika"
+        ],
+        "summary_paragraph": "Nový zákon, ktorý bol schválený Národnou radou Slovenskej republiky, prináša významné zmeny v oblasti konsolidácie verejných financií. Tento zákon sa dotýka viacerých oblastí, vrátane Zákonníka práce, banského zákona, zákona o štátnych sviatkoch, zákona o cestovných náhradách a zákona o sociálnom poistení. Jednou z hlavných zmien je úprava pracovného času, kde sa vypúšťa povinnosť zamestnávateľov určiť pracovný čas zamestnancov v určitých dňoch, čo môže ovplyvniť flexibilitu pracovného času. Ďalšou dôležitou zmenou je úprava úhrad za vydobyté nerasty a primárne suroviny, kde sa zavádza nová sadzba úhrady vo výške 1,35 eura za tonu. Tieto úpravy majú za cieľ zvýšiť príjmy štátneho rozpočtu a obcí. Zákon tiež zavádza nové pravidlá pre samostatne zárobkovo činné osoby, ktoré sa týkajú povinného nemocenského a dôchodkového poistenia. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, pričom niektoré prechodné ustanovenia začnú platiť už od 1. novembra 2025. Zákon má za cieľ zlepšiť efektivitu verejných financií a zabezpečiť lepšiu kontrolu nad výdavkami a príjmami štátu.",
+        "affected_groups": [
+            "Zamestnanci v súkromnom sektore - budú mať väčšiu flexibilitu v pracovnom čase, keďže zamestnávatelia nebudú musieť striktne určovať pracovný čas.",
+            "Banské spoločnosti - budú musieť platiť nové úhrady za vydobyté nerasty a primárne suroviny, čo môže zvýšiť ich náklady.",
+            "Samostatne zárobkovo činné osoby - budú podliehať novým pravidlám pre povinné poistenie, čo môže ovplyvniť ich finančné plánovanie.",
+            "Obce - získajú príjmy z úhrad za dobývacie priestory, čo môže prispieť k ich rozpočtom.",
+            "Zamestnanci vyslaní na prácu do zahraničia - môžu mať nárok na vyššie základné sadzby stravného, čo zlepší ich finančné podmienky počas pracovných ciest."
+        ],
+        "positives": [
+            "Zvýšenie príjmov štátneho rozpočtu a obcí - nové úhrady za vydobyté nerasty a primárne suroviny prinesú viac financií do verejných rozpočtov.",
+            "Flexibilita pracovného času - zamestnanci môžu mať väčšiu voľnosť v organizácii svojho pracovného času, čo môže zlepšiť ich pracovný a osobný život."
+        ],
+        "negatives": [
+            "Zvýšené náklady pre banské spoločnosti - nové úhrady môžu zvýšiť finančné zaťaženie týchto spoločností, čo môže ovplyvniť ich ziskovosť.",
+            "Komplikácie pre samostatne zárobkovo činné osoby - nové pravidlá pre povinné poistenie môžu byť administratívne náročné a vyžadovať viac času na ich dodržiavanie."
+        ],
+        "how_to_react": [
+            "Zamestnanci by mali konzultovať so svojimi zamestnávateľmi nové možnosti pracovného času a dohodnúť si flexibilné podmienky, ktoré im vyhovujú.",
+            "Banské spoločnosti by mali prehodnotiť svoje finančné plány a zabezpečiť dostatok prostriedkov na úhrady za vydobyté nerasty a primárne suroviny.",
+            "Samostatne zárobkovo činné osoby by mali skontrolovať svoje povinnosti voči Sociálnej poisťovni a zabezpečiť, aby ich poistenie bolo v súlade s novými pravidlami.",
+            "Obce by mali plánovať využitie nových príjmov z úhrad na rozvoj miestnej infraštruktúry a služieb pre obyvateľov.",
+            "Zamestnanci vyslaní na prácu do zahraničia by mali sledovať zmeny v sadzbách stravného a uistiť sa, že dostávajú správne kompenzácie."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

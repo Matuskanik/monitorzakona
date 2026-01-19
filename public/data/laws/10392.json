@@ -1,0 +1,41 @@
+{
+    "id": 24,
+    "master_id": "10392",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 504/2003 Z. z. o nájme poľnohospodárskych pozemkov, poľnohospodárskeho podniku a lesných pozemkov a o zmene niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10392",
+    "created_at": "2026-01-07 18:47:17",
+    "updated_at": "2026-01-07 18:47:17",
+    "summary": {
+        "tags": [
+            "poľnohospodárstvo",
+            "právo",
+            "nájomné vzťahy"
+        ],
+        "summary_paragraph": "Novela zákona č. 504/2003 Z. z. prináša významné zmeny v oblasti nájmu poľnohospodárskych pozemkov, ktoré majú za cieľ zjednodušiť a sprehľadniť právne vzťahy medzi nájomcami a vlastníkmi pôdy. Jednou z hlavných zmien je zavedenie povinnosti pre nájomné zmluvy obsahovať presné vymedzenie pozemku, vrátane názvu okresu, katastrálneho územia a parcelného čísla. Táto zmena má za cieľ predísť nejasnostiam a sporom týkajúcim sa predmetu nájmu. Ďalšou dôležitou úpravou je možnosť získania oprávnenia na užívanie pozemku po piatich rokoch nepretržitého užívania bez námietok zo strany vlastníka, čo môže motivovať užívateľov k dlhodobejšiemu plánovaniu a investíciám do pôdy. Zákon tiež stanovuje minimálne a maximálne trvanie nájomných zmlúv, čo má zabezpečiť stabilitu a predvídateľnosť pre všetky zúčastnené strany. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, pričom prechodné obdobia umožňujú prispôsobenie existujúcich zmlúv novým požiadavkám do konca roka 2030.",
+        "affected_groups": [
+            "poľnohospodári - budú musieť prispôsobiť svoje nájomné zmluvy novým požiadavkám na vymedzenie pozemkov",
+            "vlastníci poľnohospodárskej pôdy - môžu získať lepšiu kontrolu nad svojimi pozemkami vďaka presnejšiemu vymedzeniu nájomných vzťahov",
+            "nájomcovia bez písomných zmlúv - budú musieť do konca roka 2030 uzatvoriť písomné zmluvy alebo riskovať zánik nájomného vzťahu",
+            "mladí poľnohospodári - môžu získať prednostné právo na prenájom pozemkov, ak splnia určité podmienky",
+            "správcovia štátnych pozemkov - budú musieť zverejňovať informácie o pozemkoch dostupných na prenájom"
+        ],
+        "positives": [
+            "Zlepšenie právnej istoty - presné vymedzenie pozemkov v nájomných zmluvách znižuje riziko sporov a nejasností.",
+            "Podpora dlhodobého plánovania - možnosť získať oprávnenie na užívanie po piatich rokoch motivuje k dlhodobejším investíciám do pôdy."
+        ],
+        "negatives": [
+            "Administratívna záťaž - poľnohospodári a vlastníci budú musieť investovať čas a prostriedky do úpravy existujúcich zmlúv.",
+            "Riziko zániku nájomných vzťahov - nájomcovia bez písomných zmlúv môžu prísť o právo užívať pozemok, ak neuzatvoria zmluvu do konca roka 2030."
+        ],
+        "how_to_react": [
+            "Poľnohospodári by mali do konca roka 2030 uzatvoriť písomné nájomné zmluvy, aby sa vyhli zániku nájomného vzťahu.",
+            "Vlastníci pôdy by mali skontrolovať a aktualizovať svoje nájomné zmluvy podľa nových požiadaviek na vymedzenie pozemkov.",
+            "Mladí poľnohospodári by mali sledovať zverejnenia Slovenského pozemkového fondu o dostupných pozemkoch a pripraviť potrebné dokumenty na preukázanie oprávnenia na prenájom."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

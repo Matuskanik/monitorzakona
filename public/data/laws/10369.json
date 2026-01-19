@@ -1,0 +1,45 @@
+{
+    "id": 22,
+    "master_id": "10369",
+    "title": "Vládny návrh zákona o ochrane spotrebiteľa pri finančných službách na diaľku a o zmene a doplnení niektorých zákonov",
+    "approval_date": "13. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10369",
+    "created_at": "2026-01-07 18:45:57",
+    "updated_at": "2026-01-07 18:45:57",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie",
+            "spotrebitelia"
+        ],
+        "summary_paragraph": "Nový zákon o ochrane spotrebiteľa pri finančných službách na diaľku prináša významné zmeny v oblasti práv a povinností spotrebiteľov a obchodníkov pri uzatváraní zmlúv na diaľku. Tento zákon je dôležitý, pretože reaguje na rastúci trend poskytovania finančných služieb prostredníctvom online platforiem a iných prostriedkov diaľkovej komunikácie. Kľúčové zmeny zahŕňajú povinnosť obchodníkov poskytovať spotrebiteľom jasné a zrozumiteľné informácie pred uzavretím zmluvy, vrátane detailov o obchodníkovi, ponúkanej službe a možných rizikách. Spotrebitelia majú právo odstúpiť od zmluvy bez sankcií do 14 dní, pričom pre niektoré produkty, ako sú dôchodkové sporenia, je táto lehota predĺžená na 30 dní. Zákon tiež zakazuje obchodníkom používať manipulatívne praktiky v online rozhraniach, čím sa posilňuje ochrana spotrebiteľov pred neetickými obchodnými praktikami. Platnosť zákona začína 18. júna 2026, čo poskytuje obchodníkom čas na prispôsobenie sa novým požiadavkám.",
+        "affected_groups": [
+            "Spotrebitelia využívajúci online finančné služby - získajú lepšiu ochranu a možnosť odstúpiť od zmluvy bez sankcií.",
+            "Obchodníci poskytujúci finančné služby na diaľku - budú musieť dodržiavať nové informačné povinnosti a zabezpečiť transparentnosť svojich ponúk.",
+            "Dôchodcovia využívajúci doplnkové dôchodkové sporenie - budú mať predĺženú lehotu na odstúpenie od zmluvy na 30 dní.",
+            "Osoby so zdravotným postihnutím - budú mať právo na informácie v prístupnom formáte.",
+            "Poskytovatelia kryptoaktív - budú musieť dodržiavať nové pravidlá týkajúce sa informovania spotrebiteľov."
+        ],
+        "positives": [
+            "Zvýšená ochrana spotrebiteľov - zákon posilňuje práva spotrebiteľov pri uzatváraní zmlúv na diaľku, čo znižuje riziko podvodov.",
+            "Transparentnosť obchodných praktík - obchodníci sú povinní poskytovať jasné a zrozumiteľné informácie, čo zvyšuje dôveru spotrebiteľov.",
+            "Možnosť odstúpenia od zmluvy - spotrebitelia majú právo odstúpiť od zmluvy bez sankcií, čo im dáva väčšiu flexibilitu a ochranu."
+        ],
+        "negatives": [
+            "Zvýšené náklady pre obchodníkov - obchodníci môžu čeliť vyšším nákladom na splnenie nových informačných povinností.",
+            "Možné zneužitie práva na odstúpenie - niektorí spotrebitelia môžu zneužívať právo na odstúpenie, čo môže spôsobiť problémy obchodníkom.",
+            "Komplexnosť pre malé podniky - malé podniky môžu mať ťažkosti s implementáciou všetkých požiadaviek zákona."
+        ],
+        "how_to_react": [
+            "Spotrebitelia by mali pred uzavretím zmluvy na diaľku dôkladne preštudovať všetky poskytnuté informácie a uistiť sa, že rozumejú podmienkam.",
+            "Obchodníci by mali aktualizovať svoje obchodné praktiky a zabezpečiť, že všetky informácie sú poskytované v súlade s novým zákonom.",
+            "Spotrebitelia, ktorí chcú odstúpiť od zmluvy, by mali zaslať oznámenie o odstúpení v listinnej podobe alebo na trvanlivom médiu najneskôr v posledný deň lehoty.",
+            "Obchodníci by mali zabezpečiť, že ich online platformy neobsahujú manipulatívne prvky, ktoré by mohli zavádzať spotrebiteľov.",
+            "Spotrebitelia so zdravotným postihnutím by mali požiadať o informácie v prístupnom formáte, ak sú potrebné."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

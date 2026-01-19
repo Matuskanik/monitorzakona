@@ -1,0 +1,42 @@
+{
+    "id": 38,
+    "master_id": "10386",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 317/2012 Z. z. o inteligentných dopravných systémoch v cestnej doprave a o zmene a doplnení niektorých zákonov",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10386",
+    "created_at": "2026-01-07 18:58:44",
+    "updated_at": "2026-01-07 18:58:44",
+    "summary": {
+        "tags": [
+            "doprava",
+            "IT",
+            "verejná správa"
+        ],
+        "summary_paragraph": "Novela zákona č. 317/2012 Z. z. o inteligentných dopravných systémoch prináša významné zmeny v oblasti cestnej dopravy, ktoré sú zamerané na zlepšenie interoperability a efektívnosti dopravných systémov. Kľúčovou zmenou je zavedenie kooperatívnych inteligentných dopravných systémov, ktoré umožňujú výmenu zabezpečených správ medzi systémami bez predchádzajúcich poznatkov o sebe. Táto zmena je dôležitá pre zjednodušenie a zefektívnenie výmeny dopravných údajov medzi členskými štátmi EÚ a prevádzkovateľmi, čo môže viesť k lepšej bezpečnosti a dostupnosti dopravných informácií. Zákon tiež upravuje normy a technické špecifikácie, ktoré musia byť dodržiavané, čím sa zabezpečuje súlad s európskymi štandardmi. Novela nadobudne účinnosť 21. decembra 2025, čo poskytuje čas na prípravu a implementáciu potrebných zmien. Pre prevádzkovateľov dopravných služieb to znamená, že budú musieť prispôsobiť svoje systémy novým požiadavkám, čo môže zahŕňať aj zvýšené náklady na technické úpravy a zabezpečenie kompatibility s novými normami.",
+        "affected_groups": [
+            "prevádzkovatelia cestnej dopravy - budú musieť prispôsobiť svoje systémy novým technickým špecifikáciám",
+            "poskytovatelia dopravných informácií - získajú nové povinnosti v oblasti výmeny a sprístupňovania dopravných údajov",
+            "Národná diaľničná spoločnosť - bude musieť zabezpečiť interoperabilitu a efektívnosť dopravných systémov",
+            "vodiči nákladných vozidiel - môžu očakávať lepšie informácie o bezpečných parkovacích miestach",
+            "verejná správa - bude musieť zabezpečiť implementáciu a dohľad nad dodržiavaním nových noriem"
+        ],
+        "positives": [
+            "Zlepšenie bezpečnosti cestnej premávky - vďaka lepšej výmene dopravných údajov a informácií",
+            "Podpora digitalizácie dopravného sektora - zosúladenie s európskymi štandardmi a zlepšenie dostupnosti dopravných informácií",
+            "Zvýšenie efektívnosti dopravných systémov - vďaka interoperabilite a kooperatívnym systémom"
+        ],
+        "negatives": [
+            "Zvýšené náklady pre prevádzkovateľov - na prispôsobenie systémov novým technickým špecifikáciám",
+            "Negatívny vplyv na rozpočet verejnej správy - kvôli potrebným investíciám do infraštruktúry a systémov"
+        ],
+        "how_to_react": [
+            "Prevádzkovatelia dopravných služieb by mali začať s auditom svojich systémov, aby zistili, aké úpravy sú potrebné na splnenie nových technických špecifikácií.",
+            "Do 30 dní od nadobudnutia účinnosti zákona kontaktujte Národnú diaľničnú spoločnosť pre získanie podrobných informácií o nových požiadavkách a možnostiach podpory.",
+            "Zabezpečte školenie pre zamestnancov, ktorí budú pracovať s novými systémami a technológiami, aby boli pripravení na zmeny v praxi."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

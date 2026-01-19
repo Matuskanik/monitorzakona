@@ -163,9 +163,11 @@
         }
 
         function escapeHtml(text) {
-            if (!text) return '';
+            if (text == null) return '';
+            // Ensure we have a string
+            const str = typeof text === 'string' ? text : String(text);
             const div = document.createElement('div');
-            div.textContent = text;
+            div.textContent = str;
             return div.innerHTML;
         }
 
@@ -175,7 +177,21 @@
         }
 
         function renderLaw(law) {
+            // Ensure summary is properly structured
             const summary = law.summary || {};
+            
+            // Ensure arrays are arrays (defensive programming)
+            if (summary.how_to_react && !Array.isArray(summary.how_to_react)) {
+                console.warn('how_to_react is not an array:', summary.how_to_react);
+                summary.how_to_react = [];
+            }
+            if (summary.positives && !Array.isArray(summary.positives)) {
+                summary.positives = [];
+            }
+            if (summary.negatives && !Array.isArray(summary.negatives)) {
+                summary.negatives = [];
+            }
+            
             const tags = summary.tags || [];
             const attachments = law.attachments || [];
 
@@ -261,13 +277,25 @@
                             ${summary.positives.map(positive => {
                                 if (typeof positive === 'string') {
                                     return `<li class="positive-item">${escapeHtml(positive)}</li>`;
-                                } else if (positive && typeof positive === 'object') {
+                                } else if (positive && typeof positive === 'object' && !Array.isArray(positive)) {
                                     const positiveText = positive.positive || positive.name || '';
                                     const explanationText = positive.explanation || positive.impact || '';
-                                    return `<li class="positive-item"><strong>${escapeHtml(positiveText)}</strong>${explanationText ? ': ' + escapeHtml(explanationText) : ''}</li>`;
+                                    if (positiveText && explanationText) {
+                                        return `<li class="positive-item"><strong>${escapeHtml(String(positiveText))}</strong>: ${escapeHtml(String(explanationText))}</li>`;
+                                    } else if (positiveText) {
+                                        return `<li class="positive-item">${escapeHtml(String(positiveText))}</li>`;
+                                    } else {
+                                        const objValues = Object.values(positive).filter(v => typeof v === 'string' && v.trim() !== '');
+                                        if (objValues.length > 0) {
+                                            return `<li class="positive-item">${escapeHtml(objValues.join(': '))}</li>`;
+                                        }
+                                        return `<li class="positive-item">${escapeHtml(JSON.stringify(positive, null, 2))}</li>`;
+                                    }
+                                } else if (positive !== null && positive !== undefined) {
+                                    return `<li class="positive-item">${escapeHtml(String(positive))}</li>`;
                                 }
-                                return `<li class="positive-item">${escapeHtml(String(positive))}</li>`;
-                            }).join('')}
+                                return '';
+                            }).filter(html => html !== '').join('')}
                         </ul>
                     </div>
                 </div>
@@ -281,13 +309,25 @@
                             ${summary.negatives.map(negative => {
                                 if (typeof negative === 'string') {
                                     return `<li class="negative-item">${escapeHtml(negative)}</li>`;
-                                } else if (negative && typeof negative === 'object') {
+                                } else if (negative && typeof negative === 'object' && !Array.isArray(negative)) {
                                     const negativeText = negative.negative || negative.name || '';
                                     const explanationText = negative.explanation || negative.impact || '';
-                                    return `<li class="negative-item"><strong>${escapeHtml(negativeText)}</strong>${explanationText ? ': ' + escapeHtml(explanationText) : ''}</li>`;
+                                    if (negativeText && explanationText) {
+                                        return `<li class="negative-item"><strong>${escapeHtml(String(negativeText))}</strong>: ${escapeHtml(String(explanationText))}</li>`;
+                                    } else if (negativeText) {
+                                        return `<li class="negative-item">${escapeHtml(String(negativeText))}</li>`;
+                                    } else {
+                                        const objValues = Object.values(negative).filter(v => typeof v === 'string' && v.trim() !== '');
+                                        if (objValues.length > 0) {
+                                            return `<li class="negative-item">${escapeHtml(objValues.join(': '))}</li>`;
+                                        }
+                                        return `<li class="negative-item">${escapeHtml(JSON.stringify(negative, null, 2))}</li>`;
+                                    }
+                                } else if (negative !== null && negative !== undefined) {
+                                    return `<li class="negative-item">${escapeHtml(String(negative))}</li>`;
                                 }
-                                return `<li class="negative-item">${escapeHtml(String(negative))}</li>`;
-                            }).join('')}
+                                return '';
+                            }).filter(html => html !== '').join('')}
                         </ul>
                     </div>
                 </div>
@@ -298,7 +338,32 @@
                     <div class="section-title">Ako reagovať</div>
                     <div class="section-content">
                         <ul>
-                            ${summary.how_to_react.map(reaction => `<li>${escapeHtml(reaction)}</li>`).join('')}
+                            ${summary.how_to_react.map(reaction => {
+                                // Handle string (normalized data)
+                                if (typeof reaction === 'string') {
+                                    return '<li>' + escapeHtml(reaction) + '</li>';
+                                }
+                                // Handle object with advice/details (Cloudflare data)
+                                if (reaction && typeof reaction === 'object') {
+                                    const advice = reaction.advice || reaction.reaction || reaction.text || '';
+                                    const details = reaction.details || reaction.explanation || '';
+                                    if (advice && details) {
+                                        return '<li><strong>' + escapeHtml(advice) + '</strong>: ' + escapeHtml(details) + '</li>';
+                                    }
+                                    if (advice) {
+                                        return '<li>' + escapeHtml(advice) + '</li>';
+                                    }
+                                    if (details) {
+                                        return '<li>' + escapeHtml(details) + '</li>';
+                                    }
+                                    // Fallback: get all string values from object
+                                    const values = Object.values(reaction).filter(v => typeof v === 'string' && v.trim());
+                                    if (values.length > 0) {
+                                        return '<li>' + escapeHtml(values.join(': ')) + '</li>';
+                                    }
+                                }
+                                return '';
+                            }).filter(h => h).join('')}
                         </ul>
                     </div>
                 </div>
@@ -334,16 +399,49 @@
                     return;
                 }
 
-                // Try absolute path first, then relative
-                let response = await fetch(`/data/laws/${encodeURIComponent(masterId)}.json`);
-                if (!response.ok) {
-                    response = await fetch(`data/laws/${encodeURIComponent(masterId)}.json`);
+                // Try multiple paths for Cloudflare Pages compatibility
+                // Add cache-busting timestamp to prevent Cloudflare Pages cache issues
+                const cacheBuster = '?v=' + Date.now();
+                let response = null;
+                const paths = [
+                    `/data/laws/${encodeURIComponent(masterId)}.json${cacheBuster}`,
+                    `data/laws/${encodeURIComponent(masterId)}.json${cacheBuster}`,
+                    `./data/laws/${encodeURIComponent(masterId)}.json${cacheBuster}`,
+                    `/data/laws/${encodeURIComponent(masterId)}.json`,
+                    `data/laws/${encodeURIComponent(masterId)}.json`,
+                    `./data/laws/${encodeURIComponent(masterId)}.json`
+                ];
+                
+                let lastError = null;
+                for (const path of paths) {
+                    try {
+                        response = await fetch(path, {
+                            cache: 'no-cache',
+                            headers: {
+                                'Cache-Control': 'no-cache'
+                            }
+                        });
+                        if (response.ok) {
+                            break;
+                        }
+                    } catch (e) {
+                        lastError = e;
+                        console.warn(`Failed to fetch from ${path}:`, e);
+                    }
                 }
-                if (!response.ok) {
-                    throw new Error('Law not found');
+                
+                if (!response || !response.ok) {
+                    const errorMsg = lastError ? lastError.message : `HTTP ${response?.status || 'unknown'}`;
+                    throw new Error(`Law not found (master_id: ${masterId}): ${errorMsg}`);
                 }
                 
                 const law = await response.json();
+                
+                // Validate that we got valid data
+                if (!law || !law.summary) {
+                    throw new Error('Invalid law data structure');
+                }
+                
                 renderLaw(law);
             } catch (error) {
                 console.error('Error loading law:', error);

@@ -1,0 +1,41 @@
+{
+    "id": 43,
+    "master_id": "10268",
+    "title": "Návrh skupiny poslancov Narodnej rady Slovenskej republiky na vydanie zákona, ktorým sa mení a dopĺňa zákon č. 279/2024 Z. z. o dani z finančných transakcií a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "15. 4. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10268",
+    "created_at": "2026-01-07 19:02:07",
+    "updated_at": "2026-01-07 19:02:07",
+    "summary": {
+        "tags": [
+            "ekonomika",
+            "financie",
+            "podnikanie"
+        ],
+        "summary_paragraph": "Navrhovaný zákon prináša významné zmeny v oblasti zdaňovania finančných transakcií na Slovensku. Hlavným cieľom je znížiť administratívne a finančné zaťaženie pre malé podnikateľské subjekty, konkrétne fyzické osoby – podnikateľov a právnické osoby s ročnými príjmami do 100 000 eur. Tieto subjekty budú vyňaté z povinnosti platiť daň z finančných transakcií, čo má za cieľ podporiť ich ekonomickú stabilitu a znížiť riziko ukončenia podnikania z dôvodu nadmerného daňového zaťaženia. Zákon tiež zavádza mechanizmus preverovania výšky príjmov prostredníctvom predloženia dokladov, čím sa zabezpečuje transparentnosť a spravodlivosť v uplatňovaní daňových povinností. Účinnosť zákona je plánovaná na 15. októbra 2025, čo poskytuje dostatočný čas na prípravu dotknutých subjektov na nové pravidlá. Zmeny sú reakciou na pripomienky podnikateľskej verejnosti a majú za cieľ zlepšiť podnikateľské prostredie na Slovensku.",
+        "affected_groups": [
+            "Fyzické osoby – podnikatelia: Budú vyňaté z povinnosti platiť daň z finančných transakcií, čo zníži ich administratívne a finančné zaťaženie.",
+            "Právnické osoby s príjmami do 100 000 eur: Nebudú musieť platiť daň z finančných transakcií, čo im umožní lepšie sa sústrediť na rast a rozvoj.",
+            "Organizačné zložky zahraničných osôb s nízkymi príjmami: Budú oslobodené od dane, čo zníži ich regulačné zaťaženie.",
+            "Platitelia dane: Budú musieť overovať výšku príjmov daňovníkov, čo môže zvýšiť ich administratívnu záťaž.",
+            "Podnikateľská verejnosť: Celkovo môže očakávať zlepšenie podnikateľského prostredia a zníženie bariér pre vstup do podnikania."
+        ],
+        "positives": [
+            "Zníženie administratívneho zaťaženia pre malé podniky: Malé podniky budú oslobodené od povinnosti platiť daň z finančných transakcií, čo im umožní sústrediť sa na rast a rozvoj.",
+            "Podpora podnikateľského prostredia: Zákon znižuje bariéry pre vstup do podnikania, čo môže stimulovať ekonomickú aktivitu a podporiť nové podnikateľské iniciatívy."
+        ],
+        "negatives": [
+            "Negatívny vplyv na rozpočet verejnej správy: Odhaduje sa výpadok príjmov vo výške 35 až 50 miliónov eur ročne, čo môže ovplyvniť financovanie verejných služieb.",
+            "Zvýšená administratívna záťaž pre platiteľov dane: Platitelia budú musieť overovať príjmy daňovníkov, čo môže zvýšiť ich pracovné zaťaženie."
+        ],
+        "how_to_react": [
+            "Podnikatelia by mali do 15. októbra 2025 skontrolovať, či ich príjmy neprevyšujú 100 000 eur, aby zistili, či budú oslobodení od dane.",
+            "Právnické osoby by mali pripraviť potrebné doklady na preukázanie výšky príjmov a predložiť ich platiteľovi dane do jedného mesiaca od podania daňového priznania.",
+            "Platitelia dane by mali aktualizovať svoje procesy na overovanie príjmov daňovníkov a zabezpečiť, že majú všetky potrebné informácie na správne uplatňovanie nových pravidiel."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

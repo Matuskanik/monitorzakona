@@ -1,0 +1,41 @@
+{
+    "id": 42,
+    "master_id": "10397",
+    "title": "Vládny návrh zákona, ktorým sa mení zákon č. 325/2022 Z. z., ktorým sa mení a dopĺňa zákon č. 305/2013 Z. z. o elektronickej podobe výkonu pôsobnosti orgánov verejnej moci a o zmene a doplnení niektorých zákonov (zákon o e-Governmente) v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony v znení neskorších predpisov",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10397",
+    "created_at": "2026-01-07 19:01:13",
+    "updated_at": "2026-01-07 19:01:13",
+    "summary": {
+        "tags": [
+            "verejná správa",
+            "IT",
+            "legislatíva"
+        ],
+        "summary_paragraph": "Novela zákona o e-Governmente, ktorú predložila vláda Slovenskej republiky, posúva účinnosť niektorých ustanovení týkajúcich sa zaručenej konverzie z 1. októbra 2025 na 1. januára 2027. Zaručená konverzia je kľúčovým prvkom elektronickej verejnej správy, pretože umožňuje nahradiť listinné dokumenty ich elektronickými ekvivalentmi v právne záväznej forme. Tento posun je nevyhnutný kvôli nedostatočnému času na prípravu a testovanie nových technických riešení, ktoré sú potrebné na zabezpečenie spoľahlivosti a bezpečnosti týchto služieb. Ak by sa termín neposunul, mohlo by to viesť k zdržaniam alebo znemožneniu doručovania právne významných úkonov, čo by narušilo právnu istotu. Novela sa dotýka najmä advokátov, daňových poradcov, exekútorov a notárov, ktorí sú na elektronickú komunikáciu odkázaní zo zákona. Posunutie termínu poskytne dostatok času na implementáciu nových technických riešení a zabezpečí, že služby zaručenej konverzie budú plne funkčné a v súlade s právnymi požiadavkami.",
+        "affected_groups": [
+            "Advokáti - budú mať viac času na prispôsobenie sa novým technickým riešeniam zaručenej konverzie.",
+            "Daňoví poradcovia - posun účinnosti im umožní pokračovať v používaní existujúcich systémov bez prerušenia.",
+            "Exekútori - získajú čas na prípravu a testovanie nových systémov, čo zníži riziko právnych komplikácií.",
+            "Notári - hoci využívajú vlastný systém, posun účinnosti môže ovplyvniť ich interakciu s inými subjektmi.",
+            "Orgány verejnej moci - budú mať viac času na adaptáciu svojich procesov na nové technické požiadavky."
+        ],
+        "positives": [
+            "Poskytnutie dodatočného času na implementáciu technických riešení zaručenej konverzie zvyšuje pravdepodobnosť, že nové systémy budú spoľahlivé a bezpečné.",
+            "Zníženie rizika právnych komplikácií a zdržaní v doručovaní právne významných úkonov medzi verejnou správou a fyzickými či právnickými osobami."
+        ],
+        "negatives": [
+            "Posunutie účinnosti môže oddialiť plánované zlepšenia v oblasti zaručenej konverzie, čo môže byť nevýhodné pre subjekty, ktoré očakávali rýchlejšie zjednodušenie procesov.",
+            "Prechodné obdobie môže spôsobiť zmätok medzi subjektmi, ktoré sa pripravovali na pôvodný termín účinnosti, čo môže vyžadovať dodatočné školenia a úpravy."
+        ],
+        "how_to_react": [
+            "Advokáti a daňoví poradcovia by mali využiť dodatočný čas na školenia a testovanie nových systémov zaručenej konverzie, aby boli pripravení na zmenu k 1. januáru 2027.",
+            "Orgány verejnej moci by mali aktualizovať svoje interné procesy a zabezpečiť, že všetky technické a právne požiadavky budú splnené do nového termínu účinnosti.",
+            "Podnikatelia by mali sledovať aktualizácie a odporúčania Ministerstva investícií, regionálneho rozvoja a informatizácie SR, aby sa uistili, že ich systémy sú kompatibilné s novými požiadavkami."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

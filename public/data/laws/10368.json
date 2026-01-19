@@ -1,0 +1,41 @@
+{
+    "id": 35,
+    "master_id": "10368",
+    "title": "Návrh poslancov Národnej rady Slovenskej republiky Michala BARTEKA, Róberta PUCIHO a Igora ŠIMKA na vydanie zákona, ktorým sa mení a dopĺňa zákon č. 8/2009 Z. z. o cestnej premávke a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
+    "approval_date": "13. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10368",
+    "created_at": "2026-01-07 18:57:06",
+    "updated_at": "2026-01-07 18:57:06",
+    "summary": {
+        "tags": [
+            "doprava",
+            "bezpečnosť"
+        ],
+        "summary_paragraph": "Navrhovaný zákon prináša možnosť dobrovoľného zavedenia predného brzdového svetla (PBS) zelenej farby na motorových vozidlách kategórie M (osobné vozidlá) a N (nákladné vozidlá) v Slovenskej republike. Tento prvok aktívnej bezpečnosti má za cieľ zlepšiť informovanosť ostatných účastníkov cestnej premávky o spomaľovaní vozidla, čím sa očakáva zníženie počtu dopravných nehôd a zvýšenie bezpečnosti na cestách. Zákon nadobudne účinnosť 1. januára 2026, čo poskytne dostatok času na prípravu výrobcov a montážnych pracovísk. Výskumy ukazujú, že zavedenie PBS môže výrazne zlepšiť vnímanie bezpečnosti, najmä pri križovatkách a priechodoch pre chodcov. Zákon neukladá povinnosť montáže PBS, čím sa minimalizuje regulačná záťaž pre občanov a podnikateľov. Technické špecifikácie PBS budú stanovené ministerstvom dopravy, pričom sa očakáva, že zelená farba svetla bude jasne odlíšená od iných signalizačných zariadení.",
+        "affected_groups": [
+            "vodiči osobných a nákladných vozidiel - môžu dobrovoľne vybaviť svoje vozidlá PBS, čo môže zvýšiť ich bezpečnosť",
+            "výrobcovia automobilových svetelných komponentov - získajú novú trhovú príležitosť na výrobu a predaj PBS",
+            "stanice technickej kontroly (STK) - budú musieť kontrolovať správnu funkciu a schválenie PBS, ak je nainštalované",
+            "chodci a cyklisti - môžu profitovať z lepšej viditeľnosti a predvídateľnosti vozidiel vybavených PBS",
+            "dovozcovia a distribútori automobilových dielov - môžu rozšíriť svoje portfólio o nové produkty"
+        ],
+        "positives": [
+            "Zvýšenie bezpečnosti cestnej premávky - PBS poskytuje včasnú informáciu o spomaľovaní vozidla, čo môže znížiť počet nehôd.",
+            "Dobrovoľnosť zavedenia - vodiči nie sú nútení vybaviť svoje vozidlá PBS, čo znižuje finančnú záťaž.",
+            "Nové trhové príležitosti - výrobcovia a distribútori môžu profitovať z predaja a montáže PBS."
+        ],
+        "negatives": [
+            "Možné zmätky v signalizácii - ak PBS nebude správne rozpoznané ostatnými účastníkmi premávky, môže to viesť k nedorozumeniam.",
+            "Náklady na montáž - aj keď je PBS dobrovoľné, vodiči, ktorí sa rozhodnú pre montáž, budú musieť znášať náklady."
+        ],
+        "how_to_react": [
+            "Ak ste vodič a zvažujete montáž PBS, kontaktujte autorizovaný servis, ktorý zabezpečí správnu inštaláciu a homologizáciu.",
+            "Výrobcovia a dovozcovia by mali začať s prípravou na výrobu a distribúciu PBS, aby boli pripravení na dopyt po 1. januári 2026.",
+            "Stanice technickej kontroly by mali aktualizovať svoje metodiky na kontrolu PBS, aby zabezpečili súlad s novými predpismi."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

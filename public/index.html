@@ -197,7 +197,7 @@
     </div>
 
     <script>
-        // Tag color mapping (same as PHP version)
+        // Fixed tag color mapping - consistent colors for each tag (same as law.html)
         const tagColors = {
             'financie': '#e74c3c',
             'školstvo': '#3498db',
@@ -208,12 +208,33 @@
             'doprava': '#34495e',
             'životné prostredie': '#16a085',
             'sociálne zabezpečenie': '#e67e22',
-            'občianske práva': '#c0392b'
+            'občianske práva': '#c0392b',
+            'justícia': '#8e44ad',
+            'sociálna politika': '#e67e22',
+            'ekonomika': '#e74c3c',
+            'šport': '#1abc9c',
+            'kultúra': '#9b59b6',
+            'energetika': '#f39c12',
+            'obrana': '#c0392b',
+            'verejná správa': '#7f8c8d',
+            'medicína': '#2ecc71',
+            'vzdelávanie': '#3498db'
         };
 
         function getTagColor(tag) {
-            const tagLower = tag.toLowerCase();
-            return tagColors[tagLower] || '#' + Math.floor(Math.random()*16777215).toString(16);
+            const tagLower = tag.toLowerCase().trim();
+            // Try exact match first
+            if (tagColors[tagLower]) {
+                return tagColors[tagLower];
+            }
+            // Try partial match
+            for (const [key, color] of Object.entries(tagColors)) {
+                if (tagLower.includes(key) || key.includes(tagLower)) {
+                    return color;
+                }
+            }
+            // Default color for unknown tags
+            return '#95a5a6';
         }
 
         function formatDate(dateString) {
@@ -319,16 +340,64 @@
         // Load laws from JSON
         async function loadLaws() {
             try {
-                // Try absolute path first, then relative
-                let response = await fetch('/data/index.json');
-                if (!response.ok) {
-                    // Fallback to relative path
-                    response = await fetch('data/index.json');
+                // Try multiple paths for Cloudflare Pages compatibility
+                let response = null;
+                const paths = [
+                    '/data/index.json',
+                    'data/index.json',
+                    './data/index.json'
+                ];
+                
+                // Add cache-busting to prevent Cloudflare Pages cache issues
+                const cacheBuster = '?v=' + Date.now();
+                let lastError = null;
+                for (const path of paths) {
+                    try {
+                        response = await fetch(path + cacheBuster, {
+                            cache: 'no-cache',
+                            headers: {
+                                'Cache-Control': 'no-cache'
+                            }
+                        });
+                        if (response.ok) {
+                            break;
+                        }
+                    } catch (e) {
+                        lastError = e;
+                        console.warn(`Failed to fetch from ${path}:`, e);
+                    }
                 }
-                if (!response.ok) {
-                    throw new Error('Failed to load laws: ' + response.status + ' ' + response.statusText);
+                
+                // Try without cache buster if first attempt failed
+                if (!response || !response.ok) {
+                    for (const path of paths) {
+                        try {
+                            response = await fetch(path, {
+                                cache: 'no-cache',
+                                headers: {
+                                    'Cache-Control': 'no-cache'
+                                }
+                            });
+                            if (response.ok) {
+                                break;
+                            }
+                        } catch (e) {
+                            lastError = e;
+                        }
+                    }
                 }
+                
+                if (!response || !response.ok) {
+                    const errorMsg = lastError ? lastError.message : (response ? response.status + ' ' + response.statusText : 'No response');
+                    throw new Error('Failed to load laws: ' + errorMsg);
+                }
+                
                 const laws = await response.json();
+                
+                // Validate that we got valid data
+                if (!Array.isArray(laws)) {
+                    throw new Error('Invalid laws data structure - expected array');
+                }
                 
                 // Get search query from URL
                 const urlParams = new URLSearchParams(window.location.search);

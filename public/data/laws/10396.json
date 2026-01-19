@@ -1,0 +1,43 @@
+{
+    "id": 36,
+    "master_id": "10396",
+    "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 153/2013 Z. z. o národnom zdravotníckom informačnom systéme a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
+    "approval_date": "22. 8. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10396",
+    "created_at": "2026-01-07 18:57:40",
+    "updated_at": "2026-01-07 18:57:40",
+    "summary": {
+        "tags": [
+            "zdravotníctvo",
+            "IT",
+            "verejná správa"
+        ],
+        "summary_paragraph": "Novela zákona č. 153/2013 Z. z. o národnom zdravotníckom informačnom systéme prináša významné zmeny v oblasti správy zdravotníckych údajov a ich využitia. Jednou z hlavných zmien je rozšírenie funkcionality informačných systémov, ktoré teraz zahŕňajú aj integráciu prístrojov s certifikátom kvality na získavanie kvalitatívnych a kvantitatívnych ukazovateľov zdravotného stavu. Táto zmena umožní lepšiu analýzu a využitie zdravotných údajov na klinické a vedecké účely, ako aj na tvorbu zdravotných politík. Zavedenie elektronickej tehotenskej knižky ako súčasti elektronickej zdravotnej knižky je ďalším krokom k digitalizácii zdravotníctva, čo môže zjednodušiť prístup k dôležitým informáciám pre tehotné ženy a ich poskytovateľov zdravotnej starostlivosti. Novela tiež upravuje poskytovanie dôverných štatistických údajov rôznym inštitúciám, čím sa zvyšuje transparentnosť a efektivita v oblasti zdravotnej politiky. Tieto zmeny nadobudnú platnosť v priebehu roka 2025, pričom prechodné obdobia umožnia adaptáciu na nové požiadavky.",
+        "affected_groups": [
+            "poskytovatelia zdravotnej starostlivosti - budú musieť integrovať nové systémy a postupy na spracovanie údajov",
+            "tehotné ženy - získajú prístup k elektronickej tehotenskej knižke, čo zjednoduší sledovanie ich zdravotného stavu",
+            "ministerstvo zdravotníctva - bude mať prístup k rozšíreným štatistickým údajom na tvorbu zdravotných politík",
+            "výskumníci v oblasti zdravotníctva - budú mať lepší prístup k údajom pre klinické a vedecké účely",
+            "sociálna poisťovňa - získa údaje potrebné na posúdenie nárokov na tehotenské a materské dávky"
+        ],
+        "positives": [
+            "zlepšenie kvality zdravotnej starostlivosti - integrácia certifikovaných prístrojov umožní presnejšie sledovanie zdravotného stavu pacientov",
+            "efektívnejšia tvorba zdravotných politík - rozšírený prístup k štatistickým údajom umožní lepšie rozhodovanie na úrovni verejnej správy"
+        ],
+        "negatives": [
+            "náklady na implementáciu - poskytovatelia zdravotnej starostlivosti môžu čeliť zvýšeným nákladom na integráciu nových systémov",
+            "riziko zneužitia údajov - rozšírený prístup k zdravotným údajom môže zvýšiť riziko ich neoprávneného použitia"
+        ],
+        "how_to_react": [
+            "Poskytovatelia zdravotnej starostlivosti by mali začať s plánovaním integrácie nových systémov a školením personálu, aby boli pripravení na zmeny.",
+            "Tehotné ženy by sa mali informovať o dostupnosti elektronickej tehotenskej knižky u svojho poskytovateľa zdravotnej starostlivosti a zistiť, ako ju môžu využívať.",
+            "Ministerstvo zdravotníctva by malo pripraviť interné procesy na efektívne využitie rozšírených štatistických údajov pre tvorbu zdravotných politík.",
+            "Výskumníci by mali sledovať aktualizácie v prístupe k zdravotným údajom a pripraviť sa na nové možnosti v oblasti klinického výskumu.",
+            "Sociálna poisťovňa by mala aktualizovať svoje systémy na spracovanie nových údajov potrebných pre posudzovanie nárokov na dávky."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}

@@ -1,0 +1,44 @@
+{
+    "id": 40,
+    "master_id": "10480",
+    "title": "Vládny návrh zákona o adresnej energopomoci a o zmene a doplnení niektorých zákonov",
+    "approval_date": "19. 9. 2025",
+    "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10480",
+    "created_at": "2026-01-07 18:59:43",
+    "updated_at": "2026-01-07 18:59:43",
+    "summary": {
+        "tags": [
+            "energetika",
+            "sociálna politika",
+            "verejná správa"
+        ],
+        "summary_paragraph": "Zákon o adresnej energopomoci zavádza systém cielených finančných príspevkov pre domácnosti na pokrytie časti nákladov na elektrinu, plyn a teplo. Tento zákon je dôležitý, pretože reaguje na rastúce náklady na energie a snaží sa zmierniť finančný tlak na domácnosti s nižšími príjmami. Kľúčovým aspektom je, že pomoc je adresná, čo znamená, že je určená konkrétnym domácnostiam, ktoré spĺňajú stanovené kritériá, ako je bonita domácnosti. Právo na energopomoc vzniká automaticky, ak domácnosť spĺňa podmienky, a je poskytované vo forme znížených cien alebo energopoukážok. Zákon tiež ustanovuje povinnosti pre dodávateľov energií a štátne orgány, ktoré musia spolupracovať pri poskytovaní údajov a zabezpečení pomoci. Ministerstvo hospodárstva zohráva kľúčovú úlohu v správe registra odberných miest a v posudzovaní nároku na pomoc. Tento zákon nadobúda platnosť od 1. januára príslušného kalendárneho roka, ak nie je stanovené inak, a obsahuje mechanizmy na prehodnocovanie nároku na pomoc, čím zabezpečuje, že pomoc je poskytovaná len tým, ktorí ju skutočne potrebujú.",
+        "affected_groups": [
+            "Domácnosti s nízkymi príjmami - získajú finančnú pomoc na úhradu nákladov na energie.",
+            "Dodávatelia elektriny a plynu - musia uplatňovať regulované ceny a spolupracovať s ministerstvom hospodárstva.",
+            "Správcovia bytových domov - môžu byť príjemcami pomoci na úhradu spoločných nákladov na energie.",
+            "Ministerstvo hospodárstva - zodpovedné za správu registra a posudzovanie nárokov na pomoc.",
+            "Koncoví odberatelia tepla - môžu získať znížené ceny za dodávky tepla."
+        ],
+        "positives": [
+            "Zníženie finančného zaťaženia pre domácnosti s nízkymi príjmami, čo môže zlepšiť ich životnú úroveň.",
+            "Podpora energetickej bezpečnosti tým, že domácnosti budú schopné pokryť svoje základné energetické potreby.",
+            "Zvýšená transparentnosť a efektivita v poskytovaní pomoci vďaka automatizovanému systému posudzovania nárokov."
+        ],
+        "negatives": [
+            "Administratívna náročnosť pre dodávateľov energií, ktorí musia viesť podrobnú evidenciu a spolupracovať s ministerstvom.",
+            "Možné riziko nesprávneho posúdenia nároku na pomoc, čo môže viesť k nespravodlivému vylúčeniu niektorých domácností."
+        ],
+        "how_to_react": [
+            "Ak ste domácnosť s nízkymi príjmami, skontrolujte, či spĺňate podmienky na adresnú energopomoc. Informácie nájdete na webovej stránke ministerstva hospodárstva.",
+            "Dodávatelia energií by mali aktualizovať svoje informačné systémy, aby mohli správne uplatňovať regulované ceny a evidovať odberné miesta.",
+            "Ak vám nebola poskytnutá energopomoc, podajte námietku do 60 dní od doručenia oznámenia. Formulár nájdete na webovej stránke ministerstva hospodárstva.",
+            "Domácnosti by mali sledovať oznámenia od ministerstva hospodárstva, ktoré informujú o vzniku práva na pomoc a ďalších podrobnostiach.",
+            "Správcovia bytových domov by mali zabezpečiť, aby boli všetky potrebné údaje o odberných miestach aktuálne a v súlade s registrom adries."
+        ],
+        "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
+    },
+    "attachments": [],
+    "processing_status": "completed",
+    "text_extracted": true
+}
