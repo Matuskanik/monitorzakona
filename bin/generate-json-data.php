@@ -21,7 +21,7 @@ try {
 $db = new Database(Config::get('DB_PATH'));
 $pdo = $db->getPdo();
 
-// Get 20 latest laws (chronologically from newest)
+// Get all processed laws (with ai_summary) chronologically from newest
 $stmt = $pdo->query("
     SELECT l.*, 
            GROUP_CONCAT(
@@ -33,6 +33,7 @@ $stmt = $pdo->query("
            ) as attachments_json
     FROM laws l
     LEFT JOIN attachments a ON a.law_id = l.id
+    WHERE l.ai_summary IS NOT NULL AND l.ai_summary != ''
     GROUP BY l.id
     ORDER BY 
         CASE 
@@ -43,7 +44,6 @@ $stmt = $pdo->query("
             ELSE '0000-00-00'
         END DESC,
         l.created_at DESC
-    LIMIT 20
 ");
 
 $laws = $stmt->fetchAll(\PDO::FETCH_ASSOC);

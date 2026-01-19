@@ -77,6 +77,9 @@ class OpenAIClient
             throw new \RuntimeException("Invalid JSON in AI response");
         }
 
+        // Normalize to ensure arrays contain strings
+        $summary = $this->normalizeSummary($summary);
+
         // Validate schema
         $this->validateSchema($summary);
 
@@ -184,6 +187,96 @@ Text zákona:
         if (empty($data['tags'])) {
             throw new \RuntimeException("tags array must not be empty");
         }
+    }
+
+    private function normalizeSummary(array $data): array
+    {
+        $data['tags'] = $this->normalizeTags($data['tags'] ?? []);
+        $data['affected_groups'] = $this->normalizeList($data['affected_groups'] ?? [], 'group', 'impact');
+        $data['positives'] = $this->normalizeList($data['positives'] ?? [], 'positive', 'explanation');
+        $data['negatives'] = $this->normalizeList($data['negatives'] ?? [], 'negative', 'explanation');
+        $data['how_to_react'] = $this->normalizeList($data['how_to_react'] ?? [], 'reaction', 'text', 'advice', 'details');
+
+        return $data;
+    }
+
+    private function normalizeTags(array $tags): array
+    {
+        $normalized = [];
+        foreach ($tags as $tag) {
+            if (is_string($tag)) {
+                $clean = trim(mb_strtolower($tag, 'UTF-8'));
+                if ($clean !== '') {
+                    $normalized[] = $clean;
+                }
+            }
+        }
+
+        return array_values(array_unique($normalized));
+    }
+
+    private function normalizeList(array $items, string ...$keys): array
+    {
+        $normalized = [];
+        foreach ($items as $item) {
+            if (is_string($item)) {
+                $text = trim($item);
+                if ($text !== '') {
+                    $normalized[] = $text;
+                }
+                continue;
+            }
+
+            if (is_array($item)) {
+                $primary = '';
+                $secondary = '';
+                $primaryFound = false;
+                
+                // First pass: find primary key
+                foreach ($keys as $key) {
+                    if (!empty($item[$key]) && is_string($item[$key])) {
+                        $primary = trim($item[$key]);
+                        $primaryFound = true;
+                        break;
+                    }
+                }
+                
+                // Second pass: find secondary key (check all remaining keys)
+                if ($primaryFound) {
+                    foreach ($keys as $key) {
+                        if (!empty($item[$key]) && is_string($item[$key]) && trim($item[$key]) !== $primary) {
+                            $secondary = trim($item[$key]);
+                            break;
+                        }
+                    }
+                    // Also check common secondary keys that might not be in the list
+                    if ($secondary === '') {
+                        $commonSecondaryKeys = ['details', 'explanation', 'impact', 'text'];
+                        foreach ($commonSecondaryKeys as $key) {
+                            if (!empty($item[$key]) && is_string($item[$key]) && trim($item[$key]) !== $primary) {
+                                $secondary = trim($item[$key]);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if ($primary !== '' && $secondary !== '') {
+                    $normalized[] = $primary . ': ' . $secondary;
+                } elseif ($primary !== '') {
+                    $normalized[] = $primary;
+                } else {
+                    $normalized[] = json_encode($item, JSON_UNESCAPED_UNICODE);
+                }
+                continue;
+            }
+
+            if ($item !== null) {
+                $normalized[] = (string)$item;
+            }
+        }
+
+        return $normalized;
     }
     
     public static function getTagColor(string $tag): string

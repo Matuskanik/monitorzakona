@@ -273,7 +273,23 @@ $textExtracted = isset($law['text_extracted']) ? (bool)$law['text_extracted'] : 
             <div class="section-content">
                 <ul>
                     <?php foreach ($summary['how_to_react'] as $reaction): ?>
-                        <li><?php echo htmlspecialchars($reaction); ?></li>
+                        <?php
+                        if (is_string($reaction)) {
+                            echo '<li>' . htmlspecialchars($reaction) . '</li>';
+                        } elseif (is_array($reaction)) {
+                            $advice = $reaction['advice'] ?? $reaction['reaction'] ?? $reaction['text'] ?? '';
+                            $details = $reaction['details'] ?? $reaction['explanation'] ?? '';
+                            if ($advice && $details) {
+                                echo '<li><strong>' . htmlspecialchars($advice) . '</strong>: ' . htmlspecialchars($details) . '</li>';
+                            } elseif ($advice) {
+                                echo '<li>' . htmlspecialchars($advice) . '</li>';
+                            } else {
+                                echo '<li>' . htmlspecialchars(json_encode($reaction, JSON_UNESCAPED_UNICODE)) . '</li>';
+                            }
+                        } else {
+                            echo '<li>' . htmlspecialchars(String($reaction)) . '</li>';
+                        }
+                        ?>
                     <?php endforeach; ?>
                 </ul>
             </div>

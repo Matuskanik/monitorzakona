@@ -32,9 +32,7 @@ public/data/*.db
 *.swo
 *~
 .DS_Store
-Thumbs.db
-
-# PHP
+Thumbs.db# PHP
 *.cache
 .phpunit.result.cache# Temporary files
 *.tmp
