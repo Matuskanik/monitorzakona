@@ -1,40 +1,36 @@
 {
-    "id": 6,
+    "id": 4,
     "master_id": "10505",
     "title": "Vládny návrh zákona o evidencii tržieb a o zmene a doplnení niektorých zákonov",
     "approval_date": "26. 9. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10505",
-    "created_at": "2026-01-07 14:44:22",
-    "updated_at": "2026-01-07 17:34:00",
+    "created_at": "2026-01-19 14:11:23",
+    "updated_at": "2026-01-19 14:11:23",
     "summary": {
         "tags": [
             "ekonomika",
-            "financie",
-            "podnikanie"
+            "financie"
         ],
-        "summary_paragraph": "Nový zákon o evidencii tržieb prináša zásadné zmeny v tom, ako podnikatelia na Slovensku musia evidovať svoje tržby. Zavádza povinnosť používať systém eKasa, čo je on-line registračná pokladnica, ktorá umožňuje priamu komunikáciu s Finančným riaditeľstvom SR. Tento systém má za cieľ zvýšiť transparentnosť a zjednodušiť kontrolu nad finančnými tokmi, čím sa znižuje priestor pre daňové úniky. Zákon stanovuje, že všetci predávajúci, ktorí prijímajú platby za tovar alebo služby, musia bezodkladne evidovať tržby prostredníctvom eKasa, s výnimkou niektorých špecifických prípadov, ako sú predajné automaty alebo predaj vo vysokohorských oblastiach bez pripojenia na sieť. Zákon tiež definuje rôzne typy pokladníc, ako sú on-line, softvérové a virtuálne registračné pokladnice, a stanovuje technické požiadavky na ich používanie. Finančné riaditeľstvo má právomoc certifikovať pokladničné programy a chránené dátové úložiská, pričom certifikácia je platná päť rokov. Zákon nadobudne platnosť v septembri 2025, pričom podnikatelia majú určitý čas na prispôsobenie sa novým požiadavkám.",
+        "summary_paragraph": "Zákon o evidencii tržieb, ktorý bol predložený Národnej rade Slovenskej republiky, zavádza nové povinnosti pre predávajúcich pri evidencii tržieb prostredníctvom pokladnice eKasa. Tento zákon sa zameriava na zlepšenie transparentnosti a efektivity v oblasti daňových povinností, pričom zavádza povinnosť pre všetkých predávajúcich, aby evidovali tržby v systéme eKasa bez zbytočného odkladu po ich prijatí. Zákon tiež definuje podmienky pre používanie pokladníc eKasa, vrátane certifikácie pokladničného programu a chráneného dátového úložiska. Dôležitou zmenou je zavedenie hraničnej doby odozvy, ktorá je stanovená na päť sekúnd, a povinnosť zaslať dátovú správu do systému eKasa do 96 hodín od prvého pokusu o jej zaslanie. Tento zákon nadobudne účinnosť v septembri 2025 a jeho dodržiavanie bude kontrolované orgánmi finančnej správy. Zákon má za cieľ znížiť daňové úniky a zabezpečiť spravodlivejšie podmienky pre podnikateľov.",
         "affected_groups": [
-            "Podnikatelia a živnostníci - budú musieť investovať do nových pokladničných systémov eKasa a zabezpečiť ich certifikáciu.",
-            "Výrobcovia a distribútori pokladničných systémov - budú musieť zabezpečiť, že ich produkty spĺňajú nové technické požiadavky a získať certifikáciu od Finančného riaditeľstva.",
-            "Zamestnanci v maloobchode - budú musieť byť vyškolení na používanie nových pokladničných systémov.",
-            "Spotrebitelia - môžu očakávať zvýšenú transparentnosť a možnosť overiť pravosť pokladničných dokladov pomocou QR kódov.",
-            "Daňové úrady - budú mať efektívnejšie nástroje na kontrolu a monitorovanie tržieb."
+            "predávajúci: Budú musieť evidovať tržby v systéme eKasa a používať pokladnice, ktoré spĺňajú nové požiadavky.",
+            "daňové úrady: Získajú nové právomoci na kontrolu dodržiavania zákona a certifikáciu pokladničných programov.",
+            "zákazníci: Budú mať možnosť overiť správnosť pokladničných dokladov prostredníctvom QR kódu.",
+            "výrobcovia pokladníc: Budú musieť zabezpečiť certifikáciu svojich pokladničných programov a chránených dátových úložísk.",
+            "podnikatelia v likvidácii: Nebudú povinní evidovať tržby, pokiaľ sú v likvidácii alebo na nich bol vyhlásený konkurz."
         ],
         "positives": [
-            "Zvýšená transparentnosť - systém eKasa umožňuje okamžitú evidenciu tržieb, čo znižuje priestor pre daňové úniky.",
-            "Jednoduchšia kontrola - daňové úrady budú mať prístup k aktuálnym údajom o tržbách, čo zjednoduší kontrolné procesy.",
-            "Zlepšenie podnikateľského prostredia - jednotný systém evidencie tržieb môže znížiť administratívnu záťaž pre podnikateľov."
+            "Zvýšená transparentnosť: Zákon prispieva k zníženiu daňových únikov, čo môže viesť k spravodlivejšiemu podnikateľskému prostrediu.",
+            "Možnosť overenia dokladov: Zákazníci môžu overiť pravosť pokladničných dokladov, čo zvyšuje dôveru v obchodovanie."
         ],
         "negatives": [
-            "Náklady na implementáciu - podnikatelia budú musieť investovať do nových pokladničných systémov a ich certifikácie.",
-            "Technické problémy - môže dôjsť k problémom s pripojením na internet alebo s funkčnosťou nových systémov, čo môže spôsobiť oneskorenia v evidencii tržieb."
+            "Zvýšené náklady pre podnikateľov: Podnikatelia budú musieť investovať do nových pokladníc a školení zamestnancov na ich používanie.",
+            "Komplexnosť dodržiavania predpisov: Nové povinnosti môžu byť pre menších podnikateľov zložitou administratívnou záťažou."
         ],
         "how_to_react": [
-            "Podnikatelia by mali do 30 dní od nadobudnutia platnosti zákona požiadať o certifikáciu svojich pokladničných systémov na Finančnom riaditeľstve.",
-            "Zabezpečte, aby všetky pokladnice eKasa boli pripravené na používanie a spĺňali technické požiadavky uvedené v zákone.",
-            "Ak nemáte prístup k internetu na predajnom mieste, podajte žiadosť o povolenie odkladu zasielania údajov na daňovom úrade.",
-            "Školte svojich zamestnancov na používanie nových pokladničných systémov a zabezpečte, aby boli oboznámení s novými postupmi.",
-            "Pravidelne kontrolujte webové sídlo Finančného riaditeľstva pre aktualizácie a oznámenia týkajúce sa systému eKasa."
+            "Do septembra 2025 sa uistite, že vaša pokladnica je certifikovaná a pripravená na používanie v súlade s novým zákonom.",
+            "Organizujte školenie pre zamestnancov o používaní pokladnice eKasa a evidencii tržieb.",
+            "Zrevidujte svoje interné procesy a zabezpečte, aby ste mohli efektívne evidovať tržby a zasielať dátové správy do systému eKasa."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

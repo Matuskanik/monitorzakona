@@ -4,36 +4,32 @@
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 357/2015 Z. z. o finančnej kontrole a audite a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
     "approval_date": "13. 8. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10370",
-    "created_at": "2026-01-07 14:57:07",
-    "updated_at": "2026-01-07 17:41:29",
+    "created_at": "2026-01-19 14:22:06",
+    "updated_at": "2026-01-19 14:22:06",
     "summary": {
         "tags": [
             "financie",
-            "verejná správa",
-            "audity"
+            "podnikanie"
         ],
-        "summary_paragraph": "Novela zákona č. 357/2015 Z. z. o finančnej kontrole a audite prináša významné zmeny v oblasti finančnej kontroly a auditu verejných financií. Kľúčovou zmenou je redefinícia pojmov ako finančná kontrola, finančná operácia a vnútorný audit, čo má za cieľ zvýšiť transparentnosť a efektívnosť nakladania s verejnými prostriedkami. Zákon teraz kladie väčší dôraz na hospodárnosť, efektívnosť, účinnosť a účelnosť finančných operácií, pričom zavádza nové povinnosti pre orgány verejnej správy, ako je vytvorenie a udržiavanie funkčného vnútorného kontrolného systému. Tieto zmeny sú dôležité, pretože majú potenciál zlepšiť riadenie verejných financií a minimalizovať riziká spojené s podvodmi a korupciou. Zákon tiež upravuje postupy pri vykonávaní finančných kontrol, vrátane možnosti poveriť iný orgán verejnej správy na ich vykonanie, čo môže byť užitočné pre menšie obce, ktoré nemajú dostatočné kapacity. Novela nadobudne účinnosť v júli 2025, pričom orgány verejnej správy majú čas na prispôsobenie svojich vnútorných systémov do konca roka.",
+        "summary_paragraph": "Zákon č. 357/2015 Z. z. o finančnej kontrole a audite prechádza významnými zmenami, ktoré sa dotknú spôsobu, akým orgány verejnej správy vykonávajú finančnú kontrolu a audit. Hlavným cieľom týchto zmien je zlepšiť hospodárnosť, efektívnosť a účinnosť nakladania s verejnými financiami. Zákon zavádza nové definície a povinnosti pre orgány verejnej správy, ako aj pre zamestnancov, ktorí sa podieľajú na finančnej kontrole. Napríklad, novinkou je, že orgány verejnej správy budú musieť vytvoriť a udržiavať vnútorný kontrolný systém, ktorý zabezpečí efektívne nakladanie s verejnými financiami. Zmeny nadobudnú účinnosť v júli 2025, čo dáva orgánom čas na prispôsobenie sa novým požiadavkám. Dôležité je, že zákon kladie dôraz na prevenciu podvodov a korupcie, čo môže prispieť k transparentnejšiemu a zodpovednejšiemu spravovaniu verejných zdrojov.",
         "affected_groups": [
-            "Orgány verejnej správy - budú musieť vytvoriť a udržiavať vnútorný kontrolný systém",
-            "Zamestnanci verejnej správy - budú zodpovední za vykonávanie finančných kontrol",
-            "Obce - môžu poveriť iné orgány na vykonanie finančných kontrol",
-            "Príjemcovia verejných financií - budú podliehať prísnejším kontrolám",
-            "Ministerstvo financií - získa nové kompetencie v oblasti auditu"
+            "zamestnanci orgánov verejnej správy: Budú musieť prijať nové postupy a zodpovednosti pri vykonávaní finančnej kontroly a auditu, čo si vyžaduje dodatočné školenie a adaptáciu na nové pravidlá.",
+            "občania: Zvýšená transparentnosť a efektívnosť nakladania s verejnými financiami by mala viesť k lepšiemu využívaniu verejných zdrojov, čo môže mať pozitívny dopad na kvalitu verejných služieb.",
+            "podnikatelia: Môžu sa stretnúť s prísnejšími kontrolami a auditmi zo strany verejných orgánov, čo môže ovplyvniť ich podnikateľské aktivity a zmluvy s verejným sektorom.",
+            "neziskové organizácie: Budú musieť dodržiavať nové pravidlá pri správe verejných financií, čo môže ovplyvniť ich financovanie a spôsob, akým vykonávajú svoje projekty."
         ],
         "positives": [
-            "Zvýšená transparentnosť - nový systém kontroly zlepší prehľad o nakladaní s verejnými financiami",
-            "Zníženie rizika podvodov - dôraz na efektívnosť a účelnosť môže znížiť korupčné praktiky"
+            "Zvýšená transparentnosť: Nové pravidlá a definície prispievajú k väčšej transparentnosti vo využívaní verejných financií, čo môže posilniť dôveru občanov v verejné inštitúcie.",
+            "Prevencia podvodov: Dôraz na prevenciu podvodov a korupcie môže viesť k efektívnejšiemu využívaniu verejných prostriedkov a zníženiu rizika zneužívania financií."
         ],
         "negatives": [
-            "Zvýšená administratívna záťaž - orgány verejnej správy budú musieť investovať čas a zdroje do nových systémov",
-            "Možné oneskorenia - implementácia nových kontrolných mechanizmov môže spôsobiť dočasné zdržania v procese financovania"
+            "Zvýšená administratívna záťaž: Nové povinnosti a procedúry môžu viesť k zvýšenej administratívnej záťaži pre zamestnancov orgánov verejnej správy, čo môže spomaliť procesy a znížiť efektivitu.",
+            "Náklady na školenie: Orgány verejnej správy budú musieť investovať do školení zamestnancov, čo môže viesť k dodatočným nákladom v rozpočtoch."
         ],
         "how_to_react": [
-            "Orgány verejnej správy by mali do konca roka 2025 vytvoriť vnútorný kontrolný systém podľa nových požiadaviek.",
-            "Zamestnanci zodpovední za finančné kontroly by mali absolvovať školenia o nových postupoch a povinnostiach.",
-            "Obce, ktoré nemajú dostatočné kapacity, by mali zvážiť poverenie iného orgánu na vykonanie finančných kontrol.",
-            "Príjemcovia verejných financií by mali zabezpečiť, že ich finančné operácie sú v súlade s novými pravidlami, aby predišli sankciám.",
-            "Ministerstvo financií by malo pripraviť metodické pokyny na podporu implementácie nových kontrolných systémov."
+            "Zamestnanci orgánov verejnej správy by mali absolvovať školenie o nových pravidlách a postupoch do júna 2025, aby sa pripravili na zmeny.: Školenie by malo byť zabezpečené zamestnávateľom a malo by pokrývať všetky nové aspekty finančnej kontroly a auditu.",
+            "Občania by mali sledovať zmeny v správe verejných financií a zapojiť sa do diskusií o transparentnosti a efektívnosti využívania verejných prostriedkov.: Môžu sa zúčastniť verejných stretnutí alebo posielať podnety na zlepšenie správy financií.",
+            "Podnikatelia by mali prehodnotiť svoje zmluvy s verejným sektorom a pripraviť sa na prísnejšie kontroly.: Odporúča sa konzultovať s právnikom alebo odborníkom na verejné obstarávanie, aby sa zabezpečila súladnosť s novými pravidlami."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

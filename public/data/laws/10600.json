@@ -1,37 +1,38 @@
 {
-    "id": 4,
+    "id": 2,
     "master_id": "10600",
     "title": "Vládny návrh zákona o príspevku na pomoc pri odkázanosti na pomoc inej fyzickej osoby a o zmene a doplnení niektorých zákonov",
     "approval_date": "28. 11. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10600",
-    "created_at": "2026-01-07 14:42:51",
-    "updated_at": "2026-01-07 17:32:37",
+    "created_at": "2026-01-19 14:09:41",
+    "updated_at": "2026-01-19 14:09:41",
     "summary": {
         "tags": [
             "sociálna politika",
-            "zdravotníctvo",
             "financie"
         ],
-        "summary_paragraph": "Nový zákon o príspevku na pomoc pri odkázanosti na pomoc inej fyzickej osoby prináša významné zmeny v oblasti sociálnej starostlivosti na Slovensku. Tento zákon zavádza príspevok, ktorý má pomôcť osobám odkázaným na pomoc iných, pokryť náklady na neformálnu alebo formálnu starostlivosť. Neformálna starostlivosť je poskytovaná fyzickými osobami, ktoré nie sú profesionálmi, ale sú schopné poskytnúť potrebnú pomoc, zatiaľ čo formálna starostlivosť zahŕňa služby poskytované registrovanými zariadeniami. Príspevok sa líši podľa stupňa odkázanosti osoby, pričom maximálna suma môže dosiahnuť až 1 210 eur mesačne pre nezaopatrené deti s najvyšším stupňom odkázanosti. Zákon tiež stanovuje podmienky pre poskytovateľov starostlivosti, vrátane zdravotnej spôsobilosti a obmedzenia počtu osôb, ktorým môžu súčasne poskytovať starostlivosť. Tieto opatrenia sú dôležité pre zabezpečenie kvality a dostupnosti starostlivosti pre odkázané osoby, pričom zároveň poskytujú finančnú podporu pre tých, ktorí sa o ne starajú.",
+        "summary_paragraph": "Zákon o príspevku na pomoc pri odkázanosti na pomoc inej fyzickej osoby prináša významné zmeny v oblasti podpory osôb odkázaných na starostlivosť. Cieľom zákona je poskytnúť finančnú pomoc odkázaným osobám, ktoré potrebujú neformálnu alebo formálnu starostlivosť. Zákon zavádza príspevky, ktorých výška závisí od stupňa odkázanosti, pričom maximálna suma môže dosiahnuť až 1 210 eur mesačne pre nezaopatrené deti s najvyšším stupňom odkázanosti. Dôležité je, že príspevok sa vypláca za celý kalendárny mesiac, aj keď podmienky nároku boli splnené len za časť mesiaca. Zákon tiež upravuje podmienky pre poskytovanie neformálnej starostlivosti, pričom neformálny opatrovateľ môže poskytovať starostlivosť maximálne dvom osobám súčasne. Zákon nadobudne účinnosť v januári 2026, čo dáva čas na prípravu a informovanie potenciálnych žiadateľov o príspevok.",
         "affected_groups": [
-            "osoby odkázané na pomoc inej fyzickej osoby - získajú finančnú podporu na úhradu starostlivosti",
-            "neformálni opatrovatelia - budú môcť poskytovať starostlivosť za odmenu, ale s určitými obmedzeniami",
-            "rodiny s nezaopatrenými deťmi - môžu získať vyšší príspevok na starostlivosť",
-            "zariadenia poskytujúce formálnu starostlivosť - budú musieť byť registrované a dodržiavať stanovené normy",
-            "úrad práce, sociálnych vecí a rodiny - bude zodpovedný za výplatu príspevkov a kontrolu ich využitia"
+            "osoby odkázané na pomoc: Budú mať nárok na príspevok na pokrytie nákladov na starostlivosť, čo im umožní zlepšiť kvalitu života.",
+            "neformálni opatrovatelia: Môžu získať odmenu za poskytovanie starostlivosti, čo im pomôže zabezpečiť si príjem.",
+            "rodiny s nezaopatrenými deťmi: Môžu získať vyšší príspevok, ak je dieťa odkázané na pomoc, čo im uľahčí finančnú situáciu.",
+            "poskytovatelia formálnej starostlivosti: Budú musieť splniť nové podmienky na preukazovanie poskytovanej starostlivosti, aby mohli získať úhrady.",
+            "štátne inštitúcie: Budú zodpovedné za administráciu a vyplácanie príspevkov, čo môže zvýšiť ich administratívnu záťaž."
         ],
         "positives": [
-            "Zvýšená finančná podpora pre odkázané osoby - príspevok pomôže pokryť náklady na potrebnú starostlivosť, čo môže zlepšiť kvalitu ich života.",
-            "Podpora neformálnych opatrovateľov - umožňuje im poskytovať starostlivosť za odmenu, čím sa zvyšuje dostupnosť starostlivosti pre odkázané osoby."
+            "Zvýšenie finančnej podpory: Príspevky môžu výrazne zlepšiť životné podmienky odkázaných osôb a ich rodín.",
+            "Podpora neformálnych opatrovateľov: Zákon umožňuje neformálnym opatrovateľom získať odmenu, čo môže motivovať viac ľudí k poskytovaniu starostlivosti."
         ],
         "negatives": [
-            "Administratívna záťaž pre opatrovateľov - neformálni opatrovatelia musia spĺňať určité podmienky a viesť evidenciu, čo môže byť náročné.",
-            "Obmedzenia pre poskytovateľov starostlivosti - neformálni opatrovatelia môžu poskytovať starostlivosť len dvom osobám súčasne, čo môže obmedziť ich príjmy."
+            "Zložitá administratíva: Žiadatelia môžu čeliť zložitým podmienkam a administratívnym prekážkam pri získavaní príspevku.",
+            "Obmedzený počet opatrovateľov: Neformálny opatrovateľ môže poskytovať starostlivosť len dvom osobám, čo môže obmedziť dostupnosť starostlivosti pre niektorých."
         ],
         "how_to_react": [
-            "Ak ste odkázaná osoba, požiadajte o príspevok na úrade práce, sociálnych vecí a rodiny. Pripravte si potrebné doklady, ako je lekársky posudok.",
-            "Neformálni opatrovatelia by mali zabezpečiť, že sú zdravotne spôsobilí a zaregistrovaní v evidencii. Ak máte pochybnosti o zdravotnej spôsobilosti, získajte potvrdenie od lekára.",
-            "Ak poskytujete formálnu starostlivosť, uistite sa, že vaše zariadenie je riadne registrované a dodržiava všetky predpísané normy."
+            "Prečítajte si zákon a zistite, či spĺňate podmienky na získanie príspevku na pomoc.",
+            "Ak plánujete poskytovať neformálnu starostlivosť, zaregistrujte sa v evidencii do 5 pracovných dní od začatia starostlivosti.",
+            "Vyplňte a podajte žiadosť o príspevok na úrade práce, sociálnych vecí a rodiny, najneskôr do konca mesiaca, v ktorom ste splnili podmienky.",
+            "Zaznamenávajte všetky náklady na starostlivosť, aby ste mohli preukázať výdavky pri žiadosti o príspevok.",
+            "Dbajte na dodržiavanie termínov pre podávanie žiadostí a preukazovanie nákladov, aby ste nezmeškali nárok na príspevok."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

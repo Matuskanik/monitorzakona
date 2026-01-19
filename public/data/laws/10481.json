@@ -1,37 +1,34 @@
 {
-    "id": 8,
+    "id": 6,
     "master_id": "10481",
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 461/2003 Z. z. o sociálnom poistení v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
     "approval_date": "22. 9. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10481",
-    "created_at": "2026-01-07 14:45:46",
-    "updated_at": "2026-01-07 17:35:06",
+    "created_at": "2026-01-19 14:12:47",
+    "updated_at": "2026-01-19 14:12:47",
     "summary": {
         "tags": [
             "sociálna politika",
-            "dôchodky",
-            "poistenie"
+            "financie"
         ],
-        "summary_paragraph": "Navrhovaný zákon prináša významné zmeny v oblasti sociálneho poistenia, ktoré sa dotýkajú najmä dôchodkového systému. Zákon upravuje podmienky dôchodkového poistenia pre osoby starajúce sa o deti, pričom zavádza nové pravidlá pre výpočet dôchodkových dávok. Napríklad, fyzické osoby, ktoré sa starajú o dieťa do šiestich rokov, budú mať možnosť prihlásiť sa na dôchodkové poistenie, ak spĺňajú určité podmienky. Zákon tiež stanovuje minimálny vymeriavací základ na úrovni 60 % všeobecného vymeriavacieho základu, čo môže ovplyvniť výšku budúcich dôchodkov. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, pričom niektoré ustanovenia budú platiť až od roku 2029. Prechodné ustanovenia zabezpečujú, že osoby, ktoré už majú nárok na dôchodok, budú posudzované podľa starých pravidiel, ak by nové pravidlá boli pre nich menej výhodné.",
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 461/2003 Z. z. o sociálnom poistení, prináša viaceré zmeny, ktoré sa dotknú dôchodkového poistenia a starostlivosti o deti. Hlavným cieľom týchto zmien je zlepšiť podmienky pre rodičov, ktorí sa starajú o deti do šiestich rokov. Zákon zavádza nové pravidlá pre prihlásenie na dôchodkové poistenie pre osoby, ktoré sa starajú o deti a nie sú dôchodkovo poistené. Taktiež sa menia podmienky pre výpočet dôchodkových dávok, pričom sa zohľadňuje aj starostlivosť o deti s dlhodobo nepriaznivým zdravotným stavom. Zmeny nadobudnú účinnosť 1. januára 2026, pričom niektoré ustanovenia budú účinné až od 1. januára 2029. Tieto úpravy sú dôležité, pretože môžu ovplyvniť výšku dôchodkov a prístup k dôchodkovému poisteniu pre mnohých rodičov a opatrovateľov.",
         "affected_groups": [
-            "Rodičia starajúci sa o deti do šiestich rokov - budú mať možnosť prihlásiť sa na dôchodkové poistenie.",
-            "Osoby s nárokom na rodičovský príspevok - ich povinné dôchodkové poistenie vznikne odo dňa vzniku nároku na príspevok.",
-            "Dôchodcovia - zmeny vo výpočte dôchodkov môžu ovplyvniť výšku ich dávok.",
-            "Zamestnanci v dôchodkovom veku - môžu byť ovplyvnení zmenami vo vymeriavacích základoch.",
-            "Osoby s dlhodobou starostlivosťou o deti - nové pravidlá môžu ovplyvniť ich dôchodkové nároky."
+            "rodičia s deťmi do 6 rokov: Budú mať možnosť prihlásiť sa na dôchodkové poistenie, čo im umožní získať nárok na dôchodok aj počas starostlivosti o deti.",
+            "osoby s dlhodobo nepriaznivým zdravotným stavom: Budú mať zabezpečené lepšie podmienky pri výpočte dôchodkových dávok, čo môže zlepšiť ich finančnú situáciu.",
+            "dôchodcovia: Môžu byť ovplyvnení zmenami vo výpočte dôchodkov, čo môže viesť k zníženiu alebo zvýšeniu ich dôchodkových dávok."
         ],
         "positives": [
-            "Zlepšenie podmienok pre rodičov starajúcich sa o deti - možnosť prihlásiť sa na dôchodkové poistenie zvyšuje ich sociálne zabezpečenie.",
-            "Zavedenie minimálneho vymeriavacieho základu - zabezpečuje, že aj osoby s nižšími príjmami budú mať nárok na dôchodok v primeranej výške."
+            "Zlepšenie podmienok pre rodičov: Rodičia sa budú môcť prihlásiť na dôchodkové poistenie, čo im zabezpečí dôchodok aj počas obdobia starostlivosti o deti.",
+            "Lepšie podmienky pre osoby s dlhodobo nepriaznivým zdravotným stavom: Zmeny v zákone umožnia spravodlivejší výpočet dôchodkových dávok, čo môže zlepšiť ich životnú úroveň."
         ],
         "negatives": [
-            "Komplexnosť zmien - môže spôsobiť zmätok medzi poistencami, ktorí sa musia prispôsobiť novým pravidlám.",
-            "Možné zníženie dôchodkov pre niektoré skupiny - ak nové pravidlá nebudú pre nich výhodné, môžu byť finančne znevýhodnení."
+            "Možné zníženie dôchodkov pre niektoré skupiny: Niektoré zmeny v pravidlách výpočtu dôchodkov môžu viesť k zníženiu dôchodkových dávok pre niektorých dôchodcov.",
+            "Zložitosti pri prihlásení na dôchodkové poistenie: Nové pravidlá môžu byť pre niektorých rodičov zložité a môžu si vyžadovať dodatočné administratívne úkony."
         ],
         "how_to_react": [
-            "Rodičia starajúci sa o deti do šiestich rokov by mali do 31. decembra 2025 podať prihlášku na dôchodkové poistenie, aby využili nové možnosti.",
-            "Osoby s nárokom na rodičovský príspevok by mali sledovať dátum vzniku nároku a zabezpečiť, že ich povinné dôchodkové poistenie je včas aktivované.",
-            "Dôchodcovia by mali konzultovať so Sociálnou poisťovňou, či nové pravidlá ovplyvnia ich dôchodok a ak áno, ako sa môžu prispôsobiť."
+            "Do 31. decembra 2025 sa informujte o nových podmienkach a pripravte si potrebné dokumenty.",
+            "Od januára 2026 sa obráťte na Sociálnu poisťovňu alebo odborníka na sociálne zabezpečenie, aby ste sa uistili, že rozumiete svojim právam.",
+            "Pravidelne kontrolujte oficiálne stránky vlády a Sociálnej poisťovne pre aktuálne informácie o zmenách v zákone."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

@@ -4,35 +4,33 @@
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 108/2024 Z. z. o ochrane spotrebiteľa a o zmene a doplnení niektorých zákonov a ktorým sa menia a dopĺňajú niektoré zákony",
     "approval_date": "4. 6. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10345",
-    "created_at": "2026-01-07 14:54:27",
-    "updated_at": "2026-01-07 17:38:50",
+    "created_at": "2026-01-19 14:19:27",
+    "updated_at": "2026-01-19 14:19:27",
     "summary": {
         "tags": [
             "ekonomika",
-            "financie",
-            "spotrebitelia",
-            "životné prostredie"
+            "financie"
         ],
-        "summary_paragraph": "Novela zákona č. 108/2024 Z. z. o ochrane spotrebiteľa prináša významné zmeny, ktoré sa zameriavajú na posilnenie práv spotrebiteľov a podporu udržateľnosti. Jednou z hlavných zmien je zavedenie nových ustanovení týkajúcich sa environmentálnych tvrdení a značiek udržateľnosti. Tieto ustanovenia majú za cieľ zabezpečiť, aby obchodníci poskytovali spotrebiteľom presné a overiteľné informácie o environmentálnych vlastnostiach produktov. Zákon tiež zavádza povinnosť obchodníkov informovať o opraviteľnosti tovaru, dostupnosti náhradných dielov a poskytovaní aktualizácií pre digitálne produkty. Tieto opatrenia majú za cieľ predĺžiť životnosť produktov a znížiť ich environmentálny dopad. Zákon nadobudne účinnosť 1. januára 2026, pričom prechodné obdobia umožnia obchodníkom prispôsobiť sa novým požiadavkám. Spotrebitelia budú mať lepší prístup k informáciám o opravách a udržateľnosti, čo im umožní robiť informovanejšie rozhodnutia pri nákupe.",
+        "summary_paragraph": "Zákon č. 108/2024 Z. z. o ochrane spotrebiteľa a jeho novelizácia prináša významné zmeny v oblasti ochrany spotrebiteľov, pričom sa zameriava na zlepšenie transparentnosti a zodpovednosti obchodníkov. Novela zavádza povinnosť obchodníkov poskytovať jasné informácie o zárukách, opraviteľnosti tovaru a environmentálnych vlastnostiach produktov. Napríklad, obchodníci budú musieť informovať spotrebiteľov o dĺžke trvania záruky na životnosť tovaru, ak ju výrobca poskytuje. Zákon tiež posilňuje práva spotrebiteľov v oblasti opráv, pričom zavádza európsky formulár pre informácie o oprave, ktorý musí byť poskytnutý pred uzavretím zmluvy o oprave. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, pričom prechodné ustanovenia zabezpečujú, že konania začaté pred týmto dátumom budú dokončené podľa predchádzajúcich pravidiel. Zákon sa snaží o ochranu spotrebiteľov pred nekalými praktikami a zvyšuje zodpovednosť obchodníkov za informácie, ktoré poskytujú, čím sa zlepšuje celková ochrana spotrebiteľov na trhu.",
         "affected_groups": [
-            "spotrebitelia - získajú lepšie informácie o opraviteľnosti a udržateľnosti produktov, čo im umožní robiť informovanejšie rozhodnutia",
-            "obchodníci - budú musieť zabezpečiť presnosť environmentálnych tvrdení a poskytnúť viac informácií o opraviteľnosti a aktualizáciách produktov",
-            "výrobcovia - budú musieť zabezpečiť dostupnosť náhradných dielov a informácií o opravách, čo môže zvýšiť ich náklady",
-            "opravovne - budú musieť poskytovať európsky formulár pre informácie o oprave, čo môže zvýšiť administratívnu záťaž",
-            "dovozcovia - budú zodpovední za zabezpečenie opráv a dostupnosti náhradných dielov, ak výrobca nemá sídlo v EÚ"
+            "spotrebitelia: Budú mať právo na jasné a zrozumiteľné informácie o zárukách a opraviteľnosti tovaru, čo im umožní lepšie sa rozhodovať pri nákupe.",
+            "obchodníci: Budú musieť dodržiavať nové povinnosti týkajúce sa informovania spotrebiteľov a zodpovednosti za vady tovaru, čo môže zvýšiť ich administratívne náklady.",
+            "výrobcovia: Budú povinní poskytovať informácie o opraviteľnosti a dostupnosti náhradných dielov, čo môže ovplyvniť ich výrobné procesy.",
+            "opravy a servisné strediská: Budú musieť dodržiavať nové pravidlá týkajúce sa poskytovania informácií o opravách a cenách, čo môže zvýšiť ich zodpovednosť voči spotrebiteľom.",
+            "regulačné orgány: Budú mať rozšírené právomoci na dohľad nad dodržiavaním nových pravidiel, čo môže vyžadovať viac zdrojov na kontrolu a presadzovanie zákona."
         ],
         "positives": [
-            "zvýšená transparentnosť - spotrebitelia budú mať prístup k presným informáciám o environmentálnych vlastnostiach produktov, čo podporí informované rozhodovanie",
-            "podpora udržateľnosti - zákon podporuje dlhšiu životnosť produktov a znižuje ich environmentálny dopad, čo je pozitívne pre životné prostredie"
+            "Zvýšená transparentnosť: Spotrebitelia budú mať prístup k jasným informáciám o zárukách a opraviteľnosti, čo im umožní robiť informovanejšie rozhodnutia pri nákupe.",
+            "Ochrana životného prostredia: Zákon podporuje environmentálne tvrdenia a udržateľnosť, čo môže viesť k zodpovednejšiemu správaniu obchodníkov a výrobcov."
         ],
         "negatives": [
-            "zvýšené náklady pre obchodníkov a výrobcov - nové požiadavky na informácie a opravy môžu zvýšiť náklady na administratívu a logistiku",
-            "možné zneužitie environmentálnych tvrdení - ak nie sú správne kontrolované, môžu byť environmentálne tvrdenia zneužité na marketingové účely bez reálneho prínosu"
+            "Zvýšené náklady pre obchodníkov: Nové povinnosti môžu viesť k vyšším administratívnym nákladom a potrebám na školenie zamestnancov, čo môže ovplyvniť ich ziskovosť.",
+            "Možné nejasnosti v aplikácii zákona: Niektoré ustanovenia môžu byť interpretované rôzne, čo môže viesť k sporom medzi obchodníkmi a spotrebiteľmi."
         ],
         "how_to_react": [
-            "Obchodníci by mali do 1. januára 2026 aktualizovať svoje marketingové materiály a zabezpečiť, že všetky environmentálne tvrdenia sú presné a overiteľné.",
-            "Spotrebitelia by mali pri nákupe produktov vyhľadávať informácie o opraviteľnosti a dostupnosti náhradných dielov, aby mohli robiť udržateľnejšie rozhodnutia.",
-            "Výrobcovia by mali zabezpečiť, že majú dostatočné zásoby náhradných dielov a že sú schopní poskytnúť potrebné informácie o opravách a aktualizáciách produktov."
+            "Spotrebitelia by mali sledovať zmeny v zákone a informovať sa o svojich právach, najmä pokiaľ ide o záruky a opravy tovaru.: Od 1. januára 2026 budú mať právo na jasné informácie o zárukách a opraviteľnosti tovaru.",
+            "Obchodníci by mali začať pripravovať svoje procesy na splnenie nových požiadaviek.: Zabezpečte školenie zamestnancov a aktualizáciu informačných materiálov o zárukách a opraviteľnosti.",
+            "Výrobcovia by mali zhodnotiť svoje výrobné procesy a zabezpečiť dostupnosť náhradných dielov.: Začnite s prípravou dokumentácie o opraviteľnosti a dostupnosti náhradných dielov pre spotrebiteľov."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

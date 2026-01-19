@@ -1,38 +1,38 @@
 {
-    "id": 20,
+    "id": 10,
     "master_id": "10420",
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 282/2008 Z. z. o podpore práce s mládežou a o zmene a doplnení zákona č. 131/2002 Z. z. o vysokých školách a o zmene a doplnení niektorých zákonov v znení neskorších predpisov v znení neskorších predpisov",
     "approval_date": "22. 8. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10420",
-    "created_at": "2026-01-07 18:44:34",
-    "updated_at": "2026-01-07 18:44:34",
+    "created_at": "2026-01-19 14:15:27",
+    "updated_at": "2026-01-19 14:15:27",
     "summary": {
         "tags": [
             "mládež",
-            "vzdelávanie",
-            "sociálna politika"
+            "vzdelávanie"
         ],
-        "summary_paragraph": "Novela zákona č. 282/2008 Z. z. o podpore práce s mládežou prináša niekoľko významných zmien, ktoré majú za cieľ zlepšiť prácu s mládežou na Slovensku. Jednou z hlavných zmien je zavedenie spodnej vekovej hranice pre mládežníkov na 12 rokov, čo umožňuje lepšie zacielenie programov a aktivít na túto vekovú skupinu. Zákon tiež mení definíciu mládežníckej organizácie, ktorá teraz musí mať v kolektívnych orgánoch aj mládežníkov a poskytovať všeobecne prospešné služby. Ďalšou dôležitou zmenou je zjednodušenie procesu preukazovania bezúhonnosti pre cudzincov, ktorí už nebudú musieť predkladať úradne osvedčený preklad výpisu z registra trestov, ak je tento v úradnom jazyku členského štátu EÚ. Zákon tiež zavádza mládežnícke parlamenty ako poradné orgány, ktoré môžu byť zriadené obcami alebo vyššími územnými celkami, čím sa posilňuje participácia mládeže na rozhodovacích procesoch. Tieto zmeny nadobudnú účinnosť od 1. januára 2026, pričom prechodné obdobie na zosúladenie dokumentov a činností je stanovené do 30. júna 2026.",
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 282/2008 Z. z. o podpore práce s mládežou, prináša viaceré dôležité zmeny, ktoré sa týkajú definície mládežníckych organizácií, vekových hraníc pre mládežníkov a administratívnych postupov pri preukazovaní bezúhonnosti. Zákon zavádza spodnú vekovú hranicu pre mládežníkov na 12 rokov a znižuje vekovú hranicu pre mladých vedúcich z 15 na 14 rokov. Taktiež sa zjednodušujú administratívne postupy, čo môže znížiť byrokraciu pre organizácie pracujúce s mládežou. Zákon tiež definuje mládežnícku organizáciu ako právnickú osobu, ktorá poskytuje všeobecne prospešné služby v oblasti práce s mládežou. Tieto zmeny nadobudnú účinnosť 1. januára 2026, pričom organizácie budú mať prechodné obdobie do 30. júna 2026 na zosúladenie svojich zakladajúcich dokumentov s novými predpismi. Zákon má za cieľ zlepšiť kvalitu neformálneho vzdelávania a podporiť zapojenie mládeže do činností v ich regiónoch.",
         "affected_groups": [
-            "mládežníci od 12 rokov - budú môcť byť súčasťou mládežníckych organizácií a parlamentov",
-            "mládežnícke organizácie - musia zosúladiť svoje zakladajúce dokumenty s novými predpismi",
-            "cudzinci pracujúci s mládežou - zjednodušené preukazovanie bezúhonnosti",
-            "obce a vyššie územné celky - môžu zriadiť mládežnícke parlamenty",
-            "dobrovoľníci pracujúci s mládežou - musia preukazovať bezúhonnosť"
+            "mládežníci do 18 rokov: Budú musieť spĺňať novú vekovú hranicu 12 rokov pre definíciu mládežníka a 14 rokov pre mladých vedúcich.",
+            "mládežnícke organizácie: Budú musieť aktualizovať svoje zakladajúce dokumenty a zosúladiť ich s novými predpismi do 30. júna 2026.",
+            "dobrovoľníci: Budú musieť preukazovať bezúhonnosť a informovať zamestnávateľov o jej strate bezodkladne.",
+            "obce a mestá: Budú mať možnosť zriadiť mládežnícky parlament a zapojiť sa do práce s mládežou na regionálnej úrovni.",
+            "vysoké školy: Budú musieť prispôsobiť svoje akreditované programy neformálneho vzdelávania novým požiadavkám."
         ],
         "positives": [
-            "Zjednodušenie administratívy pre cudzincov - nie je potrebný úradný preklad výpisu z registra trestov, čo znižuje náklady a časovú náročnosť.",
-            "Posilnenie participácie mládeže - mládežnícke parlamenty umožnia mladým ľuďom aktívne sa zapájať do rozhodovacích procesov na miestnej úrovni.",
-            "Jasnejšia definícia mládežníckych organizácií - pomôže lepšie zamerať podporu a zdroje na organizácie, ktoré skutočne pracujú s mládežou."
+            "Zníženie administratívnej záťaže: Organizácie budú mať jednoduchšie podmienky na preukazovanie bezúhonnosti, čo môže zvýšiť ich efektivitu.",
+            "Zlepšenie kvality vzdelávania: Zavedenie minimálnych hodín praxe pre lektorov a garantov zlepší kvalitu akreditovaných programov."
         ],
         "negatives": [
-            "Povinnosť zosúladenia dokumentov - mládežnícke organizácie budú musieť vynaložiť čas a zdroje na aktualizáciu svojich zakladajúcich dokumentov.",
-            "Možné zvýšenie byrokracie - aj keď sa niektoré procesy zjednodušujú, nové povinnosti môžu pre niektoré organizácie znamenať viac administratívnej práce."
+            "Zvýšené nároky na preukazovanie bezúhonnosti: Dobrovoľníci a zamestnanci budú musieť čelíť prísnejším požiadavkám na preukazovanie bezúhonnosti, čo môže odradiť niektorých záujemcov.",
+            "Možné nejasnosti v definícii mládežníckej organizácie: Nové definície môžu viesť k nejasnostiam a sporom o tom, ktoré organizácie spĺňajú kritériá."
         ],
         "how_to_react": [
-            "Mládežnícke organizácie by mali do 30. júna 2026 zosúladiť svoje zakladajúce dokumenty s novými predpismi. Odporúča sa začať s revíziou dokumentov čo najskôr.",
-            "Cudzinci pracujúci s mládežou by mali zabezpečiť, že ich výpis z registra trestov je v úradnom jazyku členského štátu EÚ, aby sa vyhli potrebe úradného prekladu.",
-            "Obce a vyššie územné celky, ktoré plánujú zriadiť mládežnícke parlamenty, by mali začať s prípravou štatútov a organizačných štruktúr, aby boli pripravené na účinnosť zákona od 1. januára 2026."
+            "Skontrolujte vekové hranice vo vašich organizáciách a prispôsobte ich novým predpisom do 1. januára 2026.",
+            "Zosúladte zakladajúce dokumenty vašich mládežníckych organizácií s novými predpismi do 30. júna 2026.",
+            "Zabezpečte školenie pre zamestnancov a dobrovoľníkov o nových požiadavkách na preukazovanie bezúhonnosti.",
+            "Zriadenie mládežníckeho parlamentu v obci by malo byť prediskutované na najbližšom zasadnutí obecného zastupiteľstva.",
+            "Pripravte sa na zmeny v akreditovaných programoch a zistite, aké nové podmienky budú potrebné pre ich schválenie."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

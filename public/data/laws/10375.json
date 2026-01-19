@@ -4,34 +4,32 @@
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 566/2001 Z. z. o cenných papieroch a investičných službách a o zmene a doplnení niektorých zákonov (zákon o cenných papieroch) v znení neskorších predpisov a ktorým sa mení a dopĺňa zákon č. 429/2002 Z. z. o burze cenných papierov v znení neskorších predpisov",
     "approval_date": "19. 8. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10375",
-    "created_at": "2026-01-07 14:56:37",
-    "updated_at": "2026-01-07 17:40:58",
+    "created_at": "2026-01-19 14:21:25",
+    "updated_at": "2026-01-19 14:21:25",
     "summary": {
         "tags": [
             "ekonomika",
             "financie"
         ],
-        "summary_paragraph": "Novela zákona o cenných papieroch a investičných službách prináša významné zmeny v oblasti obchodovania s cennými papiermi a investičných služieb na Slovensku. Jednou z hlavných zmien je zavedenie definície systematického internalizátora, čo je obchodník s cennými papiermi, ktorý obchoduje na vlastný účet mimo regulovaných trhov. Táto zmena môže ovplyvniť spôsob, akým obchodníci s cennými papiermi vykonávajú transakcie a poskytujú služby svojim klientom. Ďalšou dôležitou zmenou je úprava pravidiel pre centrálnu protistranu, čo môže mať vplyv na riadenie rizík a stabilitu finančného systému. Zákon tiež zavádza nové povinnosti pre obchodníkov s cennými papiermi, vrátane povinnosti oznamovať Národnej banke Slovenska zámer vykonávať ďalšie podnikateľské činnosti. Tieto zmeny sú dôležité pre zvýšenie transparentnosti a efektívnosti finančných trhov na Slovensku. Novela nadobudne účinnosť v priebehu roka 2025, pričom prechodné obdobia umožnia obchodníkom prispôsobiť sa novým požiadavkám.",
+        "summary_paragraph": "Zákon č. .../2025, ktorým sa mení a dopĺňa zákon o cenných papieroch a investičných službách, prináša viaceré dôležité zmeny v oblasti regulácie obchodovania s cennými papiermi. Hlavným cieľom týchto zmien je zlepšiť transparentnosť a bezpečnosť na finančných trhoch, čo je kľúčové pre ochranu investorov a stabilitu trhu. Napríklad, zavádza sa definícia systematického internalizátora, čo je obchodník, ktorý obchoduje na vlastný účet mimo regulovaných trhov. Taktiež sa posilňuje dohľad Národnej banky Slovenska nad obchodníkmi s cennými papiermi, ktorí budú musieť oznámiť akékoľvek ďalšie podnikateľské činnosti, ktoré plánujú vykonávať. Zmeny nadobudnú účinnosť v auguste 2025, čo dáva obchodníkom čas na prispôsobenie sa novým požiadavkám. Kľúčovými bodmi sú aj povinnosti týkajúce sa investičného prieskumu a zodpovednosti obchodníkov za kvalitu poskytovaných služieb. Tieto zmeny môžu mať významný dopad na spôsob, akým sa obchoduje a investuje na slovenskom trhu.",
         "affected_groups": [
-            "Obchodníci s cennými papiermi - budú musieť prispôsobiť svoje obchodné modely novým pravidlám a oznamovať ďalšie podnikateľské činnosti Národnej banke Slovenska.",
-            "Investori na finančných trhoch - môžu očakávať zvýšenú transparentnosť a ochranu svojich investícií vďaka novým pravidlám pre investičný prieskum a riadenie rizík.",
-            "Národná banka Slovenska - získa nové kompetencie v oblasti dohľadu nad obchodníkmi s cennými papiermi a bude musieť posudzovať oznámenia o ďalších podnikateľských činnostiach.",
-            "Emitenti cenných papierov - budú musieť dodržiavať nové požiadavky na zverejňovanie informácií a predkladať dokumenty Národnej banke Slovenska.",
-            "Finančné inštitúcie - budú musieť zohľadniť nové pravidlá pre centrálnu protistranu a riadenie rizík koncentrácie."
+            "obchodníci s cennými papiermi: Budú musieť prísne dodržiavať nové pravidlá a oznámiť Národnej banke Slovenska akékoľvek ďalšie podnikateľské činnosti, čo môže ovplyvniť ich obchodné modely.",
+            "investori: Získajú väčšiu ochranu a transparentnosť v oblasti investičných služieb, čo môže zlepšiť ich dôveru v trh.",
+            "regulátori: Národná banka Slovenska získa viac právomocí na dohľad nad obchodníkmi, čo môže viesť k prísnejšiemu monitorovaniu trhu.",
+            "emitenti cenných papierov: Budú musieť dodržiavať nové pravidlá týkajúce sa zverejňovania informácií a investičného prieskumu, čo môže ovplyvniť ich prístup na trh."
         ],
         "positives": [
-            "Zvýšená transparentnosť na finančných trhoch - nové pravidlá pre investičný prieskum a systematických internalizátorov zvyšujú dôveru investorov.",
-            "Lepšie riadenie rizík - úpravy týkajúce sa centrálnej protistrany a rizika koncentrácie pomáhajú stabilizovať finančný systém.",
-            "Podpora pre malé a stredné podniky - zmeny v smernici o trhoch s finančnými nástrojmi môžu uľahčiť prístup k kapitálu."
+            "Zvýšená transparentnosť: Nové pravidlá zabezpečia, že investičný prieskum bude spravodlivý a jasný, čo pomôže investorom robiť informovanejšie rozhodnutia.",
+            "Silnejší dohľad: Posilnenie právomocí Národnej banky Slovenska môže prispieť k stabilite trhu a ochrane investorov pred podvodmi."
         ],
         "negatives": [
-            "Zvýšené administratívne náklady pre obchodníkov s cennými papiermi - nové povinnosti oznamovania a riadenia rizík môžu zvýšiť náklady na dodržiavanie predpisov.",
-            "Možné obmedzenia pre nefinančné subjekty - nové pravidlá môžu obmedziť flexibilitu v riadení likvidity a obchodných činností."
+            "Zvýšené náklady na compliance: Obchodníci s cennými papiermi budú musieť investovať do dodržiavania nových regulácií, čo môže zvýšiť ich prevádzkové náklady.",
+            "Možné obmedzenie inovácií: Prísnejšie regulácie môžu obmedziť flexibilitu obchodníkov a ich schopnosť inovovať v oblasti investičných služieb."
         ],
         "how_to_react": [
-            "Obchodníci s cennými papiermi by mali do 30 dní od nadobudnutia účinnosti zákona predložiť Národnej banke Slovenska oznámenie o ďalších podnikateľských činnostiach vrátane aktualizovaného plánu obchodných činností.",
-            "Investori by mali sledovať zmeny v pravidlách investičného prieskumu a konzultovať s finančnými poradcami, ako tieto zmeny môžu ovplyvniť ich investičné stratégie.",
-            "Emitenti cenných papierov by mali zabezpečiť, že všetky potrebné dokumenty sú pripravené na predloženie Národnej banke Slovenska a sú v súlade s novými požiadavkami na zverejňovanie informácií."
+            "Obchodníci s cennými papiermi by mali do konca júna 2025 zhodnotiť svoje obchodné modely a prispôsobiť ich novým reguláciám.",
+            "Investori by mali sledovať zmeny v reguláciách a informovať sa o nových povinnostiach obchodníkov, aby sa zabezpečili, že ich investície sú chránené.",
+            "Emitenti cenných papierov by mali začať pripravovať potrebné dokumenty a informácie, ktoré budú musieť zverejniť podľa nových pravidiel."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

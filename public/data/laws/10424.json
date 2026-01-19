@@ -1,37 +1,36 @@
 {
-    "id": 21,
+    "id": 11,
     "master_id": "10424",
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave a o zmene a doplnení niektorých zákonov v znení neskorších predpisov",
     "approval_date": "22. 8. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10424",
-    "created_at": "2026-01-07 18:45:07",
-    "updated_at": "2026-01-07 18:45:07",
+    "created_at": "2026-01-19 14:16:10",
+    "updated_at": "2026-01-19 14:16:10",
     "summary": {
         "tags": [
             "vzdelávanie",
-            "školstvo",
-            "práca"
+            "podnikanie"
         ],
-        "summary_paragraph": "Novela zákona č. 61/2015 Z. z. o odbornom vzdelávaní a príprave prináša významné zmeny, ktoré sa týkajú najmä stredných odborných a priemyselných škôl. Jednou z hlavných zmien je zavedenie odbornej stáže a digitálnej odbornej praxe ako súčasti študijných odborov, čo umožní žiakom získať praktické skúsenosti priamo v školách alebo na pracoviskách zamestnávateľov. Táto zmena je dôležitá, pretože posilňuje prepojenie medzi teoretickým vzdelávaním a praktickými zručnosťami, čo môže zvýšiť zamestnateľnosť absolventov. Zákon tiež zavádza možnosť uzatvárania zmlúv o odbornej stáži medzi strednými školami a vysokými školami, čím sa otvárajú nové možnosti pre spoluprácu a prehlbovanie vedomostí žiakov. Ďalšou významnou zmenou je zavedenie agentúrneho systému duálneho vzdelávania, ktorý umožňuje zamestnávateľom poskytovať praktické vyučovanie prostredníctvom hostiteľských zamestnávateľov. Tieto zmeny nadobudnú platnosť po schválení a zverejnení v Zbierke zákonov, pričom prechodné obdobia môžu byť stanovené na základe konkrétnych ustanovení zákona.",
+        "summary_paragraph": "Zákon č. 61/2015 Z. z. o odbornom vzdelávaní a príprave prechádza významnými zmenami, ktoré sa dotýkajú predovšetkým stredných odborných a priemyselných škôl. Novela zavádza nové pojmy ako odborná stáž a digitálna odborná prax, čím sa rozširuje ponuka praktického vzdelávania pre žiakov. Odborná stáž sa bude organizovať ako vyučovací predmet a bude sa vykonávať pod vedením vysokoškolských učiteľov, čo môže zlepšiť kvalitu praktického vzdelávania. Zákon tiež upravuje podmienky pre uzatváranie zmlúv o odbornej stáži medzi strednými a vysokými školami, čo môže posilniť spoluprácu medzi týmito inštitúciami. Zmeny nadobudnú účinnosť v auguste 2025, pričom prechodné obdobia sú nastavené tak, aby školy mali dostatok času na adaptáciu. Tieto zmeny sú dôležité, pretože zvyšujú relevanciu odborného vzdelávania vo vzťahu k potrebám trhu práce a môžu prispieť k zníženiu nezamestnanosti mladých ľudí.",
         "affected_groups": [
-            "žiaci stredných odborných a priemyselných škôl - získajú možnosť absolvovať odborné stáže a digitálne praxe, čo im umožní lepšie pripraviť sa na trh práce",
-            "zamestnávatelia v systéme duálneho vzdelávania - budú môcť poskytovať praktické vyučovanie prostredníctvom agentúrneho systému, čo môže zjednodušiť administratívu a koordináciu",
-            "vysoké školy - môžu uzatvárať zmluvy o odbornej stáži so strednými školami, čím sa posilní spolupráca a prepojenie medzi rôznymi stupňami vzdelávania",
-            "stavovské a profesijné organizácie - budú mať úlohu pri overovaní spôsobilosti zamestnávateľov a koordinácii agentúrneho systému",
-            "ministerstvo školstva - získa nové kompetencie v oblasti udeľovania oprávnení pre centrá excelentnosti odborného vzdelávania a prípravy"
+            "žiaci stredných odborných škôl: Získajú nové možnosti praktického vzdelávania prostredníctvom odbornej stáže a digitálnej odbornej praxe, čo im umožní lepšie sa pripraviť na trh práce.",
+            "vysoké školy: Budú mať možnosť uzatvárať zmluvy o odbornej stáži so strednými školami, čo posilní ich úlohu v odbornom vzdelávaní.",
+            "zamestnávatelia: Budú musieť prispôsobiť svoje praktické vyučovanie novým požiadavkám a podmienkam, čo môže vyžadovať dodatočné investície.",
+            "pedagogickí zamestnanci: Budú musieť prejsť školením a adaptáciou na nové vyučovacie metódy a prax, čo môže ovplyvniť ich pracovné zaťaženie.",
+            "rodičia žiakov: Budú musieť byť informovaní o nových možnostiach a podmienkach vzdelávania svojich detí, čo môže ovplyvniť ich rozhodovanie o vzdelaní."
         ],
         "positives": [
-            "Zvýšenie praktických zručností žiakov - odborné stáže a digitálne praxe umožnia žiakom získať cenné skúsenosti a lepšie sa pripraviť na pracovný trh.",
-            "Posilnenie spolupráce medzi školami a zamestnávateľmi - agentúrny systém duálneho vzdelávania a zmluvy o odbornej stáži podporujú efektívnejšiu spoluprácu a prepojenie vzdelávania s praxou."
+            "Zvýšenie praktických zručností žiakov: Nové formy odborného vzdelávania umožnia žiakom získať praktické skúsenosti, čo zlepší ich zamestnateľnosť.",
+            "Posilnenie spolupráce medzi školami: Zmluvy o odbornej stáži medzi strednými a vysokými školami podporia vzájomnú spoluprácu a zdieľanie zdrojov."
         ],
         "negatives": [
-            "Zvýšená administratívna záťaž pre školy a zamestnávateľov - nové zmluvné vzťahy a systémové zmeny môžu vyžadovať viac administratívnych úkonov a koordinácie.",
-            "Možné nerovnosti v prístupe k odborným stážam - nie všetky školy a zamestnávatelia môžu byť schopní poskytnúť rovnaké príležitosti pre všetkých žiakov, čo môže viesť k nerovnostiam."
+            "Zvýšené náklady pre zamestnávateľov: Zamestnávatelia budú musieť investovať do nových podmienok a vybavenia pre praktické vyučovanie, čo môže byť finančne náročné.",
+            "Náročnosť adaptácie na nové pravidlá: Školy a zamestnávatelia budú musieť prejsť zložitým procesom adaptácie na nové legislatívne požiadavky, čo môže spôsobiť dočasné problémy."
         ],
         "how_to_react": [
-            "Školy by mali začať pripravovať zmluvy o odbornej stáži s vysokými školami, aby zabezpečili možnosti pre svojich žiakov.",
-            "Zamestnávatelia, ktorí chcú vstúpiť do agentúrneho systému, by mali podať žiadosť o zápis do zoznamu agentúrnych zamestnávateľov na príslušnej stavovskej organizácii.",
-            "Žiaci a ich rodičia by sa mali informovať o možnostiach odbornej stáže a digitálnej praxe na svojich školách a aktívne sa zapájať do výberu vhodných príležitostí."
+            "Zamestnávatelia by mali začať s prípravou na nové podmienky a zmapovať si, aké zmeny budú potrebné na zabezpečenie praktického vyučovania.",
+            "Školy by mali zorganizovať školenia pre pedagogických zamestnancov, aby sa oboznámili s novými metódami a praxou, a to najneskôr do konca školského roka 2024/2025.",
+            "Rodičia by mali sledovať informácie zo škôl a zúčastniť sa rodičovských združení, aby sa dozvedeli o nových možnostiach vzdelávania svojich detí."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

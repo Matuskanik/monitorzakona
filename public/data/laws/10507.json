@@ -1,35 +1,36 @@
 {
-    "id": 7,
+    "id": 5,
     "master_id": "10507",
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 222/2004 Z. z. o dani z pridanej hodnoty v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
     "approval_date": "26. 9. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10507",
-    "created_at": "2026-01-07 14:44:58",
-    "updated_at": "2026-01-07 17:34:33",
+    "created_at": "2026-01-19 14:12:04",
+    "updated_at": "2026-01-19 14:12:04",
     "summary": {
         "tags": [
-            "dane",
-            "financie",
-            "podnikanie"
+            "ekonomika",
+            "financie"
         ],
-        "summary_paragraph": "Novela zákona o dani z pridanej hodnoty prináša významné zmeny v oblasti registrácie a správy DPH pre skupiny podnikateľov. Kľúčovou zmenou je zavedenie registrácie skupiny z úradnej moci, ktorá sa uplatňuje v prípadoch, keď je podozrenie na obchádzanie daňových povinností. Daňový úrad Banská Bystrica bude mať právomoc vyzvať členov skupiny na určenie spoločného zástupcu, pričom ak tak neurobia, úrad určí zástupcu sám. Tento proces má zabrániť zneužívaniu daňových výhod a zabezpečiť spravodlivé plnenie daňových povinností. Zákon tiež upravuje lehoty na vyjadrenie sa k dôvodom registrácie a umožňuje podanie odvolania s odkladným účinkom. Zmeny sa dotknú aj elektronickej fakturácie, kde sa zavádza povinnosť vyhotovovať faktúry v elektronickej forme, čo má zjednodušiť a zrýchliť daňové procesy. Tieto úpravy nadobudnú platnosť v priebehu roka 2025, pričom presné termíny budú závisieť od jednotlivých ustanovení zákona.",
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 222/2004 Z. z. o dani z pridanej hodnoty, prináša viaceré dôležité zmeny, ktoré ovplyvnia registráciu a správu daňových skupín. Hlavnou zmenou je zavedenie možnosti registrácie skupiny z úradnej moci, čo znamená, že ak daňový úrad zistí, že členovia skupiny obchádzajú platenie dane, môže ich zaregistrovať bez ich súhlasu. Tento krok je dôležitý pre zlepšenie daňovej správy a zabezpečenie dodržiavania daňových povinností. Zákon tiež upravuje lehoty na registráciu a podávanie žiadostí, pričom zavádza povinnosť určiť spoločného zástupcu skupiny v prípade registrácie z úradnej moci. Zmeny nadobudnú účinnosť od 1. januára 2026, čo dáva podnikateľom čas na prispôsobenie sa novým pravidlám. Zákon sa dotýka aj elektronických faktúr a oznamovacích povinností, čo môže mať vplyv na spôsob, akým podniky spravujú svoje fakturačné procesy.",
         "affected_groups": [
-            "Podnikatelia, ktorí sú členmi daňových skupín - budú musieť spolupracovať pri registrácii z úradnej moci.",
-            "Účtovníci a daňoví poradcovia - budú musieť prispôsobiť svoje postupy novým pravidlám elektronickej fakturácie.",
-            "Malé podniky, ktoré sa stanú členmi skupiny - môžu byť automaticky zaregistrované z úradnej moci, čo ovplyvní ich daňové povinnosti."
+            "podnikatelia v daňových skupinách: Budú musieť byť oboznámení s novými pravidlami registrácie a povinnosťou určiť spoločného zástupcu, čo môže ovplyvniť ich administratívne procesy.",
+            "daňoví poradcovia: Budú musieť prispôsobiť svoje poradenstvo novým pravidlám a informovať svojich klientov o zmenách v registrácii skupín.",
+            "finančné riaditeľstvo: Získa nové právomoci na registráciu skupín z úradnej moci, čo môže zvýšiť ich administratívnu záťaž.",
+            "malé a stredné podniky: Môžu čeliť novým povinnostiam pri správe svojich daňových záležitostí, čo môže vyžadovať dodatočné zdroje.",
+            "zdaniteľné osoby: Budú musieť zabezpečiť, aby ich fakturačné systémy boli schopné spracovávať elektronické faktúry v súlade s novými požiadavkami."
         ],
         "positives": [
-            "Zavedenie elektronickej fakturácie zjednoduší daňové procesy a zníži administratívnu záťaž pre podnikateľov.",
-            "Registrácia skupín z úradnej moci pomôže predchádzať daňovým únikom a zabezpečí spravodlivejšie rozdelenie daňových povinností."
+            "Zlepšenie daňovej správy: Zavedenie registrácie z úradnej moci môže pomôcť predchádzať daňovým únikom a zabezpečiť spravodlivejšie daňové prostredie.",
+            "Jednoduchšia administrácia pre daňové úrady: Nové pravidlá umožnia daňovým úradom efektívnejšie spravovať registrácie a znižovať administratívne náklady spojené s registráciou skupín."
         ],
         "negatives": [
-            "Podnikatelia môžu čeliť zvýšenej administratívnej záťaži pri registrácii z úradnej moci, čo môže byť časovo náročné.",
-            "Zmeny v elektronickej fakturácii môžu vyžadovať investície do nových technológií a školení, čo môže byť finančne náročné pre menšie podniky."
+            "Zvýšená administratívna záťaž pre podnikateľov: Podnikatelia budú musieť prispôsobiť svoje procesy a zabezpečiť dodržiavanie nových pravidiel, čo môže byť časovo náročné.",
+            "Možnosť nejasností v aplikácii zákona: Nové pravidlá môžu viesť k nejasnostiam a sporom medzi podnikateľmi a daňovými úradmi, najmä pokiaľ ide o registráciu z úradnej moci."
         ],
         "how_to_react": [
-            "Podnikatelia by mali do 8 dní od doručenia výzvy určiť spoločného zástupcu pre registráciu z úradnej moci.",
-            "Účtovníci by mali zabezpečiť, že ich systémy sú pripravené na elektronickú fakturáciu podľa nových pravidiel.",
-            "Podniky by mali sledovať komunikáciu od Daňového úradu Banská Bystrica a reagovať na výzvy v stanovených lehotách."
+            "Skontrolujte svoje aktuálne daňové povinnosti a zistite, či sa vás zmeny týkajú. Pripravte sa na prispôsobenie svojich procesov na registráciu skupín.",
+            "Do 30 dní od nadobudnutia účinnosti zákona sa informujte u svojho daňového poradcu o nových povinnostiach a zmenách v registrácii.",
+            "Zabezpečte, aby váš fakturačný systém bol schopný spracovávať elektronické faktúry v súlade s novými požiadavkami, a to najneskôr do 1. januára 2026."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

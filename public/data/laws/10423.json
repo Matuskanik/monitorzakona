@@ -1,37 +1,36 @@
 {
-    "id": 11,
+    "id": 9,
     "master_id": "10423",
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 138/2019 Z. z. o pedagogických zamestnancoch a odborných zamestnancoch a o zmene a doplnení niektorých zákonov v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
     "approval_date": "22. 8. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10423",
-    "created_at": "2026-01-07 14:47:40",
-    "updated_at": "2026-01-07 17:36:45",
+    "created_at": "2026-01-19 14:14:43",
+    "updated_at": "2026-01-19 14:14:43",
     "summary": {
         "tags": [
-            "školstvo",
             "vzdelávanie",
-            "práca"
+            "pedagogika"
         ],
-        "summary_paragraph": "Návrh zákona z roku 2025 prináša významné zmeny v oblasti pedagogických a odborných zamestnancov na Slovensku. Tento zákon sa zameriava na úpravu kvalifikačných požiadaviek a pracovných podmienok pre učiteľov a odborných zamestnancov v školách. Jednou z hlavných zmien je zavedenie povinnosti pre školských digitálnych koordinátorov absolvovať špecializované vzdelávanie v oblasti digitalizácie, čo má podporiť modernizáciu školského prostredia. Zákon tiež upravuje podmienky pre prácu nadčas, kde sa hodina priamej výchovno-vzdelávacej činnosti považuje za 1,5 hodiny práce nadčas. Okrem toho, pedagogickí zamestnanci budú mať možnosť dopĺňať si základný úväzok prácou v iných kategóriách, čo môže zvýšiť ich flexibilitu a odborný rozvoj. Zákon tiež stanovuje nové požiadavky na vzdelanie, kde napríklad učitelia materských škôl musia mať minimálne úplné stredné odborné vzdelanie. Tieto zmeny majú za cieľ zvýšiť kvalitu vzdelávania a prispôsobiť sa moderným potrebám školského systému.",
+        "summary_paragraph": "Zákon č. 138/2019 Z. z. o pedagogických zamestnancoch a odborných zamestnancoch prechádza významnými zmenami, ktoré sa dotýkajú predovšetkým kvalifikačných predpokladov a pracovných podmienok pedagogických zamestnancov. Novela zavádza nové požiadavky na vzdelanie a odbornú prípravu, pričom sa kladie dôraz na digitalizáciu a krízové situácie. Napríklad, učitelia musia absolvovať minimálne 50 hodín vzdelávania v oblasti digitalizácie do dvoch rokov od začiatku výkonu činnosti ako školský digitálny koordinátor. Zmeny sa dotýkajú aj náhradného voľna za prácu nadčas, kde sa jedna hodina priamej výchovno-vzdelávacej činnosti považuje za 1,5 hodiny práce nadčas. Tieto zmeny nadobudnú účinnosť v auguste 2025, čo dáva zamestnancom čas na prispôsobenie sa novým požiadavkám. Zákon tiež upravuje podmienky pre pedagogických zamestnancov, ktorí musia preukázať bezúhonnosť a absolvovať kurzy prvej pomoci a zvládania krízových situácií. Tieto zmeny sú dôležité pre zlepšenie kvality vzdelávania a ochranu detí a mládeže.",
         "affected_groups": [
-            "učitelia základných a stredných škôl - budú musieť absolvovať nové formy vzdelávania a môžu byť ovplyvnení zmenami v pracovných podmienkach",
-            "školskí digitálni koordinátori - budú musieť absolvovať špecializované vzdelávanie v oblasti digitalizácie",
-            "pedagogickí asistenti - môžu byť ovplyvnení zmenami v kvalifikačných požiadavkách",
-            "odborní zamestnanci výchovných zariadení - budú musieť absolvovať kurzy prvej pomoci a zvládania krízových situácií",
-            "učitelia materských škôl - budú musieť splniť nové požiadavky na vzdelanie"
+            "učitelia základných a stredných škôl: Budú musieť splniť nové kvalifikačné predpoklady a absolvovať dodatočné vzdelávanie v oblasti digitalizácie a krízového riadenia.",
+            "pedagogickí zamestnanci vo výchovných zariadeniach: Budú musieť absolvovať kurzy prvej pomoci a krízového riadenia do dvoch rokov od začiatku výkonu činnosti.",
+            "riaditelia škôl: Budú mať nové právomoci pri povolení odborným zamestnancom vykonávať činnosti mimo pracoviska a pri určovaní náhradného voľna.",
+            "pedagogickí asistenti: Budú mať zjednodušené podmienky na zaradenie do kariérového stupňa, ak splnia požiadavky na vzdelanie.",
+            "učitelia jazykových škôl: Budú mať špecifické požiadavky na vzdelanie a odbornú prípravu, ktoré sa líšia od ostatných pedagogických zamestnancov."
         ],
         "positives": [
-            "Zvýšenie kvalifikácie školských digitálnych koordinátorov môže viesť k lepšiemu využívaniu technológií v školách, čo je pozitívne pre modernizáciu vzdelávacieho procesu.",
-            "Možnosť dopĺňať si základný úväzok prácou v iných kategóriách môže zvýšiť flexibilitu a odborný rozvoj pedagogických zamestnancov."
+            "Zvýšenie kvality vzdelávania: Nové požiadavky na vzdelanie a odbornú prípravu pedagogických zamestnancov prispejú k zlepšeniu kvality vzdelávania a ochrany detí.",
+            "Flexibilita v pracovných podmienkach: Riaditelia budú mať väčšiu flexibilitu pri určovaní pracovných podmienok a náhradného voľna, čo môže viesť k lepšiemu vyváženiu pracovného a súkromného života zamestnancov."
         ],
         "negatives": [
-            "Zvýšené požiadavky na vzdelanie môžu predstavovať záťaž pre niektorých učiteľov, ktorí budú musieť investovať čas a prostriedky do ďalšieho vzdelávania.",
-            "Povinnosť absolvovať špecializované vzdelávanie môže byť časovo a finančne náročná pre školských digitálnych koordinátorov."
+            "Zvýšené nároky na zamestnancov: Nové požiadavky na vzdelanie a odbornú prípravu môžu byť pre niektorých zamestnancov ťažko splniteľné, čo môže viesť k stresu a odchodu z profesie.",
+            "Nedostatok času na adaptáciu: Zamestnanci budú mať obmedzený čas na prispôsobenie sa novým požiadavkám, čo môže ovplyvniť ich pracovný výkon a pohodu."
         ],
         "how_to_react": [
-            "Učitelia základných a stredných škôl by mali začať plánovať svoje ďalšie vzdelávanie, aby splnili nové požiadavky. Odporúča sa kontaktovať vzdelávacie inštitúcie, ktoré ponúkajú relevantné kurzy.",
-            "Školskí digitálni koordinátori by mali do dvoch rokov od začiatku výkonu funkcie absolvovať špecializované vzdelávanie v oblasti digitalizácie. Informácie o dostupných kurzoch môžu získať od ministerstva školstva.",
-            "Pedagogickí zamestnanci by mali skontrolovať svoje kvalifikačné predpoklady a v prípade potreby sa prihlásiť na doplňujúce vzdelávanie, aby splnili nové požiadavky zákona."
+            "Zamestnanci by mali začať s plánovaním svojho vzdelávania a absolvovaním potrebných kurzov už teraz, aby splnili nové požiadavky do augusta 2025.",
+            "Riaditelia by mali zorganizovať školenia a informačné stretnutia pre zamestnancov, aby ich informovali o nových požiadavkách a možnostiach vzdelávania.",
+            "Pedagogickí zamestnanci by mali sledovať dostupné kurzy a školenia v oblasti digitalizácie a krízového riadenia a prihlásiť sa na ne v dostatočnom predstihu."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },

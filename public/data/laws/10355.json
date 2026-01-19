@@ -4,37 +4,34 @@
     "title": "Vládny návrh zákona, ktorým sa mení a dopĺňa zákon č. 544/2002 Z. z. o Horskej záchrannej službe v znení neskorších predpisov a ktorým sa menia a dopĺňajú niektoré zákony",
     "approval_date": "3. 7. 2025",
     "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=zakony/zakon&MasterID=10355",
-    "created_at": "2026-01-07 14:56:03",
-    "updated_at": "2026-01-07 17:39:58",
+    "created_at": "2026-01-19 14:20:47",
+    "updated_at": "2026-01-19 14:20:47",
     "summary": {
         "tags": [
-            "záchrana",
-            "bezpečnosť",
-            "právo"
+            "ekonomika",
+            "financie"
         ],
-        "summary_paragraph": "Novela zákona o Horskej záchrannej službe prináša niekoľko významných zmien, ktoré majú za cieľ zlepšiť efektivitu a bezpečnosť záchrannej činnosti v horských oblastiach. Jednou z hlavných zmien je zavedenie prísnejších pravidiel pre používanie označenia a znaku Horskej záchrannej služby, čím sa má zabrániť ich zneužívaniu. Taktiež sa rozširuje definícia záchrannej činnosti, ktorá teraz zahŕňa aj vyslobodzovanie osôb v neprístupných oblastiach pomocou lanovej techniky. Zákon tiež zavádza disciplinárne orgány v rámci asociácie, ktoré budú dohliadať na etické a odborné správanie členov. Dôležitou novinkou je aj zriadenie Národnej asociácie horských záchranárov, ktorá bude zastupovať záujmy svojich členov a zvyšovať ich odbornú úroveň. Tieto zmeny nadobudnú účinnosť 1. januára 2026, pričom pre niektoré ustanovenia sú stanovené prechodné obdobia, napríklad pre registráciu horských vodcov do 30. júna 2026. Zákon tiež kladie dôraz na povinné poistenie členov asociácie pre prípad zodpovednosti za škodu, čo má zvýšiť ochranu klientov a profesionálnu zodpovednosť horských vodcov.",
+        "summary_paragraph": "Návrh zákona, ktorým sa mení a dopĺňa zákon č. 544/2002 Z. z. o Horskej záchrannej službe, reaguje na aktuálne problémy v aplikačnej praxi a zameriava sa na ochranu označenia 'Horská záchranná služba' a jej znaku. Zákon zavádza prísnejšie pravidlá pre používanie tohto označenia, čím sa má zabrániť jeho zneužívaniu. Okrem toho sa rozširuje definícia záchrannej činnosti, ktorá teraz zahŕňa aj vyslobodzovanie osôb v ťažko prístupných oblastiach. Zákon tiež zriaďuje Národnú asociáciu horských záchranárov, ktorá bude zastupovať záujmy svojich členov a zabezpečovať odbornú spôsobilosť. Dôležitou zmenou je aj zavedenie disciplinárnej právomoci voči členom asociácie, čo posilňuje etiku a profesionalitu v tejto oblasti. Zákon nadobudne účinnosť 1. januára 2026, pričom pre osoby s odbornou spôsobilosťou, ktoré nie sú členmi asociácie, je do 30. júna 2026 umožnené vykonávať činnosť aj bez registrácie.",
         "affected_groups": [
-            "Horskí vodcovia - budú musieť byť registrovaní v asociácii a mať povinné poistenie.",
-            "Členovia Horskej záchrannej služby - budú podliehať novým disciplinárnym pravidlám a budú musieť dodržiavať nové pokyny.",
-            "Osoby vykonávajúce záchrannú činnosť - budú musieť absolvovať nové formy školení a testov pre získanie odbornej spôsobilosti.",
-            "Podnikatelia v oblasti horskej turistiky - môžu byť ovplyvnení zmenami v pravidlách pre používanie označení a znakov.",
-            "Verejnosť - môže očakávať zvýšenú bezpečnosť a profesionalitu pri záchranných operáciách v horách."
+            "členovia Horskej záchrannej služby: Budú musieť dodržiavať prísnejšie pravidlá a podliehať disciplinárnej právomoci, čo môže ovplyvniť ich profesionálne správanie a zodpovednosť.",
+            "osoby vykonávajúce horskú vodcovskú činnosť: Budú musieť získať odbornú spôsobilosť a registrovať sa v asociácii, čím sa zvýši úroveň ich kvalifikácie a zodpovednosti.",
+            "turisti a návštevníci hôr: Získajú väčšiu istotu v kvalite a bezpečnosti záchranných služieb, keďže záchranári budú musieť preukázať odbornú spôsobilosť.",
+            "organizácie a inštitúcie zapojené do záchrannej činnosti: Budú musieť spolupracovať s novou asociáciou a prispôsobiť sa novým pravidlám a štandardom.",
+            "štátne orgány: Budú mať jasnejšie pravidlá a zodpovednosti pri regulácii a podpore Horskej záchrannej služby."
         ],
         "positives": [
-            "Zvýšená bezpečnosť - nové pravidlá pre odbornú spôsobilosť a poistenie zvyšujú bezpečnosť pre turistov a klientov.",
-            "Ochrana značky - prísnejšie pravidlá pre používanie označenia a znaku Horskej záchrannej služby zabraňujú ich zneužívaniu.",
-            "Profesionalizácia - zriadenie Národnej asociácie horských záchranárov podporuje profesionalizáciu a zvyšovanie odbornosti v oblasti záchrany."
+            "Zvýšenie profesionality: Zavedenie disciplinárnej právomoci a odborných požiadaviek posilní profesionalitu a zodpovednosť záchranárov.",
+            "Ochrana označenia: Prísnejšie pravidlá pre používanie označenia 'Horská záchranná služba' zabránia jeho zneužívaniu a posilnia dôveru verejnosti.",
+            "Zlepšenie bezpečnosti: Zvýšené požiadavky na odbornú spôsobilosť záchranárov prispejú k vyššej úrovni bezpečnosti pre turistov a návštevníkov hôr."
         ],
         "negatives": [
-            "Zvýšené náklady - povinné poistenie a nové školenia môžu zvýšiť finančné náklady pre horských vodcov.",
-            "Administratívna záťaž - nové registračné a disciplinárne pravidlá môžu zvýšiť administratívnu záťaž pre členov asociácie."
+            "Zvýšené náklady na registráciu: Osoby vykonávajúce horskú vodcovskú činnosť budú musieť investovať do registrácie a odborných školení, čo môže byť finančne náročné.",
+            "Možné obmedzenie činnosti: Prísne pravidlá a disciplinárne opatrenia môžu viesť k obmedzeniu činnosti niektorých záchranárov, ktorí nebudú schopní splniť nové požiadavky."
         ],
         "how_to_react": [
-            "Horskí vodcovia by mali do 30. júna 2026 podať žiadosť o registráciu v asociácii, aby mohli pokračovať vo svojej činnosti.",
-            "Členovia Horskej záchrannej služby by mali absolvovať nové školenia a testy na získanie alebo obnovenie odbornej spôsobilosti.",
-            "Podnikatelia v oblasti horskej turistiky by mali skontrolovať svoje používanie označení a znakov, aby sa vyhli porušeniu nových pravidiel.",
-            "Osoby vykonávajúce záchrannú činnosť by mali zabezpečiť, že majú platné poistenie s minimálnym limitom 1 000 000 eur.",
-            "Verejnosť by mala byť informovaná o nových pravidlách a očakávať zvýšenú bezpečnosť pri záchranných operáciách."
+            "Ak ste členom Horskej záchrannej služby, začnite sa pripravovať na nové pravidlá a školenia, ktoré budú potrebné na udržanie vašej odbornej spôsobilosti.",
+            "Osoby vykonávajúce horskú vodcovskú činnosť by mali do 30. júna 2026 získať registráciu v asociácii, aby mohli pokračovať vo svojej činnosti.",
+            "Pre turistov a návštevníkov hôr je odporúčané informovať sa o kvalifikáciách záchranárov a službách, ktoré poskytujú, aby sa zabezpečila ich bezpečnosť."
         ],
         "disclaimer": "Toto nie je právne poradenstvo. Informácie sú len informatívneho charakteru. Pre právne poradenstvo sa obráťte na kvalifikovaného právnika."
     },
