@@ -1,1 +1,7 @@
-DirectoryIndex index.html index.php
+# Prefer HTML over PHP for static serving
+DirectoryIndex index.html
+
+# Serve static files
+<FilesMatch "\.(html|css|js|json|png|jpg|jpeg|gif|svg|ico)$">
+    Require all granted
+</FilesMatch>
