@@ -87,6 +87,96 @@ class OpenAIClient
         return $summary;
     }
 
+    public function answerQuestion(string $lawText, string $question): string
+    {
+        $this->logger->info("Generating AI answer (text length: " . strlen($lawText) . " chars)");
+
+        $ch = curl_init('https://api.openai.com/v1/chat/completions');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->apiKey
+            ],
+            CURLOPT_POSTFIELDS => json_encode([
+                'model' => $this->model,
+                'messages' => $this->buildQaMessages($lawText, $question, []),
+                'temperature' => 0.2,
+                'max_tokens' => $this->maxTokens
+            ], JSON_UNESCAPED_UNICODE),
+            CURLOPT_TIMEOUT => 60
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($response === false || !empty($error)) {
+            throw new \RuntimeException("OpenAI API request failed: {$error}");
+        }
+
+        if ($httpCode !== 200) {
+            $this->logger->error("OpenAI API returned HTTP {$httpCode}: {$response}");
+            throw new \RuntimeException("OpenAI API returned HTTP {$httpCode}");
+        }
+
+        $data = json_decode($response, true);
+        if (!isset($data['choices'][0]['message']['content'])) {
+            throw new \RuntimeException("Invalid OpenAI API response structure");
+        }
+
+        $answer = trim($data['choices'][0]['message']['content']);
+        $this->logger->info("AI answer generated successfully");
+        return $answer;
+    }
+
+    public function answerQuestionWithHistory(string $lawText, string $question, array $history): string
+    {
+        $this->logger->info("Generating AI answer with history (text length: " . strlen($lawText) . " chars)");
+
+        $ch = curl_init('https://api.openai.com/v1/chat/completions');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->apiKey
+            ],
+            CURLOPT_POSTFIELDS => json_encode([
+                'model' => $this->model,
+                'messages' => $this->buildQaMessages($lawText, $question, $history),
+                'temperature' => 0.2,
+                'max_tokens' => $this->maxTokens
+            ], JSON_UNESCAPED_UNICODE),
+            CURLOPT_TIMEOUT => 60
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($response === false || !empty($error)) {
+            throw new \RuntimeException("OpenAI API request failed: {$error}");
+        }
+
+        if ($httpCode !== 200) {
+            $this->logger->error("OpenAI API returned HTTP {$httpCode}: {$response}");
+            throw new \RuntimeException("OpenAI API returned HTTP {$httpCode}");
+        }
+
+        $data = json_decode($response, true);
+        if (!isset($data['choices'][0]['message']['content'])) {
+            throw new \RuntimeException("Invalid OpenAI API response structure");
+        }
+
+        $answer = trim($data['choices'][0]['message']['content']);
+        $this->logger->info("AI answer generated successfully");
+        return $answer;
+    }
+
     private function buildPrompt(string $text): string
     {
         return "Analyzuj nasledujúci text zo slovenského zákona a vytvor podrobný, kvalitný JSON objekt s týmito presnými kľúčmi:
@@ -161,6 +251,194 @@ VŠEOBECNÉ PRAVIDLÁ:
 Text zákona:
 " . substr($text, 0, 30000); // Limit to avoid token limits
     }
+
+    private function buildQaPrompt(string $text, string $question): string
+    {
+        $textSnippet = substr($text, 0, 40000);
+        return "Odpovedz na otázku na základe textu zákona nižšie. Ak odpoveď nie je priamo v texte zákona, použi svoje všeobecné znalosti slovenského práva a praxe na poskytnutie užitočnej odpovede. V takom prípade jasne označ, že informácia pochádza z tvojich všeobecných znalostí. Nepridávaj upozornenia o právnom poradenstve.\n\nOtázka:\n{$question}\n\nText zákona:\n{$textSnippet}";
+    }
+
+    private function buildQaMessages(string $text, string $question, array $history): array
+    {
+        // Retrieve relevant passages instead of sending everything
+        $passages = $this->retrieveRelevantPassages($text, $question, $history);
+        $contextText = implode("\n\n---\n\n", $passages);
+        
+        // Summarize old history, keep only last 3 exchanges
+        $historySummary = $this->summarizeHistory($history);
+        $recentHistory = array_slice($history, -3);
+        
+        $systemPrompt = 'Si expertný právny poradca pre slovenské zákony. Tvoja úloha je poskytnúť praktickú, zrozumiteľnú a pravdivú odpoveď.
+
+PRAVIDLÁ:
+1. Najprv sa pokús nájsť odpoveď v poskytnutom texte zákona.
+2. Ak odpoveď NIE JE v texte zákona, NEPÍŠ "Táto informácia nie je v texte zákona uvedená." Namiesto toho:
+   - Použi svoje všeobecné znalosti slovenského práva a praxe
+   - Navrhni riešenie alebo odpoveď na základe svojich znalostí
+   - Jasne označ, že táto informácia pochádza z tvojich všeobecných znalostí, nie z konkrétneho textu tohto zákona
+   - Uveď praktické rady ako postupovať ďalej (na koho sa obrátiť, kde hľadať informácie)
+3. Buď praktický - vysvetli čo to znamená pre bežného človeka, nie právnické formulky.
+4. Štruktúra odpovede:
+   - Priama odpoveď na otázku (1-2 vety)
+   - Praktické vysvetlenie (čo to znamená v praxi, koho sa týka)
+   - Ak relevantné: konkrétne kroky čo má človek urobiť
+5. Nepoužívaj zbytočné technikálie ani právnický žargón.
+6. Ak si nie si istý, povedz to otvorene.
+7. NIKDY nepridávaj upozornenia typu "Toto nie je právne poradenstvo", "Odporúčam konzultovať s právnikom" a podobne. Tieto upozornenia sú zbytočné a znižujú kvalitu odpovede.';
+
+        $messages = [
+            [
+                'role' => 'system',
+                'content' => $systemPrompt
+            ]
+        ];
+        
+        // Add history summary if exists
+        if ($historySummary !== '') {
+            $messages[] = [
+                'role' => 'user',
+                'content' => "Zhrnutie predchádzajúcej konverzácie:\n{$historySummary}"
+            ];
+            $messages[] = [
+                'role' => 'assistant',
+                'content' => 'Rozumiem kontextu predchádzajúcej konverzácie.'
+            ];
+        }
+        
+        // Add law context
+        $messages[] = [
+            'role' => 'user',
+            'content' => "Relevantné časti textu zákona:\n\n{$contextText}"
+        ];
+        $messages[] = [
+            'role' => 'assistant',
+            'content' => 'Mám k dispozícii relevantné časti zákona. Ako vám môžem pomôcť?'
+        ];
+
+        // Add recent history
+        foreach ($recentHistory as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $role = $item['role'] ?? '';
+            $content = $item['content'] ?? '';
+            if (!in_array($role, ['user', 'assistant'], true)) {
+                continue;
+            }
+            if (!is_string($content) || trim($content) === '') {
+                continue;
+            }
+            $messages[] = [
+                'role' => $role,
+                'content' => $content
+            ];
+        }
+
+        // Add current question
+        $messages[] = [
+            'role' => 'user',
+            'content' => $question
+        ];
+
+        return $messages;
+    }
+
+    private function retrieveRelevantPassages(string $lawText, string $question, array $history): array
+    {
+        $queryText = $question;
+            foreach (array_slice($history, -2) as $item) {
+                if (isset($item['content']) && is_string($item['content'])) {
+                    $queryText .= ' ' . $item['content'];
+                }
+            }
+            
+            $stopWords = ['a', 'ale', 'ani', 'bez', 'do', 'je', 'jeho', 'jej', 'k', 'kde', 'keď', 'kto', 'ktorá', 'ktoré', 'ktorý', 'ku', 'ma', 'má', 'na', 'nad', 'ne', 'nie', 'no', 'o', 'od', 'po', 'pod', 'pre', 'pri', 'sa', 's', 'so', 'som', 'sú', 'ta', 'tak', 'tá', 'tam', 'te', 'ten', 'tento', 'tie', 'to', 'tu', 'ty', 'u', 'už', 'v', 'vo', 'vy', 'za', 'že', 'z', 'zo'];
+            $words = preg_split('/\s+/', mb_strtolower($queryText, 'UTF-8'));
+            $keywords = array_filter($words, function($w) use ($stopWords) {
+                return mb_strlen($w, 'UTF-8') > 2 && !in_array($w, $stopWords);
+            });
+            
+            if (empty($keywords)) {
+                return [substr($lawText, 0, 40000)];
+            }
+            
+            $chunkSize = 2000;
+            $chunks = [];
+            $textLength = mb_strlen($lawText, 'UTF-8');
+            
+            for ($i = 0; $i < $textLength; $i += $chunkSize) {
+                $chunk = mb_substr($lawText, $i, $chunkSize, 'UTF-8');
+                if (trim($chunk) !== '') {
+                    $chunks[] = $chunk;
+                }
+            }
+            
+            if (empty($chunks)) {
+                return [substr($lawText, 0, 40000)];
+            }
+            
+            $scoredChunks = [];
+            foreach ($chunks as $idx => $chunk) {
+                $score = 0;
+                $chunkLower = mb_strtolower($chunk, 'UTF-8');
+                foreach ($keywords as $keyword) {
+                    $score += substr_count($chunkLower, $keyword);
+                }
+                if ($score > 0) {
+                    $scoredChunks[] = ['chunk' => $chunk, 'score' => $score, 'idx' => $idx];
+                }
+            }
+            
+            usort($scoredChunks, function($a, $b) {
+                return $b['score'] - $a['score'];
+            });
+            
+            $selectedChunks = [];
+            $totalLength = 0;
+            $maxLength = 35000;
+            
+            foreach ($scoredChunks as $item) {
+                $chunkLength = mb_strlen($item['chunk'], 'UTF-8');
+                if ($totalLength + $chunkLength <= $maxLength) {
+                    $selectedChunks[] = $item['chunk'];
+                    $totalLength += $chunkLength;
+                }
+                if (count($selectedChunks) >= 6) {
+                    break;
+                }
+            }
+            
+            if (count($selectedChunks) < 2 && $textLength > 0) {
+                $firstChunk = mb_substr($lawText, 0, min(5000, $textLength), 'UTF-8');
+                array_unshift($selectedChunks, $firstChunk);
+            }
+            
+            return empty($selectedChunks) ? [substr($lawText, 0, 40000)] : $selectedChunks;
+        }
+    
+        private function summarizeHistory(array $history): string
+        {
+            if (count($history) <= 3) {
+                return '';
+            }
+            
+            $toSummarize = array_slice($history, 0, -3);
+            if (empty($toSummarize)) {
+                return '';
+            }
+            
+            $summaryText = '';
+            foreach ($toSummarize as $item) {
+                if (isset($item['role']) && isset($item['content'])) {
+                    $role = $item['role'] === 'user' ? 'Otázka' : 'Odpoveď';
+                    $content = mb_substr($item['content'], 0, 150, 'UTF-8');
+                    $summaryText .= "- {$role}: {$content}...\n";
+                }
+            }
+            
+            return mb_substr($summaryText, 0, 500, 'UTF-8');
+        }
+    
 
     private function validateSchema(array $data): void
     {
