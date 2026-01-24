@@ -4,6 +4,10 @@
     "type": "project",
     "require": {
         "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-curl": "*",
+        "ext-mbstring": "*",
         "dompdf/dompdf": "^3.1"
     },
     "autoload": {
