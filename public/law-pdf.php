@@ -318,13 +318,29 @@ $html .= '</div>
 </body>
 </html>';
 
-$options = new Options();
-$options->set('isRemoteEnabled', true);
-$options->set('defaultFont', 'DejaVu Sans');
-
-$dompdf = new Dompdf($options);
-$dompdf->loadHtml($html, 'UTF-8');
-$dompdf->setPaper('A4', 'portrait');
-$dompdf->render();
-$dompdf->stream('zakon-' . $law['id'] . '.pdf', ['Attachment' => true]);
+try {
+    $options = new Options();
+    $options->set('isRemoteEnabled', true);
+    $options->set('defaultFont', 'DejaVu Sans');
+    
+    // Use system temp directory for font cache (works on cloud platforms)
+    $tempDir = sys_get_temp_dir() . '/dompdf';
+    if (!is_dir($tempDir)) {
+        @mkdir($tempDir, 0755, true);
+    }
+    $options->set('fontDir', $tempDir);
+    $options->set('fontCache', $tempDir);
+    $options->set('tempDir', $tempDir);
+    $options->set('chroot', __DIR__);
+    
+    $dompdf = new Dompdf($options);
+    $dompdf->loadHtml($html, 'UTF-8');
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+    $dompdf->stream('zakon-' . $law['id'] . '.pdf', ['Attachment' => true]);
+} catch (\Exception $e) {
+    http_response_code(500);
+    header('Content-Type: text/plain; charset=UTF-8');
+    echo 'PDF generation error: ' . $e->getMessage();
+}
 exit;
