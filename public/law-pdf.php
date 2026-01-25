@@ -1,5 +1,22 @@
 <?php
 
+// Suppress HTML error output - return text errors instead
+ini_set('display_errors', '0');
+error_reporting(E_ALL);
+
+// Global exception handler
+set_exception_handler(function($e) {
+    http_response_code(500);
+    header('Content-Type: text/plain; charset=UTF-8');
+    echo 'Chyba: ' . $e->getMessage();
+    exit;
+});
+
+// Custom error handler
+set_error_handler(function($errno, $errstr, $errfile, $errline) {
+    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+});
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Config;
@@ -11,7 +28,7 @@ try {
     Config::load();
 } catch (\Exception $e) {
     http_response_code(500);
-    echo 'Configuration error.';
+    echo 'Configuration error: ' . $e->getMessage();
     exit;
 }
 
