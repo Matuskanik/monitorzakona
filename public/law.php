@@ -13,14 +13,23 @@ try {
 }
 
 $lawId = $_GET['id'] ?? null;
-if (!$lawId) {
+$masterId = $_GET['master_id'] ?? null;
+
+if (!$lawId && !$masterId) {
     header('Location: index.php');
     exit;
 }
 
 $db = new Database(Config::get('DB_PATH'));
-$law = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ?");
-$law->execute([$lawId]);
+
+// Support both id and master_id parameters
+if ($masterId) {
+    $law = $db->getPdo()->prepare("SELECT * FROM laws WHERE master_id = ?");
+    $law->execute([$masterId]);
+} else {
+    $law = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ?");
+    $law->execute([$lawId]);
+}
 $law = $law->fetch();
 
 if (!$law) {
