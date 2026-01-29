@@ -9,7 +9,7 @@
   2. Nastavte **Branch** na **v3** (alebo **V5**).
   3. Spustite **Deploy** (alebo nechajte automatický deploy po push).
 - Po nasadení skontrolujte: https://monitorzakona.sk/login.php a https://monitorzakona.sk/register.php.
-- **Prihlásenie cez Google:** v **Settings** → **App-Level Environment Variables** pridajte premennú **GOOGLE_CLIENT_ID** (hodnota = Client ID z Google Cloud Console). V Google Cloud Console pridajte do OAuth 2.0 Authorized redirect URIs: `https://monitorzakona.sk/google-callback.php`. Po uložení premenných spustite nový deploy.
+- **Prihlásenie cez Google:** v **Settings** → **App-Level Environment Variables** pridajte premennú presne s názvom **GOOGLE_CLIENT_ID** (hodnota = celý Client ID z Google Cloud Console, napr. `515009050245-...apps.googleusercontent.com`). V Google Cloud Console pridajte do OAuth 2.0: Authorized redirect URIs `https://monitorzakona.sk/google-callback.php` a Authorized JavaScript origins `https://monitorzakona.sk`. Po pridaní/zmene premenných **musíte spustiť nový deploy** (env sa načíta až pri deployi).
 
 ---
 

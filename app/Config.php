@@ -34,17 +34,20 @@ class Config
     public static function get(string $key, ?string $default = null): ?string
     {
         $value = self::$config[$key] ?? null;
-        if ($value !== null && $value !== '') {
-            return $value;
+        if ($value !== null && (string) $value !== '') {
+            return trim((string) $value);
         }
         $env = getenv($key);
-        if ($env !== false && $env !== '') {
-            return $env;
+        if ($env !== false && trim((string) $env) !== '') {
+            return trim((string) $env);
         }
-        // Some platforms (e.g. PHP-FPM) expose env only in $_ENV
         $envValue = $_ENV[$key] ?? null;
-        if ($envValue !== null && $envValue !== '') {
-            return (string) $envValue;
+        if ($envValue !== null && trim((string) $envValue) !== '') {
+            return trim((string) $envValue);
+        }
+        $serverValue = $_SERVER[$key] ?? null;
+        if ($serverValue !== null && trim((string) $serverValue) !== '') {
+            return trim((string) $serverValue);
         }
         return $default;
     }
