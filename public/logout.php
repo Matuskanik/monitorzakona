@@ -12,7 +12,7 @@ try {
     die("Configuration error: " . htmlspecialchars($e->getMessage()));
 }
 
-$db = new Database(Config::get('DB_PATH'));
+$db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
 $auth = new Auth($db);
 
 $auth->logout();

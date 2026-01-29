@@ -23,7 +23,7 @@ if (!Security::checkRateLimit($ip, 60, 60)) {
     die("Príliš veľa požiadaviek. Skúste znova neskôr.");
 }
 
-$db = new Database(Config::get('DB_PATH'));
+$db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
 $auth = new Auth($db);
 
 // Handle search - validate and sanitize input

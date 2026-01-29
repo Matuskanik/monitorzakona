@@ -8,16 +8,24 @@ class Database
 
     public function __construct(string $dbPath)
     {
+        $dbPath = trim($dbPath);
+        if ($dbPath === '') {
+            $dbPath = 'data/sentinel.db';
+        }
+
         // Convert relative paths to absolute paths relative to project root
         if (!str_starts_with($dbPath, '/')) {
-            // Find project root (where vendor/autoload.php is)
             $projectRoot = dirname(__DIR__);
             $dbPath = $projectRoot . '/' . $dbPath;
         }
-        
+
         $dir = dirname($dbPath);
         if (!is_dir($dir)) {
-            mkdir($dir, 0755, true);
+            @mkdir($dir, 0755, true);
+        }
+        // On Digital Ocean / Heroku, app dir may be read-only; use /tmp if dir not writable
+        if (!is_writable($dir)) {
+            $dbPath = '/tmp/sentinel.db';
         }
 
         $this->pdo = new \PDO('sqlite:' . $dbPath);
