@@ -41,6 +41,11 @@ class Config
         if ($env !== false && $env !== '') {
             return $env;
         }
+        // Some platforms (e.g. PHP-FPM) expose env only in $_ENV
+        $envValue = $_ENV[$key] ?? null;
+        if ($envValue !== null && $envValue !== '') {
+            return (string) $envValue;
+        }
         return $default;
     }
 

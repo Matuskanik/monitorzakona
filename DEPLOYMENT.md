@@ -1,5 +1,18 @@
 # Deployment Guide - $0 Tech Stack
 
+## Digital Ocean (monitorzakona.sk)
+
+- **Aktuálna produkcia:** nasadzuje sa z vetvy **v3** (alebo **V5** – obe obsahujú rovnakú novú verziu s Google prihlásením).
+- **Verzia s Google prihlásením:** vetva **V5** (alebo **v3** po merge) – registrácia, prihlásenie, Moja pamäť.
+- Ak na DO beží ešte stará verzia:
+  1. V Digital Ocean App Platform → váš projekt → **Settings** → **App** → **Source**.
+  2. Nastavte **Branch** na **v3** (alebo **V5**).
+  3. Spustite **Deploy** (alebo nechajte automatický deploy po push).
+- Po nasadení skontrolujte: https://monitorzakona.sk/login.php a https://monitorzakona.sk/register.php.
+- **Prihlásenie cez Google:** v **Settings** → **App-Level Environment Variables** pridajte premennú **GOOGLE_CLIENT_ID** (hodnota = Client ID z Google Cloud Console). V Google Cloud Console pridajte do OAuth 2.0 Authorized redirect URIs: `https://monitorzakona.sk/google-callback.php`. Po uložení premenných spustite nový deploy.
+
+---
+
 This application has been optimized to run on a **$0 tech stack** using:
 - **GitHub Actions** for automated processing (free)
 - **Cloudflare Pages** for hosting (free tier)

@@ -221,7 +221,7 @@ $loginUri = $redirectUri;
                 <button class="google-disabled" disabled>Prihlásiť sa cez Google</button>
             </div>
             <div class="info">
-                Google prihlásenie nie je nakonfigurované. Nastavte <code>GOOGLE_CLIENT_ID</code> v súbore <code>.env</code> a reštartujte server.
+                Google prihlásenie nie je zapnuté. Nastavte <code>GOOGLE_CLIENT_ID</code> v súbore <code>.env</code> (lokálne) alebo v <strong>premenných prostredia</strong> na Digital Ocean (Settings → App-Level Environment Variables) a znova nasaďte.
             </div>
         <?php endif; ?>
 
