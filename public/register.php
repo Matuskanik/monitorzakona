@@ -248,6 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    <!-- DEBUG: GOOGLE_CLIENT_ID on server is <?php echo $googleClientId ? 'set (length ' . strlen($googleClientId) . ')' : 'NOT SET'; ?> -->
     <div class="container">
         <h1>Registrácia</h1>
         
