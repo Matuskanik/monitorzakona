@@ -4,7 +4,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Config;
 use App\Database;
+use App\Auth;
 use App\OpenAIClient;
+use App\Security;
 
 try {
     Config::load();
@@ -12,10 +14,20 @@ try {
     die("Configuration error: " . htmlspecialchars($e->getMessage()));
 }
 
-$db = new Database(Config::get('DB_PATH'));
+Security::setSecurityHeaders();
 
-// Handle search
-$searchQuery = $_GET['search'] ?? '';
+// Rate limiting
+$ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+if (!Security::checkRateLimit($ip, 60, 60)) {
+    http_response_code(429);
+    die("Príliš veľa požiadaviek. Skúste znova neskôr.");
+}
+
+$db = new Database(Config::get('DB_PATH'));
+$auth = new Auth($db);
+
+// Handle search - validate and sanitize input
+$searchQuery = Security::validateSearchQuery($_GET['search'] ?? null);
 $laws = $db->getLatestLaws(50);
 
 // Filter laws if search query is provided
@@ -213,10 +225,83 @@ if (!empty($searchQuery)) {
             color: #95a5a6;
             font-size: 0.9em;
         }
+        .user-header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #34495e;
+        }
+        .user-email {
+            font-weight: 500;
+        }
+        .my-memory-button {
+            padding: 8px 16px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .my-memory-button:hover {
+            background: #229954;
+        }
+        .login-link {
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .login-link:hover {
+            background: #2980b9;
+        }
+        .logout-link {
+            padding: 8px 16px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .logout-link:hover {
+            background: #c0392b;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="position: relative;">
+        <?php if ($auth->isLoggedIn()): ?>
+            <div class="user-header">
+                <div class="user-info">
+                    <span class="user-email"><?php echo htmlspecialchars($auth->getUserEmail()); ?></span>
+                </div>
+                <a href="my-memory.php" class="my-memory-button">Moja pamäť</a>
+                <a href="logout.php" class="logout-link">Odhlásiť sa</a>
+            </div>
+        <?php else: ?>
+            <div class="user-header">
+                <a href="login.php" class="login-link">Prihlásiť sa</a>
+                <a href="register.php" class="login-link" style="background: #27ae60;">Registrovať sa</a>
+            </div>
+        <?php endif; ?>
         <div class="header">
             <img src="logo.png" alt="Monitor zákona" class="logo">
             <p class="tagline">Zrozumiteľné analýzy slovenských zákonov, ktoré vám pomôžu pochopiť, ako vás ovplyvnia a ako môžete na ne reagovať.</p>
@@ -314,7 +399,7 @@ if (!empty($searchQuery)) {
         <div class="footer">
             <p>Automaticky monitorované z <a href="https://www.nrsr.sk/web/default.aspx?SectionId=184" target="_blank">NR SR</a></p>
             <p style="margin-top: 10px;">
-                <a href="prompts.php">Použité prompty</a> | Autor: Matúš Kaník
+                <a href="prompts.php">Použité prompty</a> | <a href="terms.php">Podmienky používania</a> | Autor: Matúš Kaník
             </p>
         </div>
     </div>

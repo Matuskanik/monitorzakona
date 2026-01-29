@@ -79,6 +79,45 @@ class Database
                 created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )
         ");
+
+        // User tables for V5
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL UNIQUE,
+                password_hash TEXT,
+                google_id TEXT UNIQUE,
+                terms_accepted INTEGER DEFAULT 0,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS user_saved_laws (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                law_id INTEGER NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                FOREIGN KEY (law_id) REFERENCES laws(id) ON DELETE CASCADE,
+                UNIQUE(user_id, law_id)
+            )
+        ");
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS user_chats (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                law_id INTEGER NOT NULL,
+                messages_json TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                FOREIGN KEY (law_id) REFERENCES laws(id) ON DELETE CASCADE,
+                UNIQUE(user_id, law_id)
+            )
+        ");
     }
 
     public function getPdo(): \PDO
@@ -229,6 +268,126 @@ class Database
         }
         
         return '0000-00-00';
+    }
+
+    // User methods
+    public function createUser(string $email, ?string $passwordHash = null, ?string $googleId = null, bool $termsAccepted = false): int
+    {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO users (email, password_hash, google_id, terms_accepted)
+            VALUES (?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            $email,
+            $passwordHash,
+            $googleId,
+            $termsAccepted ? 1 : 0
+        ]);
+        return $this->pdo->lastInsertId();
+    }
+
+    public function findUserByEmail(string $email): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function findUserByGoogleId(string $googleId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE google_id = ?");
+        $stmt->execute([$googleId]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function findUserById(int $id): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function saveLawForUser(int $userId, int $lawId): bool
+    {
+        try {
+            $stmt = $this->pdo->prepare("
+                INSERT INTO user_saved_laws (user_id, law_id)
+                VALUES (?, ?)
+            ");
+            $stmt->execute([$userId, $lawId]);
+            return true;
+        } catch (\PDOException $e) {
+            // Already saved, ignore
+            return false;
+        }
+    }
+
+    public function removeSavedLawForUser(int $userId, int $lawId): void
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM user_saved_laws WHERE user_id = ? AND law_id = ?");
+        $stmt->execute([$userId, $lawId]);
+    }
+
+    public function getUserSavedLaws(int $userId): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT l.*, usl.created_at as saved_at
+            FROM user_saved_laws usl
+            JOIN laws l ON usl.law_id = l.id
+            WHERE usl.user_id = ?
+            ORDER BY usl.created_at DESC
+        ");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll();
+    }
+
+    public function isLawSavedByUser(int $userId, int $lawId): bool
+    {
+        $stmt = $this->pdo->prepare("SELECT id FROM user_saved_laws WHERE user_id = ? AND law_id = ?");
+        $stmt->execute([$userId, $lawId]);
+        return $stmt->fetch() !== false;
+    }
+
+    public function saveUserChat(int $userId, int $lawId, array $messages): void
+    {
+        $messagesJson = json_encode($messages, JSON_UNESCAPED_UNICODE);
+        $stmt = $this->pdo->prepare("
+            INSERT INTO user_chats (user_id, law_id, messages_json, updated_at)
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT(user_id, law_id) DO UPDATE SET
+                messages_json = ?,
+                updated_at = CURRENT_TIMESTAMP
+        ");
+        $stmt->execute([$userId, $lawId, $messagesJson, $messagesJson]);
+    }
+
+    public function getUserChat(int $userId, int $lawId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM user_chats WHERE user_id = ? AND law_id = ?");
+        $stmt->execute([$userId, $lawId]);
+        $chat = $stmt->fetch();
+        if ($chat) {
+            $chat['messages'] = json_decode($chat['messages_json'], true) ?: [];
+            return $chat;
+        }
+        return null;
+    }
+
+    public function getUserChats(int $userId): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT uc.*, l.title as law_title, l.master_id
+            FROM user_chats uc
+            JOIN laws l ON uc.law_id = l.id
+            WHERE uc.user_id = ?
+            ORDER BY uc.updated_at DESC
+        ");
+        $stmt->execute([$userId]);
+        $chats = $stmt->fetchAll();
+        foreach ($chats as &$chat) {
+            $chat['messages'] = json_decode($chat['messages_json'], true) ?: [];
+        }
+        return $chats;
     }
 }
 

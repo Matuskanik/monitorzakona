@@ -3,7 +3,8 @@
     "description": "Slovak National Council Law Monitor",
     "type": "project",
     "require": {
-        "php": ">=8.2"
+        "php": ">=8.2",
+        "google/apiclient": "^2.15"
     },
     "autoload": {
         "psr-4": {

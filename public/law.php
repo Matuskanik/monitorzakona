@@ -4,7 +4,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Config;
 use App\Database;
+use App\Auth;
 use App\OpenAIClient;
+use App\Security;
 
 try {
     Config::load();
@@ -12,13 +14,42 @@ try {
     die("Configuration error: " . htmlspecialchars($e->getMessage()));
 }
 
-$lawId = $_GET['id'] ?? null;
-if (!$lawId) {
+Security::setSecurityHeaders();
+
+// Rate limiting
+$ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+if (!Security::checkRateLimit($ip, 60, 60)) {
+    http_response_code(429);
+    die("Príliš veľa požiadaviek. Skúste znova neskôr.");
+}
+
+// Validate and sanitize input
+$lawId = Security::validateIntegerId($_GET['id'] ?? null);
+if ($lawId === null) {
     header('Location: index.php');
     exit;
 }
 
 $db = new Database(Config::get('DB_PATH'));
+$auth = new Auth($db);
+
+// Handle save/unsave action
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    if (!$auth->isLoggedIn()) {
+        header('Location: login.php?redirect=' . urlencode($_SERVER['REQUEST_URI']));
+        exit;
+    }
+    
+    $userId = $auth->getUserId();
+    if ($_POST['action'] === 'save') {
+        $db->saveLawForUser($userId, $lawId);
+    } elseif ($_POST['action'] === 'unsave') {
+        $db->removeSavedLawForUser($userId, $lawId);
+    }
+    header('Location: law.php?id=' . $lawId);
+    exit;
+}
+
 $law = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ?");
 $law->execute([$lawId]);
 $law = $law->fetch();
@@ -59,6 +90,12 @@ if (!isset($summary['tags']) || !is_array($summary['tags'])) {
 
 $processingStatus = $law['processing_status'] ?? 'completed';
 $textExtracted = isset($law['text_extracted']) ? (bool)$law['text_extracted'] : true;
+
+// Check if law is saved by user
+$isSaved = false;
+if ($auth->isLoggedIn()) {
+    $isSaved = $db->isLawSavedByUser($auth->getUserId(), $lawId);
+}
 
 ?>
 <!DOCTYPE html>
@@ -184,11 +221,49 @@ $textExtracted = isset($law['text_extracted']) ? (bool)$law['text_extracted'] : 
             letter-spacing: 0.5px;
             color: white;
         }
+        .save-button-container {
+            margin-bottom: 20px;
+        }
+        .save-button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .save-button:hover {
+            background: #229954;
+        }
+        .save-button.unsave {
+            background: #e74c3c;
+        }
+        .save-button.unsave:hover {
+            background: #c0392b;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.php" class="back-link">← Späť na zoznam</a>
+        
+        <?php if ($auth->isLoggedIn()): ?>
+            <div class="save-button-container">
+                <form method="POST" action="" style="display: inline;">
+                    <?php if ($isSaved): ?>
+                        <button type="submit" name="action" value="unsave" class="save-button unsave">
+                            ✗ Odstrániť z Mojej pamäte
+                        </button>
+                    <?php else: ?>
+                        <button type="submit" name="action" value="save" class="save-button">
+                            ✓ Uložiť do Mojej pamäte
+                        </button>
+                    <?php endif; ?>
+                </form>
+            </div>
+        <?php endif; ?>
         
         <?php if (!empty($summary['tags']) && is_array($summary['tags'])): ?>
         <div class="law-tags">
@@ -321,7 +396,7 @@ $textExtracted = isset($law['text_extracted']) ? (bool)$law['text_extracted'] : 
         <div class="footer" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; text-align: center; color: #95a5a6; font-size: 0.9em;">
             <p>Automaticky monitorované z <a href="https://www.nrsr.sk/web/default.aspx?SectionId=184" target="_blank" style="color: #3498db; text-decoration: none;">NR SR</a></p>
             <p style="margin-top: 10px;">
-                <a href="prompts.php" style="color: #3498db; text-decoration: none;">Použité prompty</a> | Autor: Matúš Kaník
+                <a href="prompts.php" style="color: #3498db; text-decoration: none;">Použité prompty</a> | <a href="terms.php" style="color: #3498db; text-decoration: none;">Podmienky používania</a> | Autor: Matúš Kaník
             </p>
         </div>
     </div>

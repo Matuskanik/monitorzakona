@@ -3,11 +3,21 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Config;
+use App\Security;
 
 try {
     Config::load();
 } catch (\Exception $e) {
     // Ignore config errors for this page
+}
+
+Security::setSecurityHeaders();
+
+// Rate limiting
+$ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+if (!Security::checkRateLimit($ip, 60, 60)) {
+    http_response_code(429);
+    die("Príliš veľa požiadaviek. Skúste znova neskôr.");
 }
 
 // System prompt
