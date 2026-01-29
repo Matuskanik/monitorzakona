@@ -21,7 +21,7 @@
 
 # Allow access to this directory and index files
 Require all granted
-DirectoryIndex index.html index.php
+DirectoryIndex index.php index.html
 
 # Serve static files and PHP entrypoints
 <FilesMatch "\.(html|css|js|json|png|jpg|jpeg|gif|svg|ico|php)$">
