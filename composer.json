@@ -4,6 +4,7 @@
     "type": "project",
     "require": {
         "php": ">=8.2",
+        "ext-pdo_sqlite": "*",
         "google/apiclient": "^2.15"
     },
     "autoload": {
