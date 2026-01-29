@@ -23,7 +23,7 @@ if (!Security::checkRateLimit($ip, 60, 60)) {
     die("Príliš veľa požiadaviek. Skúste znova neskôr.");
 }
 
-// Validate and sanitize input
+// Validate and sanitize input (id can be DB id or master_id when from JSON fallback)
 $lawId = Security::validateIntegerId($_GET['id'] ?? null);
 if ($lawId === null) {
     header('Location: index.php');
@@ -33,33 +33,57 @@ if ($lawId === null) {
 $db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
 $auth = new Auth($db);
 
-// Handle save/unsave action
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    if (!$auth->isLoggedIn()) {
-        header('Location: login.php?redirect=' . urlencode($_SERVER['REQUEST_URI']));
-        exit;
-    }
-    
-    $userId = $auth->getUserId();
-    if ($_POST['action'] === 'save') {
-        $db->saveLawForUser($userId, $lawId);
-    } elseif ($_POST['action'] === 'unsave') {
-        $db->removeSavedLawForUser($userId, $lawId);
-    }
-    header('Location: law.php?id=' . $lawId);
-    exit;
-}
-
+// Handle save/unsave action (only when law is from DB)
 $law = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ?");
 $law->execute([$lawId]);
 $law = $law->fetch();
+
+$fromJson = false;
+if (!$law) {
+    // Fallback: load from JSON (e.g. on Digital Ocean when DB is empty)
+    $jsonPath = __DIR__ . '/data/laws/' . $lawId . '.json';
+    if (is_readable($jsonPath)) {
+        $json = json_decode(file_get_contents($jsonPath), true);
+        if (is_array($json)) {
+            $law = [
+                'id' => $json['master_id'] ?? $lawId,
+                'master_id' => $json['master_id'] ?? $lawId,
+                'title' => $json['title'] ?? '',
+                'approval_date' => $json['approval_date'] ?? null,
+                'source_url' => $json['source_url'] ?? '',
+                'created_at' => $json['created_at'] ?? null,
+                'updated_at' => $json['updated_at'] ?? null,
+                'ai_summary' => isset($json['summary']) ? json_encode($json['summary']) : null,
+                'processing_status' => 'completed',
+                'text_extracted' => 1,
+            ];
+            $fromJson = true;
+        }
+    }
+}
 
 if (!$law) {
     header('Location: index.php');
     exit;
 }
 
-$attachments = $db->getAttachments($law['id']);
+// Handle save/unsave (only when law is from DB)
+if (!$fromJson && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    if (!$auth->isLoggedIn()) {
+        header('Location: login.php?redirect=' . urlencode($_SERVER['REQUEST_URI']));
+        exit;
+    }
+    $userId = $auth->getUserId();
+    if ($_POST['action'] === 'save') {
+        $db->saveLawForUser($userId, (int)$law['id']);
+    } elseif ($_POST['action'] === 'unsave') {
+        $db->removeSavedLawForUser($userId, (int)$law['id']);
+    }
+    header('Location: law.php?id=' . (int)$law['id']);
+    exit;
+}
+
+$attachments = $fromJson ? [] : $db->getAttachments($law['id']);
 $summary = null;
 
 if (!empty($law['ai_summary'])) {
@@ -91,10 +115,10 @@ if (!isset($summary['tags']) || !is_array($summary['tags'])) {
 $processingStatus = $law['processing_status'] ?? 'completed';
 $textExtracted = isset($law['text_extracted']) ? (bool)$law['text_extracted'] : true;
 
-// Check if law is saved by user
+// Check if law is saved by user (only when from DB)
 $isSaved = false;
-if ($auth->isLoggedIn()) {
-    $isSaved = $db->isLawSavedByUser($auth->getUserId(), $lawId);
+if (!$fromJson && $auth->isLoggedIn()) {
+    $isSaved = $db->isLawSavedByUser($auth->getUserId(), (int)$law['id']);
 }
 
 ?>
@@ -249,7 +273,7 @@ if ($auth->isLoggedIn()) {
     <div class="container">
         <a href="index.php" class="back-link">← Späť na zoznam</a>
         
-        <?php if ($auth->isLoggedIn()): ?>
+        <?php if ($auth->isLoggedIn() && !$fromJson): ?>
             <div class="save-button-container">
                 <form method="POST" action="" style="display: inline;">
                     <?php if ($isSaved): ?>

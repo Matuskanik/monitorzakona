@@ -30,6 +30,27 @@ $auth = new Auth($db);
 $searchQuery = Security::validateSearchQuery($_GET['search'] ?? null);
 $laws = $db->getLatestLaws(50);
 
+// Fallback: when DB is empty (e.g. on Digital Ocean), show laws from committed JSON
+if (empty($laws)) {
+    $indexPath = __DIR__ . '/data/index.json';
+    if (is_readable($indexPath)) {
+        $indexData = json_decode(file_get_contents($indexPath), true);
+        if (is_array($indexData)) {
+            foreach ($indexData as $item) {
+                $laws[] = [
+                    'id' => $item['master_id'] ?? $item['id'] ?? '',
+                    'master_id' => $item['master_id'] ?? '',
+                    'title' => $item['title'] ?? '',
+                    'approval_date' => $item['approval_date'] ?? '',
+                    'source_url' => $item['source_url'] ?? '',
+                    'created_at' => $item['created_at'] ?? null,
+                    'ai_summary' => isset($item['tags']) ? json_encode(['tags' => $item['tags']]) : null,
+                ];
+            }
+        }
+    }
+}
+
 // Filter laws if search query is provided
 if (!empty($searchQuery)) {
     $searchLower = mb_strtolower($searchQuery, 'UTF-8');
