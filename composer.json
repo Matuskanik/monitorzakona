@@ -6,6 +6,7 @@
         "php": ">=8.2",
         "ext-mbstring": "*",
         "ext-pdo_sqlite": "*",
+        "dompdf/dompdf": "^3.1",
         "google/apiclient": "^2.15"
     },
     "autoload": {

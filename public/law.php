@@ -121,6 +121,18 @@ if (!$fromJson && $auth->isLoggedIn()) {
     $isSaved = $db->isLawSavedByUser($auth->getUserId(), (int)$law['id']);
 }
 
+// Chat panel: need combined.txt in storage (only for DB laws; JSON laws on DO have no storage)
+$chatAvailable = false;
+if (!$fromJson) {
+    $storagePath = Config::get('STORAGE_PATH', 'storage');
+    if (!str_starts_with($storagePath, '/')) {
+        $storagePath = dirname(__DIR__) . '/' . $storagePath;
+    }
+    $masterId = $law['master_id'] ?? $law['id'];
+    $combinedPath = $storagePath . '/' . $masterId . '/combined.txt';
+    $chatAvailable = file_exists($combinedPath) && filesize($combinedPath) > 0;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -267,6 +279,75 @@ if (!$fromJson && $auth->isLoggedIn()) {
         .save-button.unsave:hover {
             background: #c0392b;
         }
+        .law-chat {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+        .law-chat .chat-thread {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .law-chat .chat-message {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ecf0f1;
+            white-space: pre-wrap;
+        }
+        .law-chat .chat-message.user {
+            background: #eaf2fb;
+            align-self: flex-end;
+        }
+        .law-chat .chat-message.assistant {
+            background: #f5f7fa;
+            align-self: flex-start;
+        }
+        .law-chat .chat-meta {
+            font-size: 0.75em;
+            color: #7f8c8d;
+            margin-bottom: 4px;
+        }
+        .law-chat textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid #dcdfe3;
+            border-radius: 6px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.95em;
+        }
+        .law-chat .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .law-chat button {
+            margin-top: 10px;
+            padding: 10px 16px;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .law-chat button.secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        .law-chat button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        .law-chat .error {
+            margin-top: 10px;
+            color: #e74c3c;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -317,6 +398,26 @@ if (!$fromJson && $auth->isLoggedIn()) {
                 <p style="color: #27ae60; font-weight: bold; margin-top: 10px;">
                     ✓ Text úspešne extrahovaný pomocou OCR technológie
                 </p>
+            <?php endif; ?>
+        </div>
+
+        <div class="law-chat">
+            <div class="section-title">Opýtajte sa zákona</div>
+            <?php if ($chatAvailable): ?>
+                <div class="section-content">
+                    <textarea id="law-chat-question" placeholder="Napíšte otázku k tomuto zákonu..."></textarea>
+                    <div class="actions">
+                        <button id="law-chat-submit" type="button">Opýtať sa</button>
+                        <button id="law-chat-download" class="secondary" type="button">Stiahnuť PDF</button>
+                        <button id="law-chat-reset" class="secondary" type="button">Vymazať konverzáciu</button>
+                    </div>
+                    <div id="law-chat-error" class="error" style="display:none;"></div>
+                    <div id="law-chat-thread" class="chat-thread"></div>
+                </div>
+            <?php else: ?>
+                <div class="section-content">
+                    Text zákona zatiaľ nie je dostupný pre chat. Skúste to neskôr po spracovaní.
+                </div>
             <?php endif; ?>
         </div>
 
@@ -424,6 +525,138 @@ if (!$fromJson && $auth->isLoggedIn()) {
             </p>
         </div>
     </div>
+    <?php if ($chatAvailable): ?>
+    <script>
+        const chatSubmit = document.getElementById('law-chat-submit');
+        const chatDownload = document.getElementById('law-chat-download');
+        const chatReset = document.getElementById('law-chat-reset');
+        const chatQuestion = document.getElementById('law-chat-question');
+        const chatThread = document.getElementById('law-chat-thread');
+        const chatError = document.getElementById('law-chat-error');
+        const storageKey = 'law-chat-<?php echo htmlspecialchars($law['id']); ?>';
+
+        const loadHistory = () => {
+            try {
+                const raw = localStorage.getItem(storageKey);
+                const parsed = raw ? JSON.parse(raw) : [];
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+                return [];
+            }
+        };
+
+        const saveHistory = (history) => {
+            localStorage.setItem(storageKey, JSON.stringify(history));
+        };
+
+        const renderHistory = (history) => {
+            chatThread.innerHTML = '';
+            history.forEach((msg) => {
+                const item = document.createElement('div');
+                item.className = 'chat-message ' + (msg.role === 'user' ? 'user' : 'assistant');
+                const meta = document.createElement('div');
+                meta.className = 'chat-meta';
+                meta.textContent = msg.role === 'user' ? 'Vy' : 'AI';
+                const content = document.createElement('div');
+                content.textContent = msg.content;
+                item.appendChild(meta);
+                item.appendChild(content);
+                chatThread.appendChild(item);
+            });
+        };
+
+        let history = loadHistory();
+        renderHistory(history);
+
+        chatReset.addEventListener('click', () => {
+            history = [];
+            saveHistory(history);
+            renderHistory(history);
+            chatError.style.display = 'none';
+            chatError.textContent = '';
+        });
+
+        chatDownload.addEventListener('click', async () => {
+            chatError.style.display = 'none';
+            chatError.textContent = '';
+            chatDownload.disabled = true;
+            chatDownload.textContent = 'Pripravujem PDF...';
+            try {
+                const response = await fetch('law-pdf.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                    body: JSON.stringify({
+                        law_id: '<?php echo htmlspecialchars($law['id']); ?>',
+                        history: history
+                    })
+                });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Nepodarilo sa vygenerovať PDF.');
+                }
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'zakon-<?php echo htmlspecialchars($law['id']); ?>.pdf';
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                chatError.textContent = err.message || 'Chyba pri generovaní PDF.';
+                chatError.style.display = 'block';
+            } finally {
+                chatDownload.disabled = false;
+                chatDownload.textContent = 'Stiahnuť PDF';
+            }
+        });
+
+        chatSubmit.addEventListener('click', async () => {
+            const question = chatQuestion.value.trim();
+            chatError.style.display = 'none';
+            chatError.textContent = '';
+            if (!question) {
+                chatError.textContent = 'Zadajte otázku.';
+                chatError.style.display = 'block';
+                return;
+            }
+            const historyForRequest = history.slice(-10);
+            history = history.concat([{ role: 'user', content: question }]);
+            renderHistory(history);
+            chatQuestion.value = '';
+            chatSubmit.disabled = true;
+            chatSubmit.textContent = 'Spracovávam...';
+            try {
+                const response = await fetch('law-chat.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                    body: JSON.stringify({
+                        law_id: '<?php echo htmlspecialchars($law['id']); ?>',
+                        question: question,
+                        history: historyForRequest
+                    })
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Neznáma chyba.');
+                }
+                const answer = data.answer || 'AI nevrátila odpoveď.';
+                history = history.concat([{ role: 'assistant', content: answer }]);
+                saveHistory(history);
+                renderHistory(history);
+            } catch (err) {
+                history.pop();
+                renderHistory(history);
+                chatError.textContent = err.message || 'Chyba pri spracovaní otázky.';
+                chatError.style.display = 'block';
+            } finally {
+                chatSubmit.disabled = false;
+                chatSubmit.textContent = 'Opýtať sa';
+            }
+        });
+    </script>
+    <?php endif; ?>
 </body>
 </html>
 
