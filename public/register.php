@@ -29,9 +29,17 @@ $success = false;
 $recaptchaSiteKey = Config::get('RECAPTCHA_SITE_KEY', '');
 $recaptchaSecret = Config::get('RECAPTCHA_SECRET_KEY', '');
 $googleClientId = Config::get('GOOGLE_CLIENT_ID', '');
-$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'];
-$scriptPath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+$host = $_SERVER['HTTP_HOST'] ?? 'monitorzakona.sk';
+$protocol = 'http';
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+    $protocol = 'https';
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https') {
+    $protocol = 'https';
+}
+if (strpos($host, 'monitorzakona.sk') !== false) {
+    $protocol = 'https'; // production always HTTPS (Google requires secure login_uri)
+}
+$scriptPath = rtrim(dirname($_SERVER['SCRIPT_NAME'] ?? ''), '/');
 $redirectUri = $protocol . '://' . $host . $scriptPath . '/google-callback.php';
 $loginUri = $redirectUri;
 
@@ -248,7 +256,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-    <!-- DEBUG: GOOGLE_CLIENT_ID on server is <?php echo $googleClientId ? 'set (length ' . strlen($googleClientId) . ')' : 'NOT SET'; ?> -->
     <div class="container">
         <h1>Registrácia</h1>
         
