@@ -1,0 +1,123 @@
+# Generate law data for v6: JSON + combined.txt as .txt for chat on DO
+name: Generate Law Data (v6)
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - v6
+    paths:
+      - 'bin/**'
+      - 'app/**'
+      - '.github/workflows/generate-data-v6.yml'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository (v6)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: true
+          ref: ${{ github.event_name == 'workflow_dispatch' && 'v6' || github.ref }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: curl, zip, pdo_sqlite, dom, xml, mbstring
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-slk
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Setup environment
+        run: |
+          if [ ! -f .env ]; then
+            echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+            echo "DB_PATH=data/sentinel.db" >> .env
+            echo "STORAGE_PATH=storage" >> .env
+            echo "LOG_PATH=storage/logs" >> .env
+            echo "NR_SR_LIST_URL=https://www.nrsr.sk/web/default.aspx?SectionId=184" >> .env
+            echo "REQUEST_DELAY_SECONDS=3" >> .env
+            echo "MAX_RETRIES=3" >> .env
+            echo "RETRY_DELAY_SECONDS=5" >> .env
+            echo "OPENAI_MODEL=gpt-4o-mini" >> .env
+            echo "OPENAI_MAX_TOKENS=2000" >> .env
+            echo "BASE_URL=https://monitorzakona.sk" >> .env
+          fi
+
+      - name: Create necessary directories
+        run: |
+          mkdir -p data storage/logs storage/snapshots public/data/laws
+
+      - name: Check if we need initial processing
+        id: check_initial
+        run: |
+          LAW_COUNT=$(php -r "
+            require_once 'vendor/autoload.php';
+            use App\Config;
+            use App\Database;
+            try {
+              Config::load();
+              \$db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
+              \$stmt = \$db->getPdo()->query('SELECT COUNT(*) as count FROM laws');
+              \$result = \$stmt->fetch();
+              echo \$result['count'];
+            } catch (Exception \$e) {
+              echo '0';
+            }
+          ")
+          echo "laws_count=$LAW_COUNT" >> $GITHUB_OUTPUT
+          echo "Found $LAW_COUNT laws in database"
+
+      - name: Run initial processing (if needed)
+        if: steps.check_initial.outputs.laws_count < 20
+        run: |
+          echo "Less than 20 laws in database, running initial processing..."
+          php bin/process-initial-20.php || true
+        continue-on-error: true
+
+      - name: Run cron job to process laws
+        run: php bin/cron.php
+        continue-on-error: true
+
+      - name: Generate JSON data files
+        run: php bin/generate-json-data.php
+
+      - name: Copy combined.txt to public/data/laws for chat on DO
+        run: |
+          for dir in storage/*/; do
+            [ -d "$dir" ] || continue
+            mid=$(basename "$dir")
+            if [ -f "storage/$mid/combined.txt" ]; then
+              cp "storage/$mid/combined.txt" "public/data/laws/$mid.txt"
+              echo "Copied storage/$mid/combined.txt -> public/data/laws/$mid.txt"
+            fi
+          done
+
+      - name: Commit and push changes (v6)
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git fetch origin v6 2>/dev/null || true
+          if ! git pull --rebase origin v6 2>/dev/null; then
+            git pull origin v6 || true
+          fi
+          git add public/data/laws/*.json public/data/index.json 2>/dev/null || true
+          git add public/data/laws/*.txt 2>/dev/null || true
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-update: Generate law data JSON + .txt for chat [skip ci]" || true
+          fi
+          git push origin HEAD:v6 || (git pull origin v6 && git push origin HEAD:v6)

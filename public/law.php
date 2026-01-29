@@ -121,14 +121,18 @@ if (!$fromJson && $auth->isLoggedIn()) {
     $isSaved = $db->isLawSavedByUser($auth->getUserId(), (int)$law['id']);
 }
 
-// Chat panel: need combined.txt in storage (only for DB laws; JSON laws on DO have no storage)
+// Chat panel: need law text from storage/.../combined.txt OR public/data/laws/{id}.txt (v6: committed by Actions for DO)
 $chatAvailable = false;
-if (!$fromJson) {
+$masterId = $law['master_id'] ?? $law['id'];
+$txtInPublic = __DIR__ . '/data/laws/' . $masterId . '.txt';
+if (is_readable($txtInPublic) && filesize($txtInPublic) > 0) {
+    $chatAvailable = true;
+}
+if (!$chatAvailable && !$fromJson) {
     $storagePath = Config::get('STORAGE_PATH', 'storage');
     if (!str_starts_with($storagePath, '/')) {
         $storagePath = dirname(__DIR__) . '/' . $storagePath;
     }
-    $masterId = $law['master_id'] ?? $law['id'];
     $combinedPath = $storagePath . '/' . $masterId . '/combined.txt';
     $chatAvailable = file_exists($combinedPath) && filesize($combinedPath) > 0;
 }

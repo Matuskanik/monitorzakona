@@ -121,13 +121,17 @@ if (!str_starts_with($storagePath, '/')) {
 }
 
 $combinedPath = $storagePath . '/' . $law['master_id'] . '/combined.txt';
-if (!file_exists($combinedPath)) {
+$txtInPublic = __DIR__ . '/data/laws/' . $law['master_id'] . '.txt';
+
+if (file_exists($combinedPath) && is_readable($combinedPath)) {
+    $lawText = file_get_contents($combinedPath);
+} elseif (is_readable($txtInPublic)) {
+    $lawText = file_get_contents($txtInPublic);
+} else {
     http_response_code(404);
     echo json_encode(['error' => 'Text zákona nie je dostupný.']);
     exit;
 }
-
-$lawText = file_get_contents($combinedPath);
 if ($lawText === false || trim($lawText) === '') {
     http_response_code(404);
     echo json_encode(['error' => 'Text zákona je prázdny.']);
