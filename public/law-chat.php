@@ -109,19 +109,16 @@ $stmt = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ? OR master_id = ?
 $stmt->execute([$lawId, $lawId]);
 $law = $stmt->fetch();
 
-if (!$law) {
-    http_response_code(404);
-    echo json_encode(['error' => 'Zákon nebol nájdený.']);
-    exit;
-}
+// master_id for paths: from DB or treat law_id as master_id (DO: law from JSON, no DB)
+$masterId = $law ? ($law['master_id'] ?? $law['id']) : (string)$lawId;
 
 $storagePath = Config::get('STORAGE_PATH', 'storage');
 if (!str_starts_with($storagePath, '/')) {
     $storagePath = dirname(__DIR__) . '/' . $storagePath;
 }
 
-$combinedPath = $storagePath . '/' . $law['master_id'] . '/combined.txt';
-$txtInPublic = __DIR__ . '/data/laws/' . $law['master_id'] . '.txt';
+$combinedPath = $storagePath . '/' . $masterId . '/combined.txt';
+$txtInPublic = __DIR__ . '/data/laws/' . $masterId . '.txt';
 
 if (file_exists($combinedPath) && is_readable($combinedPath)) {
     $lawText = file_get_contents($combinedPath);

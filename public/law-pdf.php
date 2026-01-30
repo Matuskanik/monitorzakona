@@ -52,18 +52,36 @@ if (empty($lawId)) {
 }
 
 $db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
-// Support both numeric id and master_id
+// Support both numeric id and master_id (when from JSON on DO, law_id is master_id)
 $stmt = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ? OR master_id = ?");
 $stmt->execute([$lawId, $lawId]);
 $law = $stmt->fetch();
 
+// Fallback: law from JSON on DO (no DB) – load metadata from public/data/laws/{id}.json
 if (!$law) {
-    http_response_code(404);
-    echo 'Law not found.';
-    exit;
+    $jsonPath = __DIR__ . '/data/laws/' . $lawId . '.json';
+    if (!is_readable($jsonPath)) {
+        http_response_code(404);
+        echo 'Law not found.';
+        exit;
+    }
+    $json = json_decode(file_get_contents($jsonPath), true);
+    if (!is_array($json)) {
+        http_response_code(404);
+        echo 'Law not found.';
+        exit;
+    }
+    $law = [
+        'id' => $json['master_id'] ?? $lawId,
+        'master_id' => $json['master_id'] ?? $lawId,
+        'title' => $json['title'] ?? '',
+        'approval_date' => $json['approval_date'] ?? null,
+        'source_url' => $json['source_url'] ?? '',
+        'ai_summary' => isset($json['summary']) ? json_encode($json['summary']) : null,
+    ];
 }
 
-$attachments = $db->getAttachments($law['id']);
+$attachments = $law ? $db->getAttachments((int)$law['id']) : [];
 $summary = null;
 
 if (!empty($law['ai_summary'])) {
