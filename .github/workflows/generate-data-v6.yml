@@ -1,4 +1,5 @@
 # Generate law data for v6: JSON + combined.txt as .txt for chat on DO
+# Uses data/sentinel.seed.db in repo as source of laws; cron fetches new/updated from NR SR.
 name: Generate Law Data (v6)
 
 on:
@@ -12,10 +13,12 @@ on:
       - 'bin/**'
       - 'app/**'
       - '.github/workflows/generate-data-v6.yml'
+      - 'data/sentinel.seed.db'
 
 jobs:
   generate:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     permissions:
       contents: write
 
@@ -62,6 +65,15 @@ jobs:
         run: |
           mkdir -p data storage/logs storage/snapshots public/data/laws
 
+      - name: Restore seed database
+        run: |
+          if [ -f data/sentinel.seed.db ]; then
+            cp data/sentinel.seed.db data/sentinel.db
+            echo "Restored DB from data/sentinel.seed.db"
+          else
+            echo "No seed DB; initial processing will populate DB from NR SR."
+          fi
+
       - name: Check if we need initial processing
         id: check_initial
         run: |
@@ -82,14 +94,14 @@ jobs:
           echo "laws_count=$LAW_COUNT" >> $GITHUB_OUTPUT
           echo "Found $LAW_COUNT laws in database"
 
-      - name: Run initial processing (if needed)
+      - name: Run initial processing (if no seed DB)
         if: steps.check_initial.outputs.laws_count < 20
         run: |
-          echo "Less than 20 laws in database, running initial processing..."
+          echo "Less than 20 laws in database, running initial processing from NR SR..."
           php bin/process-initial-20.php || true
         continue-on-error: true
 
-      - name: Run cron job to process laws
+      - name: Run cron job (fetch new/updated laws, create storage + combined.txt)
         run: php bin/cron.php
         continue-on-error: true
 

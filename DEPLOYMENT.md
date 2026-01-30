@@ -176,6 +176,51 @@ The old PHP-based frontend (`index.php`, `law.php`) is still available but not u
 ✅ **Scalable** (Cloudflare handles traffic spikes)  
 ✅ **Simple architecture** (fewer moving parts)
 
+## v6: Digital Ocean + chat pre každý zákon (GitHub Actions so seed DB)
+
+Pre nasadenie na **Digital Ocean** s vetvou **v6** (panel „Opýtajte sa zákona“ pre každý zákon) sa používa workflow so **zdrojom dát v Actions**:
+
+### Ako to funguje
+
+1. **Seed DB v repozitári** (`data/sentinel.seed.db`) – obsahuje zoznam zákonov (metadata + AI sumáre). Workflow na začiatku skopíruje tento súbor na `data/sentinel.db`.
+2. **Cron v Actions** – stiahne z NR SR zoznam, spracuje až 20 najnovších zákonov (stiahnutie, OCR, combined.txt, AI sumár), aktualizuje DB a vytvorí `storage/{master_id}/combined.txt`.
+3. **Generovanie JSON** – `bin/generate-json-data.php` vygeneruje `public/data/laws/*.json` a `public/data/index.json` z DB.
+4. **Kopírovanie .txt** – všetky `storage/*/combined.txt` sa skopírujú do `public/data/laws/*.txt` (existujúce .txt v repozitári sa nemazú, len sa pridávajú/aktualizujú).
+5. **Commit a push** – zmeny (JSON + .txt) sa commitnú do vetvy v6.
+
+Výsledok: na DO má každý zákon v zozname dostupný text pre chat (buď z predchádzajúceho commitu .txt, alebo z posledného behu workflow).
+
+### Jednorazové vytvorenie seed DB
+
+Lokálne (keď máš plnú DB a chceš ju použiť ako zdroj pre Actions):
+
+```bash
+cp data/sentinel.db data/sentinel.seed.db
+git add data/sentinel.seed.db
+git commit -m "Add seed DB for v6 workflow"
+git push origin v6
+```
+
+Súbor `data/sentinel.seed.db` je v repozitári povolený (v `.gitignore` je výnimka `!data/sentinel.seed.db`). Lokálna `data/sentinel.db` sa do gitu necommituje.
+
+### Čo potrebuje workflow v GitHub Actions
+
+- **Secrets:** `OPENAI_API_KEY` (pre AI sumáre a chat).
+- **Trigger:** každých 6 h (`schedule`), alebo manuálne (Actions → Generate Law Data (v6) → Run workflow), alebo pri push do v6 (cesty `bin/**`, `app/**`, workflow, `data/sentinel.seed.db`).
+
+### Aktualizácia seed DB (voliteľne)
+
+Ak pridáš nové zákony lokálne a chceš, aby mali v Actions plný zoznam:
+
+```bash
+cp data/sentinel.db data/sentinel.seed.db
+git add data/sentinel.seed.db
+git commit -m "Update seed DB for v6 workflow"
+git push origin v6
+```
+
+Nasledujúci beh workflow použije aktualizovanú seed DB.
+
 ## Next Steps
 
 1. Set up GitHub secrets
