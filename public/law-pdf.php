@@ -53,10 +53,10 @@ if (str_contains($contentType, 'application/json')) {
     }
 }
 
-$lawId = $payload['law_id'] ?? ($_POST['law_id'] ?? null);
+$lawId = trim((string)($payload['law_id'] ?? $_POST['law_id'] ?? ''));
 $history = $payload['history'] ?? [];
 
-if (empty($lawId)) {
+if ($lawId === '') {
     http_response_code(400);
     echo 'Missing law id.';
     exit;
@@ -72,13 +72,15 @@ if (!$law) {
     $jsonPath = __DIR__ . '/data/laws/' . $lawId . '.json';
     if (!is_readable($jsonPath)) {
         http_response_code(404);
-        echo 'Law not found.';
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode(['error' => 'Zákon nebol nájdený.', 'limit_reached' => false], JSON_UNESCAPED_UNICODE);
         exit;
     }
     $json = json_decode(file_get_contents($jsonPath), true);
     if (!is_array($json)) {
         http_response_code(404);
-        echo 'Law not found.';
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode(['error' => 'Zákon nebol nájdený.', 'limit_reached' => false], JSON_UNESCAPED_UNICODE);
         exit;
     }
     $law = [
@@ -154,10 +156,13 @@ if (is_array($history)) {
     }
 }
 
-$logoPath = __DIR__ . '/logo.png';
+// Logo only when GD is available – Dompdf can require GD for image handling; without GD we skip logo to avoid 500
 $logoData = '';
-if (file_exists($logoPath)) {
-    $logoData = 'data:image/png;base64,' . base64_encode((string)file_get_contents($logoPath));
+if (extension_loaded('gd')) {
+    $logoPath = __DIR__ . '/logo.png';
+    if (file_exists($logoPath)) {
+        $logoData = 'data:image/png;base64,' . base64_encode((string)file_get_contents($logoPath));
+    }
 }
 
 $title = htmlspecialchars($law['title'] ?? '', ENT_QUOTES, 'UTF-8');

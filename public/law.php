@@ -129,8 +129,13 @@ if ($auth->isLoggedIn()) {
     if (!$isPaid) {
         $pdfDownloadLimitReached = $db->getPdfDownloadCount($userId) >= 1;
     }
-    if (!$fromJson && !$isPaid) {
-        $existingChat = $db->getUserChat($userId, (int)$law['id']);
+    if (!$isPaid) {
+        if ($fromJson) {
+            $masterIdForChat = (string)($law['master_id'] ?? $law['id']);
+            $existingChat = $db->getChatByMasterId($userId, $masterIdForChat);
+        } else {
+            $existingChat = $db->getUserChat($userId, (int)$law['id']);
+        }
         $msgs = $existingChat['messages'] ?? [];
         $userMsgCount = 0;
         foreach ($msgs as $m) {

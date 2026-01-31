@@ -63,11 +63,11 @@ if (str_contains($contentType, 'application/json')) {
     }
 }
 
-$lawId = $payload['law_id'] ?? ($_POST['law_id'] ?? null);
+$lawId = trim((string)($payload['law_id'] ?? $_POST['law_id'] ?? ''));
 $question = trim((string)($payload['question'] ?? ($_POST['question'] ?? '')));
 $history = $payload['history'] ?? [];
 
-if (empty($lawId) || $question === '') {
+if ($lawId === '' || $question === '') {
     http_response_code(400);
     echo json_encode(['error' => 'Chýba ID zákona alebo otázka.']);
     exit;
@@ -118,18 +118,40 @@ $stmt = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ? OR master_id = ?
 $stmt->execute([$lawId, $lawId]);
 $law = $stmt->fetch();
 
+$fromJson = false;
+if (!$law) {
+    // Fallback: law from JSON (e.g. on Digital Ocean when DB is empty)
+    $jsonPath = __DIR__ . '/data/laws/' . $lawId . '.json';
+    if (is_readable($jsonPath)) {
+        $json = json_decode(file_get_contents($jsonPath), true);
+        if (is_array($json)) {
+            $law = [
+                'id' => $json['master_id'] ?? $lawId,
+                'master_id' => $json['master_id'] ?? $lawId,
+                'title' => $json['title'] ?? '',
+            ];
+            $fromJson = true;
+        }
+    }
+}
+
 if (!$law) {
     http_response_code(404);
     echo json_encode(['error' => 'Zákon nebol nájdený.']);
     exit;
 }
 
-$internalLawId = (int) $law['id'];
+$masterId = (string)($law['master_id'] ?? $law['id']);
 $userId = $auth->getUserId();
 $isPaid = $auth->isPaid();
 
 // Free: 1 question per law total. Paid: cap per law (default 200).
-$existingChat = $db->getUserChat($userId, $internalLawId);
+if ($fromJson) {
+    $existingChat = $db->getChatByMasterId($userId, $masterId);
+} else {
+    $internalLawId = (int) $law['id'];
+    $existingChat = $db->getUserChat($userId, $internalLawId);
+}
 $messages = $existingChat['messages'] ?? [];
 $userMessageCount = 0;
 foreach ($messages as $m) {
@@ -155,9 +177,6 @@ if (!$isPaid) {
         exit;
     }
 }
-
-// master_id for paths: from DB or treat law_id as master_id (DO: law from JSON, no DB)
-$masterId = $law['master_id'] ?? $law['id'];
 
 $storagePath = Config::get('STORAGE_PATH', 'storage');
 if (!str_starts_with($storagePath, '/')) {
@@ -207,7 +226,11 @@ try {
     $messagesToSave = $messages;
     $messagesToSave[] = ['role' => 'user', 'content' => $question];
     $messagesToSave[] = ['role' => 'assistant', 'content' => $answer];
-    $db->saveUserChat($userId, $internalLawId, $messagesToSave);
+    if ($fromJson) {
+        $db->saveChatByMasterId($userId, $masterId, $messagesToSave);
+    } else {
+        $db->saveUserChat($userId, (int) $law['id'], $messagesToSave);
+    }
 
     echo json_encode([
         'answer' => $answer

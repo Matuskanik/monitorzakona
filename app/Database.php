@@ -127,6 +127,20 @@ class Database
             )
         ");
 
+        // Chat for laws loaded from JSON only (no laws.id) – v7
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS user_chats_master (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                master_id TEXT NOT NULL,
+                messages_json TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                UNIQUE(user_id, master_id)
+            )
+        ");
+
         // Stripe / subscription columns on users (v7)
         try {
             $this->pdo->exec("ALTER TABLE users ADD COLUMN stripe_customer_id TEXT");
@@ -419,6 +433,32 @@ class Database
             $chat['messages'] = json_decode($chat['messages_json'], true) ?: [];
         }
         return $chats;
+    }
+
+    /** Chat keyed by master_id (for laws loaded from JSON only). */
+    public function getChatByMasterId(int $userId, string $masterId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM user_chats_master WHERE user_id = ? AND master_id = ?");
+        $stmt->execute([$userId, $masterId]);
+        $chat = $stmt->fetch();
+        if ($chat) {
+            $chat['messages'] = json_decode($chat['messages_json'], true) ?: [];
+            return $chat;
+        }
+        return null;
+    }
+
+    public function saveChatByMasterId(int $userId, string $masterId, array $messages): void
+    {
+        $messagesJson = json_encode($messages, JSON_UNESCAPED_UNICODE);
+        $stmt = $this->pdo->prepare("
+            INSERT INTO user_chats_master (user_id, master_id, messages_json, updated_at)
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT(user_id, master_id) DO UPDATE SET
+                messages_json = ?,
+                updated_at = CURRENT_TIMESTAMP
+        ");
+        $stmt->execute([$userId, $masterId, $messagesJson, $messagesJson]);
     }
 
     // Stripe / subscription (v7)
