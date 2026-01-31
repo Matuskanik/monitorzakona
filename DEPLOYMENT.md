@@ -2,14 +2,19 @@
 
 ## Digital Ocean (monitorzakona.sk)
 
-- **Aktuálna produkcia:** nasadzuje sa z vetvy **v3** (alebo **V5** – obe obsahujú rovnakú novú verziu s Google prihlásením).
-- **Verzia s Google prihlásením:** vetva **V5** (alebo **v3** po merge) – registrácia, prihlásenie, Moja pamäť.
-- Ak na DO beží ešte stará verzia:
-  1. V Digital Ocean App Platform → váš projekt → **Settings** → **App** → **Source**.
-  2. Nastavte **Branch** na **v3** (alebo **V5**).
-  3. Spustite **Deploy** (alebo nechajte automatický deploy po push).
-- Po nasadení skontrolujte: https://monitorzakona.sk/login.php a https://monitorzakona.sk/register.php.
-- **Prihlásenie cez Google:** v **Settings** → **App-Level Environment Variables** pridajte premennú presne s názvom **GOOGLE_CLIENT_ID** (hodnota = celý Client ID z Google Cloud Console, napr. `515009050245-...apps.googleusercontent.com`). V Google Cloud Console pridajte do OAuth 2.0: Authorized redirect URIs `https://monitorzakona.sk/google-callback.php` a Authorized JavaScript origins `https://monitorzakona.sk`. Po pridaní/zmene premenných **musíte spustiť nový deploy** (env sa načíta až pri deployi).
+- **Aktuálna produkcia (v7):** nasadzuje sa z vetvy **v7** – Stripe platby, platená verzia (3 €/mes, 30 €/rok), free limity (1 otázka/zákon, 1× PDF).
+- Predchádzajúce: **v3** / **V5** – Google prihlásenie, Moja pamäť.
+- **Nasadenie v7 na DO:**
+  1. Digital Ocean App Platform → váš projekt → **Settings** → **App** → **Source**.
+  2. Nastavte **Branch** na **v7**.
+  3. V **Settings** → **App-Level Environment Variables** skontrolujte/priďte:
+     - **GOOGLE_CLIENT_ID** (prihlásenie cez Google)
+     - **STRIPE_SECRET_KEY** (sk_live_...), **STRIPE_PUBLISHABLE_KEY** (pk_live_...)
+     - **STRIPE_WEBHOOK_SECRET** (whsec_...), **STRIPE_PRICE_MONTHLY**, **STRIPE_PRICE_YEARLY**
+     - **APP_BASE_URL** = `https://monitorzakona.sk`
+  4. Spustite **Deploy** (alebo nechajte automatický deploy po push na v7).
+- Po nasadení skontrolujte: https://monitorzakona.sk/login.php, https://monitorzakona.sk/pricing.php.
+- **Stripe webhook:** V Stripe Dashboard (Live) musí byť endpoint **https://monitorzakona.sk/stripe-webhook.php** s eventmi `customer.subscription.created/updated/deleted`. Po pridaní/zmene env **spustite nový deploy**.
 
 ---
 
