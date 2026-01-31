@@ -93,7 +93,9 @@ if (!empty($searchQuery)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
     <title>Monitor zákona</title>
+    <script>(function(){if(localStorage.getItem('darkMode')==='1')document.documentElement.classList.add('dark-mode');})();</script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -305,9 +307,109 @@ if (!empty($searchQuery)) {
         .logout-link:hover {
             background: #c0392b;
         }
+
+        /* Dark mode */
+        html.dark-mode body { background: #111; color: #eee; }
+        html.dark-mode .container { background: #1a1a1a; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+        html.dark-mode .tagline { color: #bbb; }
+        html.dark-mode .search-container { background: #222; border-color: #333; }
+        html.dark-mode .search-input { background: #222; border-color: #444; color: #eee; }
+        html.dark-mode .search-input::placeholder { color: #888; }
+        html.dark-mode .search-input:focus { border-color: #5dade2; }
+        html.dark-mode .search-button { background: #2980b9; }
+        html.dark-mode .search-button:hover { background: #3498db; }
+        html.dark-mode .search-results-info { color: #aaa; }
+        html.dark-mode .search-results-info a { color: #5dade2; }
+        html.dark-mode .law-item { background: #222; border-left-color: #3498db; }
+        html.dark-mode .law-item:hover { box-shadow: 0 2px 8px rgba(255,255,255,0.05); }
+        html.dark-mode .law-title { color: #e0e0e0; }
+        html.dark-mode .law-title a { color: #5dade2; }
+        html.dark-mode .law-date, html.dark-mode .law-date-label { color: #aaa; }
+        html.dark-mode .law-source { color: #888; }
+        html.dark-mode .law-source a { color: #aaa; }
+        html.dark-mode .empty { color: #aaa; }
+        html.dark-mode .empty a { color: #5dade2; }
+        html.dark-mode .footer { border-top-color: #333; color: #888; }
+        html.dark-mode .footer a { color: #aaa; }
+        html.dark-mode .user-info, html.dark-mode .user-email { color: #ccc; }
+        html.dark-mode .my-memory-button { background: #229954; }
+        html.dark-mode .my-memory-button:hover { background: #27ae60; }
+        html.dark-mode .login-link { background: #2980b9; }
+        html.dark-mode .login-link:hover { background: #3498db; }
+        html.dark-mode .logout-link { background: #c0392b; }
+        html.dark-mode .logout-link:hover { background: #e74c3c; }
+
+        /* Dark mode toggle – horný ľavý roh */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.95);
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        html.dark-mode .dark-mode-toggle {
+            background: rgba(30,30,30,0.95);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .dark-mode-toggle-row { display: flex; align-items: center; gap: 10px; }
+        .dark-mode-toggle span { color: #333; }
+        html.dark-mode .dark-mode-toggle span { color: #ddd; }
+        .dark-mode-label {
+            font-size: 0.7em;
+            font-weight: 500;
+            line-height: 1;
+            max-width: 100%;
+            text-align: center;
+            color: #555;
+        }
+        html.dark-mode .dark-mode-label { color: #aaa; }
+        .dark-mode-switch {
+            position: relative;
+            width: 52px;
+            height: 26px;
+            background: #ccc;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .dark-mode-switch.on { background: #27ae60; }
+        html.dark-mode .dark-mode-switch { background: #444; }
+        html.dark-mode .dark-mode-switch.on { background: #27ae60; }
+        .dark-mode-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .dark-mode-switch.on::after { transform: translateX(26px); }
+        .dark-mode-toggle .label-off { margin-right: 2px; }
+        .dark-mode-toggle .label-on { margin-left: 2px; }
     </style>
 </head>
 <body>
+    <div class="dark-mode-toggle" id="darkModeToggle" title="Tmavý režim">
+        <div class="dark-mode-toggle-row">
+            <span class="label-off">OFF</span>
+            <div class="dark-mode-switch" id="darkModeSwitch" role="switch" aria-checked="false" aria-label="Tmavý režim"></div>
+            <span class="label-on">ON</span>
+        </div>
+        <span class="dark-mode-label">Tmavý režim</span>
+    </div>
     <div class="container" style="position: relative;">
         <?php if ($auth->isLoggedIn()): ?>
             <div class="user-header">
@@ -425,6 +527,27 @@ if (!empty($searchQuery)) {
             </p>
         </div>
     </div>
+    <script>
+    (function() {
+        var KEY = 'darkMode';
+        var el = document.documentElement;
+        var sw = document.getElementById('darkModeSwitch');
+        var tg = document.getElementById('darkModeToggle');
+        function isOn() { return localStorage.getItem(KEY) === '1'; }
+        function apply(on) {
+            if (on) { el.classList.add('dark-mode'); sw.classList.add('on'); sw.setAttribute('aria-checked', 'true'); }
+            else { el.classList.remove('dark-mode'); sw.classList.remove('on'); sw.setAttribute('aria-checked', 'false'); }
+        }
+        function toggle() {
+            var on = !isOn();
+            localStorage.setItem(KEY, on ? '1' : '0');
+            apply(on);
+        }
+        apply(isOn());
+        if (sw) sw.addEventListener('click', toggle);
+        if (tg) tg.addEventListener('click', function(e) { if (e.target !== sw) toggle(); });
+    })();
+    </script>
 </body>
 </html>
 
