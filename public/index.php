@@ -95,368 +95,64 @@ if (!empty($searchQuery)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png">
     <title>Monitor zákona</title>
+    <link rel="stylesheet" href="css/liquid-glass.css">
     <script>(function(){if(localStorage.getItem('darkMode')==='1')document.documentElement.classList.add('dark-mode');})();</script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .header {
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-        .logo {
-            max-width: 600px;
-            width: auto;
-            height: auto;
-            flex-shrink: 0;
-        }
-        .tagline {
-            font-size: 1.2em;
-            color: #444;
-            font-style: italic;
-            font-weight: 400;
-            line-height: 1.7;
-            flex: 1;
-        }
-        .search-container {
-            margin: 30px 0;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-        }
-        .search-box {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        .search-input {
-            flex: 1;
-            padding: 12px 16px;
-            font-size: 1em;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            transition: border-color 0.3s;
-        }
-        .search-input:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-        .search-button {
-            padding: 12px 24px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .search-button:hover {
-            background: #2980b9;
-        }
-        .search-results-info {
-            margin-top: 15px;
-            color: #7f8c8d;
-            font-size: 0.9em;
-        }
-        .law-item {
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #3498db;
-            background: #f9f9f9;
-            transition: transform 0.2s;
-        }
-        .law-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .law-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-        .law-title a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        .law-title a:hover {
-            text-decoration: underline;
-        }
-        .law-tags {
-            margin-bottom: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        .law-tag {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: white;
-        }
-        .law-date {
-            color: #7f8c8d;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-        .law-date-label {
-            font-weight: 600;
-            color: #34495e;
-        }
-        .law-source {
-            font-size: 0.85em;
-            color: #95a5a6;
-        }
-        .law-source a {
-            color: #7f8c8d;
-            text-decoration: none;
-        }
-        .law-source a:hover {
-            text-decoration: underline;
-        }
-        .empty {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-        }
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            text-align: center;
-            color: #95a5a6;
-            font-size: 0.9em;
-        }
-        .user-header {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #34495e;
-        }
-        .user-email {
-            font-weight: 500;
-        }
-        .my-memory-button {
-            padding: 8px 16px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9em;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.3s;
-        }
-        .my-memory-button:hover {
-            background: #229954;
-        }
-        .login-link {
-            padding: 8px 16px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9em;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.3s;
-        }
-        .login-link:hover {
-            background: #2980b9;
-        }
-        .logout-link {
-            padding: 8px 16px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9em;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.3s;
-        }
-        .logout-link:hover {
-            background: #c0392b;
-        }
-
-        /* Dark mode */
-        html.dark-mode body { background: #111; color: #eee; }
-        html.dark-mode .container { background: #1a1a1a; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-        html.dark-mode .tagline { color: #bbb; }
-        html.dark-mode .search-container { background: #222; border-color: #333; }
-        html.dark-mode .search-input { background: #222; border-color: #444; color: #eee; }
-        html.dark-mode .search-input::placeholder { color: #888; }
-        html.dark-mode .search-input:focus { border-color: #5dade2; }
-        html.dark-mode .search-button { background: #2980b9; }
-        html.dark-mode .search-button:hover { background: #3498db; }
-        html.dark-mode .search-results-info { color: #aaa; }
-        html.dark-mode .search-results-info a { color: #5dade2; }
-        html.dark-mode .law-item { background: #222; border-left-color: #3498db; }
-        html.dark-mode .law-item:hover { box-shadow: 0 2px 8px rgba(255,255,255,0.05); }
-        html.dark-mode .law-title { color: #e0e0e0; }
-        html.dark-mode .law-title a { color: #5dade2; }
-        html.dark-mode .law-date, html.dark-mode .law-date-label { color: #aaa; }
-        html.dark-mode .law-source { color: #888; }
-        html.dark-mode .law-source a { color: #aaa; }
-        html.dark-mode .empty { color: #aaa; }
-        html.dark-mode .empty a { color: #5dade2; }
-        html.dark-mode .footer { border-top-color: #333; color: #888; }
-        html.dark-mode .footer a { color: #aaa; }
-        html.dark-mode .user-info, html.dark-mode .user-email { color: #ccc; }
-        html.dark-mode .my-memory-button { background: #229954; }
-        html.dark-mode .my-memory-button:hover { background: #27ae60; }
-        html.dark-mode .login-link { background: #2980b9; }
-        html.dark-mode .login-link:hover { background: #3498db; }
-        html.dark-mode .logout-link { background: #c0392b; }
-        html.dark-mode .logout-link:hover { background: #e74c3c; }
-
-        /* Dark mode toggle – horný ľavý roh */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255,255,255,0.95);
-            padding: 8px 12px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-        html.dark-mode .dark-mode-toggle {
-            background: rgba(30,30,30,0.95);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-        }
-        .dark-mode-toggle-row { display: flex; align-items: center; gap: 10px; }
-        .dark-mode-toggle span { color: #333; }
-        html.dark-mode .dark-mode-toggle span { color: #ddd; }
-        .dark-mode-label {
-            font-size: 0.7em;
-            font-weight: 500;
-            line-height: 1;
-            max-width: 100%;
-            text-align: center;
-            color: #555;
-        }
-        html.dark-mode .dark-mode-label { color: #aaa; }
-        .dark-mode-switch {
-            position: relative;
-            width: 52px;
-            height: 26px;
-            background: #ccc;
-            border-radius: 13px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .dark-mode-switch.on { background: #27ae60; }
-        html.dark-mode .dark-mode-switch { background: #444; }
-        html.dark-mode .dark-mode-switch.on { background: #27ae60; }
-        .dark-mode-switch::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
-        }
-        .dark-mode-switch.on::after { transform: translateX(26px); }
-        .dark-mode-toggle .label-off { margin-right: 2px; }
-        .dark-mode-toggle .label-on { margin-left: 2px; }
-    </style>
+    <style>.lg-logo{max-width:600px;width:auto;height:auto;flex-shrink:0;}.lg-header{display:flex;align-items:center;gap:28px;margin-bottom:28px;flex-wrap:wrap;}.lg-tagline{flex:1;min-width:200px;}</style>
 </head>
 <body>
-    <div class="dark-mode-toggle" id="darkModeToggle" title="Tmavý režim">
-        <div class="dark-mode-toggle-row">
+    <div class="lg-dark-toggle" id="darkModeToggle" title="Tmavý režim">
+        <div class="lg-dark-toggle-row">
             <span class="label-off">OFF</span>
-            <div class="dark-mode-switch" id="darkModeSwitch" role="switch" aria-checked="false" aria-label="Tmavý režim"></div>
+            <div class="lg-dark-switch" id="darkModeSwitch" role="switch" aria-checked="false" aria-label="Tmavý režim"></div>
             <span class="label-on">ON</span>
         </div>
-        <span class="dark-mode-label">Tmavý režim</span>
+        <span class="lg-dark-label">Tmavý režim</span>
     </div>
-    <div class="container" style="position: relative;">
+    <div class="lg-container" style="position: relative;">
         <?php if ($auth->isLoggedIn()): ?>
-            <div class="user-header">
-                <div class="user-info">
-                    <span class="user-email"><?php echo htmlspecialchars($auth->getUserEmail()); ?></span>
-                </div>
-                <a href="my-memory.php" class="my-memory-button">Moja pamäť</a>
-                <a href="pricing.php" class="login-link" style="background: #27ae60;"><?php echo $auth->isPaid() ? 'Cenník' : 'Upgradovať'; ?></a>
-                <a href="logout.php" class="logout-link">Odhlásiť sa</a>
+            <div class="lg-user-header">
+                <span class="lg-user-email"><?php echo htmlspecialchars($auth->getUserEmail()); ?></span>
+                <a href="my-memory.php" class="lg-btn lg-btn-success">Moja pamäť</a>
+                <a href="pricing.php" class="lg-btn lg-btn-success"><?php echo $auth->isPaid() ? 'Cenník' : 'Upgradovať'; ?></a>
+                <a href="logout.php" class="lg-btn lg-btn-danger">Odhlásiť sa</a>
             </div>
         <?php else: ?>
-            <div class="user-header">
-                <a href="login.php" class="login-link">Prihlásiť sa</a>
-                <a href="register.php" class="login-link" style="background: #27ae60;">Registrovať sa</a>
+            <div class="lg-user-header">
+                <a href="login.php" class="lg-btn lg-btn-primary">Prihlásiť sa</a>
+                <a href="register.php" class="lg-btn lg-btn-success">Registrovať sa</a>
             </div>
         <?php endif; ?>
-        <div class="header">
-            <img src="logo.png" alt="Monitor zákona" class="logo">
-            <p class="tagline">Zrozumiteľné analýzy slovenských zákonov, ktoré vám pomôžu pochopiť, ako vás ovplyvnia a ako môžete na ne reagovať.</p>
+        <div class="lg-header">
+            <img src="logo.png" alt="Monitor zákona" class="lg-logo">
+            <p class="lg-tagline lg-tagline">Zrozumiteľné analýzy slovenských zákonov, ktoré vám pomôžu pochopiť, ako vás ovplyvnia a ako môžete na ne reagovať.</p>
         </div>
         
-        <div class="search-container">
-            <form method="GET" action="" class="search-box">
+        <div class="lg-search-container">
+            <form method="GET" action="" class="lg-search-box">
                 <input 
                     type="text" 
                     name="search" 
-                    class="search-input" 
+                    class="lg-search-input" 
                     placeholder="Hľadať zákony podľa názvu alebo tagov (napr. financie, školstvo, dane...)" 
                     value="<?php echo htmlspecialchars($searchQuery); ?>"
                 >
-                <button type="submit" class="search-button">Hľadať</button>
+                <button type="submit" class="lg-btn lg-btn-primary">Hľadať</button>
             </form>
             <?php if (!empty($searchQuery)): ?>
-                <div class="search-results-info">
+                <div class="lg-search-results-info">
                     Nájdených: <?php echo count($laws); ?> zákon<?php echo count($laws) === 1 ? '' : (count($laws) >= 2 && count($laws) <= 4 ? 'y' : 'ov'); ?> 
                     pre "<?php echo htmlspecialchars($searchQuery); ?>"
-                    <a href="index.php" style="margin-left: 10px; color: #3498db;">Zrušiť vyhľadávanie</a>
+                    <a href="index.php" class="lg-link" style="margin-left: 10px;">Zrušiť vyhľadávanie</a>
                 </div>
             <?php endif; ?>
         </div>
         
         <?php if (empty($laws)): ?>
-            <div class="empty">
+            <div class="lg-empty">
                 <?php if (!empty($searchQuery)): ?>
                     <p>Pre vyhľadávanie "<?php echo htmlspecialchars($searchQuery); ?>" neboli nájdené žiadne zákony.</p>
                     <p style="margin-top: 10px; font-size: 0.9em;">
-                        <a href="index.php" style="color: #3498db;">Zobraziť všetky zákony</a>
+                        <a href="index.php" class="lg-link">Zobraziť všetky zákony</a>
                     </p>
                 <?php else: ?>
                     <p>Zatiaľ neboli spracované žiadne zákony.</p>
@@ -465,9 +161,8 @@ if (!empty($searchQuery)) {
             </div>
         <?php else: ?>
             <?php foreach ($laws as $law): ?>
-                <div class="law-item">
+                <div class="lg-law-item">
                     <?php
-                    // Parse tags from AI summary
                     $tags = [];
                     if (!empty($law['ai_summary'])) {
                         $summary = json_decode($law['ai_summary'], true);
@@ -477,23 +172,21 @@ if (!empty($searchQuery)) {
                     }
                     if (!empty($tags)):
                     ?>
-                    <div class="law-tags">
+                    <div class="lg-law-tags">
                         <?php foreach ($tags as $tag): ?>
-                            <?php 
-                            $color = \App\OpenAIClient::getTagColor($tag);
-                            ?>
-                            <span class="law-tag" style="background-color: <?php echo htmlspecialchars($color); ?>;">
+                            <?php $color = \App\OpenAIClient::getTagColor($tag); ?>
+                            <span class="lg-law-tag" style="background-color: <?php echo htmlspecialchars($color); ?>;">
                                 <?php echo htmlspecialchars($tag); ?>
                             </span>
                         <?php endforeach; ?>
                     </div>
                     <?php endif; ?>
-                    <div class="law-title">
+                    <div class="lg-law-title">
                         <a href="law.php?id=<?php echo htmlspecialchars($law['id']); ?>">
                             <?php echo htmlspecialchars($law['title']); ?>
                         </a>
                     </div>
-                    <div class="law-date">
+                    <div class="lg-law-date">
                         <?php if (!empty($law['approval_date'])): ?>
                             <span class="law-date-label">Zverejnené:</span> <?php echo htmlspecialchars($law['approval_date']); ?>
                         <?php else: ?>
@@ -505,13 +198,13 @@ if (!empty($searchQuery)) {
                                 $createdDate = new DateTime($law['created_at']);
                                 $formattedDate = $createdDate->format('d.m.Y');
                             } catch (Exception $e) {
-                                $formattedDate = substr($law['created_at'], 0, 10); // Fallback to first 10 chars
+                                $formattedDate = substr($law['created_at'], 0, 10);
                             }
                             ?>
                             | <span class="law-date-label">Spracované:</span> <?php echo htmlspecialchars($formattedDate); ?>
                         <?php endif; ?>
                     </div>
-                    <div class="law-source">
+                    <div class="lg-law-source">
                         <a href="<?php echo htmlspecialchars($law['source_url']); ?>" target="_blank">
                             Zdroj: NR SR →
                         </a>
@@ -520,7 +213,7 @@ if (!empty($searchQuery)) {
             <?php endforeach; ?>
         <?php endif; ?>
         
-        <div class="footer">
+        <div class="lg-footer">
             <p>Automaticky monitorované z <a href="https://www.nrsr.sk/web/default.aspx?SectionId=184" target="_blank">NR SR</a></p>
             <p style="margin-top: 10px;">
                 <a href="prompts.php">Použité prompty</a> | <a href="terms.php">Podmienky používania</a> | Autor: Matúš Kaník

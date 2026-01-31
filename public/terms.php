@@ -10,73 +10,17 @@ Security::setSecurityHeaders();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
     <title>Podmienky používania - Monitor zákona</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.7;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-        h2 {
-            color: #2c3e50;
-            margin-top: 30px;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-        p {
-            margin-bottom: 12px;
-        }
-        ul {
-            margin-left: 20px;
-            margin-bottom: 12px;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #3498db;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .warning {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 12px 16px;
-            margin: 16px 0;
-            color: #856404;
-        }
-        .footer {
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px solid #ecf0f1;
-            color: #95a5a6;
-            font-size: 0.9em;
-        }
-    </style>
+    <link rel="stylesheet" href="css/liquid-glass.css">
+    <style>.lg-terms h1{margin-bottom:20px;}.lg-terms h2{margin-top:32px;margin-bottom:12px;font-size:1.2rem;}.lg-terms p{margin-bottom:12px;}.lg-terms ul{margin-left:22px;margin-bottom:12px;}</style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.php" class="back-link">← Späť na hlavnú stránku</a>
-        <h1>Podmienky používania</h1>
+    <div class="lg-container lg-container-wide lg-terms">
+        <a href="index.php" class="lg-back-link">← Späť na hlavnú stránku</a>
+        <h1 class="lg-title">Podmienky používania</h1>
 
-        <p>Vitajte na webovej stránke Monitor zákona. Používaním tejto webovej stránky súhlasíte s týmito Podmienkami používania.</p>
+        <p class="lg-body">Vitajte na webovej stránke Monitor zákona. Používaním tejto webovej stránky súhlasíte s týmito Podmienkami používania.</p>
 
         <h2>1. Prevádzkovateľ</h2>
         <p>Prevádzkovateľom webovej stránky je fyzická osoba Ing. Matúš Kaník (ďalej len „Prevádzkovateľ“).</p>
@@ -85,7 +29,7 @@ Security::setSecurityHeaders();
         <h2>2. Charakter služby</h2>
         <p>Webová stránka poskytuje automatizované prehľady a zhrnutia verejne dostupných informácií o slovenských zákonoch. Ide o informatívny a edukatívny obsah.</p>
 
-        <div class="warning">
+        <div class="lg-disclaimer">
             <strong>Dôležité upozornenie:</strong> Obsah na tejto webovej stránke nepredstavuje právne poradenstvo, právnu službu ani záväzné právne stanovisko. Na právne otázky sa vždy obráťte na kvalifikovaného právnika.
         </div>
 
@@ -130,7 +74,7 @@ Security::setSecurityHeaders();
         <h2>10. Rozhodné právo</h2>
         <p>Tieto podmienky sa riadia právom Slovenskej republiky.</p>
 
-        <div class="footer">
+        <div class="lg-footer" style="margin-top:30px;padding-top:20px;">
             Posledná aktualizácia: <?php echo htmlspecialchars(date('d.m.Y')); ?>
         </div>
     </div>

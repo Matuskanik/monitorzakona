@@ -1,0 +1,503 @@
+/**
+ * Liquid Glass Design System – Monitor zákona
+ * Inšpirované Apple Liquid Glass (iOS 26 / macOS Tahoe): priehľadné sklo, blur, zaoblené tvary.
+ * Cieľová skupina: občania a profesionáli hľadajúci prehľad slovenských zákonov.
+ */
+
+/* ---- Tokens ---- */
+:root {
+    /* Glass */
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --glass-blur: 20px;
+    --glass-saturate: 180%;
+    
+    /* Surfaces */
+    --surface-1: #f2f4f8;
+    --surface-2: #e8ecf4;
+    --page-bg: linear-gradient(160deg, #f5f7fc 0%, #eef2f8 50%, #e8ecf4 100%);
+    
+    /* Text */
+    --text-primary: #1d1d1f;
+    --text-secondary: #424245;
+    --text-tertiary: #6e6e73;
+    
+    /* Accent (dôveryhodná modrá – zákon, štát) */
+    --accent: #0071e3;
+    --accent-hover: #0077ed;
+    --accent-muted: rgba(0, 113, 227, 0.12);
+    
+    /* Semantic */
+    --success: #34c759;
+    --success-hover: #30b350;
+    --danger: #ff3b30;
+    --danger-hover: #e6352b;
+    --warning-bg: rgba(255, 204, 0, 0.15);
+    --warning-border: #ffcc00;
+    
+    /* Radii */
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+    
+    /* Input / button */
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-border: rgba(0, 0, 0, 0.08);
+    --input-focus: var(--accent);
+}
+
+/* Dark mode */
+html.dark-mode {
+    --glass-bg: rgba(44, 44, 46, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --page-bg: linear-gradient(160deg, #0d0d0f 0%, #1c1c1e 50%, #2c2c2e 100%);
+    --surface-1: #1c1c1e;
+    --surface-2: #2c2c2e;
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --text-tertiary: #6e6e73;
+    --accent: #0a84ff;
+    --accent-hover: #409cff;
+    --accent-muted: rgba(10, 132, 255, 0.2);
+    --input-bg: rgba(58, 58, 60, 0.8);
+    --input-border: rgba(255, 255, 255, 0.12);
+}
+
+/* ---- Base ---- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background: var(--page-bg);
+    min-height: 100vh;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Glass panel (main container) ---- */
+.lg-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--glass-shadow);
+    padding: 32px 40px;
+}
+
+@media (max-width: 640px) {
+    .lg-container { padding: 24px 20px; }
+}
+
+/* ---- Typography ---- */
+.lg-title { font-size: 1.75rem; font-weight: 600; color: var(--text-primary); letter-spacing: -0.02em; }
+.lg-heading { font-size: 1.35rem; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; }
+.lg-body { color: var(--text-secondary); line-height: 1.6; }
+.lg-caption { font-size: 0.9rem; color: var(--text-tertiary); }
+.lg-tagline { font-size: 1.1rem; color: var(--text-secondary); font-style: italic; line-height: 1.6; }
+
+/* ---- Glass card (search box, law item, plan card) ---- */
+.lg-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    padding: 20px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lg-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+html.dark-mode .lg-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* ---- Search / form area ---- */
+.lg-search-container {
+    margin: 28px 0;
+    padding: 24px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+}
+
+.lg-search-box { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.lg-search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 14px 18px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lg-search-input::placeholder { color: var(--text-tertiary); }
+.lg-search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+}
+
+/* ---- Buttons ---- */
+.lg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+.lg-btn:active { transform: scale(0.98); }
+.lg-btn-primary {
+    background: var(--accent);
+    color: #fff;
+}
+.lg-btn-primary:hover { background: var(--accent-hover); }
+.lg-btn-success {
+    background: var(--success);
+    color: #fff;
+}
+.lg-btn-success:hover { background: var(--success-hover); }
+.lg-btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+.lg-btn-danger:hover { background: var(--danger-hover); }
+.lg-btn-secondary {
+    background: var(--surface-2);
+    color: var(--text-primary);
+}
+html.dark-mode .lg-btn-secondary { background: rgba(255,255,255,0.12); color: var(--text-primary); }
+.lg-btn-secondary:hover { filter: brightness(0.95); }
+html.dark-mode .lg-btn-secondary:hover { filter: brightness(1.1); }
+
+/* ---- Law item (list) ---- */
+.lg-law-item {
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.lg-law-item:hover {
+    transform: translateX(6px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+html.dark-mode .lg-law-item:hover { box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3); }
+.lg-law-title { font-size: 1.15rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+.lg-law-title a { color: var(--accent); text-decoration: none; }
+.lg-law-title a:hover { text-decoration: underline; }
+.lg-law-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.lg-law-tag {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+}
+.lg-law-date, .lg-law-source { font-size: 0.9rem; color: var(--text-tertiary); }
+.lg-law-date .law-date-label { font-weight: 600; color: var(--text-secondary); }
+.lg-law-source a { color: var(--accent); text-decoration: none; }
+.lg-law-source a:hover { text-decoration: underline; }
+
+/* ---- Form (login, register) ---- */
+.lg-form-group { margin-bottom: 20px; }
+.lg-label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-secondary); }
+.lg-input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lg-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+}
+.lg-input::placeholder { color: var(--text-tertiary); }
+.lg-submit { width: 100%; padding: 14px; margin-top: 8px; }
+
+/* ---- Alerts ---- */
+.lg-error {
+    padding: 14px 18px;
+    background: rgba(255, 59, 48, 0.12);
+    border: 1px solid rgba(255, 59, 48, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--danger);
+    margin-bottom: 20px;
+}
+.lg-info {
+    padding: 14px 18px;
+    background: var(--accent-muted);
+    border: 1px solid rgba(0, 113, 227, 0.25);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+.lg-alert-success { background: rgba(52, 199, 89, 0.15); border-color: rgba(52, 199, 89, 0.4); color: var(--success); }
+.lg-disclaimer {
+    padding: 16px 20px;
+    background: var(--warning-bg);
+    border-left: 4px solid var(--warning-border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+html.dark-mode .lg-disclaimer { background: rgba(255, 204, 0, 0.12); color: #f5f5f7; }
+
+/* ---- Plan card (pricing) ---- */
+.lg-plan-card {
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+}
+.lg-plan-name { font-size: 1.4rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; }
+.lg-price-old { text-decoration: line-through; color: var(--text-tertiary); font-size: 1.05rem; }
+.lg-price-current { font-size: 1.5rem; font-weight: 700; color: var(--success); }
+.lg-features { margin: 20px 0; padding-left: 22px; }
+.lg-features li { margin-bottom: 10px; color: var(--text-secondary); }
+.lg-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+
+/* ---- Section (law detail, my-memory) ---- */
+.lg-section { margin-bottom: 32px; }
+.lg-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+}
+.lg-section-content { color: var(--text-secondary); line-height: 1.75; }
+.lg-section-content ul { margin-left: 22px; margin-top: 10px; }
+.lg-section-content li { margin-bottom: 8px; }
+.lg-meta { color: var(--text-tertiary); margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--glass-border); }
+.lg-meta a { color: var(--accent); text-decoration: none; }
+.lg-meta a:hover { text-decoration: underline; }
+.lg-positive { color: var(--success); }
+.lg-negative { color: var(--danger); }
+
+/* ---- Chat (law page) ---- */
+.lg-chat .lg-chat-thread { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+.lg-chat .lg-chat-message {
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    white-space: pre-wrap;
+    max-width: 90%;
+}
+.lg-chat .lg-chat-message.user {
+    background: var(--accent-muted);
+    align-self: flex-end;
+    border-color: rgba(0, 113, 227, 0.25);
+}
+.lg-chat .lg-chat-message.assistant {
+    background: var(--glass-bg);
+    align-self: flex-start;
+}
+.lg-chat textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px 18px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-md);
+    resize: vertical;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lg-chat textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+}
+.lg-chat .lg-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+.lg-chat .lg-chat-meta { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 4px; }
+.lg-attachments { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--glass-border); }
+.lg-attachments ul { list-style: none; margin-left: 0; }
+.lg-attachments li { padding: 8px 0; color: var(--text-tertiary); }
+.lg-attachments a { color: var(--accent); text-decoration: none; }
+.lg-attachments a:hover { text-decoration: underline; }
+.lg-save-container { margin-bottom: 20px; }
+
+/* ---- Prompts page ---- */
+.lg-prompt-section { margin-bottom: 36px; }
+.lg-prompt-title { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--accent); }
+.lg-prompt-content {
+    background: var(--glass-bg);
+    padding: 20px 24px;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--accent);
+    white-space: pre-wrap;
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    overflow-x: auto;
+}
+.lg-prompt-meta { font-size: 0.85rem; color: var(--text-tertiary); margin-top: 10px; font-style: italic; }
+
+/* ---- Footer ---- */
+.lg-footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--glass-border);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+}
+.lg-footer a { color: var(--accent); text-decoration: none; }
+.lg-footer a:hover { text-decoration: underline; }
+
+/* ---- Dark mode toggle (liquid glass pill) ---- */
+.lg-dark-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    padding: 10px 14px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.lg-dark-toggle-row { display: flex; align-items: center; gap: 10px; }
+.lg-dark-label { font-size: 0.7rem; font-weight: 500; color: var(--text-tertiary); }
+.lg-dark-switch {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    background: var(--surface-2);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.lg-dark-switch.on { background: var(--success); }
+.lg-dark-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+.lg-dark-switch.on::after { transform: translateX(24px); }
+
+/* ---- Links ---- */
+.lg-back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+.lg-back-link:hover { text-decoration: underline; }
+.lg-link { color: var(--accent); text-decoration: none; }
+.lg-link:hover { text-decoration: underline; }
+
+/* ---- Divider ---- */
+.lg-divider {
+    text-align: center;
+    margin: 28px 0;
+    position: relative;
+    color: var(--text-tertiary);
+}
+.lg-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: var(--glass-border);
+}
+.lg-divider span { background: var(--glass-bg); padding: 0 16px; position: relative; }
+
+/* ---- Empty / loading ---- */
+.lg-empty, .lg-loading { text-align: center; padding: 48px 24px; color: var(--text-tertiary); }
+.lg-search-results-info { margin-top: 14px; font-size: 0.9rem; color: var(--text-tertiary); }
+.lg-search-results-info a { color: var(--accent); }
+
+/* ---- Nav links (header) ---- */
+.lg-nav { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.lg-nav a { color: var(--accent); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+.lg-nav a:hover { text-decoration: underline; }
+.lg-nav .lg-nav-danger { color: var(--danger); }
+.lg-nav .lg-nav-success { color: var(--success); }
+
+/* ---- Utility: container width ---- */
+.lg-container-narrow { max-width: 560px; margin-left: auto; margin-right: auto; }
+.lg-container-mid { max-width: 720px; margin-left: auto; margin-right: auto; }
+.lg-container-wide { max-width: 960px; margin-left: auto; margin-right: auto; }
+
+/* ---- User header (index.php) ---- */
+.lg-user-header {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.lg-user-email { font-weight: 500; color: var(--text-secondary); }
+html.dark-mode .lg-user-email { color: var(--text-secondary); }

@@ -104,167 +104,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
     <title>Registrácia - Monitor zákona</title>
+    <link rel="stylesheet" href="css/liquid-glass.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <?php if ($googleClientId): ?>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <?php endif; ?>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        .container {
-            max-width: 500px;
-            margin: 50px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            margin-bottom: 30px;
-            color: #2c3e50;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #34495e;
-            font-weight: 500;
-        }
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px 16px;
-            font-size: 1em;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            transition: border-color 0.3s;
-        }
-        input[type="email"]:focus,
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .checkbox-group input[type="checkbox"] {
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-weight: normal;
-        }
-        .recaptcha-container {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-        .submit-button {
-            width: 100%;
-            padding: 14px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .submit-button:hover {
-            background: #2980b9;
-        }
-        .error {
-            background: #fee;
-            color: #c33;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            border-left: 4px solid #c33;
-        }
-        .info {
-            background: #eef6ff;
-            color: #2c3e50;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-            font-size: 0.95em;
-        }
-        .divider {
-            text-align: center;
-            margin: 30px 0;
-            position: relative;
-            color: #7f8c8d;
-        }
-        .divider::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 100%;
-            height: 1px;
-            background: #ddd;
-        }
-        .divider span {
-            background: white;
-            padding: 0 15px;
-            position: relative;
-        }
-        .google-button {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .google-disabled {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            background: #f5f5f5;
-            color: #7f8c8d;
-            font-size: 0.95em;
-            cursor: not-allowed;
-        }
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            color: #7f8c8d;
-        }
-        .login-link a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <style>.lg-checkbox-group{display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;}.lg-checkbox-group input[type=checkbox]{margin-top:4px;flex-shrink:0;}.lg-checkbox-group label{margin-bottom:0;font-weight:normal;}.lg-recaptcha{display:flex;justify-content:center;margin:20px 0;}.lg-google-wrap{width:100%;display:flex;justify-content:center;margin-bottom:20px;}.lg-google-disabled{width:100%;padding:14px;border:1px solid var(--input-border);border-radius:var(--radius-md);background:var(--surface-2);color:var(--text-tertiary);cursor:not-allowed;}.lg-register-link{text-align:center;margin-top:24px;color:var(--text-tertiary);}.lg-register-link a{color:var(--accent);}</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Registrácia</h1>
+    <div class="lg-container lg-container-narrow">
+        <h1 class="lg-title" style="margin-bottom:28px;text-align:center;">Registrácia</h1>
         
         <?php if ($error): ?>
-            <div class="error"><?php echo htmlspecialchars($error); ?></div>
+            <div class="lg-error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
         <?php if ($googleClientId): ?>
-            <div class="google-button">
+            <div class="lg-google-wrap">
                 <div id="g_id_onload"
                     data-client_id="<?php echo htmlspecialchars($googleClientId); ?>"
                     data-context="signin"
@@ -282,70 +140,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
-            <div class="divider">
+            <div class="lg-divider">
                 <span>alebo</span>
             </div>
         <?php else: ?>
-            <div class="google-button">
-                <button class="google-disabled" disabled>Zaregistrovať sa cez Google</button>
+            <div class="lg-google-wrap">
+                <button class="lg-google-disabled" disabled>Zaregistrovať sa cez Google</button>
             </div>
-            <div class="info">
+            <div class="lg-info">
                 Google registrácia nie je zapnutá. Nastavte <code>GOOGLE_CLIENT_ID</code> v súbore <code>.env</code> (lokálne) alebo v <strong>premenných prostredia</strong> na Digital Ocean (Settings → App-Level Environment Variables) a znova nasaďte.
             </div>
         <?php endif; ?>
 
         <form method="POST" action="">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    required 
-                    value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>"
-                >
+            <div class="lg-form-group">
+                <label for="email" class="lg-label">Email</label>
+                <input type="email" id="email" name="email" class="lg-input" required value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
             </div>
-
-            <div class="form-group">
-                <label for="password">Heslo</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    required 
-                    minlength="8"
-                    placeholder="Minimálne 8 znakov"
-                >
+            <div class="lg-form-group">
+                <label for="password" class="lg-label">Heslo</label>
+                <input type="password" id="password" name="password" class="lg-input" required minlength="8" placeholder="Minimálne 8 znakov">
             </div>
-
-            <div class="form-group">
-                <label for="password_confirm">Potvrdenie hesla</label>
-                <input 
-                    type="password" 
-                    id="password_confirm" 
-                    name="password_confirm" 
-                    required 
-                    minlength="8"
-                >
+            <div class="lg-form-group">
+                <label for="password_confirm" class="lg-label">Potvrdenie hesla</label>
+                <input type="password" id="password_confirm" name="password_confirm" class="lg-input" required minlength="8">
             </div>
-
-            <div class="checkbox-group">
+            <div class="lg-checkbox-group">
                 <input type="checkbox" id="terms" name="terms" required>
                 <label for="terms">
-                    Súhlasím s <a href="terms.php" target="_blank">podmienkami používania</a>
+                    Súhlasím s <a href="terms.php" target="_blank" class="lg-link">podmienkami používania</a>
                 </label>
             </div>
-
             <?php if ($recaptchaSiteKey): ?>
-                <div class="recaptcha-container">
+                <div class="lg-recaptcha">
                     <div class="g-recaptcha" data-sitekey="<?php echo htmlspecialchars($recaptchaSiteKey); ?>"></div>
                 </div>
             <?php endif; ?>
-
-            <button type="submit" class="submit-button">Registrovať sa</button>
+            <button type="submit" class="lg-btn lg-btn-primary lg-submit">Registrovať sa</button>
         </form>
 
-        <div class="login-link">
+        <div class="lg-register-link">
             Už máte účet? <a href="login.php">Prihlásiť sa</a>
         </div>
     </div>

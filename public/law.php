@@ -171,342 +171,55 @@ if (!$chatAvailable && !$fromJson) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png">
     <title><?php echo htmlspecialchars($law['title']); ?> - Monitor zákona</title>
+    <link rel="stylesheet" href="css/liquid-glass.css">
     <script>(function(){if(localStorage.getItem('darkMode')==='1')document.documentElement.classList.add('dark-mode');})();</script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-        }
-        .meta {
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-        .meta a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        .meta a:hover {
-            text-decoration: underline;
-        }
-        .section {
-            margin-bottom: 35px;
-        }
-        .section-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #3498db;
-        }
-        .section-content {
-            color: #555;
-            line-height: 1.8;
-        }
-        .section-content ul {
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-        .section-content li {
-            margin-bottom: 8px;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #3498db;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .attachments {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ecf0f1;
-        }
-        .attachments ul {
-            list-style: none;
-            margin-left: 0;
-        }
-        .attachments li {
-            padding: 8px 0;
-            color: #7f8c8d;
-        }
-        .attachments a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        .attachments a:hover {
-            text-decoration: underline;
-        }
-        .disclaimer {
-            margin-top: 30px;
-            padding: 15px;
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            color: #856404;
-            font-size: 0.9em;
-        }
-        .positive-item {
-            color: #27ae60;
-        }
-        .negative-item {
-            color: #e74c3c;
-        }
-        .law-tags {
-            margin-bottom: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .law-tag {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: white;
-        }
-        .save-button-container {
-            margin-bottom: 20px;
-        }
-        .save-button {
-            padding: 10px 20px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9em;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .save-button:hover {
-            background: #229954;
-        }
-        .save-button.unsave {
-            background: #e74c3c;
-        }
-        .save-button.unsave:hover {
-            background: #c0392b;
-        }
-        .law-chat {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ecf0f1;
-        }
-        .law-chat .chat-thread {
-            margin-top: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .law-chat .chat-message {
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #ecf0f1;
-            white-space: pre-wrap;
-        }
-        .law-chat .chat-message.user {
-            background: #eaf2fb;
-            align-self: flex-end;
-        }
-        .law-chat .chat-message.assistant {
-            background: #f5f7fa;
-            align-self: flex-start;
-        }
-        .law-chat .chat-meta {
-            font-size: 0.75em;
-            color: #7f8c8d;
-            margin-bottom: 4px;
-        }
-        .law-chat textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 12px;
-            border: 1px solid #dcdfe3;
-            border-radius: 6px;
-            resize: vertical;
-            font-family: inherit;
-            font-size: 0.95em;
-        }
-        .law-chat .actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-top: 10px;
-        }
-        .law-chat button {
-            margin-top: 10px;
-            padding: 10px 16px;
-            background: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .law-chat button.secondary {
-            background: #ecf0f1;
-            color: #2c3e50;
-        }
-        .law-chat button:disabled {
-            background: #95a5a6;
-            cursor: not-allowed;
-        }
-        .law-chat .error {
-            margin-top: 10px;
-            color: #e74c3c;
-            font-weight: 600;
-        }
-
-        /* Dark mode */
-        html.dark-mode body { background: #111; color: #eee; }
-        html.dark-mode .container { background: #1a1a1a; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-        html.dark-mode h1, html.dark-mode .section-title { color: #e0e0e0; }
-        html.dark-mode .meta { color: #aaa; border-bottom-color: #333; }
-        html.dark-mode .meta a { color: #5dade2; }
-        html.dark-mode .section-title { border-bottom-color: #3498db; }
-        html.dark-mode .section-content { color: #ccc; }
-        html.dark-mode .back-link { color: #5dade2; }
-        html.dark-mode .attachments { border-top-color: #333; }
-        html.dark-mode .attachments li { color: #aaa; }
-        html.dark-mode .attachments a { color: #5dade2; }
-        html.dark-mode .disclaimer { background: #3d3520; border-left-color: #f1c40f; color: #e8d68a; }
-        html.dark-mode .save-button { background: #229954; }
-        html.dark-mode .save-button:hover { background: #27ae60; }
-        html.dark-mode .save-button.unsave { background: #c0392b; }
-        html.dark-mode .save-button.unsave:hover { background: #e74c3c; }
-        html.dark-mode .law-chat { border-top-color: #333; }
-        html.dark-mode .law-chat .chat-message.user { background: #1e3a5f; border-color: #2c5282; }
-        html.dark-mode .law-chat .chat-message.assistant { background: #2d3748; border-color: #4a5568; }
-        html.dark-mode .law-chat .chat-meta { color: #aaa; }
-        html.dark-mode .law-chat textarea { background: #222; border-color: #444; color: #eee; }
-        html.dark-mode .law-chat button.secondary { background: #444; color: #ddd; }
-        html.dark-mode .footer { border-top-color: #333 !important; color: #888 !important; }
-        html.dark-mode .footer a { color: #5dade2 !important; }
-
-        /* Dark mode toggle */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255,255,255,0.95);
-            padding: 8px 12px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-        html.dark-mode .dark-mode-toggle { background: rgba(30,30,30,0.95); box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-        .dark-mode-toggle-row { display: flex; align-items: center; gap: 10px; }
-        .dark-mode-toggle span { color: #333; }
-        html.dark-mode .dark-mode-toggle span { color: #ddd; }
-        .dark-mode-label { font-size: 0.7em; font-weight: 500; line-height: 1; max-width: 100%; text-align: center; color: #555; }
-        html.dark-mode .dark-mode-label { color: #aaa; }
-        .dark-mode-switch {
-            position: relative;
-            width: 52px;
-            height: 26px;
-            background: #ccc;
-            border-radius: 13px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .dark-mode-switch.on { background: #27ae60; }
-        html.dark-mode .dark-mode-switch { background: #444; }
-        html.dark-mode .dark-mode-switch.on { background: #27ae60; }
-        .dark-mode-switch::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
-        }
-        .dark-mode-switch.on::after { transform: translateX(26px); }
-        .dark-mode-toggle .label-off { margin-right: 2px; }
-        .dark-mode-toggle .label-on { margin-left: 2px; }
-    </style>
 </head>
 <body>
-    <div class="dark-mode-toggle" id="darkModeToggle" title="Tmavý režim">
-        <div class="dark-mode-toggle-row">
+    <div class="lg-dark-toggle" id="darkModeToggle" title="Tmavý režim">
+        <div class="lg-dark-toggle-row">
             <span class="label-off">OFF</span>
-            <div class="dark-mode-switch" id="darkModeSwitch" role="switch" aria-checked="false" aria-label="Tmavý režim"></div>
+            <div class="lg-dark-switch" id="darkModeSwitch" role="switch" aria-checked="false" aria-label="Tmavý režim"></div>
             <span class="label-on">ON</span>
         </div>
-        <span class="dark-mode-label">Tmavý režim</span>
+        <span class="lg-dark-label">Tmavý režim</span>
     </div>
-    <div class="container">
-        <a href="index.php" class="back-link">← Späť na zoznam</a>
+    <div class="lg-container lg-container-wide">
+        <a href="index.php" class="lg-back-link">← Späť na zoznam</a>
         
         <?php if ($auth->isLoggedIn() && !$fromJson && $isPaid): ?>
-            <div class="save-button-container">
+            <div class="lg-save-container">
                 <form method="POST" action="" style="display: inline;">
                     <?php if ($isSaved): ?>
-                        <button type="submit" name="action" value="unsave" class="save-button unsave">
+                        <button type="submit" name="action" value="unsave" class="lg-btn lg-btn-danger">
                             ✗ Odstrániť z Mojej pamäte
                         </button>
                     <?php else: ?>
-                        <button type="submit" name="action" value="save" class="save-button">
+                        <button type="submit" name="action" value="save" class="lg-btn lg-btn-success">
                             ✓ Uložiť do Mojej pamäte
                         </button>
                     <?php endif; ?>
                 </form>
             </div>
         <?php elseif ($auth->isLoggedIn() && !$fromJson && !$isPaid): ?>
-            <div class="save-button-container" style="color:#7f8c8d; font-size:0.9em;">
-                Ukladanie do Mojej pamäte je súčasťou <a href="pricing.php" style="color:#3498db;">platenej verzie</a>.
+            <div class="lg-save-container lg-caption">
+                Ukladanie do Mojej pamäte je súčasťou <a href="pricing.php" class="lg-link">platenej verzie</a>.
             </div>
         <?php endif; ?>
         
         <?php if (!empty($summary['tags']) && is_array($summary['tags'])): ?>
-        <div class="law-tags">
+        <div class="lg-law-tags">
             <?php foreach ($summary['tags'] as $tag): ?>
-                <?php 
-                $color = \App\OpenAIClient::getTagColor($tag);
-                ?>
-                <span class="law-tag" style="background-color: <?php echo htmlspecialchars($color); ?>;">
+                <?php $color = \App\OpenAIClient::getTagColor($tag); ?>
+                <span class="lg-law-tag" style="background-color: <?php echo htmlspecialchars($color); ?>;">
                     <?php echo htmlspecialchars($tag); ?>
                 </span>
             <?php endforeach; ?>
         </div>
         <?php endif; ?>
         
-        <h1><?php echo htmlspecialchars($law['title']); ?></h1>
+        <h1 class="lg-title" style="margin-bottom:15px;font-size:1.75rem;"><?php echo htmlspecialchars($law['title']); ?></h1>
         
-        <div class="meta">
+        <div class="lg-meta">
             <?php if ($law['approval_date']): ?>
                 <p><strong>Schválené:</strong> <?php echo htmlspecialchars($law['approval_date']); ?></p>
             <?php endif; ?>
@@ -522,54 +235,54 @@ if (!$chatAvailable && !$fromJson) {
             <?php endif; ?>
         </div>
 
-        <div class="law-chat">
-            <div class="section-title">Opýtajte sa zákona</div>
+        <div class="lg-chat" style="margin-top:30px;padding-top:20px;border-top:1px solid var(--glass-border);">
+            <div class="lg-section-title">Opýtajte sa zákona</div>
             <?php if (!$auth->isLoggedIn()): ?>
-                <div class="section-content" style="color:#7f8c8d;">
-                    Pre opýtanie sa zákona sa <a href="login.php?redirect=<?php echo urlencode('law.php?id=' . ($law['id'] ?? '')); ?>">prihláste</a> alebo <a href="register.php">registrujte</a>.
+                <div class="lg-section-content lg-caption">
+                    Pre opýtanie sa zákona sa <a href="login.php?redirect=<?php echo urlencode('law.php?id=' . ($law['id'] ?? '')); ?>" class="lg-link">prihláste</a> alebo <a href="register.php" class="lg-link">registrujte</a>.
                 </div>
             <?php elseif ($chatAvailable): ?>
                 <?php if ($chatQuestionUsed && !$isPaid): ?>
-                    <div class="section-content">
+                    <div class="lg-section-content">
                         <p style="margin-bottom:12px;">Na ďalšie otázky k tomuto zákonu aktivujte platenú verziu.</p>
-                        <a href="pricing.php" class="save-button" style="display:inline-block; text-decoration:none;">Upgradovať na platenú verziu</a>
+                        <a href="pricing.php" class="lg-btn lg-btn-success" style="display:inline-block;text-decoration:none;">Upgradovať na platenú verziu</a>
                     </div>
                 <?php else: ?>
-                    <div class="section-content">
+                    <div class="lg-section-content">
                         <?php if (!$isPaid): ?>
-                            <p style="font-size:0.85em; color:#7f8c8d; margin-bottom:10px;">Bezplatní používatelia: 1 otázka na zákon. Ďalšie po upgrade.</p>
+                            <p class="lg-caption" style="margin-bottom:10px;">Bezplatní používatelia: 1 otázka na zákon. Ďalšie po upgrade.</p>
                         <?php endif; ?>
                         <textarea id="law-chat-question" placeholder="Napíšte otázku k tomuto zákonu..."></textarea>
-                        <div class="actions">
-                            <button id="law-chat-submit" type="button">Opýtať sa</button>
-                            <button id="law-chat-download" class="secondary" type="button">Stiahnuť PDF</button>
-                            <button id="law-chat-reset" class="secondary" type="button">Vymazať konverzáciu</button>
+                        <div class="lg-actions">
+                            <button id="law-chat-submit" type="button" class="lg-btn lg-btn-primary">Opýtať sa</button>
+                            <button id="law-chat-download" class="lg-btn lg-btn-secondary" type="button">Stiahnuť PDF</button>
+                            <button id="law-chat-reset" class="lg-btn lg-btn-secondary" type="button">Vymazať konverzáciu</button>
                         </div>
                         <?php if (!$isPaid): ?>
-                            <p style="font-size:0.85em; color:#7f8c8d; margin-top:8px;">Sťahovanie PDF: 1× zadarmo. Ďalšie po upgrade.</p>
+                            <p class="lg-caption" style="margin-top:8px;">Sťahovanie PDF: 1× zadarmo. Ďalšie po upgrade.</p>
                         <?php endif; ?>
-                        <div id="law-chat-error" class="error" style="display:none;"></div>
-                        <div id="law-chat-thread" class="chat-thread"></div>
+                        <div id="law-chat-error" class="lg-error" style="display:none;margin-top:10px;"></div>
+                        <div id="law-chat-thread" class="lg-chat-thread"></div>
                     </div>
                 <?php endif; ?>
             <?php else: ?>
-                <div class="section-content">
+                <div class="lg-section-content">
                     Text zákona zatiaľ nie je dostupný pre chat. Skúste to neskôr po spracovaní.
                 </div>
             <?php endif; ?>
         </div>
 
-        <div class="section">
-            <div class="section-title">Zhrnutie</div>
-            <div class="section-content">
+        <div class="lg-section">
+            <div class="lg-section-title">Zhrnutie</div>
+            <div class="lg-section-content">
                 <?php echo nl2br(htmlspecialchars($summary['summary_paragraph'])); ?>
             </div>
         </div>
 
         <?php if (!empty($summary['affected_groups'])): ?>
-        <div class="section">
-            <div class="section-title">Ovplyvnené skupiny</div>
-            <div class="section-content">
+        <div class="lg-section">
+            <div class="lg-section-title">Ovplyvnené skupiny</div>
+            <div class="lg-section-content">
                 <ul>
                     <?php foreach ($summary['affected_groups'] as $group): ?>
                         <li><?php echo htmlspecialchars($group); ?></li>
@@ -580,12 +293,12 @@ if (!$chatAvailable && !$fromJson) {
         <?php endif; ?>
 
         <?php if (!empty($summary['positives'])): ?>
-        <div class="section">
-            <div class="section-title">Pozitíva</div>
-            <div class="section-content">
+        <div class="lg-section">
+            <div class="lg-section-title">Pozitíva</div>
+            <div class="lg-section-content">
                 <ul>
                     <?php foreach ($summary['positives'] as $positive): ?>
-                        <li class="positive-item"><?php echo htmlspecialchars($positive); ?></li>
+                        <li class="lg-positive"><?php echo htmlspecialchars($positive); ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -593,12 +306,12 @@ if (!$chatAvailable && !$fromJson) {
         <?php endif; ?>
 
         <?php if (!empty($summary['negatives'])): ?>
-        <div class="section">
-            <div class="section-title">Negatíva</div>
-            <div class="section-content">
+        <div class="lg-section">
+            <div class="lg-section-title">Negatíva</div>
+            <div class="lg-section-content">
                 <ul>
                     <?php foreach ($summary['negatives'] as $negative): ?>
-                        <li class="negative-item"><?php echo htmlspecialchars($negative); ?></li>
+                        <li class="lg-negative"><?php echo htmlspecialchars($negative); ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -606,9 +319,9 @@ if (!$chatAvailable && !$fromJson) {
         <?php endif; ?>
 
         <?php if (!empty($summary['how_to_react'])): ?>
-        <div class="section">
-            <div class="section-title">Ako reagovať</div>
-            <div class="section-content">
+        <div class="lg-section">
+            <div class="lg-section-title">Ako reagovať</div>
+            <div class="lg-section-content">
                 <ul>
                     <?php foreach ($summary['how_to_react'] as $reaction): ?>
                         <?php
@@ -635,8 +348,8 @@ if (!$chatAvailable && !$fromJson) {
         <?php endif; ?>
 
         <?php if (!empty($attachments)): ?>
-        <div class="attachments">
-            <div class="section-title">Prílohy</div>
+        <div class="lg-attachments">
+            <div class="lg-section-title">Prílohy</div>
             <ul>
                 <?php foreach ($attachments as $att): ?>
                     <li>
@@ -651,15 +364,15 @@ if (!$chatAvailable && !$fromJson) {
         <?php endif; ?>
 
         <?php if (!empty($summary['disclaimer'])): ?>
-        <div class="disclaimer">
+        <div class="lg-disclaimer" style="margin-top:30px;">
             <?php echo nl2br(htmlspecialchars($summary['disclaimer'])); ?>
         </div>
         <?php endif; ?>
 
-        <div class="footer" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; text-align: center; color: #95a5a6; font-size: 0.9em;">
-            <p>Automaticky monitorované z <a href="https://www.nrsr.sk/web/default.aspx?SectionId=184" target="_blank" style="color: #3498db; text-decoration: none;">NR SR</a></p>
+        <div class="lg-footer" style="margin-top: 40px;">
+            <p>Automaticky monitorované z <a href="https://www.nrsr.sk/web/default.aspx?SectionId=184" target="_blank">NR SR</a></p>
             <p style="margin-top: 10px;">
-                <a href="prompts.php" style="color: #3498db; text-decoration: none;">Použité prompty</a> | <a href="terms.php" style="color: #3498db; text-decoration: none;">Podmienky používania</a> | Autor: Matúš Kaník
+                <a href="prompts.php">Použité prompty</a> | <a href="terms.php">Podmienky používania</a> | Autor: Matúš Kaník
             </p>
         </div>
     </div>
@@ -692,9 +405,9 @@ if (!$chatAvailable && !$fromJson) {
             chatThread.innerHTML = '';
             history.forEach((msg) => {
                 const item = document.createElement('div');
-                item.className = 'chat-message ' + (msg.role === 'user' ? 'user' : 'assistant');
+                item.className = 'lg-chat-message ' + (msg.role === 'user' ? 'user' : 'assistant');
                 const meta = document.createElement('div');
-                meta.className = 'chat-meta';
+                meta.className = 'lg-chat-meta';
                 meta.textContent = msg.role === 'user' ? 'Vy' : 'AI';
                 const content = document.createElement('div');
                 content.textContent = msg.content;
