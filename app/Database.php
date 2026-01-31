@@ -126,6 +126,29 @@ class Database
                 UNIQUE(user_id, law_id)
             )
         ");
+
+        // Stripe / subscription columns on users (v7)
+        try {
+            $this->pdo->exec("ALTER TABLE users ADD COLUMN stripe_customer_id TEXT");
+        } catch (\PDOException $e) { /* column exists */ }
+        try {
+            $this->pdo->exec("ALTER TABLE users ADD COLUMN subscription_status TEXT DEFAULT 'free'");
+        } catch (\PDOException $e) { /* column exists */ }
+        try {
+            $this->pdo->exec("ALTER TABLE users ADD COLUMN subscription_plan TEXT");
+        } catch (\PDOException $e) { /* column exists */ }
+        try {
+            $this->pdo->exec("ALTER TABLE users ADD COLUMN subscription_current_period_end TEXT");
+        } catch (\PDOException $e) { /* column exists */ }
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS user_pdf_downloads (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                downloaded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        ");
     }
 
     public function getPdo(): \PDO
@@ -396,6 +419,42 @@ class Database
             $chat['messages'] = json_decode($chat['messages_json'], true) ?: [];
         }
         return $chats;
+    }
+
+    // Stripe / subscription (v7)
+    public function findUserByStripeCustomerId(string $stripeCustomerId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE stripe_customer_id = ?");
+        $stmt->execute([$stripeCustomerId]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function setStripeCustomerId(int $userId, string $stripeCustomerId): void
+    {
+        $stmt = $this->pdo->prepare("UPDATE users SET stripe_customer_id = ? WHERE id = ?");
+        $stmt->execute([$stripeCustomerId, $userId]);
+    }
+
+    public function updateUserSubscription(int $userId, string $status, ?string $plan = null, ?string $currentPeriodEnd = null): void
+    {
+        $stmt = $this->pdo->prepare("
+            UPDATE users SET subscription_status = ?, subscription_plan = ?, subscription_current_period_end = ?
+            WHERE id = ?
+        ");
+        $stmt->execute([$status, $plan, $currentPeriodEnd, $userId]);
+    }
+
+    public function getPdfDownloadCount(int $userId): int
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM user_pdf_downloads WHERE user_id = ?");
+        $stmt->execute([$userId]);
+        return (int) $stmt->fetchColumn();
+    }
+
+    public function recordPdfDownload(int $userId): void
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO user_pdf_downloads (user_id) VALUES (?)");
+        $stmt->execute([$userId]);
     }
 }
 

@@ -21,6 +21,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Config;
 use App\Database;
+use App\Auth;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -29,6 +30,16 @@ try {
 } catch (\Exception $e) {
     http_response_code(500);
     echo 'Configuration error: ' . $e->getMessage();
+    exit;
+}
+
+$db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
+$auth = new Auth($db);
+
+if (!$auth->isLoggedIn()) {
+    http_response_code(401);
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode(['error' => 'Musíte byť prihlásený.', 'login_redirect' => 'login.php'], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -51,7 +62,6 @@ if (empty($lawId)) {
     exit;
 }
 
-$db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
 // Support both numeric id and master_id (when from JSON on DO, law_id is master_id)
 $stmt = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ? OR master_id = ?");
 $stmt->execute([$lawId, $lawId]);
@@ -79,6 +89,18 @@ if (!$law) {
         'source_url' => $json['source_url'] ?? '',
         'ai_summary' => isset($json['summary']) ? json_encode($json['summary']) : null,
     ];
+}
+
+// Free users: 1 PDF download per account; then redirect to pricing
+$userId = $auth->getUserId();
+if (!$auth->isPaid()) {
+    $pdfCount = $db->getPdfDownloadCount($userId);
+    if ($pdfCount >= 1) {
+        http_response_code(403);
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode(['limit_reached' => true, 'redirect' => 'pricing.php'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
 }
 
 $attachments = $law ? $db->getAttachments((int)$law['id']) : [];
@@ -355,6 +377,7 @@ try {
     $dompdf->loadHtml($html, 'UTF-8');
     $dompdf->setPaper('A4', 'portrait');
     $dompdf->render();
+    $db->recordPdfDownload($userId);
     $dompdf->stream('zakon-' . $law['id'] . '.pdf', ['Attachment' => true]);
 } catch (\Exception $e) {
     http_response_code(500);

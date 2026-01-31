@@ -315,6 +315,7 @@ if (!empty($searchQuery)) {
                     <span class="user-email"><?php echo htmlspecialchars($auth->getUserEmail()); ?></span>
                 </div>
                 <a href="my-memory.php" class="my-memory-button">Moja pamäť</a>
+                <a href="pricing.php" class="login-link" style="background: #27ae60;"><?php echo $auth->isPaid() ? 'Cenník' : 'Upgradovať'; ?></a>
                 <a href="logout.php" class="logout-link">Odhlásiť sa</a>
             </div>
         <?php else: ?>

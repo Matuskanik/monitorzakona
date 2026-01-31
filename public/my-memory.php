@@ -22,8 +22,9 @@ $auth = new Auth($db);
 $auth->requireLogin();
 
 $userId = $auth->getUserId();
-$savedLaws = $db->getUserSavedLaws($userId);
-$chats = $db->getUserChats($userId);
+$isPaid = $auth->isPaid();
+$savedLaws = $isPaid ? $db->getUserSavedLaws($userId) : [];
+$chats = $isPaid ? $db->getUserChats($userId) : [];
 
 ?>
 <!DOCTYPE html>
@@ -162,6 +163,14 @@ $chats = $db->getUserChats($userId);
             <a href="index.php" class="back-link">← Späť na hlavnú stránku</a>
         </div>
 
+        <?php if (!$isPaid): ?>
+        <div class="section" style="padding:30px 0; text-align:center;">
+            <h2 class="section-title">Platená verzia</h2>
+            <p style="margin-bottom:20px; color:#555;">Ukladanie zákonov do Mojej pamäte a prehľad AI chatov sú súčasťou platenej verzie.</p>
+            <p style="margin-bottom:24px;">Získajte neobmedzenú konverzáciu so zákonmi, ukladanie do pamäte a neobmedzené sťahovanie PDF.</p>
+            <a href="pricing.php" class="back-link" style="display:inline-block; padding:12px 24px; background:#3498db; color:white; border-radius:8px; font-weight:bold;">Upgradovať na platenú verziu</a>
+        </div>
+        <?php else: ?>
         <div class="section">
             <h2 class="section-title">Uložené zákony</h2>
             <?php if (empty($savedLaws)): ?>
@@ -242,6 +251,7 @@ $chats = $db->getUserChats($userId);
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
+        <?php endif; ?>
 
         <div class="footer" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; text-align: center; color: #95a5a6; font-size: 0.9em;">
             <p>Automaticky monitorované z <a href="https://www.nrsr.sk/web/default.aspx?SectionId=184" target="_blank" style="color: #3498db; text-decoration: none;">NR SR</a></p>

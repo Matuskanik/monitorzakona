@@ -26,6 +26,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Config;
 use App\Database;
+use App\Auth;
 use App\OpenAIClient;
 use App\Logger;
 
@@ -40,6 +41,15 @@ try {
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed.']);
+    exit;
+}
+
+$db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
+$auth = new Auth($db);
+
+if (!$auth->isLoggedIn()) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Musíte byť prihlásený.']);
     exit;
 }
 
@@ -103,14 +113,51 @@ if (count($sanitizedHistory) > 10) {
     $sanitizedHistory = array_slice($sanitizedHistory, -10);
 }
 
-$db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
 // Support both numeric id and master_id (when from JSON fallback, law.php passes master_id as id)
 $stmt = $db->getPdo()->prepare("SELECT * FROM laws WHERE id = ? OR master_id = ?");
 $stmt->execute([$lawId, $lawId]);
 $law = $stmt->fetch();
 
+if (!$law) {
+    http_response_code(404);
+    echo json_encode(['error' => 'Zákon nebol nájdený.']);
+    exit;
+}
+
+$internalLawId = (int) $law['id'];
+$userId = $auth->getUserId();
+$isPaid = $auth->isPaid();
+
+// Free: 1 question per law total. Paid: cap per law (default 200).
+$existingChat = $db->getUserChat($userId, $internalLawId);
+$messages = $existingChat['messages'] ?? [];
+$userMessageCount = 0;
+foreach ($messages as $m) {
+    if (isset($m['role']) && $m['role'] === 'user') {
+        $userMessageCount++;
+    }
+}
+
+if (!$isPaid) {
+    if ($userMessageCount >= 1) {
+        http_response_code(403);
+        echo json_encode([
+            'error' => 'Na ďalšie otázky k tomuto zákonu aktivujte platenú verziu.',
+            'upgrade_redirect' => 'pricing.php',
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+} else {
+    $limit = (int) Config::get('CHAT_MESSAGES_PER_LAW_PER_MONTH', '200');
+    if ($limit > 0 && $userMessageCount >= $limit) {
+        http_response_code(403);
+        echo json_encode(['error' => 'Mesačný limit konverzácie pre tento zákon ste vyčerpali. Skúste znova neskôr.'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+}
+
 // master_id for paths: from DB or treat law_id as master_id (DO: law from JSON, no DB)
-$masterId = $law ? ($law['master_id'] ?? $law['id']) : (string)$lawId;
+$masterId = $law['master_id'] ?? $law['id'];
 
 $storagePath = Config::get('STORAGE_PATH', 'storage');
 if (!str_starts_with($storagePath, '/')) {
@@ -156,6 +203,12 @@ $aiClient = new OpenAIClient(
 
 try {
     $answer = $aiClient->answerQuestionWithHistory($lawText, $question, $sanitizedHistory);
+    // Persist chat so free 1-question limit is enforced server-side
+    $messagesToSave = $messages;
+    $messagesToSave[] = ['role' => 'user', 'content' => $question];
+    $messagesToSave[] = ['role' => 'assistant', 'content' => $answer];
+    $db->saveUserChat($userId, $internalLawId, $messagesToSave);
+
     echo json_encode([
         'answer' => $answer
     ], JSON_UNESCAPED_UNICODE);

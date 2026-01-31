@@ -137,4 +137,22 @@ class Auth
             exit;
         }
     }
+
+    /** Whether the current user has an active paid subscription (v7). */
+    public function isPaid(): bool
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return false;
+        }
+        $status = $user['subscription_status'] ?? 'free';
+        if ($status !== 'active' && $status !== 'trialing') {
+            return false;
+        }
+        $end = $user['subscription_current_period_end'] ?? null;
+        if ($end === null || $end === '') {
+            return true; // no end date = treat as active
+        }
+        return strtotime($end) > time();
+    }
 }

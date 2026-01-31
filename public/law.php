@@ -121,6 +121,27 @@ if (!$fromJson && $auth->isLoggedIn()) {
     $isSaved = $db->isLawSavedByUser($auth->getUserId(), (int)$law['id']);
 }
 
+$isPaid = $auth->isPaid();
+$pdfDownloadLimitReached = false;
+$chatQuestionUsed = false;
+if ($auth->isLoggedIn()) {
+    $userId = $auth->getUserId();
+    if (!$isPaid) {
+        $pdfDownloadLimitReached = $db->getPdfDownloadCount($userId) >= 1;
+    }
+    if (!$fromJson && !$isPaid) {
+        $existingChat = $db->getUserChat($userId, (int)$law['id']);
+        $msgs = $existingChat['messages'] ?? [];
+        $userMsgCount = 0;
+        foreach ($msgs as $m) {
+            if (isset($m['role']) && $m['role'] === 'user') {
+                $userMsgCount++;
+            }
+        }
+        $chatQuestionUsed = $userMsgCount >= 1;
+    }
+}
+
 // Chat panel: need law text from storage/.../combined.txt OR public/data/laws/{id}.txt (v6: committed by Actions for DO)
 $chatAvailable = false;
 $masterId = $law['master_id'] ?? $law['id'];
@@ -358,7 +379,7 @@ if (!$chatAvailable && !$fromJson) {
     <div class="container">
         <a href="index.php" class="back-link">← Späť na zoznam</a>
         
-        <?php if ($auth->isLoggedIn() && !$fromJson): ?>
+        <?php if ($auth->isLoggedIn() && !$fromJson && $isPaid): ?>
             <div class="save-button-container">
                 <form method="POST" action="" style="display: inline;">
                     <?php if ($isSaved): ?>
@@ -371,6 +392,10 @@ if (!$chatAvailable && !$fromJson) {
                         </button>
                     <?php endif; ?>
                 </form>
+            </div>
+        <?php elseif ($auth->isLoggedIn() && !$fromJson && !$isPaid): ?>
+            <div class="save-button-container" style="color:#7f8c8d; font-size:0.9em;">
+                Ukladanie do Mojej pamäte je súčasťou <a href="pricing.php" style="color:#3498db;">platenej verzie</a>.
             </div>
         <?php endif; ?>
         
@@ -407,17 +432,34 @@ if (!$chatAvailable && !$fromJson) {
 
         <div class="law-chat">
             <div class="section-title">Opýtajte sa zákona</div>
-            <?php if ($chatAvailable): ?>
-                <div class="section-content">
-                    <textarea id="law-chat-question" placeholder="Napíšte otázku k tomuto zákonu..."></textarea>
-                    <div class="actions">
-                        <button id="law-chat-submit" type="button">Opýtať sa</button>
-                        <button id="law-chat-download" class="secondary" type="button">Stiahnuť PDF</button>
-                        <button id="law-chat-reset" class="secondary" type="button">Vymazať konverzáciu</button>
-                    </div>
-                    <div id="law-chat-error" class="error" style="display:none;"></div>
-                    <div id="law-chat-thread" class="chat-thread"></div>
+            <?php if (!$auth->isLoggedIn()): ?>
+                <div class="section-content" style="color:#7f8c8d;">
+                    Pre opýtanie sa zákona sa <a href="login.php?redirect=<?php echo urlencode('law.php?id=' . ($law['id'] ?? '')); ?>">prihláste</a> alebo <a href="register.php">registrujte</a>.
                 </div>
+            <?php elseif ($chatAvailable): ?>
+                <?php if ($chatQuestionUsed && !$isPaid): ?>
+                    <div class="section-content">
+                        <p style="margin-bottom:12px;">Na ďalšie otázky k tomuto zákonu aktivujte platenú verziu.</p>
+                        <a href="pricing.php" class="save-button" style="display:inline-block; text-decoration:none;">Upgradovať na platenú verziu</a>
+                    </div>
+                <?php else: ?>
+                    <div class="section-content">
+                        <?php if (!$isPaid): ?>
+                            <p style="font-size:0.85em; color:#7f8c8d; margin-bottom:10px;">Bezplatní používatelia: 1 otázka na zákon. Ďalšie po upgrade.</p>
+                        <?php endif; ?>
+                        <textarea id="law-chat-question" placeholder="Napíšte otázku k tomuto zákonu..."></textarea>
+                        <div class="actions">
+                            <button id="law-chat-submit" type="button">Opýtať sa</button>
+                            <button id="law-chat-download" class="secondary" type="button">Stiahnuť PDF</button>
+                            <button id="law-chat-reset" class="secondary" type="button">Vymazať konverzáciu</button>
+                        </div>
+                        <?php if (!$isPaid): ?>
+                            <p style="font-size:0.85em; color:#7f8c8d; margin-top:8px;">Sťahovanie PDF: 1× zadarmo. Ďalšie po upgrade.</p>
+                        <?php endif; ?>
+                        <div id="law-chat-error" class="error" style="display:none;"></div>
+                        <div id="law-chat-thread" class="chat-thread"></div>
+                    </div>
+                <?php endif; ?>
             <?php else: ?>
                 <div class="section-content">
                     Text zákona zatiaľ nie je dostupný pre chat. Skúste to neskôr po spracovaní.
@@ -529,7 +571,7 @@ if (!$chatAvailable && !$fromJson) {
             </p>
         </div>
     </div>
-    <?php if ($chatAvailable): ?>
+    <?php if ($chatAvailable && $auth->isLoggedIn() && (!$chatQuestionUsed || $isPaid)): ?>
     <script>
         const chatSubmit = document.getElementById('law-chat-submit');
         const chatDownload = document.getElementById('law-chat-download');
@@ -538,6 +580,7 @@ if (!$chatAvailable && !$fromJson) {
         const chatThread = document.getElementById('law-chat-thread');
         const chatError = document.getElementById('law-chat-error');
         const storageKey = 'law-chat-<?php echo htmlspecialchars($law['id']); ?>';
+        const pdfDownloadLimitReached = <?php echo $pdfDownloadLimitReached ? 'true' : 'false'; ?>;
 
         const loadHistory = () => {
             try {
@@ -581,6 +624,10 @@ if (!$chatAvailable && !$fromJson) {
         });
 
         chatDownload.addEventListener('click', async () => {
+            if (pdfDownloadLimitReached) {
+                window.location.href = 'pricing.php';
+                return;
+            }
             chatError.style.display = 'none';
             chatError.textContent = '';
             chatDownload.disabled = true;
@@ -595,8 +642,14 @@ if (!$chatAvailable && !$fromJson) {
                     })
                 });
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(errorText || 'Nepodarilo sa vygenerovať PDF.');
+                    const text = await response.text();
+                    let data;
+                    try { data = JSON.parse(text); } catch (e) { data = {}; }
+                    if (data.limit_reached && data.redirect) {
+                        window.location.href = data.redirect;
+                        return;
+                    }
+                    throw new Error(data.error || text || 'Nepodarilo sa vygenerovať PDF.');
                 }
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
@@ -643,6 +696,10 @@ if (!$chatAvailable && !$fromJson) {
                 });
                 const data = await response.json();
                 if (!response.ok) {
+                    if (response.status === 403 && data.upgrade_redirect) {
+                        window.location.href = data.upgrade_redirect;
+                        return;
+                    }
                     throw new Error(data.error || 'Neznáma chyba.');
                 }
                 const answer = data.answer || 'AI nevrátila odpoveď.';
