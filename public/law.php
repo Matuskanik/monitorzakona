@@ -159,7 +159,16 @@ if (!$chatAvailable && !$fromJson) {
     if (!str_starts_with($storagePath, '/')) {
         $storagePath = dirname(__DIR__) . '/' . $storagePath;
     }
-    $combinedPath = $storagePath . '/' . $masterId . '/combined.txt';
+    $origin = $law['origin'] ?? 'nrsr';
+    if ($origin === 'slovlex_zz') {
+        $extId = $law['external_id'] ?? '';
+        if ($extId === '' && preg_match('/^slovlex-ZZ-(\d+)-(\d+)$/', $masterId, $m)) {
+            $extId = $m[1] . '/' . $m[2];
+        }
+        $combinedPath = $storagePath . '/slovlex_zz/' . str_replace('\\', '/', $extId) . '/combined.txt';
+    } else {
+        $combinedPath = $storagePath . '/' . $masterId . '/combined.txt';
+    }
     $chatAvailable = file_exists($combinedPath) && filesize($combinedPath) > 0;
 }
 
@@ -223,7 +232,7 @@ if (!$chatAvailable && !$fromJson) {
             <?php if ($law['approval_date']): ?>
                 <p><strong>Schválené:</strong> <?php echo htmlspecialchars($law['approval_date']); ?></p>
             <?php endif; ?>
-            <p><strong>Zdroj:</strong> <a href="<?php echo htmlspecialchars($law['source_url']); ?>" target="_blank">NR SR</a></p>
+            <p><strong>Zdroj:</strong> <a href="<?php echo htmlspecialchars($law['source_url']); ?>" target="_blank"><?php echo (isset($law['origin']) && $law['origin'] === 'slovlex_zz') ? 'Slov-Lex' : 'NR SR'; ?></a></p>
             <?php if (!$textExtracted && $processingStatus === 'no_text_extracted'): ?>
                 <p style="color: #e67e22; font-weight: bold; margin-top: 10px;">
                     ⚠ Text z tohto zákona nebol možné automaticky extrahovať (naskenované dokumenty). Pre detailnú analýzu by bolo potrebné OCR.

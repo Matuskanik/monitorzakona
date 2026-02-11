@@ -122,6 +122,7 @@ $loginUri = $redirectUri;
         </form>
 
         <div class="lg-register-link">
+            <a href="forgot-password.php">Zabudli ste heslo?</a><br>
             Nemáte účet? <a href="register.php">Registrovať sa</a>
         </div>
     </div>

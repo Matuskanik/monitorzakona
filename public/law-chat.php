@@ -183,7 +183,17 @@ if (!str_starts_with($storagePath, '/')) {
     $storagePath = dirname(__DIR__) . '/' . $storagePath;
 }
 
-$combinedPath = $storagePath . '/' . $masterId . '/combined.txt';
+// Slov-Lex stores under storage/slovlex_zz/{year}/{number}/combined.txt
+$origin = $law['origin'] ?? 'nrsr';
+if ($origin === 'slovlex_zz') {
+    $extId = $law['external_id'] ?? '';
+    if ($extId === '' && preg_match('/^slovlex-ZZ-(\d+)-(\d+)$/', $masterId, $m)) {
+        $extId = $m[1] . '/' . $m[2];
+    }
+    $combinedPath = $storagePath . '/slovlex_zz/' . str_replace('\\', '/', $extId) . '/combined.txt';
+} else {
+    $combinedPath = $storagePath . '/' . $masterId . '/combined.txt';
+}
 $txtInPublic = __DIR__ . '/data/laws/' . $masterId . '.txt';
 
 if (file_exists($combinedPath) && is_readable($combinedPath)) {

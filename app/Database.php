@@ -65,6 +65,24 @@ class Database
             // Column already exists, ignore
         }
 
+        // Origin: nrsr | slovlex_zz (Slov-Lex Zbierka zákonov)
+        try {
+            $this->pdo->exec("ALTER TABLE laws ADD COLUMN origin TEXT DEFAULT 'nrsr'");
+        } catch (\PDOException $e) {
+            // Column already exists, ignore
+        }
+        try {
+            $this->pdo->exec("ALTER TABLE laws ADD COLUMN external_id TEXT");
+        } catch (\PDOException $e) {
+            // Column already exists, ignore
+        }
+        // Migrate existing rows to explicit nrsr
+        try {
+            $this->pdo->exec("UPDATE laws SET origin = 'nrsr' WHERE origin IS NULL OR origin = ''");
+        } catch (\PDOException $e) {
+            // ignore
+        }
+
         $this->pdo->exec("
             CREATE TABLE IF NOT EXISTS attachments (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -163,6 +181,50 @@ class Database
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             )
         ");
+
+        // law_chunks: persistent blocks for full-text / librarian (Slov-Lex + NR SR)
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS law_chunks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                law_id INTEGER NOT NULL,
+                chunk_index INTEGER NOT NULL,
+                content TEXT NOT NULL,
+                char_start INTEGER DEFAULT 0,
+                char_end INTEGER DEFAULT 0,
+                section_title TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (law_id) REFERENCES laws(id) ON DELETE CASCADE
+            )
+        ");
+        try {
+            $this->pdo->exec("CREATE INDEX IF NOT EXISTS idx_law_chunks_law_id ON law_chunks(law_id)");
+        } catch (\PDOException $e) {
+            // ignore
+        }
+
+        // Global chat (librarian): one thread per user, no law_id
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS user_chats_global (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL UNIQUE,
+                messages_json TEXT NOT NULL DEFAULT '[]',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        ");
+
+        // Password reset tokens (forgot password flow)
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS password_reset_tokens (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                token TEXT NOT NULL UNIQUE,
+                expires_at TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        ");
     }
 
     public function getPdo(): \PDO
@@ -183,12 +245,14 @@ class Database
         
         $processingStatus = $data['processing_status'] ?? 'completed';
         $textExtracted = isset($data['text_extracted']) ? ($data['text_extracted'] ? 1 : 0) : 1;
+        $origin = $data['origin'] ?? 'nrsr';
+        $externalId = $data['external_id'] ?? null;
         
         if ($existing) {
             $stmt = $this->pdo->prepare("
                 UPDATE laws 
                 SET title = ?, approval_date = ?, source_url = ?, content_hash = ?, 
-                    ai_summary = ?, processing_status = ?, text_extracted = ?, updated_at = CURRENT_TIMESTAMP
+                    ai_summary = ?, processing_status = ?, text_extracted = ?, origin = ?, external_id = ?, updated_at = CURRENT_TIMESTAMP
                 WHERE master_id = ?
             ");
             $stmt->execute([
@@ -199,13 +263,15 @@ class Database
                 $data['ai_summary'] ?? null,
                 $processingStatus,
                 $textExtracted,
+                $origin,
+                $externalId,
                 $data['master_id']
             ]);
             return $existing['id'];
         } else {
             $stmt = $this->pdo->prepare("
-                INSERT INTO laws (master_id, title, approval_date, source_url, content_hash, ai_summary, processing_status, text_extracted)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO laws (master_id, title, approval_date, source_url, content_hash, ai_summary, processing_status, text_extracted, origin, external_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
             $stmt->execute([
                 $data['master_id'],
@@ -215,9 +281,11 @@ class Database
                 $data['content_hash'],
                 $data['ai_summary'] ?? null,
                 $processingStatus,
-                $textExtracted
+                $textExtracted,
+                $origin,
+                $externalId
             ]);
-            return $this->pdo->lastInsertId();
+            return (int) $this->pdo->lastInsertId();
         }
     }
 
@@ -243,6 +311,159 @@ class Database
         return $stmt->fetchAll();
     }
 
+    public function deleteChunksByLawId(int $lawId): void
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM law_chunks WHERE law_id = ?");
+        $stmt->execute([$lawId]);
+    }
+
+    public function saveLawChunk(int $lawId, int $chunkIndex, string $content, int $charStart = 0, int $charEnd = 0, ?string $sectionTitle = null): void
+    {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO law_chunks (law_id, chunk_index, content, char_start, char_end, section_title)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([$lawId, $chunkIndex, $content, $charStart, $charEnd, $sectionTitle]);
+    }
+
+    /** @return list<array{id: int, law_id: int, chunk_index: int, content: string, char_start: int, char_end: int, section_title: ?string}> */
+    public function getChunksByLawId(int $lawId): array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM law_chunks WHERE law_id = ? ORDER BY chunk_index");
+        $stmt->execute([$lawId]);
+        return $stmt->fetchAll();
+    }
+
+    /** Search chunks by content (LIKE). For librarian / full-text. */
+    public function searchChunksByContent(string $query, ?string $origin = null, int $limit = 50): array
+    {
+        $sql = "
+            SELECT c.*, l.master_id, l.title, l.origin
+            FROM law_chunks c
+            JOIN laws l ON l.id = c.law_id
+            WHERE c.content LIKE ?
+        ";
+        $params = ['%' . str_replace(['%', '_'], ['\\%', '\\_'], $query) . '%'];
+        if ($origin !== null && $origin !== '') {
+            $sql .= " AND l.origin = ?";
+            $params[] = $origin;
+        }
+        $sql .= " ORDER BY c.law_id, c.chunk_index LIMIT ?";
+        $params[] = $limit;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Librarian: get chunks matching any of the keywords, scored by number of matches.
+     * @param string[] $keywords
+     * @return list<array{score: int, content: string, master_id: string, title: string, section_title: ?string}>
+     */
+    public function getChunksMatchingKeywords(array $keywords, ?string $origin = null, int $maxChunks = 150): array
+    {
+        $byKey = [];
+        foreach ($keywords as $kw) {
+            $kw = trim($kw);
+            if ($kw === '') {
+                continue;
+            }
+            $rows = $this->searchChunksByContent($kw, $origin, 80);
+            foreach ($rows as $row) {
+                $id = $row['law_id'] . '_' . $row['chunk_index'];
+                if (!isset($byKey[$id])) {
+                    $byKey[$id] = [
+                        'score' => 0,
+                        'content' => $row['content'],
+                        'master_id' => $row['master_id'],
+                        'title' => $row['title'],
+                        'section_title' => $row['section_title'] ?? null,
+                        'law_id' => (int) $row['law_id'],
+                        'chunk_index' => (int) $row['chunk_index'],
+                    ];
+                }
+                $byKey[$id]['score']++;
+            }
+        }
+        $chunks = array_values($byKey);
+        usort($chunks, function ($a, $b) {
+            return $b['score'] - $a['score'];
+        });
+        return array_slice($chunks, 0, $maxChunks);
+    }
+
+    /**
+     * Get chunks from laws whose title contains any of the given terms (LIKE %term%).
+     * Used to prioritize e.g. Zákonník práce for labour/vacation questions.
+     *
+     * @param string[] $titleTerms e.g. ['zákonník práce', 'práce']
+     * @return list<array{content: string, master_id: string, title: string, section_title: ?string, law_id: int, chunk_index: int}>
+     */
+    public function getChunksFromLawsWithTitleMatching(array $titleTerms, ?string $origin = null, int $limit = 80): array
+    {
+        if (empty($titleTerms)) {
+            return [];
+        }
+        $conditions = [];
+        $params = [];
+        foreach ($titleTerms as $term) {
+            $conditions[] = 'l.title LIKE ?';
+            $params[] = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $term) . '%';
+        }
+        $sql = "
+            SELECT c.id, c.law_id, c.chunk_index, c.content, c.section_title, l.master_id, l.title
+            FROM law_chunks c
+            JOIN laws l ON l.id = c.law_id
+            WHERE (" . implode(' OR ', $conditions) . ")
+        ";
+        if ($origin !== null && $origin !== '') {
+            $sql .= " AND l.origin = ?";
+            $params[] = $origin;
+        }
+        $sql .= " ORDER BY l.id, c.chunk_index LIMIT ?";
+        $params[] = $limit;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        $rows = $stmt->fetchAll();
+        $out = [];
+        foreach ($rows as $row) {
+            $out[] = [
+                'content' => $row['content'],
+                'master_id' => $row['master_id'],
+                'title' => $row['title'],
+                'section_title' => $row['section_title'] ?? null,
+                'law_id' => (int) $row['law_id'],
+                'chunk_index' => (int) $row['chunk_index'],
+            ];
+        }
+        return $out;
+    }
+
+    public function getGlobalChat(int $userId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM user_chats_global WHERE user_id = ?");
+        $stmt->execute([$userId]);
+        $row = $stmt->fetch();
+        if ($row) {
+            $row['messages'] = json_decode($row['messages_json'], true) ?: [];
+            return $row;
+        }
+        return null;
+    }
+
+    public function saveGlobalChat(int $userId, array $messages): void
+    {
+        $messagesJson = json_encode($messages, JSON_UNESCAPED_UNICODE);
+        $stmt = $this->pdo->prepare("
+            INSERT INTO user_chats_global (user_id, messages_json, updated_at)
+            VALUES (?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT(user_id) DO UPDATE SET
+                messages_json = excluded.messages_json,
+                updated_at = CURRENT_TIMESTAMP
+        ");
+        $stmt->execute([$userId, $messagesJson]);
+    }
+
     public function logProcessing(string $masterId, string $status, ?string $message = null): void
     {
         $stmt = $this->pdo->prepare("
@@ -252,18 +473,24 @@ class Database
         $stmt->execute([$masterId, $status, $message]);
     }
 
-    public function getLatestLaws(int $limit = 50): array
+    /**
+     * @param int $limit
+     * @param string|null $origin Optional filter: 'nrsr' | 'slovlex_zz' | null for all
+     */
+    public function getLatestLaws(int $limit = 50, ?string $origin = null): array
     {
-        // Order by approval_date (date of publication) descending, then by created_at
-        // Since approval_date is in Slovak format (DD. MM. YYYY), we need to parse it
-        // We'll use a subquery to convert the date format for proper sorting
-        $stmt = $this->pdo->prepare("
-            SELECT * FROM laws 
-            ORDER BY 
-                CASE 
+        $sql = "
+            SELECT * FROM laws
+        ";
+        $params = [];
+        if ($origin !== null && $origin !== '') {
+            $sql .= " WHERE origin = ?";
+            $params[] = $origin;
+        }
+        $sql .= "
+            ORDER BY
+                CASE
                     WHEN approval_date IS NOT NULL AND approval_date != '' THEN
-                        -- Convert Slovak date format (DD. MM. YYYY) to sortable format
-                        -- Extract year, month, day and create YYYY-MM-DD format
                         substr('0000' || substr(approval_date, -4), -4) || '-' ||
                         substr('00' || substr(approval_date, length(approval_date) - 7, 2), -2) || '-' ||
                         substr('00' || substr(approval_date, 1, 2), -2)
@@ -271,8 +498,10 @@ class Database
                 END DESC,
                 created_at DESC
             LIMIT ?
-        ");
-        $stmt->execute([$limit]);
+        ";
+        $params[] = $limit;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
         $laws = $stmt->fetchAll();
         
         // Additional PHP sorting as fallback for edge cases
@@ -495,6 +724,32 @@ class Database
     {
         $stmt = $this->pdo->prepare("INSERT INTO user_pdf_downloads (user_id) VALUES (?)");
         $stmt->execute([$userId]);
+    }
+
+    // Password reset (forgot password flow)
+    public function createPasswordResetToken(int $userId, string $token, string $expiresAt): void
+    {
+        $this->pdo->prepare("DELETE FROM password_reset_tokens WHERE user_id = ?")->execute([$userId]);
+        $stmt = $this->pdo->prepare("INSERT INTO password_reset_tokens (user_id, token, expires_at) VALUES (?, ?, ?)");
+        $stmt->execute([$userId, $token, $expiresAt]);
+    }
+
+    public function findPasswordResetToken(string $token): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM password_reset_tokens WHERE token = ? AND expires_at > datetime('now')");
+        $stmt->execute([$token]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function deletePasswordResetToken(string $token): void
+    {
+        $this->pdo->prepare("DELETE FROM password_reset_tokens WHERE token = ?")->execute([$token]);
+    }
+
+    public function updateUserPassword(int $userId, string $passwordHash): void
+    {
+        $stmt = $this->pdo->prepare("UPDATE users SET password_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
+        $stmt->execute([$passwordHash, $userId]);
     }
 }
 

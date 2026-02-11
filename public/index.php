@@ -28,10 +28,18 @@ $auth = new Auth($db);
 
 // Handle search - validate and sanitize input
 $searchQuery = Security::validateSearchQuery($_GET['search'] ?? null);
-$laws = $db->getLatestLaws(50);
+// Section filter: nrsr | slovlex | (empty = all)
+$section = $_GET['section'] ?? '';
+$originFilter = null;
+if ($section === 'nrsr') {
+    $originFilter = 'nrsr';
+} elseif ($section === 'slovlex') {
+    $originFilter = 'slovlex_zz';
+}
+$laws = $db->getLatestLaws(50, $originFilter);
 
-// Fallback: when DB is empty (e.g. on Digital Ocean), show laws from committed JSON
-if (empty($laws)) {
+// Fallback: when DB is empty (e.g. on Digital Ocean), show laws from committed JSON (only when no section filter or nrsr)
+if (empty($laws) && ($originFilter === null || $originFilter === 'nrsr')) {
     $indexPath = __DIR__ . '/data/index.json';
     if (is_readable($indexPath)) {
         $indexData = json_decode(file_get_contents($indexPath), true);
@@ -129,6 +137,9 @@ if (!empty($searchQuery)) {
         
         <div class="lg-search-container">
             <form method="GET" action="" class="lg-search-box">
+                <?php if ($section !== ''): ?>
+                <input type="hidden" name="section" value="<?php echo htmlspecialchars($section); ?>">
+                <?php endif; ?>
                 <input 
                     type="text" 
                     name="search" 
@@ -138,6 +149,13 @@ if (!empty($searchQuery)) {
                 >
                 <button type="submit" class="lg-btn lg-btn-primary">Hľadať</button>
             </form>
+        </div>
+        <div class="lg-section-tabs" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+            <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=" class="lg-btn <?php echo $section === '' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Všetky</a>
+            <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=nrsr" class="lg-btn <?php echo $section === 'nrsr' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Nové zákony (NR SR)</a>
+            <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=slovlex" class="lg-btn <?php echo $section === 'slovlex' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Zbierka zákonov</a>
+            <a href="global-chat-ui.php" class="lg-btn lg-btn-success" style="text-decoration:none;">Opýtať sa celej zbierky</a>
+        </div>
             <?php if (!empty($searchQuery)): ?>
                 <div class="lg-search-results-info">
                     Nájdených: <?php echo count($laws); ?> zákon<?php echo count($laws) === 1 ? '' : (count($laws) >= 2 && count($laws) <= 4 ? 'y' : 'ov'); ?> 
@@ -145,7 +163,6 @@ if (!empty($searchQuery)) {
                     <a href="index.php" class="lg-link" style="margin-left: 10px;">Zrušiť vyhľadávanie</a>
                 </div>
             <?php endif; ?>
-        </div>
         
         <?php if (empty($laws)): ?>
             <div class="lg-empty">
@@ -154,9 +171,15 @@ if (!empty($searchQuery)) {
                     <p style="margin-top: 10px; font-size: 0.9em;">
                         <a href="index.php" class="lg-link">Zobraziť všetky zákony</a>
                     </p>
+                <?php elseif ($section === 'slovlex'): ?>
+                    <p>Zatiaľ neboli importované žiadne zákony zo Zbierky zákonov.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Spustite v priečinku projektu: <code>php bin/crawl-slovlex.php 2</code> (posledné 2 roky) alebo <code>php bin/crawl-slovlex.php 10</code> (posledných 10 rokov).</p>
+                <?php elseif ($section === 'nrsr'): ?>
+                    <p>Zatiaľ neboli spracované žiadne nové zákony (NR SR).</p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Spustite <code>php bin/cron.php</code> na spracovanie.</p>
                 <?php else: ?>
                     <p>Zatiaľ neboli spracované žiadne zákony.</p>
-                    <p style="margin-top: 10px; font-size: 0.9em;">Spustite <code>php bin/cron.php</code> na spracovanie.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Nové zákony (NR SR): <code>php bin/cron.php</code>. Zbierka zákonov: <code>php bin/crawl-slovlex.php 2</code>.</p>
                 <?php endif; ?>
             </div>
         <?php else: ?>
@@ -206,7 +229,7 @@ if (!empty($searchQuery)) {
                     </div>
                     <div class="lg-law-source">
                         <a href="<?php echo htmlspecialchars($law['source_url']); ?>" target="_blank">
-                            Zdroj: NR SR →
+                            Zdroj: <?php echo (isset($law['origin']) && $law['origin'] === 'slovlex_zz') ? 'Slov-Lex' : 'NR SR'; ?> →
                         </a>
                     </div>
                 </div>

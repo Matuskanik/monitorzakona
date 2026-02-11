@@ -8,6 +8,7 @@
         "ext-pdo_sqlite": "*",
         "dompdf/dompdf": "^3.1",
         "google/apiclient": "^2.15",
+        "phpmailer/phpmailer": "^7.0",
         "stripe/stripe-php": "^19.3"
     },
     "autoload": {

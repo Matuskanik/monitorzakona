@@ -177,6 +177,77 @@ class OpenAIClient
         return $answer;
     }
 
+    /**
+     * Librarian: answer from pre-selected labeled passages (multiple laws).
+     * @param list<array{content: string, master_id: string, title: string, section_title?: ?string}> $labeledPassages
+     */
+    public function answerFromPassagesWithHistory(array $labeledPassages, string $question, array $history): string
+    {
+        $contextParts = [];
+        foreach ($labeledPassages as $p) {
+            $title = $p['title'] ?? '';
+            $masterId = $p['master_id'] ?? '';
+            $section = isset($p['section_title']) && $p['section_title'] !== null && $p['section_title'] !== '' ? ' (' . $p['section_title'] . ')' : '';
+            $contextParts[] = "[Zákon: {$title} | {$masterId}{$section}]\n" . ($p['content'] ?? '');
+        }
+        $contextText = implode("\n\n---\n\n", $contextParts);
+
+        $systemPrompt = 'Si expertný právny poradca pre slovenské zákony. Odpovedáš na základe poskytnutých úryvkov z viacerých zákonov.
+
+PRAVIDLÁ:
+1. Odpovedaj VÝLUČNE na základe poskytnutých úryvkov. Ak odpoveď nie je v úryvkoch, povedz to jasne.
+2. Pri odpovedi uvádzaj zdroje: názov zákona alebo jeho číslo (napr. 200/2025 Z.z.) a prípadne § alebo Čl., ak je to v úryvku uvedené.
+3. Buď zrozumiteľný a praktický. Na konci pripoj krátke upozornenie, že nejde o právne poradenstvo.';
+
+        $messages = [['role' => 'system', 'content' => $systemPrompt]];
+        $recentHistory = array_slice($history, -3);
+        foreach ($recentHistory as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $role = $item['role'] ?? '';
+            $content = $item['content'] ?? '';
+            if (!in_array($role, ['user', 'assistant'], true) || !is_string($content) || trim($content) === '') {
+                continue;
+            }
+            $messages[] = ['role' => $role, 'content' => trim($content)];
+        }
+        $messages[] = ['role' => 'user', 'content' => "Relevantné úryvky zákonov:\n\n{$contextText}\n\n---\n\nOtázka: {$question}"];
+
+        $ch = curl_init('https://api.openai.com/v1/chat/completions');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->apiKey
+            ],
+            CURLOPT_POSTFIELDS => json_encode([
+                'model' => $this->model,
+                'messages' => $messages,
+                'temperature' => 0.2,
+                'max_tokens' => $this->maxTokens
+            ], JSON_UNESCAPED_UNICODE),
+            CURLOPT_TIMEOUT => 90
+        ]);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+        if ($response === false || !empty($error)) {
+            throw new \RuntimeException("OpenAI API request failed: {$error}");
+        }
+        if ($httpCode !== 200) {
+            $this->logger->error("OpenAI API returned HTTP {$httpCode}: {$response}");
+            throw new \RuntimeException("OpenAI API returned HTTP {$httpCode}");
+        }
+        $data = json_decode($response, true);
+        if (!isset($data['choices'][0]['message']['content'])) {
+            throw new \RuntimeException("Invalid OpenAI API response structure");
+        }
+        return trim($data['choices'][0]['message']['content']);
+    }
+
     private function buildPrompt(string $text): string
     {
         return "Analyzuj nasledujúci text zo slovenského zákona a vytvor podrobný, kvalitný JSON objekt s týmito presnými kľúčmi:

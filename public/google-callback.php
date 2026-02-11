@@ -6,6 +6,8 @@ use App\Config;
 use App\Database;
 use App\Auth;
 use App\Security;
+use App\MailService;
+use App\Logger;
 
 try {
     Config::load();
@@ -52,9 +54,18 @@ if (!$googleId || !$email || !$emailVerified) {
 }
 
 // Login or register user
+$existingUser = $db->findUserByEmail($email) ?: $db->findUserByGoogleId($googleId);
 $result = $auth->loginWithGoogle($googleId, $email, $name);
 
 if ($result['success']) {
+    if (!$existingUser) {
+        $logPath = Config::get('LOG_PATH', __DIR__ . '/../storage/logs');
+        if (!str_starts_with($logPath, '/')) {
+            $logPath = dirname(__DIR__) . '/' . $logPath;
+        }
+        $mailer = new MailService(new Logger($logPath . '/app.log'));
+        $mailer->sendWelcomeEmail($email);
+    }
     $redirect = $_GET['redirect'] ?? 'index.php';
     if (preg_match('/^https?:\\/\\//i', $redirect)) {
         $redirect = 'index.php';

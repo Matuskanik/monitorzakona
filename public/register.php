@@ -6,6 +6,8 @@ use App\Config;
 use App\Database;
 use App\Auth;
 use App\Security;
+use App\MailService;
+use App\Logger;
 
 try {
     Config::load();
@@ -89,6 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$error) {
         $result = $auth->register($email, $password, $termsAccepted);
         if ($result['success']) {
+            $logPath = Config::get('LOG_PATH', __DIR__ . '/../storage/logs');
+            if (!str_starts_with($logPath, '/')) {
+                $logPath = dirname(__DIR__) . '/' . $logPath;
+            }
+            $mailer = new MailService(new Logger($logPath . '/app.log'));
+            $mailer->sendWelcomeEmail($email);
             $success = true;
             header('Location: index.php?registered=1');
             exit;
