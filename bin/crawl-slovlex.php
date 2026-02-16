@@ -5,9 +5,10 @@
  * Crawl static.slov-lex.sk Zbierka zákonov (ZZ), fetch vyhlásené znenie HTML,
  * extract text and metadata, save to storage and DB (origin=slovlex_zz).
  *
- * Usage: php crawl-slovlex.php [years_limit]
+ * Usage: php crawl-slovlex.php [years_limit] [--no-summarize]
  *   years_limit = number of years to crawl (default 2). E.g. 5 = last 5 years.
  *   To crawl all years, pass a large number (e.g. 100).
+ *   --no-summarize = preskočiť automatické generovanie AI zhrnutí po crawl.
  *
  * Spustenie v termináli (výstup v reálnom čase): php bin/crawl-slovlex.php 120
  */
@@ -172,3 +173,17 @@ foreach ($years as $year) {
 
 echo "\nHotovo. Spracované: {$totalProcessed}, preskočené: {$totalSkipped}, chyby: {$totalErrors}\n";
 @flush();
+
+// Automaticky vygenerovať AI zhrnutia pre nové zákony (ak nie je --no-summarize)
+$noSummarize = in_array('--no-summarize', $argv ?? [], true);
+if (!$noSummarize && count($years) > 0) {
+    echo "\n" . str_repeat('=', 50) . "\n";
+    echo "Generovanie AI zhrnutí pre nové zákony...\n";
+    @flush();
+    foreach ($years as $yr) {
+        $summarizeScript = __DIR__ . '/summarize-slovlex.php';
+        if (is_file($summarizeScript)) {
+            passthru(sprintf('php %s 0 %d', escapeshellarg($summarizeScript), (int) $yr), $_);
+        }
+    }
+}

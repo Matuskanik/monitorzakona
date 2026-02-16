@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+\App\Maintenance::check();
 
 use App\Config;
 use App\Database;
@@ -173,7 +174,7 @@ if (!empty($searchQuery)) {
                     </p>
                 <?php elseif ($section === 'slovlex'): ?>
                     <p>Zatiaľ neboli importované žiadne zákony zo Zbierky zákonov.</p>
-                    <p style="margin-top: 10px; font-size: 0.9em;">Spustite v priečinku projektu: <code>php bin/crawl-slovlex.php 2</code> (posledné 2 roky) alebo <code>php bin/crawl-slovlex.php 10</code> (posledných 10 rokov).</p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Spustite v priečinku projektu: <code>php bin/crawl-slovlex.php 2</code> (posledné 2 roky) alebo <code>php bin/crawl-slovlex.php 10</code> (posledných 10 rokov). Na predspracovanie AI zhrnutí za aktuálny rok: <code>php bin/process-year-slovlex.php</code>.</p>
                 <?php elseif ($section === 'nrsr'): ?>
                     <p>Zatiaľ neboli spracované žiadne nové zákony (NR SR).</p>
                     <p style="margin-top: 10px; font-size: 0.9em;">Spustite <code>php bin/cron.php</code> na spracovanie.</p>
