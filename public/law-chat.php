@@ -31,6 +31,99 @@ use App\Auth;
 use App\OpenAIClient;
 use App\Logger;
 
+/**
+ * Build labeled passages for one law: prefer DB chunks, fallback to text slices.
+ *
+ * @return list<array{content:string,master_id:string,title:string,section_title:?string}>
+ */
+function buildLawLabeledPassages(Database $db, array $law, string $lawText, string $question): array
+{
+    $masterId = (string) ($law['master_id'] ?? $law['id'] ?? '');
+    $title = (string) ($law['title'] ?? $masterId);
+    $passages = [];
+
+    $chunks = [];
+    if (isset($law['id']) && is_numeric($law['id'])) {
+        try {
+            $chunks = $db->getChunksByLawId((int) $law['id']);
+        } catch (\Throwable $e) {
+            $chunks = [];
+        }
+    }
+
+    if (!empty($chunks)) {
+        $queryLower = mb_strtolower($question, 'UTF-8');
+        $keywords = array_values(array_filter(preg_split('/\s+/u', $queryLower), function ($w) {
+            return is_string($w) && mb_strlen($w, 'UTF-8') > 2;
+        }));
+
+        $scored = [];
+        foreach ($chunks as $chunk) {
+            $content = (string) ($chunk['content'] ?? '');
+            if ($content === '') {
+                continue;
+            }
+            $score = 0;
+            $contentLower = mb_strtolower($content, 'UTF-8');
+            foreach ($keywords as $kw) {
+                if ($kw !== '') {
+                    $score += substr_count($contentLower, $kw);
+                }
+            }
+            if ($score > 0) {
+                $scored[] = ['score' => $score, 'chunk' => $chunk];
+            }
+        }
+
+        usort($scored, static function ($a, $b) {
+            return ($b['score'] ?? 0) <=> ($a['score'] ?? 0);
+        });
+
+        $selected = [];
+        $selectedChars = 0;
+        $maxChars = 35000;
+
+        foreach ($scored as $item) {
+            $chunk = $item['chunk'];
+            $content = (string) ($chunk['content'] ?? '');
+            $len = mb_strlen($content, 'UTF-8');
+            if ($selectedChars + $len > $maxChars) {
+                continue;
+            }
+            $selected[] = $chunk;
+            $selectedChars += $len;
+            if (count($selected) >= 8) {
+                break;
+            }
+        }
+
+        if (empty($selected) && !empty($chunks)) {
+            $selected = array_slice($chunks, 0, 4);
+        }
+
+        foreach ($selected as $chunk) {
+            $passages[] = [
+                'content' => (string) ($chunk['content'] ?? ''),
+                'master_id' => $masterId,
+                'title' => $title,
+                'section_title' => isset($chunk['section_title']) ? (string) $chunk['section_title'] : null,
+            ];
+        }
+    }
+
+    if (empty($passages)) {
+        $snippet = mb_substr($lawText, 0, 35000, 'UTF-8');
+        $passages[] = [
+            'content' => $snippet,
+            'master_id' => $masterId,
+            'title' => $title,
+            'section_title' => null,
+        ];
+    }
+
+    return $passages;
+}
+
 try {
     Config::load();
 } catch (\Exception $e) {
@@ -232,7 +325,37 @@ $aiClient = new OpenAIClient(
 );
 
 try {
-    $answer = $aiClient->answerQuestionWithHistory($lawText, $question, $sanitizedHistory);
+    // Step 1: analyze only law materials.
+    $lawOnlyAnalysis = $aiClient->answerQuestionWithHistory($lawText, $question, $sanitizedHistory);
+
+    // Step 2: combine law analysis with web search (same mode as global chat).
+    $labeledPassages = buildLawLabeledPassages($db, $law, $lawText, $question);
+    $useWebSearch = filter_var(Config::get('GLOBAL_CHAT_WEB_SEARCH', 'true'), FILTER_VALIDATE_BOOLEAN);
+    $globalChatModel = Config::get('GLOBAL_CHAT_MODEL', 'gpt-4o-search-preview');
+
+    $finalPrompt = "Používateľská otázka:\n{$question}\n\n"
+        . "Predbežná analýza z textu konkrétneho zákona:\n{$lawOnlyAnalysis}\n\n"
+        . "Úloha:\n"
+        . "1) Zachovaj jadro odpovede podľa textu zákona.\n"
+        . "2) Over a doplň ju o aktuálne informácie z webu (ak sú relevantné).\n"
+        . "3) Daj používateľovi jednu finálnu odpoveď v slovenčine, prakticky a zrozumiteľne.\n"
+        . "4) Ak sa web a zákon líšia, explicitne upozorni na rozdiel a uveď, že rozhodujúce je aktuálne účinné znenie predpisu.";
+
+    $citations = [];
+    if ($useWebSearch) {
+        $webResult = $aiClient->answerFromPassagesWithWebSearch(
+            $labeledPassages,
+            $finalPrompt,
+            $sanitizedHistory,
+            $globalChatModel,
+            'medium'
+        );
+        $answer = $webResult['answer'];
+        $citations = $webResult['citations'] ?? [];
+    } else {
+        $answer = $aiClient->answerFromPassagesWithHistory($labeledPassages, $finalPrompt, $sanitizedHistory);
+    }
+
     // Persist chat so free 1-question limit is enforced server-side
     $messagesToSave = $messages;
     $messagesToSave[] = ['role' => 'user', 'content' => $question];
@@ -243,9 +366,11 @@ try {
         $db->saveUserChat($userId, (int) $law['id'], $messagesToSave);
     }
 
-    echo json_encode([
-        'answer' => $answer
-    ], JSON_UNESCAPED_UNICODE);
+    $payload = ['answer' => $answer];
+    if (!empty($citations)) {
+        $payload['citations'] = $citations;
+    }
+    echo json_encode($payload, JSON_UNESCAPED_UNICODE);
 } catch (\Exception $e) {
     $logger->error("Law chat error: " . $e->getMessage());
     http_response_code(500);

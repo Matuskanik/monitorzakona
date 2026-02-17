@@ -8,6 +8,15 @@ use App\Database;
 use App\Auth;
 use App\Security;
 
+// Google Sign-In is usually configured for localhost in dev; normalize 127.0.0.1.
+$hostHeader = $_SERVER['HTTP_HOST'] ?? '';
+if (str_starts_with($hostHeader, '127.0.0.1')) {
+    $targetHost = preg_replace('/^127\.0\.0\.1/', 'localhost', $hostHeader);
+    $requestUri = $_SERVER['REQUEST_URI'] ?? '/login.php';
+    header('Location: http://' . $targetHost . $requestUri, true, 302);
+    exit;
+}
+
 try {
     Config::load();
 } catch (\Exception $e) {

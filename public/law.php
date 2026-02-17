@@ -86,9 +86,14 @@ if (!$fromJson && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'
 
 $attachments = $fromJson ? [] : $db->getAttachments($law['id']);
 $summary = null;
+$hasFullSummary = false;
 
 if (!empty($law['ai_summary'])) {
     $summary = json_decode($law['ai_summary'], true);
+    if (is_array($summary)) {
+        $summaryParagraph = trim((string) ($summary['summary_paragraph'] ?? ''));
+        $hasFullSummary = ($summaryParagraph !== '');
+    }
 }
 
 $defaultSummary = [
@@ -102,17 +107,13 @@ $defaultSummary = [
 ];
 
 if (!$summary || json_last_error() !== JSON_ERROR_NONE) {
-    $processingStatus = $law['processing_status'] ?? 'pending';
-    $statusMessage = ($processingStatus === 'pending')
-        ? 'Zákon čaká na spracovanie. Spustite <code>php bin/summarize-slovlex.php</code> (Slov-Lex) alebo <code>php bin/reprocess-law.php ' . htmlspecialchars($law['id'] ?? '') . '</code> (NR SR).'
-        : 'Zákon zatiaľ nemá dostupnú analýzu. Spustite <code>php bin/summarize-slovlex.php</code> na vygenerovanie zhrnutia.';
-    $summary = array_merge($defaultSummary, ['summary_paragraph' => $statusMessage]);
+    $summary = $defaultSummary;
 } else {
     $summary = array_merge($defaultSummary, $summary);
 }
 
-if (!isset($summary['summary_paragraph']) || $summary['summary_paragraph'] === null || $summary['summary_paragraph'] === '') {
-    $summary['summary_paragraph'] = 'Zákon zatiaľ nemá dostupnú analýzu. Spustite <code>php bin/summarize-slovlex.php</code> na vygenerovanie zhrnutia.';
+if (!$hasFullSummary) {
+    $summary['summary_paragraph'] = 'Tento dokument ešte nemá AI analýzu. Kliknite na tlačidlo "Analyzovať" a analýza sa vygeneruje na požiadanie.';
 }
 
 // Ensure all expected fields have correct types
@@ -127,6 +128,7 @@ foreach (['affected_groups', 'positives', 'negatives', 'how_to_react'] as $key) 
 
 $processingStatus = $law['processing_status'] ?? 'completed';
 $textExtracted = isset($law['text_extracted']) ? (bool)$law['text_extracted'] : true;
+$canAnalyzeOnDemand = !$fromJson && $textExtracted && !$hasFullSummary;
 
 // Check if law is saved by user (only when from DB)
 $isSaved = false;
@@ -297,7 +299,17 @@ if (!$chatAvailable && !$fromJson) {
         <div class="lg-section">
             <div class="lg-section-title">Zhrnutie</div>
             <div class="lg-section-content">
-                <?php echo nl2br(htmlspecialchars($summary['summary_paragraph'] ?? '', ENT_QUOTES, 'UTF-8')); ?>
+                <?php if ($canAnalyzeOnDemand): ?>
+                    <p style="margin-bottom: 12px;"><?php echo nl2br(htmlspecialchars($summary['summary_paragraph'] ?? '', ENT_QUOTES, 'UTF-8')); ?></p>
+                    <?php if ($auth->isLoggedIn()): ?>
+                        <button id="analyze-law-btn" type="button" class="lg-btn lg-btn-primary">Analyzovať</button>
+                        <p id="analyze-law-status" class="lg-caption" style="margin-top:10px;display:none;"></p>
+                    <?php else: ?>
+                        <p class="lg-caption">Pre analýzu sa <a href="login.php?redirect=<?php echo urlencode('law.php?id=' . ($law['id'] ?? '')); ?>" class="lg-link">prihláste</a>.</p>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <?php echo nl2br(htmlspecialchars($summary['summary_paragraph'] ?? '', ENT_QUOTES, 'UTF-8')); ?>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -435,6 +447,16 @@ if (!$chatAvailable && !$fromJson) {
                 content.textContent = msg.content;
                 item.appendChild(meta);
                 item.appendChild(content);
+                if (msg.role === 'assistant' && Array.isArray(msg.citations) && msg.citations.length > 0) {
+                    const citeWrap = document.createElement('div');
+                    citeWrap.className = 'lg-chat-citations';
+                    citeWrap.style.cssText = 'margin-top:8px;font-size:0.85em;opacity:0.9;';
+                    const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+                    citeWrap.innerHTML = '<strong>Zdroje:</strong> ' + msg.citations.map(function(c) {
+                        return '<a href="' + esc(c.url || '#') + '" target="_blank" rel="noopener noreferrer">' + esc(c.title || c.url || 'Odkaz') + '</a>';
+                    }).join(', ');
+                    item.appendChild(citeWrap);
+                }
                 chatThread.appendChild(item);
             });
         };
@@ -530,7 +552,11 @@ if (!$chatAvailable && !$fromJson) {
                     throw new Error(data.error || 'Neznáma chyba.');
                 }
                 const answer = data.answer || 'AI nevrátila odpoveď.';
-                history = history.concat([{ role: 'assistant', content: answer }]);
+                const assistantMsg = { role: 'assistant', content: answer };
+                if (Array.isArray(data.citations) && data.citations.length > 0) {
+                    assistantMsg.citations = data.citations;
+                }
+                history = history.concat([assistantMsg]);
                 saveHistory(history);
                 renderHistory(history);
             } catch (err) {
@@ -566,6 +592,39 @@ if (!$chatAvailable && !$fromJson) {
         if (tg) tg.addEventListener('click', function(e) { if (e.target !== sw) toggle(); });
     })();
     </script>
+    <?php if ($canAnalyzeOnDemand && $auth->isLoggedIn()): ?>
+    <script>
+    (function() {
+        var btn = document.getElementById('analyze-law-btn');
+        var status = document.getElementById('analyze-law-status');
+        if (!btn || !status) return;
+
+        btn.addEventListener('click', async function () {
+            status.style.display = 'block';
+            status.textContent = 'Analyzujem dokument, prosím čakajte...';
+            btn.disabled = true;
+
+            try {
+                var response = await fetch('analyze-law.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                    body: JSON.stringify({ law_id: '<?php echo htmlspecialchars((string)($law['id'] ?? '')); ?>' })
+                });
+                var data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Analýzu sa nepodarilo spustiť.');
+                }
+
+                status.textContent = 'Analýza je hotová. Obnovujem stránku...';
+                window.location.reload();
+            } catch (err) {
+                status.textContent = err.message || 'Analýza zlyhala. Skúste to znova.';
+                btn.disabled = false;
+            }
+        });
+    })();
+    </script>
+    <?php endif; ?>
 </body>
 </html>
 
