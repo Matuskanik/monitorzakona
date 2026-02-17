@@ -18,6 +18,7 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) {
 });
 
 require_once __DIR__ . '/../vendor/autoload.php';
+\App\Maintenance::check();
 
 use App\Config;
 use App\Database;
@@ -63,6 +64,39 @@ if (str_contains($contentType, 'application/json')) {
 $question = trim((string)($payload['question'] ?? $_POST['question'] ?? ''));
 $history = $payload['history'] ?? [];
 $action = $payload['action'] ?? '';
+
+if ($action === 'test_search' && $auth->isLoggedIn()) {
+    $openaiKey = Config::get('OPENAI_API_KEY') ?: getenv('OPENAI_API_KEY');
+    if (empty($openaiKey) || $openaiKey === 'your_openai_api_key_here') {
+        echo json_encode(['error' => 'OPENAI_API_KEY not configured', 'source' => 'config']);
+        exit;
+    }
+    $body = [
+        'model' => 'gpt-4o-search-preview',
+        'messages' => [['role' => 'user', 'content' => 'Aké sú výpovedné lehoty na Slovensku? Odpovedz stručne.']],
+        'web_search_options' => (object) [],
+        'max_tokens' => 300,
+    ];
+    $ch = curl_init('https://api.openai.com/v1/chat/completions');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . $openaiKey],
+        CURLOPT_POSTFIELDS => json_encode($body, JSON_UNESCAPED_UNICODE),
+        CURLOPT_TIMEOUT => 60,
+    ]);
+    $resp = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $err = curl_error($ch);
+    curl_close($ch);
+    echo json_encode([
+        'http_code' => $code,
+        'curl_error' => $err ?: null,
+        'response_preview' => $resp ? substr($resp, 0, 500) : null,
+        'ok' => ($code === 200 && empty($err)),
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 if ($action === 'clear') {
     $db->saveGlobalChat($userId, []);
@@ -149,7 +183,12 @@ $keywords = array_values(array_filter($words, function ($w) use ($stopWords) {
 }));
 
 // Theme detection: expand keywords and set title-boost terms for known domains (e.g. labour → Zákonník práce)
-$laborTriggerWords = ['dovolenka', 'dovolenky', 'dovolenku', 'dovolenke', 'zamestnanec', 'zamestnanca', 'zamestnancov', 'práca', 'pracovný', 'pracovná', 'zákonník', 'nárok', 'mzda', 'mzdy', 'prestávka', 'prestávky', 'úväzok', 'úväzku', 'plný', 'pracovný', 'pracovnú'];
+$laborTriggerWords = [
+    'dovolenka', 'dovolenky', 'dovolenku', 'dovolenke', 'zamestnanec', 'zamestnanca', 'zamestnancov',
+    'práca', 'pracovný', 'pracovná', 'zákonník', 'nárok', 'mzda', 'mzdy', 'prestávka', 'prestávky',
+    'úväzok', 'úväzku', 'plný', 'pracovný', 'pracovnú',
+    'výpoveď', 'výpovedné', 'výpovedná', 'lehoty', 'skončenie', 'prepustenie', 'ukončenie',
+];
 $titleBoostTerms = null;
 foreach ($keywords as $kw) {
     foreach ($laborTriggerWords as $trigger) {
@@ -242,15 +281,41 @@ $aiClient = new OpenAIClient(
     $logger
 );
 
+$useWebSearch = filter_var(Config::get('GLOBAL_CHAT_WEB_SEARCH', 'true'), FILTER_VALIDATE_BOOLEAN);
+$globalChatModel = Config::get('GLOBAL_CHAT_MODEL', 'gpt-4o-search-preview');
+
 try {
-    $answer = $aiClient->answerFromPassagesWithHistory($labeledPassages, $question, $sanitizedHistory);
+    $actualSource = 'fallback';
+    if ($useWebSearch) {
+        $result = $aiClient->answerFromPassagesWithWebSearch(
+            $labeledPassages,
+            $question,
+            $sanitizedHistory,
+            $globalChatModel,
+            'medium'
+        );
+        $answer = $result['answer'];
+        $citations = $result['citations'];
+        $actualSource = $result['used_web_search'] ? 'web_search' : 'fallback';
+    } else {
+        $answer = $aiClient->answerFromPassagesWithHistory($labeledPassages, $question, $sanitizedHistory);
+        $citations = [];
+    }
 
     $messagesToSave = $messages;
     $messagesToSave[] = ['role' => 'user', 'content' => $question];
-    $messagesToSave[] = ['role' => 'assistant', 'content' => $answer];
+    $assistantMsg = ['role' => 'assistant', 'content' => $answer];
+    if (!empty($citations)) {
+        $assistantMsg['citations'] = $citations;
+    }
+    $messagesToSave[] = $assistantMsg;
     $db->saveGlobalChat($userId, $messagesToSave);
 
-    echo json_encode(['answer' => $answer], JSON_UNESCAPED_UNICODE);
+    $payload = ['answer' => $answer, 'source' => $actualSource];
+    if (!empty($citations)) {
+        $payload['citations'] = $citations;
+    }
+    echo json_encode($payload, JSON_UNESCAPED_UNICODE);
 } catch (\Exception $e) {
     $logger->error("Global chat error: " . $e->getMessage());
     http_response_code(500);

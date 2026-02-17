@@ -23,6 +23,7 @@ set_error_handler(function($errno, $errstr, $errfile, $errline) {
 });
 
 require_once __DIR__ . '/../vendor/autoload.php';
+\App\Maintenance::check();
 
 use App\Config;
 use App\Database;

@@ -1,5 +1,32 @@
 # Deployment Guide - $0 Tech Stack
 
+## Režim údržby (pozastavenie prístupu)
+
+Digital Ocean App Platform **nepodporuje** pozastavenie aplikácie – iba zmazanie. Preto je implementovaný **režim údržby** cez env premennú:
+
+1. **Zapnúť údržbu** (stránka nedostupná pre ľudí aj crawlery):
+   - Digital Ocean → váš projekt → **Settings** → **App-Level Environment Variables**
+   - Pridajte: `MAINTENANCE_MODE` = `1` (alebo `true`)
+   - **Deploy** ( alebo nechajte auto-deploy)
+
+2. **Vypnúť údržbu**:
+   - Odstráňte premennú `MAINTENANCE_MODE` alebo nastavte na `0`
+   - Deploy
+
+3. **Obchádzanie** (prístup počas údržby pre vývojárov):
+   - Nastavte `MAINTENANCE_BYPASS_SECRET` (napr. náhodný reťazec)
+   - Otvorte stránku s parametrom: `?maintenance_bypass=VÁŠ_SECRET`
+   - Napr. `https://monitorzakona.sk/?maintenance_bypass=abc123`
+
+4. **robots.txt** (blokovanie crawlerov):
+   - DO App Platform: **Networking** → **Component routing rules** → **Add routing rule**
+   - Route path: `/robots.txt`, Path handling: **Rewrite Path** → `/robots.php`
+   - Alternatíva: `.htaccess` rewrite (ak hosting používa Apache) je už pridaný
+
+Stránka počas údržby vracia HTTP 503, hlavičky `X-Robots-Tag: noindex, nofollow` a zobrazuje stručnú správu. Stripe webhook zostáva dostupný (aby Stripe mohol posielať udalosti).
+
+---
+
 ## Digital Ocean (monitorzakona.sk)
 
 - **Aktuálna produkcia (v7):** nasadzuje sa z vetvy **v7** – Stripe platby, platená verzia (3 €/mes, 30 €/rok), free limity (1 otázka/zákon, 1× PDF).

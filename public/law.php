@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+\App\Maintenance::check();
 
 use App\Config;
 use App\Database;
@@ -90,26 +91,38 @@ if (!empty($law['ai_summary'])) {
     $summary = json_decode($law['ai_summary'], true);
 }
 
+$defaultSummary = [
+    'tags' => [],
+    'summary_paragraph' => '',
+    'affected_groups' => [],
+    'positives' => [],
+    'negatives' => [],
+    'how_to_react' => [],
+    'disclaimer' => ''
+];
+
 if (!$summary || json_last_error() !== JSON_ERROR_NONE) {
     $processingStatus = $law['processing_status'] ?? 'pending';
-    $statusMessage = ($processingStatus === 'pending') 
-        ? 'Zákon čaká na spracovanie. Spustite <code>php bin/reprocess-law.php ' . htmlspecialchars($law['id']) . '</code> na prepracovanie s novými promptmi.'
-        : 'Spracovanie prebieha...';
-    
-    $summary = [
-        'tags' => [],
-        'summary_paragraph' => $statusMessage,
-        'affected_groups' => [],
-        'positives' => [],
-        'negatives' => [],
-        'how_to_react' => [],
-        'disclaimer' => ''
-    ];
+    $statusMessage = ($processingStatus === 'pending')
+        ? 'Zákon čaká na spracovanie. Spustite <code>php bin/summarize-slovlex.php</code> (Slov-Lex) alebo <code>php bin/reprocess-law.php ' . htmlspecialchars($law['id'] ?? '') . '</code> (NR SR).'
+        : 'Zákon zatiaľ nemá dostupnú analýzu. Spustite <code>php bin/summarize-slovlex.php</code> na vygenerovanie zhrnutia.';
+    $summary = array_merge($defaultSummary, ['summary_paragraph' => $statusMessage]);
+} else {
+    $summary = array_merge($defaultSummary, $summary);
 }
 
-// Ensure tags array exists
+if (!isset($summary['summary_paragraph']) || $summary['summary_paragraph'] === null || $summary['summary_paragraph'] === '') {
+    $summary['summary_paragraph'] = 'Zákon zatiaľ nemá dostupnú analýzu. Spustite <code>php bin/summarize-slovlex.php</code> na vygenerovanie zhrnutia.';
+}
+
+// Ensure all expected fields have correct types
 if (!isset($summary['tags']) || !is_array($summary['tags'])) {
     $summary['tags'] = [];
+}
+foreach (['affected_groups', 'positives', 'negatives', 'how_to_react'] as $key) {
+    if (!isset($summary[$key]) || !is_array($summary[$key])) {
+        $summary[$key] = [];
+    }
 }
 
 $processingStatus = $law['processing_status'] ?? 'completed';
@@ -284,7 +297,7 @@ if (!$chatAvailable && !$fromJson) {
         <div class="lg-section">
             <div class="lg-section-title">Zhrnutie</div>
             <div class="lg-section-content">
-                <?php echo nl2br(htmlspecialchars($summary['summary_paragraph'])); ?>
+                <?php echo nl2br(htmlspecialchars($summary['summary_paragraph'] ?? '', ENT_QUOTES, 'UTF-8')); ?>
             </div>
         </div>
 

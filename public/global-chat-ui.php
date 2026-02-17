@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+\App\Maintenance::check();
 
 use App\Config;
 use App\Database;
@@ -40,6 +41,7 @@ foreach ($initialMessages as $m) {
     }
 }
 $chatLimitReached = !$isPaid && $userMessageCount >= 1;
+$useWebSearch = filter_var(Config::get('GLOBAL_CHAT_WEB_SEARCH', 'true'), FILTER_VALIDATE_BOOLEAN);
 
 ?>
 <!DOCTYPE html>
@@ -80,6 +82,9 @@ $chatLimitReached = !$isPaid && $userMessageCount >= 1;
                 <div class="lg-section-content">
                     <?php if (!$isPaid): ?>
                         <p class="lg-caption" style="margin-bottom:10px;">Bezplatní používatelia: 1 otázka v globálnom chate. Ďalšie po upgrade.</p>
+                    <?php endif; ?>
+                    <?php if ($useWebSearch): ?>
+                        <p class="lg-caption" style="margin-bottom:10px;color:var(--text-tertiary);">Odpovede využívajú premýšľanie a vyhľadávanie na webe – môžu trvať 30–60 s.</p>
                     <?php endif; ?>
                     <textarea id="global-chat-question" placeholder="Napíšte otázku k slovenským zákonom (napr. Čo hovorí zákon o dovolenke?)..."></textarea>
                     <div class="lg-actions">
@@ -122,6 +127,23 @@ $chatLimitReached = !$isPaid && $userMessageCount >= 1;
                     content.textContent = msg.content;
                     item.appendChild(meta);
                     item.appendChild(content);
+                    if (msg.role === 'assistant' && Array.isArray(msg.citations) && msg.citations.length > 0) {
+                        const citeWrap = document.createElement('div');
+                        citeWrap.className = 'lg-chat-citations';
+                        citeWrap.style.cssText = 'margin-top:8px;font-size:0.85em;opacity:0.9;';
+                        const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+                        citeWrap.innerHTML = '<strong>Zdroje:</strong> ' + msg.citations.map(function(c) {
+                            return '<a href="' + esc(c.url || '#') + '" target="_blank" rel="noopener noreferrer">' + esc(c.title || c.url || 'Odkaz') + '</a>';
+                        }).join(', ');
+                        item.appendChild(citeWrap);
+                    }
+                    if (msg.role === 'assistant' && msg.source === 'fallback') {
+                        const fallbackNote = document.createElement('div');
+                        fallbackNote.className = 'lg-chat-fallback-note';
+                        fallbackNote.style.cssText = 'margin-top:6px;font-size:0.8em;color:var(--text-tertiary);font-style:italic;';
+                        fallbackNote.textContent = 'Poznámka: Web search nebol dostupný, odpoveď z databázy.';
+                        item.appendChild(fallbackNote);
+                    }
                     chatThread.appendChild(item);
                 });
             };
@@ -184,7 +206,14 @@ $chatLimitReached = !$isPaid && $userMessageCount >= 1;
                         throw new Error(data.error || 'Neznáma chyba.');
                     }
                     const answer = data.answer || '';
-                    history = history.concat([{ role: 'assistant', content: answer }]);
+                    const assistantMsg = { role: 'assistant', content: answer };
+                    if (Array.isArray(data.citations) && data.citations.length > 0) {
+                        assistantMsg.citations = data.citations;
+                    }
+                    if (data.source === 'fallback') {
+                        assistantMsg.source = 'fallback';
+                    }
+                    history = history.concat([assistantMsg]);
                     renderHistory(history);
                 } catch (err) {
                     history.pop();

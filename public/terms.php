@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+\App\Maintenance::check();
 
 use App\Security;
 

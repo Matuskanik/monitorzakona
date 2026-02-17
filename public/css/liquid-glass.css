@@ -358,6 +358,8 @@ html.dark-mode .lg-disclaimer { background: rgba(255, 204, 0, 0.12); color: #f5f
 }
 .lg-chat .lg-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
 .lg-chat .lg-chat-meta { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 4px; }
+.lg-chat-citations a { color: var(--accent); text-decoration: none; }
+.lg-chat-citations a:hover { text-decoration: underline; }
 .lg-attachments { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--glass-border); }
 .lg-attachments ul { list-style: none; margin-left: 0; }
 .lg-attachments li { padding: 8px 0; color: var(--text-tertiary); }
