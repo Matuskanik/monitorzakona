@@ -248,6 +248,208 @@ PRAVIDLÁ:
         return trim($data['choices'][0]['message']['content']);
     }
 
+    /**
+     * Librarian with strict web search mode.
+     * Never falls back to passage-only mode to avoid "old version" behavior.
+     *
+     * @param list<array{content: string, master_id: string, title: string, section_title?: ?string}> $labeledPassages
+     * @return array{answer: string, citations: list<array{url: string, title: string}>, used_web_search: bool}
+     */
+    public function answerFromPassagesWithWebSearch(
+        array $labeledPassages,
+        string $question,
+        array $history,
+        string $modelOverride = '',
+        string $reasoningEffort = 'medium'
+    ): array {
+        $systemPrompt = 'Si expertný právny poradca pre slovenské zákony. Odpovedáš na otázky o slovenskom práve – Zákonník práce, dane, živnosti, sociálne poistenie, zdravotníctvo atď. Vyhľadáš na webe aktuálne informácie a odpovedáš štruktúrovane: hlavné body, príklady, zdroje (§, odkazy). Na konci pripoj upozornenie, že nejde o právne poradenstvo.';
+
+        $messages = [['role' => 'system', 'content' => $systemPrompt]];
+        $recentHistory = array_slice($history, -3);
+        foreach ($recentHistory as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $role = $item['role'] ?? '';
+            $content = $item['content'] ?? '';
+            if (!in_array($role, ['user', 'assistant'], true) || !is_string($content) || trim($content) === '') {
+                continue;
+            }
+            $messages[] = ['role' => $role, 'content' => trim($content)];
+        }
+        $messages[] = ['role' => 'user', 'content' => $question];
+
+        $searchModel = $modelOverride ?: 'gpt-4o-search-preview';
+        $chatModels = array_values(array_unique([$searchModel, 'gpt-4o-mini-search-preview']));
+
+        foreach ($chatModels as $chatModel) {
+            $body = [
+                'model' => $chatModel,
+                'messages' => $messages,
+                'web_search_options' => (object) [],
+                'max_tokens' => min($this->maxTokens * 2, 8000),
+            ];
+
+            $result = $this->requestJson('https://api.openai.com/v1/chat/completions', $body, 120);
+            if ($result['http_code'] !== 200) {
+                $this->logger->warning("Search API HTTP {$result['http_code']} for {$chatModel}. Response: " . substr($result['response'], 0, 300));
+                continue;
+            }
+
+            $data = json_decode($result['response'], true);
+            if (!is_array($data) || !isset($data['choices'][0]['message']['content'])) {
+                $this->logger->warning("Search API invalid response for {$chatModel}");
+                continue;
+            }
+
+            $answer = trim((string) $data['choices'][0]['message']['content']);
+            $citations = $this->extractCitationsFromChatCompletions($data);
+            $this->logger->info("Search API success via {$chatModel}, citations=" . count($citations));
+            return ['answer' => $answer, 'citations' => $citations, 'used_web_search' => true];
+        }
+
+        // Last resort web path: Responses API with web_search_preview.
+        $responsesBody = [
+            'model' => 'gpt-4.1',
+            'input' => $messages,
+            'tools' => [['type' => 'web_search_preview']],
+            'max_output_tokens' => min($this->maxTokens * 2, 8000),
+        ];
+        $resp = $this->requestJson('https://api.openai.com/v1/responses', $responsesBody, 120);
+        if ($resp['http_code'] === 200) {
+            $data = json_decode($resp['response'], true);
+            $answer = $this->extractTextFromResponsesApi($data);
+            if ($answer !== '') {
+                $citations = $this->extractCitationsFromResponsesApi($data);
+                $this->logger->info("Search API success via responses, citations=" . count($citations));
+                return ['answer' => $answer, 'citations' => $citations, 'used_web_search' => true];
+            }
+        } else {
+            $this->logger->warning("Responses API HTTP {$resp['http_code']}. Response: " . substr($resp['response'], 0, 300));
+        }
+
+        throw new \RuntimeException('Web search temporarily unavailable');
+    }
+
+    /**
+     * @param array<string,mixed> $body
+     * @return array{http_code:int,error:string,response:string}
+     */
+    private function requestJson(string $url, array $body, int $timeout = 120): array
+    {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->apiKey
+            ],
+            CURLOPT_POSTFIELDS => json_encode($body, JSON_UNESCAPED_UNICODE),
+            CURLOPT_TIMEOUT => $timeout
+        ]);
+        $response = curl_exec($ch);
+        $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = (string) curl_error($ch);
+        curl_close($ch);
+        return [
+            'http_code' => $httpCode,
+            'error' => $error,
+            'response' => is_string($response) ? $response : '',
+        ];
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     * @return list<array{url:string,title:string}>
+     */
+    private function extractCitationsFromChatCompletions(array $data): array
+    {
+        $citations = [];
+        $msg = $data['choices'][0]['message'] ?? [];
+        foreach (($msg['annotations'] ?? []) as $ann) {
+            if (!is_array($ann)) {
+                continue;
+            }
+            $uc = is_array($ann['url_citation'] ?? null) ? $ann['url_citation'] : $ann;
+            $url = (string) ($uc['url'] ?? '');
+            $title = (string) ($uc['title'] ?? $url);
+            if ($url !== '') {
+                $citations[] = ['url' => $url, 'title' => $title];
+            }
+        }
+        return $this->dedupeCitations($citations);
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    private function extractTextFromResponsesApi(array $data): string
+    {
+        $parts = [];
+        foreach (($data['output'] ?? []) as $outItem) {
+            if (!is_array($outItem)) {
+                continue;
+            }
+            foreach (($outItem['content'] ?? []) as $contentItem) {
+                if (!is_array($contentItem)) {
+                    continue;
+                }
+                if (($contentItem['type'] ?? '') === 'output_text' && isset($contentItem['text'])) {
+                    $parts[] = trim((string) $contentItem['text']);
+                }
+            }
+        }
+        return trim(implode("\n\n", array_filter($parts)));
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     * @return list<array{url:string,title:string}>
+     */
+    private function extractCitationsFromResponsesApi(array $data): array
+    {
+        $citations = [];
+        foreach (($data['output'] ?? []) as $outItem) {
+            if (!is_array($outItem)) {
+                continue;
+            }
+            foreach (($outItem['content'] ?? []) as $contentItem) {
+                if (!is_array($contentItem)) {
+                    continue;
+                }
+                foreach (($contentItem['annotations'] ?? []) as $ann) {
+                    if (!is_array($ann)) {
+                        continue;
+                    }
+                    $url = (string) ($ann['url'] ?? ($ann['url_citation']['url'] ?? ''));
+                    $title = (string) ($ann['title'] ?? ($ann['url_citation']['title'] ?? $url));
+                    if ($url !== '') {
+                        $citations[] = ['url' => $url, 'title' => $title];
+                    }
+                }
+            }
+        }
+        return $this->dedupeCitations($citations);
+    }
+
+    /**
+     * @param list<array{url:string,title:string}> $citations
+     * @return list<array{url:string,title:string}>
+     */
+    private function dedupeCitations(array $citations): array
+    {
+        $seen = [];
+        return array_values(array_filter($citations, function ($c) use (&$seen) {
+            $url = $c['url'] ?? '';
+            if ($url !== '' && !isset($seen[$url])) {
+                $seen[$url] = true;
+                return true;
+            }
+            return false;
+        }));
+    }
+
     private function buildPrompt(string $text): string
     {
         return "Analyzuj nasledujúci text zo slovenského zákona a vytvor podrobný, kvalitný JSON objekt s týmito presnými kľúčmi:
