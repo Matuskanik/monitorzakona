@@ -1,6 +1,34 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+// DigitalOcean/Heroku: session save path must be writable (ephemeral fs)
+if (is_writable('/tmp')) {
+    session_save_path('/tmp');
+}
+
+// Graceful error handling for production
+set_exception_handler(function (\Throwable $e) {
+    error_log('Monitor zákona 500: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
+    http_response_code(500);
+    header('Content-Type: text/html; charset=utf-8');
+    echo '<!DOCTYPE html><html lang="sk"><head><meta charset="UTF-8"><title>Chyba</title></head><body>';
+    echo '<h1>Dočasná chyba servera</h1>';
+    echo '<p>Skúste stránku <a href="index.html">obnoviť</a> alebo sa vráťte neskôr.</p>';
+    echo '</body></html>';
+    exit;
+});
+
+$autoload = __DIR__ . '/../vendor/autoload.php';
+if (!file_exists($autoload)) {
+    error_log('Monitor zákona: vendor/autoload.php not found. Run: composer install');
+    http_response_code(500);
+    header('Content-Type: text/html; charset=utf-8');
+    echo '<!DOCTYPE html><html lang="sk"><head><meta charset="UTF-8"><title>Chyba</title></head><body>';
+    echo '<h1>Chýbajúce závislosti</h1><p>Aplikácia nebola správne zostavená. Skontrolujte build logy v DigitalOcean.</p>';
+    echo '<p><a href="index.html">Otvoriť statickú verziu</a></p></body></html>';
+    exit;
+}
+
+require_once $autoload;
 \App\Maintenance::check();
 
 use App\Config;
