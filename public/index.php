@@ -182,6 +182,7 @@ if (!empty($searchQuery)) {
         <div class="lg-section-tabs" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
             <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=" class="lg-btn <?php echo $section === '' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Všetky</a>
             <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=nrsr" class="lg-btn <?php echo $section === 'nrsr' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Nové zákony (NR SR)</a>
+            <a href="parliament.php" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Hlasovania NR SR</a>
             <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=slovlex" class="lg-btn <?php echo $section === 'slovlex' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Zbierka zákonov</a>
             <a href="global-chat-ui.php" class="lg-btn lg-btn-success" style="text-decoration:none;">Opýtať sa celej zbierky</a>
         </div>

@@ -106,6 +106,87 @@ class Database
             )
         ");
 
+
+        // Parliament monitoring tables
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS parliament_mps (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nrsr_id TEXT NOT NULL UNIQUE,
+                full_name TEXT NOT NULL,
+                first_name TEXT,
+                last_name TEXT,
+                title TEXT,
+                party TEXT,
+                club TEXT,
+                district TEXT,
+                birth_date TEXT,
+                email TEXT,
+                website TEXT,
+                photo_url TEXT,
+                profile_url TEXT,
+                card_text TEXT,
+                stats_json TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS parliament_votings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nrsr_voting_id TEXT NOT NULL UNIQUE,
+                session_number INTEGER,
+                voting_number INTEGER,
+                title TEXT NOT NULL,
+                voting_date TEXT,
+                voting_time TEXT,
+                result TEXT,
+                result_text TEXT,
+                present_count INTEGER,
+                votes_for INTEGER,
+                votes_against INTEGER,
+                votes_abstain INTEGER,
+                votes_absent INTEGER,
+                votes_did_not_vote INTEGER,
+                summary_text TEXT,
+                source_url TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS parliament_votes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                voting_id INTEGER NOT NULL,
+                mp_id INTEGER NOT NULL,
+                vote_code TEXT,
+                vote_label TEXT,
+                club TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(voting_id, mp_id),
+                FOREIGN KEY (voting_id) REFERENCES parliament_votings(id) ON DELETE CASCADE,
+                FOREIGN KEY (mp_id) REFERENCES parliament_mps(id) ON DELETE CASCADE
+            )
+        ");
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS parliament_monthly_reports (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                report_year INTEGER NOT NULL,
+                report_month INTEGER NOT NULL,
+                summary_text TEXT NOT NULL,
+                stats_json TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(report_year, report_month)
+            )
+        ");
+
+        $this->pdo->exec("CREATE INDEX IF NOT EXISTS idx_parliament_votings_date ON parliament_votings(voting_date DESC, voting_time DESC)");
+        $this->pdo->exec("CREATE INDEX IF NOT EXISTS idx_parliament_votes_voting ON parliament_votes(voting_id)");
+        $this->pdo->exec("CREATE INDEX IF NOT EXISTS idx_parliament_votes_mp ON parliament_votes(mp_id)");
+
         // User tables for V5
         $this->pdo->exec("
             CREATE TABLE IF NOT EXISTS users (
@@ -522,6 +603,365 @@ class Database
         return $laws;
     }
     
+
+    public function saveOrUpdateParliamentMp(array $data): int
+    {
+        $existing = $this->findParliamentMpByNrsrId((string)$data['nrsr_id']);
+        if ($existing) {
+            $stmt = $this->pdo->prepare("
+                UPDATE parliament_mps
+                SET full_name = ?, first_name = ?, last_name = ?, title = ?, party = ?, club = ?,
+                    district = ?, birth_date = ?, email = ?, website = ?, photo_url = ?, profile_url = ?,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE nrsr_id = ?
+            ");
+            $stmt->execute([
+                $data['full_name'],
+                $data['first_name'] ?? null,
+                $data['last_name'] ?? null,
+                $data['title'] ?? null,
+                $data['party'] ?? null,
+                $data['club'] ?? null,
+                $data['district'] ?? null,
+                $data['birth_date'] ?? null,
+                $data['email'] ?? null,
+                $data['website'] ?? null,
+                $data['photo_url'] ?? null,
+                $data['profile_url'] ?? null,
+                $data['nrsr_id'],
+            ]);
+            return (int)$existing['id'];
+        }
+
+        $stmt = $this->pdo->prepare("
+            INSERT INTO parliament_mps (
+                nrsr_id, full_name, first_name, last_name, title, party, club, district,
+                birth_date, email, website, photo_url, profile_url
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            $data['nrsr_id'],
+            $data['full_name'],
+            $data['first_name'] ?? null,
+            $data['last_name'] ?? null,
+            $data['title'] ?? null,
+            $data['party'] ?? null,
+            $data['club'] ?? null,
+            $data['district'] ?? null,
+            $data['birth_date'] ?? null,
+            $data['email'] ?? null,
+            $data['website'] ?? null,
+            $data['photo_url'] ?? null,
+            $data['profile_url'] ?? null,
+        ]);
+
+        return (int)$this->pdo->lastInsertId();
+    }
+
+    public function findParliamentMpByNrsrId(string $nrsrId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM parliament_mps WHERE nrsr_id = ?");
+        $stmt->execute([$nrsrId]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function getParliamentMpById(int $id): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM parliament_mps WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function saveOrUpdateParliamentVoting(array $data): int
+    {
+        $existing = $this->findParliamentVotingByNrsrId((string)$data['nrsr_voting_id']);
+        if ($existing) {
+            $stmt = $this->pdo->prepare("
+                UPDATE parliament_votings
+                SET session_number = ?, voting_number = ?, title = ?, voting_date = ?, voting_time = ?,
+                    result = ?, result_text = ?, present_count = ?, votes_for = ?, votes_against = ?,
+                    votes_abstain = ?, votes_absent = ?, votes_did_not_vote = ?, summary_text = ?, source_url = ?,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE nrsr_voting_id = ?
+            ");
+            $stmt->execute([
+                $data['session_number'] ?? null,
+                $data['voting_number'] ?? null,
+                $data['title'],
+                $data['voting_date'] ?? null,
+                $data['voting_time'] ?? null,
+                $data['result'] ?? null,
+                $data['result_text'] ?? null,
+                $data['present_count'] ?? null,
+                $data['votes_for'] ?? null,
+                $data['votes_against'] ?? null,
+                $data['votes_abstain'] ?? null,
+                $data['votes_absent'] ?? null,
+                $data['votes_did_not_vote'] ?? null,
+                $data['summary_text'] ?? null,
+                $data['source_url'] ?? null,
+                $data['nrsr_voting_id'],
+            ]);
+            return (int)$existing['id'];
+        }
+
+        $stmt = $this->pdo->prepare("
+            INSERT INTO parliament_votings (
+                nrsr_voting_id, session_number, voting_number, title, voting_date, voting_time,
+                result, result_text, present_count, votes_for, votes_against, votes_abstain,
+                votes_absent, votes_did_not_vote, summary_text, source_url
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            $data['nrsr_voting_id'],
+            $data['session_number'] ?? null,
+            $data['voting_number'] ?? null,
+            $data['title'],
+            $data['voting_date'] ?? null,
+            $data['voting_time'] ?? null,
+            $data['result'] ?? null,
+            $data['result_text'] ?? null,
+            $data['present_count'] ?? null,
+            $data['votes_for'] ?? null,
+            $data['votes_against'] ?? null,
+            $data['votes_abstain'] ?? null,
+            $data['votes_absent'] ?? null,
+            $data['votes_did_not_vote'] ?? null,
+            $data['summary_text'] ?? null,
+            $data['source_url'] ?? null,
+        ]);
+
+        return (int)$this->pdo->lastInsertId();
+    }
+
+    public function findParliamentVotingByNrsrId(string $nrsrVotingId): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM parliament_votings WHERE nrsr_voting_id = ?");
+        $stmt->execute([$nrsrVotingId]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function getParliamentVotingById(int $id): ?array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM parliament_votings WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function replaceVotesForVoting(int $votingId, array $votes): void
+    {
+        $deleteStmt = $this->pdo->prepare("DELETE FROM parliament_votes WHERE voting_id = ?");
+        $deleteStmt->execute([$votingId]);
+
+        $insertStmt = $this->pdo->prepare("
+            INSERT INTO parliament_votes (voting_id, mp_id, vote_code, vote_label, club)
+            VALUES (?, ?, ?, ?, ?)
+        ");
+
+        foreach ($votes as $vote) {
+            $mp = $this->findParliamentMpByNrsrId((string)$vote['mp_nrsr_id']);
+            if (!$mp) {
+                $mpId = $this->saveOrUpdateParliamentMp([
+                    'nrsr_id' => (string)$vote['mp_nrsr_id'],
+                    'full_name' => $vote['full_name'] ?? 'Neznamy poslanec',
+                    'profile_url' => $vote['profile_url'] ?? null,
+                ]);
+            } else {
+                $mpId = (int)$mp['id'];
+            }
+
+            $insertStmt->execute([
+                $votingId,
+                $mpId,
+                $vote['vote_code'] ?? null,
+                $vote['vote_label'] ?? null,
+                $vote['club'] ?? null,
+            ]);
+        }
+    }
+
+    public function getLatestParliamentVotings(int $limit = 50): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM parliament_votings
+            ORDER BY voting_date DESC, voting_time DESC, id DESC
+            LIMIT ?
+        ");
+        $stmt->execute([$limit]);
+        return $stmt->fetchAll();
+    }
+
+    public function countParliamentVotings(): int
+    {
+        $stmt = $this->pdo->query("SELECT COUNT(*) AS c FROM parliament_votings");
+        $row = $stmt->fetch();
+        return (int)($row['c'] ?? 0);
+    }
+
+    public function getParliamentVotingsPage(int $limit, int $offset): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM parliament_votings
+            ORDER BY voting_date DESC, voting_time DESC, id DESC
+            LIMIT ? OFFSET ?
+        ");
+        $stmt->execute([$limit, $offset]);
+        return $stmt->fetchAll();
+    }
+
+    public function getParliamentVotesForVoting(int $votingId): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT pv.*, pm.full_name, pm.nrsr_id AS mp_nrsr_id
+            FROM parliament_votes pv
+            JOIN parliament_mps pm ON pm.id = pv.mp_id
+            WHERE pv.voting_id = ?
+            ORDER BY pm.full_name ASC
+        ");
+        $stmt->execute([$votingId]);
+        return $stmt->fetchAll();
+    }
+
+    public function getRecentVotesForMp(int $mpId, int $limit = 25): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT pv.vote_code, pv.vote_label, pv.club,
+                   v.id AS voting_id, v.nrsr_voting_id, v.title, v.voting_date, v.voting_time, v.result, v.result_text
+            FROM parliament_votes pv
+            JOIN parliament_votings v ON v.id = pv.voting_id
+            WHERE pv.mp_id = ?
+            ORDER BY v.voting_date DESC, v.voting_time DESC, v.id DESC
+            LIMIT ?
+        ");
+        $stmt->execute([$mpId, $limit]);
+        return $stmt->fetchAll();
+    }
+
+    public function refreshParliamentMpStatsAndCard(int $mpId, string $cardText): void
+    {
+        $stats = $this->computeParliamentMpStats($mpId);
+        $stmt = $this->pdo->prepare("
+            UPDATE parliament_mps
+            SET card_text = ?, stats_json = ?, updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+        ");
+        $stmt->execute([$cardText, json_encode($stats, JSON_UNESCAPED_UNICODE), $mpId]);
+    }
+
+    public function getTopParliamentMps(int $limit = 300): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT pm.*,
+                   COALESCE(json_extract(pm.stats_json, '$.attendance_pct'), 0) AS attendance_pct,
+                   COALESCE(json_extract(pm.stats_json, '$.total_votes'), 0) AS total_votes,
+                   COALESCE(json_extract(pm.stats_json, '$.votes_for'), 0) AS votes_for,
+                   COALESCE(json_extract(pm.stats_json, '$.votes_against'), 0) AS votes_against,
+                   COALESCE(json_extract(pm.stats_json, '$.votes_abstain'), 0) AS votes_abstain
+            FROM parliament_mps pm
+            ORDER BY attendance_pct DESC, total_votes DESC, pm.full_name ASC
+            LIMIT ?
+        ");
+        $stmt->execute([$limit]);
+        return $stmt->fetchAll();
+    }
+
+    public function buildMonthlyVotingStats(int $year, int $month): array
+    {
+        $prefix = sprintf('%04d-%02d', $year, $month);
+        $stmt = $this->pdo->prepare("
+            SELECT COUNT(*) AS total_votings,
+                   SUM(CASE WHEN result = 'schválené' THEN 1 ELSE 0 END) AS approved,
+                   SUM(CASE WHEN result = 'neschválené' THEN 1 ELSE 0 END) AS rejected,
+                   AVG(CASE WHEN present_count IS NOT NULL THEN present_count END) AS avg_present
+            FROM parliament_votings
+            WHERE voting_date LIKE ?
+        ");
+        $stmt->execute([$prefix . '%']);
+        $summary = $stmt->fetch() ?: [];
+
+        $topStmt = $this->pdo->prepare("
+            SELECT * FROM parliament_votings
+            WHERE voting_date LIKE ?
+            ORDER BY COALESCE(votes_for, 0) + COALESCE(votes_against, 0) DESC, voting_date DESC
+            LIMIT 10
+        ");
+        $topStmt->execute([$prefix . '%']);
+
+        return [
+            'year' => $year,
+            'month' => $month,
+            'total_votings' => (int)($summary['total_votings'] ?? 0),
+            'approved' => (int)($summary['approved'] ?? 0),
+            'rejected' => (int)($summary['rejected'] ?? 0),
+            'avg_present' => round((float)($summary['avg_present'] ?? 0), 1),
+            'top_votings' => $topStmt->fetchAll(),
+        ];
+    }
+
+    public function saveMonthlyParliamentReport(int $year, int $month, string $summaryText, array $stats): void
+    {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO parliament_monthly_reports (report_year, report_month, summary_text, stats_json, updated_at)
+            VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT(report_year, report_month)
+            DO UPDATE SET summary_text = excluded.summary_text, stats_json = excluded.stats_json, updated_at = CURRENT_TIMESTAMP
+        ");
+        $stmt->execute([$year, $month, $summaryText, json_encode($stats, JSON_UNESCAPED_UNICODE)]);
+    }
+
+    public function getMonthlyParliamentReport(int $year, int $month): ?array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM parliament_monthly_reports
+            WHERE report_year = ? AND report_month = ?
+        ");
+        $stmt->execute([$year, $month]);
+        return $stmt->fetch() ?: null;
+    }
+
+    public function getAvailableParliamentMonths(int $limit = 12): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT DISTINCT substr(voting_date, 1, 7) AS ym
+            FROM parliament_votings
+            WHERE voting_date IS NOT NULL
+            ORDER BY ym DESC
+            LIMIT ?
+        ");
+        $stmt->execute([$limit]);
+        return $stmt->fetchAll();
+    }
+
+    private function computeParliamentMpStats(int $mpId): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT COUNT(*) AS total_votes,
+                   SUM(CASE WHEN vote_code = 'Z' THEN 1 ELSE 0 END) AS votes_for,
+                   SUM(CASE WHEN vote_code = 'P' THEN 1 ELSE 0 END) AS votes_against,
+                   SUM(CASE WHEN vote_code = '?' THEN 1 ELSE 0 END) AS votes_abstain,
+                   SUM(CASE WHEN vote_code = '0' THEN 1 ELSE 0 END) AS votes_absent,
+                   SUM(CASE WHEN vote_code = 'N' THEN 1 ELSE 0 END) AS votes_did_not_vote
+            FROM parliament_votes
+            WHERE mp_id = ?
+        ");
+        $stmt->execute([$mpId]);
+        $row = $stmt->fetch() ?: [];
+        $total = (int)($row['total_votes'] ?? 0);
+
+        $activeVotes = (int)($row['votes_for'] ?? 0) + (int)($row['votes_against'] ?? 0) + (int)($row['votes_abstain'] ?? 0);
+        $attendancePct = $total > 0 ? ($activeVotes / $total) * 100 : 0.0;
+
+        return [
+            'total_votes' => $total,
+            'votes_for' => (int)($row['votes_for'] ?? 0),
+            'votes_against' => (int)($row['votes_against'] ?? 0),
+            'votes_abstain' => (int)($row['votes_abstain'] ?? 0),
+            'votes_absent' => (int)($row['votes_absent'] ?? 0),
+            'votes_did_not_vote' => (int)($row['votes_did_not_vote'] ?? 0),
+            'attendance_pct' => round($attendancePct, 1),
+        ];
+    }
+
     private function parseSlovakDate(?string $date): string
     {
         if (empty($date)) {
