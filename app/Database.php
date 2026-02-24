@@ -19,6 +19,7 @@ class Database
             $dbPath = $projectRoot . '/' . $dbPath;
         }
 
+        $originalDbPath = $dbPath;
         $dir = dirname($dbPath);
         if (!is_dir($dir)) {
             @mkdir($dir, 0755, true);
@@ -26,6 +27,21 @@ class Database
         // On Digital Ocean / Heroku, app dir may be read-only; use /tmp if dir not writable
         if (!is_writable($dir)) {
             $dbPath = '/tmp/sentinel.db';
+            // Seed /tmp DB from committed seed file so read-only deployments
+            // still have the latest indexed data (laws + parliament).
+            if (!file_exists($dbPath)) {
+                $projectRoot = dirname(__DIR__);
+                $seedCandidates = [
+                    $projectRoot . '/data/sentinel.seed.db',
+                    dirname($originalDbPath) . '/sentinel.seed.db',
+                ];
+                foreach ($seedCandidates as $seedPath) {
+                    if (is_file($seedPath) && is_readable($seedPath)) {
+                        @copy($seedPath, $dbPath);
+                        break;
+                    }
+                }
+            }
         }
 
         $this->pdo = new \PDO('sqlite:' . $dbPath);
