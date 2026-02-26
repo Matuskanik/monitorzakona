@@ -13,35 +13,57 @@ class Database
             $dbPath = 'data/sentinel.db';
         }
 
+        $projectRoot = dirname(__DIR__);
         // Convert relative paths to absolute paths relative to project root
         if (!str_starts_with($dbPath, '/')) {
-            $projectRoot = dirname(__DIR__);
             $dbPath = $projectRoot . '/' . $dbPath;
         }
 
-        $originalDbPath = $dbPath;
+        $seedCandidates = [
+            $projectRoot . '/data/sentinel.seed.db',
+            dirname($dbPath) . '/sentinel.seed.db',
+        ];
+        $seedDatabaseIfNeeded = static function (string $targetPath, array $candidates): void {
+            $seedPath = null;
+            foreach ($candidates as $candidate) {
+                if (is_file($candidate) && is_readable($candidate)) {
+                    $seedPath = $candidate;
+                    break;
+                }
+            }
+            if ($seedPath === null) {
+                return;
+            }
+
+            $shouldSeed = !is_file($targetPath);
+            if (!$shouldSeed) {
+                $targetSize = (int) (@filesize($targetPath) ?: 0);
+                $targetMtime = (int) (@filemtime($targetPath) ?: 0);
+                $seedSize = (int) (@filesize($seedPath) ?: 0);
+                $seedMtime = (int) (@filemtime($seedPath) ?: 0);
+                // Refresh stale/partial DBs (common after deploys with old /tmp DB).
+                $shouldSeed = $targetSize === 0
+                    || ($seedSize > 0 && $targetSize < (int) floor($seedSize * 0.7))
+                    || ($seedMtime > 0 && $targetMtime < $seedMtime);
+            }
+
+            if ($shouldSeed) {
+                @copy($seedPath, $targetPath);
+            }
+        };
+
         $dir = dirname($dbPath);
         if (!is_dir($dir)) {
             @mkdir($dir, 0755, true);
         }
+        // Use seed DB when creating or refreshing stale local DB file.
+        if (is_writable($dir)) {
+            $seedDatabaseIfNeeded($dbPath, $seedCandidates);
+        }
         // On Digital Ocean / Heroku, app dir may be read-only; use /tmp if dir not writable
         if (!is_writable($dir)) {
             $dbPath = '/tmp/sentinel.db';
-            // Seed /tmp DB from committed seed file so read-only deployments
-            // still have the latest indexed data (laws + parliament).
-            if (!file_exists($dbPath)) {
-                $projectRoot = dirname(__DIR__);
-                $seedCandidates = [
-                    $projectRoot . '/data/sentinel.seed.db',
-                    dirname($originalDbPath) . '/sentinel.seed.db',
-                ];
-                foreach ($seedCandidates as $seedPath) {
-                    if (is_file($seedPath) && is_readable($seedPath)) {
-                        @copy($seedPath, $dbPath);
-                        break;
-                    }
-                }
-            }
+            $seedDatabaseIfNeeded($dbPath, $seedCandidates);
         }
 
         $this->pdo = new \PDO('sqlite:' . $dbPath);
