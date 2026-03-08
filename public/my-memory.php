@@ -63,6 +63,9 @@ $chats = $isPaid ? $db->getUserChats($userId) : [];
             <?php else: ?>
                 <?php foreach ($savedLaws as $law): ?>
                     <div class="lg-law-item lg-memory-law-item">
+                        <?php if (!empty($law['human_title'])): ?>
+                        <div class="lg-law-human-title" style="font-size:0.95rem;color:var(--text-secondary);margin-bottom:4px;"><?php echo htmlspecialchars($law['human_title']); ?></div>
+                        <?php endif; ?>
                         <div class="lg-law-title">
                             <a href="law.php?id=<?php echo htmlspecialchars($law['id']); ?>">
                                 <?php echo htmlspecialchars($law['title']); ?>

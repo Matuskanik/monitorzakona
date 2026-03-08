@@ -13,16 +13,31 @@ class Config
             return;
         }
 
-        $envFile = __DIR__ . '/../.env';
-        if (file_exists($envFile)) {
+        // Support both local project .env and parent workspace .env
+        // (common in this repo where app lives in nested folder).
+        $envCandidates = [
+            __DIR__ . '/../.env',
+            dirname(__DIR__, 2) . '/.env',
+        ];
+        foreach ($envCandidates as $envFile) {
+            if (!is_file($envFile) || !is_readable($envFile)) {
+                continue;
+            }
             $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             foreach ($lines as $line) {
-                if (strpos(trim($line), '#') === 0) {
+                $line = trim((string) $line);
+                if ($line === '' || str_starts_with($line, '#')) {
                     continue;
                 }
                 $parts = explode('=', $line, 2);
-                if (count($parts) === 2) {
-                    self::$config[trim($parts[0])] = trim($parts[1]);
+                if (count($parts) !== 2) {
+                    continue;
+                }
+                $key = trim($parts[0]);
+                $value = trim($parts[1]);
+                // Keep first value found (project-local has precedence over parent .env).
+                if ($key !== '' && !array_key_exists($key, self::$config)) {
+                    self::$config[$key] = trim($value, " \t\n\r\0\x0B\"'");
                 }
             }
         }

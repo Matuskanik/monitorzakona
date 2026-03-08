@@ -14,15 +14,24 @@ mkdir -p "$PROJECT_DIR/storage/logs"
 # Create cron entry
 CRON_ENTRY="0 0 * * * cd $PROJECT_DIR && php $WATCHDOG_SCRIPT >> $CRON_LOG 2>&1"
 
+# -y / --yes = non-interactive, auto-replace existing
+AUTO_YES=false
+[[ "$1" == "-y" || "$1" == "--yes" ]] && AUTO_YES=true
+
 # Check if cron job already exists
 if crontab -l 2>/dev/null | grep -q "watchdog.php"; then
     echo "Cron job for watchdog already exists."
     echo "Current cron jobs:"
     crontab -l | grep watchdog.php
     echo ""
-    read -p "Do you want to remove the existing cron job and add a new one? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ "$AUTO_YES" == true ]]; then
+        DO_REPLACE=y
+    else
+        read -p "Do you want to remove the existing cron job and add a new one? (y/n) " -n 1 -r
+        echo
+        DO_REPLACE="$REPLY"
+    fi
+    if [[ "$DO_REPLACE" =~ ^[Yy]$ ]]; then
         crontab -l 2>/dev/null | grep -v "watchdog.php" | crontab -
         (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
         echo "✓ Cron job updated successfully!"

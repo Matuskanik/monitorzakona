@@ -17,26 +17,89 @@ class OpenAIClient
         $this->logger = $logger;
     }
 
+    /**
+     * @param array<int,mixed> $options
+     * @return array<int,mixed>
+     */
+    private function buildApiCurlOptions(array $options, bool $forceDirect = false): array
+    {
+        $defaults = [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->apiKey,
+            ],
+            CURLOPT_FOLLOWLOCATION => true,
+        ];
+
+        if ($forceDirect) {
+            $defaults[CURLOPT_PROXY] = '';
+            $defaults[CURLOPT_NOPROXY] = '*';
+            $defaults[CURLOPT_HTTPPROXYTUNNEL] = false;
+        }
+
+        return $options + $defaults;
+    }
+
+    /**
+     * Try OpenAI requests both with default network settings and direct mode.
+     *
+     * @param array<int,mixed> $options
+     * @return array{response:string,http_code:int,error:string}
+     */
+    private function executeApiRequest(string $url, array $options): array
+    {
+        $attempts = [
+            'default' => false,
+            'direct' => true,
+        ];
+        $last = ['response' => '', 'http_code' => 0, 'error' => ''];
+
+        foreach ($attempts as $label => $forceDirect) {
+            $ch = curl_init($url);
+            curl_setopt_array($ch, $this->buildApiCurlOptions($options, $forceDirect));
+            $response = curl_exec($ch);
+            $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $error = (string) curl_error($ch);
+            curl_close($ch);
+
+            $last = [
+                'response' => is_string($response) ? $response : '',
+                'http_code' => $httpCode,
+                'error' => $error,
+            ];
+
+            if ($error === '' && $httpCode > 0) {
+                if ($label === 'direct') {
+                    $this->logger->info('OpenAI request succeeded in direct mode');
+                }
+                return $last;
+            }
+
+            $this->logger->warning("OpenAI request attempt {$label} failed", [
+                'http_code' => $httpCode,
+                'error' => $error,
+                'response_preview' => is_string($response) ? mb_substr($response, 0, 200, 'UTF-8') : '',
+            ]);
+        }
+
+        return $last;
+    }
+
     public function generateSummary(string $text): array
     {
         $this->logger->info("Generating AI summary (text length: " . strlen($text) . " chars)");
 
         $prompt = $this->buildPrompt($text);
         
-        $ch = curl_init('https://api.openai.com/v1/chat/completions');
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $this->apiKey
-            ],
+        $result = $this->executeApiRequest('https://api.openai.com/v1/chat/completions', [
             CURLOPT_POSTFIELDS => json_encode([
                 'model' => $this->model,
                 'messages' => [
                     [
                         'role' => 'system',
-                        'content' => 'Si expertný právny analytik a komunikátor, ktorý špecializuje sa na analýzu slovenských zákonov a ich preklad do zrozumiteľného jazyka pre bežných občanov. Tvoja úloha je poskytnúť hĺbkovú, praktickú a užitočnú analýzu, ktorá ľuďom pomôže pochopiť, ako ich zákon ovplyvní a čo môžu konkrétne urobiť. Vždy odpovedáš v JSON formáte podľa presnej schémy, pričom každá sekcia musí byť detailná, konkrétna a prakticky použiteľná.'
+                        'content' => 'Si expertný právny analytik zameraný na kritické hodnotenie legislatívy. Tvoj predvolený postoj je skeptický audit: identifikuješ riziká, implementačné slabiny, nejasnosti, presuny nákladov na občanov a miesta, kde sa deklarované ciele nemusia naplniť. Pozitíva uvádzaj len ak sú jasne podložené textom zákona. Neopakuj politické tvrdenia bez dôkazu. Vždy odpovedáš v JSON formáte podľa presnej schémy.'
                     ],
                     [
                         'role' => 'user',
@@ -49,11 +112,9 @@ class OpenAIClient
             ]),
             CURLOPT_TIMEOUT => 60
         ]);
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
-        curl_close($ch);
+        $response = $result['response'];
+        $httpCode = $result['http_code'];
+        $error = $result['error'];
 
         if ($response === false || !empty($error)) {
             throw new \RuntimeException("OpenAI API request failed: {$error}");
@@ -87,18 +148,367 @@ class OpenAIClient
         return $summary;
     }
 
+    /**
+     * Generate aggregated period summary from multiple law summaries.
+     * @param array<int, array> $lawSummaries Each: human_title, summary_paragraph, affected_groups, positives, negatives
+     * @param string $periodLabel e.g. "január 2026", "Q1 2026", "rok 2025"
+     * @return array{summary_paragraph: string, changes: string, affected_groups: array, positives: array, negatives: array}
+     */
+    public function generatePeriodSummary(array $lawSummaries, string $periodLabel): array
+    {
+        $lawCount = count($lawSummaries);
+        $this->logger->info("Generating period summary for {$periodLabel} ({$lawCount} laws)");
+
+        $input = [];
+        foreach ($lawSummaries as $i => $s) {
+            $title = $s['human_title'] ?? $s['title'] ?? 'Zákon ' . ($i + 1);
+            $summary = is_string($s['summary_paragraph'] ?? null) ? $s['summary_paragraph'] : '';
+            $groups = is_array($s['affected_groups'] ?? null) ? $s['affected_groups'] : [];
+            $pos = is_array($s['positives'] ?? null) ? $s['positives'] : [];
+            $neg = is_array($s['negatives'] ?? null) ? $s['negatives'] : [];
+            $input[] = [
+                'human_title' => $title,
+                'summary_paragraph' => $summary,
+                'affected_groups' => $groups,
+                'positives' => $pos,
+                'negatives' => $neg,
+            ];
+        }
+
+        $context = json_encode($input, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        $compactContext = $this->buildCompactPeriodContext($input);
+        $draftPrompt = $this->buildPeriodSummaryPrompt($context, $periodLabel);
+
+        $draftResp = $this->requestJson('https://api.openai.com/v1/chat/completions', [
+            'model' => $this->model,
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => 'Si kritický analytik zákonov. Tvojou úlohou je hľadať slabiny návrhu, riziká implementácie, rozpor medzi deklarovaným cieľom a mechanizmom a možné negatívne dôsledky. Pozitíva uvádzaj iba ak sú priamo podložené.'
+                ],
+                ['role' => 'user', 'content' => $draftPrompt],
+            ],
+            'temperature' => 0.1,
+            'max_tokens' => $this->maxTokens,
+            'response_format' => ['type' => 'json_object'],
+        ], 120);
+
+        if ($draftResp['http_code'] !== 200) {
+            $this->logger->error("OpenAI draft period summary HTTP {$draftResp['http_code']}: {$draftResp['response']}");
+            throw new \RuntimeException("OpenAI API returned HTTP {$draftResp['http_code']}");
+        }
+
+        $draftData = json_decode($draftResp['response'], true);
+        if (!is_array($draftData) || !isset($draftData['choices'][0]['message']['content'])) {
+            throw new \RuntimeException("Invalid OpenAI API response structure");
+        }
+        $draft = $this->decodeJsonObjectFromText((string) $draftData['choices'][0]['message']['content']);
+        if (!is_array($draft)) {
+            throw new \RuntimeException("Invalid JSON in period summary draft");
+        }
+        $draft = $this->normalizePeriodSummary($draft);
+        if ($this->isPeriodSummaryTooNarrow($draft, $lawCount)) {
+            $draft = $this->expandPeriodSummaryBreadth($draft, $periodLabel, $compactContext, $lawCount);
+        }
+
+        // 2nd pass: web-based critical review. If unavailable, keep draft.
+        $final = $draft;
+        try {
+            $reviewPrompt = $this->buildPeriodSummaryWebReviewPrompt($periodLabel, $compactContext, $draft);
+            $review = $this->runWebReviewedPeriodSummary($reviewPrompt);
+            $review['external_review_used'] = true;
+            $final = $this->mergePeriodSummary($draft, $review);
+            if ($this->isPeriodSummaryTooNarrow($final, $lawCount)) {
+                $this->logger->warning("Merged period summary too narrow, falling back to broadened draft");
+                $final = $draft;
+                $final['external_review_used'] = false;
+            }
+        } catch (\Throwable $e) {
+            $this->logger->warning("Period summary web review skipped: " . $e->getMessage());
+            $final['external_review_used'] = false;
+        }
+
+        $this->logger->info("Period summary generated successfully");
+        return $final;
+    }
+
+    private function buildPeriodSummaryPrompt(string $contextJson, string $periodLabel): string
+    {
+        return <<<PROMPT
+Na základe nasledujúcich AI zhrnutí jednotlivých zákonov a listín zo Zbierky zákonov SR (Slov-Lex) a NR SR za obdobie „{$periodLabel}“ vytvor KRITICKÉ agregované zhrnutie, ktoré pokrýva CELÝ rozsah obdobia.
+
+Štruktúra výstupu (JSON):
+{
+  "summary_paragraph": "Stručné zhrnutie jedným odstavcom (3-5 viet): čo sa zmenilo a kde sú hlavné slabé miesta alebo riziká.",
+  "changes": "Konkrétne zmeny + prečo môžu v praxi zlyhať (vykonateľnosť, nejasnosti, administratívna záťaž, financovanie, kontrola).",
+  "affected_groups": ["skupina 1 s vysvetlením", "skupina 2 s vysvetlením", ...],
+  "positives": ["len preukázané pozitívum (ak chýba dôkaz, neuvádzaj)", ...],
+  "negatives": ["konkrétne riziko/problém 1", "konkrétne riziko/problém 2", ...]
+}
+
+Pravidlá:
+- Zhrň všetky zákony do jedného celku, neopakuj zbytočne.
+- affected_groups: zlúč podobné skupiny, uveď kto je zasiahnutý.
+- Predvolený tón je kritický audit, nie PR text.
+- Najprv identifikuj negatíva a miesta zlyhania, až potom prípadné preukázané pozitíva.
+- Ak niečo znie ako politická deklarácia bez mechanizmu, označ to za nepotvrdené tvrdenie.
+- positives: max 0-2 body, a len ak sú preukázateľné priamo zo vstupu.
+- negatives: aspoň 5 bodov, konkrétne a vecne.
+- Zhrnutie NESMIE byť postavené na jednom paragrafe alebo jednom zákone; musí pokryť viac hlavných zmien za celé obdobie.
+- Pri väčšom počte zákonov uprednostni široké pokrytie tém pred detailom jedného opatrenia.
+- Píš v slovenčine, zrozumiteľne pre bežných občanov.
+- Ak je málo zákonov, buď stručnejší. Ak je veľa, vyber najdôležitejšie.
+
+Vstupné zhrnutia zákonov:
+{$contextJson}
+PROMPT;
+    }
+
+    /**
+     * @param array<string,mixed> $draft
+     */
+    private function buildPeriodSummaryWebReviewPrompt(string $periodLabel, string $contextJson, array $draft): string
+    {
+        $draftJson = json_encode($draft, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        return <<<PROMPT
+Máš pripravený interný draft kritického reportu o období "{$periodLabel}".
+
+Úloha: vykonaj webový audit draftu na základe viacerých vyhľadávaní a zreviduj výstup.
+Hľadaj hlavne:
+1) mediálne a odborné výhrady,
+2) implementačné problémy v praxi,
+3) rozpory medzi deklarovaným cieľom zákona a reálnymi dopadmi,
+4) upozornenia watchdog organizácií, analytikov, ekonomických komentárov,
+5) protiargumenty a neistoty.
+
+Dôležité pravidlá:
+- Buď kritický, vecný a dôkazový.
+- Neopakuj neoverené tvrdenia o "zvýšenej transparentnosti" alebo "zlepšení", pokiaľ na to nie je mechanizmus alebo dôkaz.
+- Ak je tvrdenie nejasné, explicitne to označ.
+- Výstup MUSÍ byť validný JSON a nič iné.
+
+Požadovaný výstup:
+{
+  "summary_paragraph": "Kritické zhrnutie obdobia jedným odstavcom.",
+  "changes": "Najdôležitejšie zmeny + riziká ich vykonania.",
+  "affected_groups": ["skupina + dopad", "..."],
+  "positives": ["len preukázané pozitíva", "..."],
+  "negatives": ["hlavné problémy/riziká", "..."]
+}
+
+Interný draft:
+{$draftJson}
+
+Interné podklady (zákony):
+{$contextJson}
+PROMPT;
+    }
+
+    private function runWebReviewedPeriodSummary(string $prompt): array
+    {
+        $webResult = $this->answerFromPassagesWithWebSearch(
+            [],
+            $prompt . "\n\nVýstup daj VÝHRADNE ako validný JSON objekt podľa požadovanej schémy.",
+            [],
+            '',
+            'high'
+        );
+
+        $rawAnswer = (string) ($webResult['answer'] ?? '');
+        $decoded = $this->decodeJsonObjectFromText($rawAnswer);
+        if (!is_array($decoded)) {
+            $repairPrompt = <<<PROMPT
+Preveď nasledujúci text do validného JSON objektu s kľúčmi:
+summary_paragraph (string), changes (string), affected_groups (array string), positives (array string), negatives (array string).
+
+Ak niektorý údaj chýba, doplň prázdny string alebo prázdne pole. Výstup musí byť LEN JSON objekt.
+
+Text:
+{$rawAnswer}
+PROMPT;
+            $repairResp = $this->requestJson('https://api.openai.com/v1/chat/completions', [
+                'model' => $this->model,
+                'messages' => [
+                    ['role' => 'system', 'content' => 'Si asistent na transformáciu textu do presného JSON formátu.'],
+                    ['role' => 'user', 'content' => $repairPrompt],
+                ],
+                'temperature' => 0,
+                'max_tokens' => min($this->maxTokens, 3000),
+                'response_format' => ['type' => 'json_object'],
+            ], 90);
+            if ($repairResp['http_code'] === 200) {
+                $repairData = json_decode($repairResp['response'], true);
+                if (is_array($repairData) && isset($repairData['choices'][0]['message']['content'])) {
+                    $decoded = $this->decodeJsonObjectFromText((string) $repairData['choices'][0]['message']['content']);
+                }
+            }
+        }
+        if (!is_array($decoded)) {
+            throw new \RuntimeException('Invalid JSON from web review');
+        }
+        $decoded = $this->normalizePeriodSummary($decoded);
+        $decoded['external_citations'] = is_array($webResult['citations'] ?? null) ? $webResult['citations'] : [];
+        return $decoded;
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     * @return array<string,mixed>
+     */
+    private function normalizePeriodSummary(array $data): array
+    {
+        $data['summary_paragraph'] = trim((string) ($data['summary_paragraph'] ?? ''));
+        $data['changes'] = trim((string) ($data['changes'] ?? $data['summary_paragraph'] ?? ''));
+        $data['affected_groups'] = is_array($data['affected_groups'] ?? null) ? $data['affected_groups'] : [];
+        $data['positives'] = is_array($data['positives'] ?? null) ? $data['positives'] : [];
+        $data['negatives'] = is_array($data['negatives'] ?? null) ? $data['negatives'] : [];
+        if (count($data['positives']) > 2) {
+            $data['positives'] = array_slice($data['positives'], 0, 2);
+        }
+        return $data;
+    }
+
+    /**
+     * @param list<array<string,mixed>> $input
+     */
+    private function buildCompactPeriodContext(array $input): string
+    {
+        $limited = array_slice($input, 0, 60);
+        $compact = [];
+        foreach ($limited as $item) {
+            $compact[] = [
+                'human_title' => (string) ($item['human_title'] ?? ''),
+                'summary_paragraph' => mb_substr((string) ($item['summary_paragraph'] ?? ''), 0, 360, 'UTF-8'),
+                'affected_groups' => array_slice(is_array($item['affected_groups'] ?? null) ? $item['affected_groups'] : [], 0, 4),
+                'positives' => array_slice(is_array($item['positives'] ?? null) ? $item['positives'] : [], 0, 2),
+                'negatives' => array_slice(is_array($item['negatives'] ?? null) ? $item['negatives'] : [], 0, 4),
+            ];
+        }
+        return (string) json_encode($compact, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * @param array<string,mixed> $summary
+     */
+    private function isPeriodSummaryTooNarrow(array $summary, int $lawCount): bool
+    {
+        $affected = is_array($summary['affected_groups'] ?? null) ? count($summary['affected_groups']) : 0;
+        $negatives = is_array($summary['negatives'] ?? null) ? count($summary['negatives']) : 0;
+        $summaryWords = str_word_count(strip_tags((string) ($summary['summary_paragraph'] ?? '')));
+        $changesWords = str_word_count(strip_tags((string) ($summary['changes'] ?? '')));
+
+        if ($lawCount >= 20) {
+            return $affected < 3 || $negatives < 5 || $summaryWords < 80 || $changesWords < 70;
+        }
+        if ($lawCount >= 8) {
+            return $affected < 2 || $negatives < 4 || $summaryWords < 55 || $changesWords < 50;
+        }
+        return $affected < 1 || $negatives < 2 || $summaryWords < 35 || $changesWords < 30;
+    }
+
+    /**
+     * @param array<string,mixed> $draft
+     * @return array<string,mixed>
+     */
+    private function expandPeriodSummaryBreadth(array $draft, string $periodLabel, string $compactContext, int $lawCount): array
+    {
+        $draftJson = (string) json_encode($draft, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        $minNeg = $lawCount >= 20 ? 6 : ($lawCount >= 8 ? 4 : 2);
+        $minAffected = $lawCount >= 20 ? 4 : ($lawCount >= 8 ? 3 : 2);
+
+        $prompt = <<<PROMPT
+Rozšír tento príliš úzky draft tak, aby objektívne pokryl celé obdobie "{$periodLabel}".
+
+Pravidlá:
+- Zachovaj kritický, vecný tón.
+- Nepíš iba o jednom zákone alebo jednom opatrení.
+- Pokry viac hlavných tematických okruhov v období.
+- Uveď aspoň {$minAffected} zasiahnuté skupiny a aspoň {$minNeg} konkrétnych negatív/rizík.
+- Pozitíva ponechaj maximálne 0-2 a len preukázané.
+- Výstup musí byť LEN validný JSON s rovnakými kľúčmi.
+
+Aktuálny draft:
+{$draftJson}
+
+Podklady (skrátené):
+{$compactContext}
+PROMPT;
+
+        $resp = $this->requestJson('https://api.openai.com/v1/chat/completions', [
+            'model' => $this->model,
+            'messages' => [
+                ['role' => 'system', 'content' => 'Si kritický analytik verejnej politiky. Tvoj cieľ je široké, objektívne a vecné pokrytie celého obdobia.'],
+                ['role' => 'user', 'content' => $prompt],
+            ],
+            'temperature' => 0.1,
+            'max_tokens' => min($this->maxTokens, 4500),
+            'response_format' => ['type' => 'json_object'],
+        ], 90);
+
+        if ($resp['http_code'] !== 200) {
+            return $draft;
+        }
+
+        $data = json_decode($resp['response'], true);
+        if (!is_array($data) || !isset($data['choices'][0]['message']['content'])) {
+            return $draft;
+        }
+        $decoded = $this->decodeJsonObjectFromText((string) $data['choices'][0]['message']['content']);
+        if (!is_array($decoded)) {
+            return $draft;
+        }
+        $expanded = $this->normalizePeriodSummary($decoded);
+        return $this->isPeriodSummaryTooNarrow($expanded, $lawCount) ? $draft : $expanded;
+    }
+
+    /**
+     * @param array<string,mixed> $draft
+     * @param array<string,mixed> $review
+     * @return array<string,mixed>
+     */
+    private function mergePeriodSummary(array $draft, array $review): array
+    {
+        $merged = $draft;
+        foreach (['summary_paragraph', 'changes', 'affected_groups', 'positives', 'negatives'] as $key) {
+            if (isset($review[$key])) {
+                $merged[$key] = $review[$key];
+            }
+        }
+        if (isset($review['external_citations'])) {
+            $merged['external_citations'] = $review['external_citations'];
+        }
+        if (array_key_exists('external_review_used', $review)) {
+            $merged['external_review_used'] = (bool) $review['external_review_used'];
+        }
+        return $this->normalizePeriodSummary($merged);
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function decodeJsonObjectFromText(string $text): ?array
+    {
+        $trimmed = trim($text);
+        $direct = json_decode($trimmed, true);
+        if (is_array($direct)) {
+            return $direct;
+        }
+
+        $start = strpos($trimmed, '{');
+        $end = strrpos($trimmed, '}');
+        if ($start === false || $end === false || $end <= $start) {
+            return null;
+        }
+        $candidate = substr($trimmed, $start, $end - $start + 1);
+        $decoded = json_decode($candidate, true);
+        return is_array($decoded) ? $decoded : null;
+    }
+
     public function answerQuestion(string $lawText, string $question): string
     {
         $this->logger->info("Generating AI answer (text length: " . strlen($lawText) . " chars)");
 
-        $ch = curl_init('https://api.openai.com/v1/chat/completions');
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $this->apiKey
-            ],
+        $result = $this->executeApiRequest('https://api.openai.com/v1/chat/completions', [
             CURLOPT_POSTFIELDS => json_encode([
                 'model' => $this->model,
                 'messages' => $this->buildQaMessages($lawText, $question, []),
@@ -107,11 +517,9 @@ class OpenAIClient
             ], JSON_UNESCAPED_UNICODE),
             CURLOPT_TIMEOUT => 60
         ]);
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
-        curl_close($ch);
+        $response = $result['response'];
+        $httpCode = $result['http_code'];
+        $error = $result['error'];
 
         if ($response === false || !empty($error)) {
             throw new \RuntimeException("OpenAI API request failed: {$error}");
@@ -136,14 +544,7 @@ class OpenAIClient
     {
         $this->logger->info("Generating AI answer with history (text length: " . strlen($lawText) . " chars)");
 
-        $ch = curl_init('https://api.openai.com/v1/chat/completions');
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $this->apiKey
-            ],
+        $result = $this->executeApiRequest('https://api.openai.com/v1/chat/completions', [
             CURLOPT_POSTFIELDS => json_encode([
                 'model' => $this->model,
                 'messages' => $this->buildQaMessages($lawText, $question, $history),
@@ -152,11 +553,9 @@ class OpenAIClient
             ], JSON_UNESCAPED_UNICODE),
             CURLOPT_TIMEOUT => 60
         ]);
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
-        curl_close($ch);
+        $response = $result['response'];
+        $httpCode = $result['http_code'];
+        $error = $result['error'];
 
         if ($response === false || !empty($error)) {
             throw new \RuntimeException("OpenAI API request failed: {$error}");
@@ -197,10 +596,12 @@ class OpenAIClient
 PRAVIDLÁ:
 1. Odpovedaj VÝLUČNE na základe poskytnutých úryvkov. Ak odpoveď nie je v úryvkoch, povedz to jasne.
 2. Pri odpovedi uvádzaj zdroje: názov zákona alebo jeho číslo (napr. 200/2025 Z.z.) a prípadne § alebo Čl., ak je to v úryvku uvedené.
-3. Buď zrozumiteľný a praktický. Na konci pripoj krátke upozornenie, že nejde o právne poradenstvo.';
+3. Aj keď sa v podkladoch nachádza viac tém alebo viac zákonov, musíš odpovedať len k presnej téme z otázky používateľa. Nesmieš svojvoľne prepnúť na inú oblasť práva.
+4. Buď zrozumiteľný a praktický. Odpoveď musí byť vecná a podrobná – rozviň kľúčové body, uvádzaj konkrétne fakty, nekoneč sa jedinou všeobecnou vetou.
+5. Na konci pripoj krátke upozornenie, že nejde o právne poradenstvo.';
 
         $messages = [['role' => 'system', 'content' => $systemPrompt]];
-        $recentHistory = array_slice($history, -3);
+        $recentHistory = array_slice($history, -6);
         foreach ($recentHistory as $item) {
             if (!is_array($item)) {
                 continue;
@@ -214,14 +615,7 @@ PRAVIDLÁ:
         }
         $messages[] = ['role' => 'user', 'content' => "Relevantné úryvky zákonov:\n\n{$contextText}\n\n---\n\nOtázka: {$question}"];
 
-        $ch = curl_init('https://api.openai.com/v1/chat/completions');
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $this->apiKey
-            ],
+        $result = $this->executeApiRequest('https://api.openai.com/v1/chat/completions', [
             CURLOPT_POSTFIELDS => json_encode([
                 'model' => $this->model,
                 'messages' => $messages,
@@ -230,10 +624,9 @@ PRAVIDLÁ:
             ], JSON_UNESCAPED_UNICODE),
             CURLOPT_TIMEOUT => 90
         ]);
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
-        curl_close($ch);
+        $response = $result['response'];
+        $httpCode = $result['http_code'];
+        $error = $result['error'];
         if ($response === false || !empty($error)) {
             throw new \RuntimeException("OpenAI API request failed: {$error}");
         }
@@ -262,10 +655,33 @@ PRAVIDLÁ:
         string $modelOverride = '',
         string $reasoningEffort = 'medium'
     ): array {
-        $systemPrompt = 'Si expertný právny poradca pre slovenské zákony. Odpovedáš na otázky o slovenskom práve – Zákonník práce, dane, živnosti, sociálne poistenie, zdravotníctvo atď. Vyhľadáš na webe aktuálne informácie a odpovedáš štruktúrovane: hlavné body, príklady, zdroje (§, odkazy). Na konci pripoj upozornenie, že nejde o právne poradenstvo.';
+        $contextParts = [];
+        foreach ($labeledPassages as $p) {
+            $title = $p['title'] ?? '';
+            $masterId = $p['master_id'] ?? '';
+            $section = isset($p['section_title']) && $p['section_title'] !== null && $p['section_title'] !== '' ? ' (' . $p['section_title'] . ')' : '';
+            $content = trim((string) ($p['content'] ?? ''));
+            if ($content === '') {
+                continue;
+            }
+            $contextParts[] = "[Interný zdroj: {$title} | {$masterId}{$section}]\n{$content}";
+        }
+        $contextText = implode("\n\n---\n\n", $contextParts);
+
+        $systemPrompt = 'Si senior analytik pre monitoring zmien v slovenských zákonoch. Tvoj cieľ je dať presnú, konkrétnu a aktuálnu odpoveď.
+
+PRAVIDLÁ:
+1. Najprv vyhodnoť interný právny kontext, ktorý dostaneš. Neprehliadaj ho a neignoruj ho.
+2. Ak interný kontext nestačí na presnú odpoveď, doplň ho webovým vyhľadávaním.
+3. Uprednostni oficiálne a aktuálne zdroje: Slov-Lex, NR SR, ministerstvá, dôvodové správy, seriózne odborné zdroje.
+4. Ak je používateľ nespokojný s predchádzajúcou odpoveďou alebo žiada detail, neopakuj všeobecné frázy. Oprav sa a uveď konkrétne fakty.
+5. Jasne rozlišuj medzi tým, čo vyplýva z interných zákonných podkladov, a tým, čo dopĺňaš z webu.
+6. Keď nemáš dosť istoty, povedz to otvorene. Nevymýšľaj si.
+7. Aj keď sa v internom kontexte nachádza viac zákonov alebo tém, nesmieš zameniť používateľovu tému za inú. Web musíš hľadať len k presnej téme z otázky.
+8. Odpoveď má byť profesionálna, vecná a praktická. Na konci pripoj upozornenie, že nejde o právne poradenstvo.';
 
         $messages = [['role' => 'system', 'content' => $systemPrompt]];
-        $recentHistory = array_slice($history, -3);
+        $recentHistory = array_slice($history, -6);
         foreach ($recentHistory as $item) {
             if (!is_array($item)) {
                 continue;
@@ -277,7 +693,11 @@ PRAVIDLÁ:
             }
             $messages[] = ['role' => $role, 'content' => trim($content)];
         }
-        $messages[] = ['role' => 'user', 'content' => $question];
+        $userMessage = $question;
+        if ($contextText !== '') {
+            $userMessage .= "\n\nInterný právny kontext pre odpoveď:\n\n" . $contextText;
+        }
+        $messages[] = ['role' => 'user', 'content' => $userMessage];
 
         $searchModel = $modelOverride ?: 'gpt-4o-search-preview';
         $chatModels = array_values(array_unique([$searchModel, 'gpt-4o-mini-search-preview']));
@@ -337,25 +757,14 @@ PRAVIDLÁ:
      */
     private function requestJson(string $url, array $body, int $timeout = 120): array
     {
-        $ch = curl_init($url);
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $this->apiKey
-            ],
+        $result = $this->executeApiRequest($url, [
             CURLOPT_POSTFIELDS => json_encode($body, JSON_UNESCAPED_UNICODE),
             CURLOPT_TIMEOUT => $timeout
         ]);
-        $response = curl_exec($ch);
-        $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = (string) curl_error($ch);
-        curl_close($ch);
         return [
-            'http_code' => $httpCode,
-            'error' => $error,
-            'response' => is_string($response) ? $response : '',
+            'http_code' => $result['http_code'],
+            'error' => $result['error'],
+            'response' => $result['response'],
         ];
     }
 
@@ -455,6 +864,7 @@ PRAVIDLÁ:
         return "Analyzuj nasledujúci text zo slovenského zákona a vytvor podrobný, kvalitný JSON objekt s týmito presnými kľúčmi:
 
 {
+  \"human_title\": \"Krátky, ľudský názov – o čom je zákon jednou vetou (max. 15 slov). Zrozumiteľné aj laikovi. Napr. 'Zmeny vo výške dôchodkov od budúceho roka' alebo 'Nové pravidlá pre parkovanie v centrách miest'.\",
   \"tags\": [\"ekonomika\", \"financie\"],
   \"summary_paragraph\": \"Detailné, viacodsekové zhrnutie zákona (minimálne 3-5 viet, ideálne 150-300 slov). Vysvetli: čo zákon mení, prečo to môže byť dôležité, aké sú kľúčové body, ktoré by ľudia mali vedieť. Používaj konkrétne príklady a situácie, kde je to možné. Píš živým, zrozumiteľným jazykom, ale zachovávaj presnosť.\",
   \"affected_groups\": [\"konkrétna skupina 1 s vysvetlením ako ich to ovplyvní\", \"konkrétna skupina 2 s vysvetlením ako ich to ovplyvní\"],
@@ -465,6 +875,12 @@ PRAVIDLÁ:
 }
 
 DETALNÉ INŠTRUKCIE PRE KAŽDÚ SEKCIU:
+
+**human_title:**
+- Krátky, ľudský názov zákona v jednej vete (max. 15 slov)
+- Popíš ľudskou a zrozumiteľnou rečou, o čom zákon stručne je – aby aj laik pochopil
+- Nie technický názov, ale vysvetlenie: napr. „Zmeny vo výške dôchodkov od budúceho roka“, „Nové pravidlá pre parkovanie v centrách miest“, „Úprava daní pre živnostníkov“
+- Musí byť konkrétny a informatívny
 
 **tags:**
 - Identifikuj 1-5 kľúčových oblastí, ku ktorým zákon patrí
@@ -516,6 +932,9 @@ VŠEOBECNÉ PRAVIDLÁ:
 - Buď zrozumiteľný pre bežných ľudí bez právnického vzdelania
 - Vyhýbaj sa halucináciám. Ak si nie si istý, povedz to
 - Používaj opatrnú reč tam, kde je to vhodné (\"môže ovplyvniť\", \"pravdepodobne\", \"podľa textu zákona\")
+- Predvolený analytický režim je KRITICKÝ AUDIT: hľadaj slabiny, riziká implementácie, nejasnosti a body, kde sa deklarovaný cieľ nemusí naplniť.
+- Neopakuj politické alebo marketingové tvrdenia ako fakty, ak text zákona neobsahuje konkrétny mechanizmus, kontrolu a vykonateľnosť.
+- Pozitíva uvádzaj len vtedy, ak sú preukázateľne podložené konkrétnou časťou textu.
 - Pre \"how_to_react\": LEN legálne, súladné, praktické návrhy. Žiadne nelegálne rady, daňové úniky alebo \"exploity\"
 - Všetky texty musia byť v slovenčine
 - Odpovedaj VÝLUČNE v JSON formáte bez akýchkoľvek dodatočných komentárov
@@ -710,7 +1129,7 @@ PRAVIDLÁ:
 
     private function validateSchema(array $data): void
     {
-        $required = ['tags', 'summary_paragraph', 'affected_groups', 'positives', 'negatives', 'how_to_react', 'disclaimer'];
+        $required = ['human_title', 'tags', 'summary_paragraph', 'affected_groups', 'positives', 'negatives', 'how_to_react', 'disclaimer'];
         
         foreach ($required as $key) {
             if (!isset($data[$key])) {
@@ -720,6 +1139,9 @@ PRAVIDLÁ:
 
         if (!is_string($data['summary_paragraph']) || !is_string($data['disclaimer'])) {
             throw new \RuntimeException("summary_paragraph and disclaimer must be strings");
+        }
+        if (!isset($data['human_title']) || !is_string($data['human_title'])) {
+            throw new \RuntimeException("human_title must be a non-empty string");
         }
 
         $arrayKeys = ['tags', 'affected_groups', 'positives', 'negatives', 'how_to_react'];
@@ -737,6 +1159,7 @@ PRAVIDLÁ:
 
     private function normalizeSummary(array $data): array
     {
+        $data['human_title'] = trim((string) ($data['human_title'] ?? ''));
         $data['tags'] = $this->normalizeTags($data['tags'] ?? []);
         $data['affected_groups'] = $this->normalizeList($data['affected_groups'] ?? [], 'group', 'impact');
         $data['positives'] = $this->normalizeList($data['positives'] ?? [], 'positive', 'explanation');

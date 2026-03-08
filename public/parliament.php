@@ -4,6 +4,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Config;
 use App\Database;
+use App\PartyColors;
 
 Config::load();
 $db = new Database(Config::get('DB_PATH', 'data/sentinel.db'));
@@ -24,6 +25,14 @@ if ($page > $totalPages) {
 $offset = ($page - 1) * $perPage;
 $votings = $db->getParliamentVotingsPage($perPage, $offset);
 $mps = $db->getTopParliamentMps(300);
+usort($mps, static function (array $a, array $b): int {
+    $orderA = PartyColors::getOrder($a['club'] ?? null);
+    $orderB = PartyColors::getOrder($b['club'] ?? null);
+    if ($orderA !== $orderB) {
+        return $orderA <=> $orderB;
+    }
+    return strcmp($a['full_name'] ?? '', $b['full_name'] ?? '');
+});
 $monthlyStats = $db->buildMonthlyVotingStats($year, $month);
 $monthlyReport = $db->getMonthlyParliamentReport($year, $month);
 $months = $db->getAvailableParliamentMonths(18);
@@ -68,7 +77,9 @@ $months = $db->getAvailableParliamentMonths(18);
         <a href="index.php?section=" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Všetky</a>
         <a href="index.php?section=nrsr" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Nové zákony (NR SR)</a>
         <a href="parliament.php" class="lg-btn lg-btn-primary" style="text-decoration:none;">Hlasovania NR SR</a>
+        <a href="poslanci.php" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Poslanci</a>
         <a href="index.php?section=slovlex" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Zbierka zákonov</a>
+        <a href="search.php" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Vyhľadávanie</a>
         <a href="global-chat-ui.php" class="lg-btn lg-btn-success" style="text-decoration:none;">Opýtať sa celej zbierky</a>
     </div>
 
@@ -152,14 +163,17 @@ $months = $db->getAvailableParliamentMonths(18);
                     <th>Poslanec</th>
                     <th>Klub</th>
                     <th>Dochádzka %</th>
-                    <th>Hlasovania</th>
+                    <th>Hlasovaní</th>
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($mps as $mp): ?>
+            <?php foreach ($mps as $mp):
+                $partyColor = PartyColors::getColor($mp['club'] ?? null);
+                $partyName = PartyColors::getDisplayName($mp['club'] ?? null);
+            ?>
                 <tr>
-                    <td><a href="parliament-mp.php?id=<?php echo (int)$mp['id']; ?>"><?php echo htmlspecialchars($mp['full_name']); ?></a></td>
-                    <td><?php echo htmlspecialchars((string)($mp['club'] ?? '-')); ?></td>
+                    <td style="border-left:3px solid <?php echo htmlspecialchars($partyColor); ?>;"><a href="parliament-mp.php?id=<?php echo (int)$mp['id']; ?>"><?php echo htmlspecialchars($mp['full_name']); ?></a></td>
+                    <td><span style="color:<?php echo htmlspecialchars($partyColor); ?>;"><?php echo htmlspecialchars($partyName); ?></span></td>
                     <td><?php echo number_format((float)($mp['attendance_pct'] ?? 0), 1, ',', ' '); ?></td>
                     <td><?php echo (int)($mp['total_votes'] ?? 0); ?></td>
                 </tr>
@@ -167,6 +181,7 @@ $months = $db->getAvailableParliamentMonths(18);
             </tbody>
         </table>
         </div>
+        <p class="lg-caption" style="margin-top:10px;">Dochádzka a počet hlasovaní z hlasovaní s dostupným detailom (aktuálne <?php echo (int)$db->countParliamentVotingsWithDetail(); ?> z <?php echo $totalVotings; ?>).</p>
     </div>
 
     <div class="lg-footer">

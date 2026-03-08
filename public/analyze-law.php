@@ -139,12 +139,13 @@ $aiClient = new OpenAIClient(
 try {
     $summary = $aiClient->generateSummary($text);
     $summaryJson = json_encode($summary, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    $humanTitle = !empty($summary['human_title']) ? trim($summary['human_title']) : null;
 
     $db->getPdo()->prepare("
         UPDATE laws
-        SET ai_summary = ?, processing_status = 'completed', updated_at = CURRENT_TIMESTAMP
+        SET ai_summary = ?, human_title = ?, processing_status = 'completed', updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
-    ")->execute([$summaryJson, $lawId]);
+    ")->execute([$summaryJson, $humanTitle, $lawId]);
 
     $db->logProcessing((string) ($law['master_id'] ?? $lawId), 'success', 'On-demand law analysis');
     echo json_encode(['success' => true], JSON_UNESCAPED_UNICODE);

@@ -113,11 +113,12 @@ foreach ($laws as $law) {
     try {
         $aiSummary = $aiClient->generateSummary($text);
         $aiSummaryJson = json_encode($aiSummary, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        $humanTitle = !empty($aiSummary['human_title']) ? trim($aiSummary['human_title']) : null;
 
         $db->getPdo()->prepare("
-            UPDATE laws SET ai_summary = ?, processing_status = 'completed', updated_at = CURRENT_TIMESTAMP
+            UPDATE laws SET ai_summary = ?, human_title = ?, processing_status = 'completed', updated_at = CURRENT_TIMESTAMP
             WHERE id = ?
-        ")->execute([$aiSummaryJson, $law['id']]);
+        ")->execute([$aiSummaryJson, $humanTitle, $law['id']]);
 
         $processed++;
         echo ".";

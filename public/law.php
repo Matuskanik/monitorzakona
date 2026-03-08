@@ -50,6 +50,7 @@ if (!$law) {
                 'id' => $json['master_id'] ?? $lawId,
                 'master_id' => $json['master_id'] ?? $lawId,
                 'title' => $json['title'] ?? '',
+                'human_title' => $json['human_title'] ?? null,
                 'approval_date' => $json['approval_date'] ?? null,
                 'source_url' => $json['source_url'] ?? '',
                 'created_at' => $json['created_at'] ?? null,
@@ -241,6 +242,9 @@ if (!$chatAvailable && !$fromJson) {
         </div>
         <?php endif; ?>
         
+        <?php if (!empty($law['human_title'])): ?>
+        <p class="lg-law-human-title" style="font-size:1.1rem;color:var(--text-secondary);margin-bottom:8px;"><?php echo htmlspecialchars($law['human_title']); ?></p>
+        <?php endif; ?>
         <h1 class="lg-title" style="margin-bottom:15px;font-size:1.75rem;"><?php echo htmlspecialchars($law['title']); ?></h1>
         
         <div class="lg-meta">

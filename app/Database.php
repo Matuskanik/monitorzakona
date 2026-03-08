@@ -114,6 +114,11 @@ class Database
         } catch (\PDOException $e) {
             // Column already exists, ignore
         }
+        try {
+            $this->pdo->exec("ALTER TABLE laws ADD COLUMN human_title TEXT");
+        } catch (\PDOException $e) {
+            // Column already exists, ignore
+        }
         // Migrate existing rows to explicit nrsr
         try {
             $this->pdo->exec("UPDATE laws SET origin = 'nrsr' WHERE origin IS NULL OR origin = ''");
@@ -164,10 +169,16 @@ class Database
                 profile_url TEXT,
                 card_text TEXT,
                 stats_json TEXT,
+                media_profile_json TEXT,
                 created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )
         ");
+        try {
+            $this->pdo->exec("ALTER TABLE parliament_mps ADD COLUMN media_profile_json TEXT");
+        } catch (\PDOException $e) {
+            // Column already exists
+        }
 
         $this->pdo->exec("
             CREATE TABLE IF NOT EXISTS parliament_votings (
@@ -218,6 +229,31 @@ class Database
                 created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE(report_year, report_month)
+            )
+        ");
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS political_digests (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                digest_date TEXT NOT NULL,
+                digest_json TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+        $this->pdo->exec("CREATE INDEX IF NOT EXISTS idx_political_digests_date ON political_digests(digest_date DESC)");
+
+        $this->pdo->exec("
+            CREATE TABLE IF NOT EXISTS period_summaries (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                period_type TEXT NOT NULL,
+                period_year INTEGER NOT NULL,
+                period_month INTEGER DEFAULT 0,
+                period_quarter INTEGER DEFAULT 0,
+                summary_json TEXT NOT NULL,
+                laws_count INTEGER DEFAULT 0,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(period_type, period_year, period_month, period_quarter)
             )
         ");
 
@@ -367,34 +403,62 @@ class Database
         $origin = $data['origin'] ?? 'nrsr';
         $externalId = $data['external_id'] ?? null;
         
+        $humanTitle = array_key_exists('human_title', $data)
+            ? ($data['human_title'] !== '' && $data['human_title'] !== null ? $data['human_title'] : null)
+            : null;
+        $includeHumanTitle = array_key_exists('human_title', $data);
+
         if ($existing) {
-            $stmt = $this->pdo->prepare("
-                UPDATE laws 
-                SET title = ?, approval_date = ?, source_url = ?, content_hash = ?, 
-                    ai_summary = ?, processing_status = ?, text_extracted = ?, origin = ?, external_id = ?, updated_at = CURRENT_TIMESTAMP
-                WHERE master_id = ?
-            ");
-            $stmt->execute([
-                $data['title'],
-                $data['approval_date'],
-                $data['source_url'],
-                $data['content_hash'],
-                $data['ai_summary'] ?? null,
-                $processingStatus,
-                $textExtracted,
-                $origin,
-                $externalId,
-                $data['master_id']
-            ]);
+            if ($includeHumanTitle) {
+                $stmt = $this->pdo->prepare("
+                    UPDATE laws 
+                    SET title = ?, human_title = ?, approval_date = ?, source_url = ?, content_hash = ?, 
+                        ai_summary = ?, processing_status = ?, text_extracted = ?, origin = ?, external_id = ?, updated_at = CURRENT_TIMESTAMP
+                    WHERE master_id = ?
+                ");
+                $stmt->execute([
+                    $data['title'],
+                    $humanTitle,
+                    $data['approval_date'],
+                    $data['source_url'],
+                    $data['content_hash'],
+                    $data['ai_summary'] ?? null,
+                    $processingStatus,
+                    $textExtracted,
+                    $origin,
+                    $externalId,
+                    $data['master_id']
+                ]);
+            } else {
+                $stmt = $this->pdo->prepare("
+                    UPDATE laws 
+                    SET title = ?, approval_date = ?, source_url = ?, content_hash = ?, 
+                        ai_summary = ?, processing_status = ?, text_extracted = ?, origin = ?, external_id = ?, updated_at = CURRENT_TIMESTAMP
+                    WHERE master_id = ?
+                ");
+                $stmt->execute([
+                    $data['title'],
+                    $data['approval_date'],
+                    $data['source_url'],
+                    $data['content_hash'],
+                    $data['ai_summary'] ?? null,
+                    $processingStatus,
+                    $textExtracted,
+                    $origin,
+                    $externalId,
+                    $data['master_id']
+                ]);
+            }
             return $existing['id'];
         } else {
             $stmt = $this->pdo->prepare("
-                INSERT INTO laws (master_id, title, approval_date, source_url, content_hash, ai_summary, processing_status, text_extracted, origin, external_id)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO laws (master_id, title, human_title, approval_date, source_url, content_hash, ai_summary, processing_status, text_extracted, origin, external_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
             $stmt->execute([
                 $data['master_id'],
                 $data['title'],
+                $humanTitle,
                 $data['approval_date'],
                 $data['source_url'],
                 $data['content_hash'],
@@ -489,13 +553,24 @@ class Database
             }
             $rows = $this->searchChunksByContent($kw, $origin, 80);
             foreach ($rows as $row) {
+                $content = (string) ($row['content'] ?? '');
+                $title = (string) ($row['title'] ?? '');
+                $sectionTitle = (string) ($row['section_title'] ?? '');
+                if (
+                    !$this->containsWholeKeyword($content, $kw)
+                    && !$this->containsWholeKeyword($title, $kw)
+                    && !$this->containsWholeKeyword($sectionTitle, $kw)
+                ) {
+                    continue;
+                }
+
                 $id = $row['law_id'] . '_' . $row['chunk_index'];
                 if (!isset($byKey[$id])) {
                     $byKey[$id] = [
                         'score' => 0,
-                        'content' => $row['content'],
+                        'content' => $content,
                         'master_id' => $row['master_id'],
-                        'title' => $row['title'],
+                        'title' => $title,
                         'section_title' => $row['section_title'] ?? null,
                         'law_id' => (int) $row['law_id'],
                         'chunk_index' => (int) $row['chunk_index'],
@@ -509,6 +584,17 @@ class Database
             return $b['score'] - $a['score'];
         });
         return array_slice($chunks, 0, $maxChunks);
+    }
+
+    private function containsWholeKeyword(string $text, string $keyword): bool
+    {
+        $text = mb_strtolower($text, 'UTF-8');
+        $keyword = mb_strtolower(trim($keyword), 'UTF-8');
+        if ($text === '' || $keyword === '') {
+            return false;
+        }
+
+        return preg_match('/(^|[^\p{L}\p{N}])' . preg_quote($keyword, '/') . '[\p{L}\p{N}]*(?=[^\p{L}\p{N}]|$)/u', $text) === 1;
     }
 
     /**
@@ -640,7 +726,57 @@ class Database
         
         return $laws;
     }
-    
+
+    /**
+     * Global search in laws: title, human_title, tags in ai_summary.
+     * @return list<array>
+     */
+    public function searchLawsGlobal(string $query, int $limit = 50): array
+    {
+        $q = trim($query);
+        if ($q === '') {
+            return [];
+        }
+        $like = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $q) . '%';
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM laws
+            WHERE title LIKE ? ESCAPE '\\'
+               OR (human_title IS NOT NULL AND human_title != '' AND human_title LIKE ? ESCAPE '\\')
+               OR (ai_summary IS NOT NULL AND ai_summary LIKE ? ESCAPE '\\')
+            ORDER BY created_at DESC
+            LIMIT ?
+        ");
+        $stmt->execute([$like, $like, $like, $limit]);
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Global search in MPs: full_name, party, club, card_text, media_profile_json.
+     * @return list<array>
+     */
+    public function searchMpsGlobal(string $query, int $limit = 50): array
+    {
+        $q = trim($query);
+        if ($q === '') {
+            return [];
+        }
+        $like = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $q) . '%';
+        $stmt = $this->pdo->prepare("
+            SELECT pm.*,
+                   COALESCE(json_extract(pm.stats_json, '$.attendance_pct'), 0) AS attendance_pct,
+                   COALESCE(json_extract(pm.stats_json, '$.total_votes'), 0) AS total_votes
+            FROM parliament_mps pm
+            WHERE pm.full_name LIKE ? ESCAPE '\\'
+               OR (pm.party IS NOT NULL AND pm.party LIKE ? ESCAPE '\\')
+               OR (pm.club IS NOT NULL AND pm.club LIKE ? ESCAPE '\\')
+               OR (pm.card_text IS NOT NULL AND pm.card_text LIKE ? ESCAPE '\\')
+               OR (pm.media_profile_json IS NOT NULL AND pm.media_profile_json LIKE ? ESCAPE '\\')
+            ORDER BY pm.full_name ASC
+            LIMIT ?
+        ");
+        $stmt->execute([$like, $like, $like, $like, $like, $limit]);
+        return $stmt->fetchAll();
+    }
 
     public function saveOrUpdateParliamentMp(array $data): int
     {
@@ -707,6 +843,34 @@ class Database
     {
         $stmt = $this->pdo->prepare("SELECT * FROM parliament_mps WHERE id = ?");
         $stmt->execute([$id]);
+        return $stmt->fetch() ?: null;
+    }
+
+    /**
+     * Find MP by name (handles "Meno Priezvisko" and "Priezvisko, Meno").
+     */
+    public function findParliamentMpByName(string $name): ?array
+    {
+        $name = trim($name);
+        if ($name === '') {
+            return null;
+        }
+        $stmt = $this->pdo->prepare("SELECT * FROM parliament_mps WHERE full_name = ?");
+        $stmt->execute([$name]);
+        if ($row = $stmt->fetch()) {
+            return $row;
+        }
+        $parts = preg_split('/\s+/u', $name, 2);
+        if (count($parts) === 2) {
+            $reversed = $parts[1] . ', ' . $parts[0];
+            $stmt->execute([$reversed]);
+            if ($row = $stmt->fetch()) {
+                return $row;
+            }
+        }
+        $surname = $parts[1] ?? $parts[0];
+        $stmt = $this->pdo->prepare("SELECT * FROM parliament_mps WHERE full_name LIKE ? LIMIT 1");
+        $stmt->execute(['%' . $surname . '%']);
         return $stmt->fetch() ?: null;
     }
 
@@ -836,6 +1000,13 @@ class Database
         return (int)($row['c'] ?? 0);
     }
 
+    public function countParliamentVotingsWithDetail(): int
+    {
+        $stmt = $this->pdo->query("SELECT COUNT(*) AS c FROM parliament_votings WHERE votes_for IS NOT NULL");
+        $row = $stmt->fetch();
+        return (int)($row['c'] ?? 0);
+    }
+
     public function getParliamentVotingsPage(int $limit, int $offset): array
     {
         $stmt = $this->pdo->prepare("
@@ -884,6 +1055,42 @@ class Database
             WHERE id = ?
         ");
         $stmt->execute([$cardText, json_encode($stats, JSON_UNESCAPED_UNICODE), $mpId]);
+    }
+
+    /**
+     * Recompute stats from parliament_votes and update card. Use when vote data changed.
+     */
+    public function refreshParliamentMpStatsFromVotes(int $mpId, ParliamentAnalyzer $analyzer): void
+    {
+        $mp = $this->getParliamentMpById($mpId);
+        if (!$mp) {
+            return;
+        }
+        $stats = $this->computeParliamentMpStats($mpId);
+        $card = $analyzer->buildMpCard(array_merge($mp, $stats));
+        $this->refreshParliamentMpStatsAndCard($mpId, $card);
+    }
+
+    public function updateParliamentMpMediaProfile(int $mpId, array $profile): void
+    {
+        $stmt = $this->pdo->prepare("
+            UPDATE parliament_mps
+            SET media_profile_json = ?, updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+        ");
+        $stmt->execute([json_encode($profile, JSON_UNESCAPED_UNICODE), $mpId]);
+    }
+
+    public function getAllParliamentMpsForMosaic(): array
+    {
+        $stmt = $this->pdo->query("
+            SELECT pm.*,
+                   COALESCE(json_extract(pm.stats_json, '$.attendance_pct'), 0) AS attendance_pct,
+                   COALESCE(json_extract(pm.stats_json, '$.total_votes'), 0) AS total_votes
+            FROM parliament_mps pm
+            ORDER BY pm.full_name ASC
+        ");
+        return $stmt->fetchAll();
     }
 
     public function getTopParliamentMps(int $limit = 300): array
@@ -955,6 +1162,218 @@ class Database
         ");
         $stmt->execute([$year, $month]);
         return $stmt->fetch() ?: null;
+    }
+
+    public function savePoliticalDigest(string $digestDate, array $digest): void
+    {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO political_digests (digest_date, digest_json)
+            VALUES (?, ?)
+        ");
+        $stmt->execute([$digestDate, json_encode($digest, JSON_UNESCAPED_UNICODE)]);
+    }
+
+    public function getLatestPoliticalDigest(): ?array
+    {
+        $stmt = $this->pdo->query("
+            SELECT digest_date, digest_json FROM political_digests
+            ORDER BY id DESC LIMIT 1
+        ");
+        $row = $stmt->fetch();
+        if (!$row) {
+            return null;
+        }
+        $data = json_decode($row['digest_json'], true);
+        return is_array($data) ? array_merge($data, ['digest_date' => $row['digest_date']]) : null;
+    }
+
+    /**
+     * Get laws with full AI summary for a given period (for Slov-Lex + NR SR).
+     * @param string $periodType 'month'|'quarter'|'year'
+     * @param int $year
+     * @param int $monthOrQuarter For month: 1-12, for quarter: 1-4, for year: 0
+     * @return list<array>
+     */
+    public function getLawsForPeriod(string $periodType, int $year, int $monthOrQuarter = 0): array
+    {
+        $stmt = $this->pdo->query("
+            SELECT id, master_id, title, human_title, approval_date, origin, ai_summary
+            FROM laws
+            WHERE ai_summary IS NOT NULL AND ai_summary != '' AND ai_summary LIKE '%summary_paragraph%'
+            AND (origin = 'slovlex_zz' OR origin = 'nrsr')
+        ");
+        $all = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $filtered = [];
+        foreach ($all as $law) {
+            $lawYear = $this->extractYearFromLaw($law);
+            $lawMonth = $this->extractMonthFromLaw($law);
+            if ($lawYear === null) {
+                continue;
+            }
+            if ($periodType === 'year') {
+                if ($lawYear === $year) {
+                    $filtered[] = $law;
+                }
+            } elseif ($periodType === 'quarter') {
+                $q = (int) $monthOrQuarter;
+                if ($q < 1 || $q > 4) {
+                    continue;
+                }
+                $startMonth = ($q - 1) * 3 + 1;
+                $endMonth = $q * 3;
+                if ($lawYear === $year && $lawMonth !== null && $lawMonth >= $startMonth && $lawMonth <= $endMonth) {
+                    $filtered[] = $law;
+                }
+            } elseif ($periodType === 'month') {
+                $m = (int) $monthOrQuarter;
+                if ($m < 1 || $m > 12) {
+                    continue;
+                }
+                if ($lawYear === $year && $lawMonth === $m) {
+                    $filtered[] = $law;
+                }
+            }
+        }
+        return $filtered;
+    }
+
+    private function extractYearFromLaw(array $law): ?int
+    {
+        $parsed = $this->parseSlovakDate($law['approval_date'] ?? '');
+        if ($parsed !== '0000-00-00') {
+            return (int) substr($parsed, 0, 4);
+        }
+        if (preg_match('/slovlex-ZZ-(\d{4})-\d+/', $law['master_id'] ?? '', $m)) {
+            return (int) $m[1];
+        }
+        if (preg_match('/\d{4}/', $law['approval_date'] ?? '', $m)) {
+            return (int) $m[0];
+        }
+        return null;
+    }
+
+    private function extractMonthFromLaw(array $law): ?int
+    {
+        $parsed = $this->parseSlovakDate($law['approval_date'] ?? '');
+        if ($parsed !== '0000-00-00') {
+            return (int) substr($parsed, 5, 2);
+        }
+        return null;
+    }
+
+    public function savePeriodSummary(string $periodType, int $year, int $monthOrQuarter, array $summary, int $lawsCount): void
+    {
+        $month = ($periodType === 'month') ? $monthOrQuarter : 0;
+        $quarter = ($periodType === 'quarter') ? $monthOrQuarter : 0;
+        $json = json_encode($summary, JSON_UNESCAPED_UNICODE);
+        $stmt = $this->pdo->prepare("
+            INSERT INTO period_summaries (period_type, period_year, period_month, period_quarter, summary_json, laws_count, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT(period_type, period_year, period_month, period_quarter) DO UPDATE SET
+                summary_json = excluded.summary_json,
+                laws_count = excluded.laws_count,
+                updated_at = CURRENT_TIMESTAMP
+        ");
+        $stmt->execute([$periodType, $year, $month, $quarter, $json, $lawsCount]);
+    }
+
+    /**
+     * Get period summaries for home: most recent month, quarter, year.
+     * @return array{month: ?array, quarter: ?array, year: ?array}
+     */
+    public function getLatestPeriodSummaries(): array
+    {
+        $result = ['month' => null, 'quarter' => null, 'year' => null];
+
+        $stmt = $this->pdo->query("
+            SELECT * FROM period_summaries
+            WHERE period_type = 'month'
+            ORDER BY period_year DESC, period_month DESC
+            LIMIT 1
+        ");
+        $row = $stmt->fetch();
+        if ($row) {
+            $data = json_decode($row['summary_json'], true);
+            if (is_array($data)) {
+                $data['laws_count'] = (int) ($row['laws_count'] ?? 0);
+                $data['period_year'] = (int) $row['period_year'];
+                $data['period_month'] = (int) ($row['period_month'] ?? 0);
+                $data['period_quarter'] = 0;
+                $result['month'] = $data;
+            }
+        }
+
+        $stmt = $this->pdo->query("
+            SELECT * FROM period_summaries
+            WHERE period_type = 'quarter'
+            ORDER BY period_year DESC, period_quarter DESC
+            LIMIT 1
+        ");
+        $row = $stmt->fetch();
+        if ($row) {
+            $data = json_decode($row['summary_json'], true);
+            if (is_array($data)) {
+                $data['laws_count'] = (int) ($row['laws_count'] ?? 0);
+                $data['period_year'] = (int) $row['period_year'];
+                $data['period_month'] = 0;
+                $data['period_quarter'] = (int) ($row['period_quarter'] ?? 0);
+                $result['quarter'] = $data;
+            }
+        }
+
+        $stmt = $this->pdo->query("
+            SELECT * FROM period_summaries
+            WHERE period_type = 'year'
+            ORDER BY period_year DESC
+            LIMIT 1
+        ");
+        $row = $stmt->fetch();
+        if ($row) {
+            $data = json_decode($row['summary_json'], true);
+            if (is_array($data)) {
+                $data['laws_count'] = (int) ($row['laws_count'] ?? 0);
+                $data['period_year'] = (int) $row['period_year'];
+                $data['period_month'] = 0;
+                $data['period_quarter'] = 0;
+                $result['year'] = $data;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get a single period summary by type, year, and value (month 1-12, quarter 1-4, or 0 for year).
+     * @return array|null Decoded summary with laws_count, period_year, period_month, period_quarter, summary_paragraph, changes, affected_groups, positives, negatives
+     */
+    public function getPeriodSummary(string $type, int $year, int $value): ?array
+    {
+        $month = 0;
+        $quarter = 0;
+        if ($type === 'month') {
+            $month = $value;
+        } elseif ($type === 'quarter') {
+            $quarter = $value;
+        }
+
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM period_summaries
+            WHERE period_type = ? AND period_year = ? AND period_month = ? AND period_quarter = ?
+        ");
+        $stmt->execute([$type, $year, $month, $quarter]);
+        $row = $stmt->fetch();
+        if (!$row) {
+            return null;
+        }
+        $data = json_decode($row['summary_json'], true);
+        if (!is_array($data)) {
+            return null;
+        }
+        $data['laws_count'] = (int) ($row['laws_count'] ?? 0);
+        $data['period_year'] = (int) $row['period_year'];
+        $data['period_month'] = (int) ($row['period_month'] ?? 0);
+        $data['period_quarter'] = (int) ($row['period_quarter'] ?? 0);
+        return $data;
     }
 
     public function getAvailableParliamentMonths(int $limit = 12): array

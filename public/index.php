@@ -55,8 +55,12 @@ if (!Security::checkRateLimit($ip, 60, 60)) {
 $db = new Database(Config::get('DB_PATH', 'data/sentinel.db') ?: 'data/sentinel.db');
 $auth = new Auth($db);
 
-// Handle search - validate and sanitize input
-$searchQuery = Security::validateSearchQuery($_GET['search'] ?? null);
+// Redirect search params to global search page
+$searchQuery = Security::validateSearchQuery($_GET['search'] ?? $_GET['q'] ?? null);
+if (!empty($searchQuery)) {
+    header('Location: search.php?q=' . urlencode($searchQuery));
+    exit;
+}
 // Section filter: nrsr | slovlex | (empty = all)
 $section = $_GET['section'] ?? '';
 $originFilter = null;
@@ -66,6 +70,10 @@ if ($section === 'nrsr') {
     $originFilter = 'slovlex_zz';
 }
 $laws = $db->getLatestLaws(50, $originFilter);
+
+// Home = section empty → show period summaries (month, quarter, year) instead of laws
+$showDigest = ($section === '');
+$periodSummaries = $showDigest ? $db->getLatestPeriodSummaries() : null;
 
 // Fallback: when DB is empty (e.g. on Digital Ocean), show laws from committed JSON (only when no section filter or nrsr)
 if (empty($laws) && ($originFilter === null || $originFilter === 'nrsr')) {
@@ -88,42 +96,6 @@ if (empty($laws) && ($originFilter === null || $originFilter === 'nrsr')) {
     }
 }
 
-// Filter laws if search query is provided
-if (!empty($searchQuery)) {
-    $searchLower = mb_strtolower($searchQuery, 'UTF-8');
-    $filteredLaws = [];
-    
-    foreach ($laws as $law) {
-        $titleLower = mb_strtolower($law['title'], 'UTF-8');
-        $match = false;
-        
-        // Check if search matches title
-        if (strpos($titleLower, $searchLower) !== false) {
-            $match = true;
-        }
-        
-        // Check if search matches tags
-        if (!$match && !empty($law['ai_summary'])) {
-            $summary = json_decode($law['ai_summary'], true);
-            if ($summary && isset($summary['tags']) && is_array($summary['tags'])) {
-                foreach ($summary['tags'] as $tag) {
-                    $tagLower = mb_strtolower($tag, 'UTF-8');
-                    if (strpos($tagLower, $searchLower) !== false) {
-                        $match = true;
-                        break;
-                    }
-                }
-            }
-        }
-        
-        if ($match) {
-            $filteredLaws[] = $law;
-        }
-    }
-    
-    $laws = $filteredLaws;
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -134,7 +106,14 @@ if (!empty($searchQuery)) {
     <title>Monitor zákona</title>
     <link rel="stylesheet" href="css/liquid-glass.css">
     <script>(function(){if(localStorage.getItem('darkMode')==='1')document.documentElement.classList.add('dark-mode');})();</script>
-    <style>.lg-logo{max-width:600px;width:auto;height:auto;flex-shrink:0;}.lg-header{display:flex;align-items:center;gap:28px;margin-bottom:28px;flex-wrap:wrap;}.lg-tagline{flex:1;min-width:200px;}</style>
+    <style>
+        .lg-logo{max-width:600px;width:auto;height:auto;flex-shrink:0;}
+        .lg-header{display:flex;align-items:center;gap:28px;margin-bottom:28px;flex-wrap:wrap;}
+        .lg-tagline{flex:1;min-width:200px;}
+        .lg-digest-citizens.digest-good{background:rgba(52,199,89,0.15)!important;border-left:4px solid var(--success);}
+        .lg-digest-citizens.digest-bad{background:rgba(255,59,48,0.12)!important;border-left:4px solid var(--danger);}
+        .lg-digest-citizens.digest-neutral{background:var(--accent-muted);}
+    </style>
 </head>
 <body>
     <div class="lg-dark-toggle" id="darkModeToggle" title="Tmavý režim">
@@ -161,47 +140,137 @@ if (!empty($searchQuery)) {
         <?php endif; ?>
         <div class="lg-header">
             <img src="logo.png" alt="Monitor zákona" class="lg-logo">
-            <p class="lg-tagline lg-tagline">Zrozumiteľné analýzy slovenských zákonov, ktoré vám pomôžu pochopiť, ako vás ovplyvnia a ako môžete na ne reagovať.</p>
+            <p class="lg-tagline lg-tagline">Sledujeme nové zákony, legislatívne zmeny a oficiálne dokumenty vlády – prehľadne, na jednom mieste.</p>
         </div>
         
         <div class="lg-search-container">
-            <form method="GET" action="" class="lg-search-box">
-                <?php if ($section !== ''): ?>
-                <input type="hidden" name="section" value="<?php echo htmlspecialchars($section); ?>">
-                <?php endif; ?>
+            <form method="GET" action="search.php" class="lg-search-box">
                 <input 
                     type="text" 
-                    name="search" 
+                    name="q" 
                     class="lg-search-input" 
-                    placeholder="Hľadať zákony podľa názvu alebo tagov (napr. financie, školstvo, dane...)" 
-                    value="<?php echo htmlspecialchars($searchQuery); ?>"
+                    placeholder="Hľadať vo všetkých zákonoch a poslancoch (názov, tagy, meno, strana...)" 
                 >
                 <button type="submit" class="lg-btn lg-btn-primary">Hľadať</button>
             </form>
         </div>
         <div class="lg-section-tabs" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
-            <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=" class="lg-btn <?php echo $section === '' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Všetky</a>
-            <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=nrsr" class="lg-btn <?php echo $section === 'nrsr' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Nové zákony (NR SR)</a>
+            <a href="index.php" class="lg-btn <?php echo $section === '' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Všetky</a>
+            <a href="index.php?section=nrsr" class="lg-btn <?php echo $section === 'nrsr' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Nové zákony (NR SR)</a>
             <a href="parliament.php" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Hlasovania NR SR</a>
-            <a href="index.php?<?php echo $searchQuery !== '' ? 'search=' . urlencode($searchQuery) . '&' : ''; ?>section=slovlex" class="lg-btn <?php echo $section === 'slovlex' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Zbierka zákonov</a>
+            <a href="poslanci.php" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Poslanci</a>
+            <a href="index.php?section=slovlex" class="lg-btn <?php echo $section === 'slovlex' ? 'lg-btn-primary' : 'lg-btn-secondary'; ?>" style="text-decoration:none;">Zbierka zákonov</a>
+            <a href="search.php" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Vyhľadávanie</a>
             <a href="global-chat-ui.php" class="lg-btn lg-btn-success" style="text-decoration:none;">Opýtať sa celej zbierky</a>
         </div>
-            <?php if (!empty($searchQuery)): ?>
-                <div class="lg-search-results-info">
-                    Nájdených: <?php echo count($laws); ?> zákon<?php echo count($laws) === 1 ? '' : (count($laws) >= 2 && count($laws) <= 4 ? 'y' : 'ov'); ?> 
-                    pre "<?php echo htmlspecialchars($searchQuery); ?>"
-                    <a href="index.php" class="lg-link" style="margin-left: 10px;">Zrušiť vyhľadávanie</a>
+        
+        <?php if ($showDigest): ?>
+            <?php
+            $hasAny = ($periodSummaries['month'] ?? null) || ($periodSummaries['quarter'] ?? null) || ($periodSummaries['year'] ?? null);
+            $monthNames = [1=>'január',2=>'február',3=>'marec',4=>'apríl',5=>'máj',6=>'jún',7=>'júl',8=>'august',9=>'september',10=>'október',11=>'november',12=>'december'];
+            ?>
+            <?php if ($hasAny): ?>
+                <div class="lg-digest-header" style="margin-bottom:24px;">
+                    <h2 style="font-size:1.4rem;font-weight:600;color:var(--text-primary);">Zhrnutia zákonov a listín zo Zbierky zákonov</h2>
+                    <p style="color:var(--text-tertiary);font-size:0.95rem;margin-top:4px;">Agregované AI zhrnutia spracovaných zákonov zo Slov-Lexu a NR SR</p>
+                </div>
+                <div class="lg-digest-panels" style="display:flex;flex-direction:column;gap:24px;">
+                    <?php
+                    $periodLabels = [
+                        'month' => ['title' => 'Zhrnutie mesiaca', 'icon' => '📅'],
+                        'quarter' => ['title' => 'Zhrnutie štvrť roka', 'icon' => '📆'],
+                        'year' => ['title' => 'Zhrnutie roka', 'icon' => '🗓️'],
+                    ];
+                    foreach (['month', 'quarter', 'year'] as $key):
+                        $p = $periodSummaries[$key] ?? null;
+                        if (!$p) continue;
+                        $label = $periodLabels[$key];
+                        $periodTypeParam = $key;
+                        $periodYearParam = (int) ($p['period_year'] ?? 0);
+                        $periodValueParam = 0;
+                        $periodLabel = '';
+                        if ($key === 'month' && !empty($p['period_month']) && !empty($p['period_year'])) {
+                            $periodValueParam = (int) $p['period_month'];
+                            $periodLabel = ($monthNames[$p['period_month']] ?? '') . ' ' . $p['period_year'];
+                        } elseif ($key === 'quarter' && !empty($p['period_quarter']) && !empty($p['period_year'])) {
+                            $periodValueParam = (int) $p['period_quarter'];
+                            $periodLabel = 'Q' . $p['period_quarter'] . ' ' . $p['period_year'];
+                        } elseif ($key === 'year' && !empty($p['period_year'])) {
+                            $periodLabel = (string) $p['period_year'];
+                        }
+                        $periodChatTarget = 'period-chat-ui.php?type=' . urlencode($periodTypeParam)
+                            . '&year=' . $periodYearParam
+                            . '&value=' . $periodValueParam;
+                        $periodChatUrl = $auth->isLoggedIn()
+                            ? $periodChatTarget
+                            : ('login.php?redirect=' . urlencode($periodChatTarget));
+                        $summary = $p['summary_paragraph'] ?? '';
+                        $changes = $p['changes'] ?? '';
+                        $affected = $p['affected_groups'] ?? [];
+                        $positives = $p['positives'] ?? [];
+                        $negatives = $p['negatives'] ?? [];
+                        $lawsCount = $p['laws_count'] ?? 0;
+                    ?>
+                    <div class="lg-digest-panel" style="background:var(--glass-bg);backdrop-filter:blur(var(--glass-blur));border-radius:var(--radius-lg);padding:24px;border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);">
+                        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+                            <span><?php echo $label['icon']; ?></span>
+                            <?php echo htmlspecialchars($label['title']); ?>
+                            <?php if ($periodLabel): ?>
+                            <span style="font-weight:500;color:var(--text-secondary);">(<?php echo htmlspecialchars($periodLabel); ?>)</span>
+                            <?php endif; ?>
+                            <?php if ($lawsCount > 0): ?>
+                            <span style="font-size:0.85rem;color:var(--text-tertiary);">— <?php echo (int)$lawsCount; ?> zákonov</span>
+                            <?php endif; ?>
+                            <a href="<?php echo htmlspecialchars($periodChatUrl); ?>" class="lg-btn lg-btn-primary" style="margin-left:auto;text-decoration:none;">Opýtať sa AI</a>
+                        </h3>
+                        <?php if ($summary): ?>
+                        <p style="margin-bottom:12px;line-height:1.6;"><strong>Stručné zhrnutie:</strong> <?php echo nl2br(htmlspecialchars($summary)); ?></p>
+                        <?php endif; ?>
+                        <?php if ($changes): ?>
+                        <p style="margin-bottom:12px;line-height:1.6;"><strong>Aktuálne zmeny:</strong> <?php echo nl2br(htmlspecialchars($changes)); ?></p>
+                        <?php endif; ?>
+                        <?php if (!empty($affected)): ?>
+                        <div style="margin:12px 0;">
+                            <strong style="color:var(--text-secondary);">Zasiahnuté skupiny:</strong>
+                            <ul style="margin:6px 0 0 20px;padding:0;">
+                                <?php foreach ($affected as $ag): ?>
+                                <li style="margin-bottom:4px;"><?php echo htmlspecialchars(is_string($ag) ? $ag : ($ag['group'] ?? $ag['impact'] ?? json_encode($ag))); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                        <?php if (!empty($positives)): ?>
+                        <div class="lg-digest-citizens digest-good" style="margin-top:12px;padding:12px;border-radius:var(--radius-sm);background:rgba(52,199,89,0.15);border-left:4px solid var(--success);">
+                            <strong>Pozitívne:</strong>
+                            <ul style="margin:6px 0 0 20px;padding:0;">
+                                <?php foreach ($positives as $pos): ?>
+                                <li style="margin-bottom:4px;"><?php echo htmlspecialchars(is_string($pos) ? $pos : ($pos['explanation'] ?? $pos['positive'] ?? json_encode($pos))); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                        <?php if (!empty($negatives)): ?>
+                        <div class="lg-digest-citizens digest-bad" style="margin-top:12px;padding:12px;border-radius:var(--radius-sm);background:rgba(255,59,48,0.12);border-left:4px solid var(--danger);">
+                            <strong>Negatívne:</strong>
+                            <ul style="margin:6px 0 0 20px;padding:0;">
+                                <?php foreach ($negatives as $neg): ?>
+                                <li style="margin-bottom:4px;"><?php echo htmlspecialchars(is_string($neg) ? $neg : ($neg['explanation'] ?? $neg['negative'] ?? json_encode($neg))); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="lg-empty">
+                    <p>Zhrnutia za obdobie sa pripravujú.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Spustite najprv spracovanie zákonov: <code>php bin/crawl-slovlex.php 2</code> a <code>php bin/summarize-slovlex.php 0 2025</code>, <code>php bin/summarize-slovlex.php 0 2026</code>. Potom: <code>php bin/generate-period-summaries.php</code>.</p>
                 </div>
             <?php endif; ?>
-        
-        <?php if (empty($laws)): ?>
+        <?php elseif (empty($laws)): ?>
             <div class="lg-empty">
-                <?php if (!empty($searchQuery)): ?>
-                    <p>Pre vyhľadávanie "<?php echo htmlspecialchars($searchQuery); ?>" neboli nájdené žiadne zákony.</p>
-                    <p style="margin-top: 10px; font-size: 0.9em;">
-                        <a href="index.php" class="lg-link">Zobraziť všetky zákony</a>
-                    </p>
-                <?php elseif ($section === 'slovlex'): ?>
+                <?php if ($section === 'slovlex'): ?>
                     <p>Zatiaľ neboli importované žiadne zákony zo Zbierky zákonov.</p>
                     <p style="margin-top: 10px; font-size: 0.9em;">Spustite v priečinku projektu: <code>php bin/crawl-slovlex.php 2</code> (posledné 2 roky) alebo <code>php bin/crawl-slovlex.php 10</code> (posledných 10 rokov). Na predspracovanie AI zhrnutí za aktuálny rok: <code>php bin/process-year-slovlex.php</code>.</p>
                 <?php elseif ($section === 'nrsr'): ?>
@@ -233,6 +302,9 @@ if (!empty($searchQuery)) {
                             </span>
                         <?php endforeach; ?>
                     </div>
+                    <?php endif; ?>
+                    <?php if (!empty($law['human_title'])): ?>
+                    <div class="lg-law-human-title" style="font-size:0.95rem;color:var(--text-secondary);margin-bottom:4px;"><?php echo htmlspecialchars($law['human_title']); ?></div>
                     <?php endif; ?>
                     <div class="lg-law-title">
                         <a href="law.php?id=<?php echo htmlspecialchars($law['id']); ?>">

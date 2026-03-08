@@ -18,6 +18,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Config;
 use App\Database;
 use App\Logger;
+use App\PoliticalDigestGenerator;
 use App\Scraper;
 use App\DocumentExtractor;
 use App\OpenAIClient;
@@ -98,6 +99,21 @@ $processor = new LawProcessor(
 );
 
 try {
+    // Political digest (home page) – run daily
+    $today = date('Y-m-d');
+    $existingDigest = $db->getLatestPoliticalDigest();
+    if (!$existingDigest || ($existingDigest['digest_date'] ?? '') !== $today) {
+        try {
+            $watchdogLogger->info("Generating political digest for {$today}...");
+            $digestGen = new PoliticalDigestGenerator($openaiKey, $logger, $db);
+            $digest = $digestGen->generate();
+            $db->savePoliticalDigest($today, $digest);
+            $watchdogLogger->info("Political digest saved.");
+        } catch (\Throwable $e) {
+            $watchdogLogger->warning("Political digest failed: " . $e->getMessage());
+        }
+    }
+
     // Fetch list page
     $watchdogLogger->info("Fetching laws list from NR SR...");
     $listHtml = $scraper->fetchListPage($nrSrListUrl);

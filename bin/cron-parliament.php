@@ -177,13 +177,7 @@ foreach ($mps as $mp) {
         $mpData = array_merge($mp, $profile, ['nrsr_id' => $mp['nrsr_id'], 'full_name' => $mp['full_name'], 'profile_url' => $mp['profile_url']]);
         $mpId = $db->saveOrUpdateParliamentMp($mpData);
 
-        $row = $db->getParliamentMpById($mpId) ?: ['full_name' => $mp['full_name']];
-        $stats = json_decode((string)($row['stats_json'] ?? '{}'), true);
-        if (!is_array($stats)) {
-            $stats = [];
-        }
-        $card = $analyzer->buildMpCard(array_merge($row, $stats));
-        $db->refreshParliamentMpStatsAndCard($mpId, $card);
+        $db->refreshParliamentMpStatsFromVotes($mpId, $analyzer);
         $processedMps++;
     } catch (\Throwable $e) {
         $logger->error('Failed parliament MP', ['id' => $mp['nrsr_id'], 'error' => $e->getMessage()]);

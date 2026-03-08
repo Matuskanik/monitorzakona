@@ -4,10 +4,11 @@ Watchdog je systém, ktorý automaticky každý deň o 00:00 (polnoc) kontroluje
 
 ## Čo watchdog robí
 
-1. **Kontroluje nové zákony** - Každý deň o polnoci načíta aktuálny zoznam zákonov z NR SR
-2. **Filtruje nové zákony** - Nájde len tie zákony, ktoré ešte neboli spracované
-3. **Spracováva nové zákony** - Automaticky ich stiahne, extrahuje text a vygeneruje AI analýzu
-4. **Loguje výsledky** - Všetky aktivity sa zapisujú do `storage/logs/watchdog.log`
+1. **Generuje politický digest** - Každý deň vygeneruje AI prehľad (Dnes, Tento týždeň, Tento mesiac) pre domovskú stránku
+2. **Kontroluje nové zákony** - Načíta aktuálny zoznam zákonov z NR SR
+3. **Filtruje nové zákony** - Nájde len tie zákony, ktoré ešte neboli spracované
+4. **Spracováva nové zákony** - Automaticky ich stiahne, extrahuje text a vygeneruje AI analýzu
+5. **Loguje výsledky** - Všetky aktivity sa zapisujú do `storage/logs/watchdog.log`
 
 ## Nastavenie cron jobu
 
@@ -29,8 +30,10 @@ crontab -e
 
 2. Pridajte tento riadok (upravte cestu podľa vašej inštalácie):
 ```
-0 0 * * * cd /Users/apple/aibnb_t/Sentinel && php bin/watchdog.php >> storage/logs/watchdog.log 2>&1
+0 0 * * * cd /cesta/k/monitorzakona && php bin/watchdog.php >> storage/logs/watchdog.log 2>&1
 ```
+
+Pre neinteraktívne nastavenie (napr. pri deployi): `bash bin/setup-cron.sh --yes`
 
 3. Uložte a zavrite editor
 

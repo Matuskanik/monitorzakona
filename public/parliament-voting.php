@@ -89,6 +89,14 @@ if (empty($votes) && !empty($voting['source_url'])) {
     <span class="lg-dark-label">Tmavý režim</span>
 </div>
 <div class="lg-container">
+    <div class="lg-section-tabs" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <a href="index.php?section=" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Všetky</a>
+        <a href="index.php?section=nrsr" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Nové zákony (NR SR)</a>
+        <a href="parliament.php" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Hlasovania NR SR</a>
+        <a href="poslanci.php" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Poslanci</a>
+        <a href="index.php?section=slovlex" class="lg-btn lg-btn-secondary" style="text-decoration:none;">Zbierka zákonov</a>
+        <a href="global-chat-ui.php" class="lg-btn lg-btn-success" style="text-decoration:none;">Opýtať sa celej zbierky</a>
+    </div>
     <a class="lg-back-link" href="parliament.php">← Späť na prehľad hlasovaní</a>
     <h1 class="lg-title"><?php echo htmlspecialchars($voting['title']); ?></h1>
     <p class="lg-body" style="margin-top:10px;"><?php echo htmlspecialchars($voting['summary_text'] ?? ''); ?></p>

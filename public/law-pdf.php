@@ -88,6 +88,7 @@ if (!$law) {
         'id' => $json['master_id'] ?? $lawId,
         'master_id' => $json['master_id'] ?? $lawId,
         'title' => $json['title'] ?? '',
+        'human_title' => $json['human_title'] ?? null,
         'approval_date' => $json['approval_date'] ?? null,
         'source_url' => $json['source_url'] ?? '',
         'ai_summary' => isset($json['summary']) ? json_encode($json['summary']) : null,
@@ -166,6 +167,7 @@ if (extension_loaded('gd')) {
     }
 }
 
+$humanTitle = trim((string)($law['human_title'] ?? ''));
 $title = htmlspecialchars($law['title'] ?? '', ENT_QUOTES, 'UTF-8');
 $approvalDate = htmlspecialchars($law['approval_date'] ?? '', ENT_QUOTES, 'UTF-8');
 $sourceUrl = htmlspecialchars($law['source_url'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -276,8 +278,11 @@ if ($logoData !== '') {
     $html .= '<img class="logo" src="' . $logoData . '" alt="Monitor zákona">';
 }
 
-$html .= '<div>
-                <h1>' . $title . '</h1>
+$html .= '<div>';
+if ($humanTitle !== '') {
+    $html .= '<p class="human-title" style="font-size:1rem;color:#7f8c8d;margin-bottom:8px;">' . htmlspecialchars($humanTitle, ENT_QUOTES, 'UTF-8') . '</p>';
+}
+$html .= '<h1>' . $title . '</h1>
                 <div class="meta">';
 
 if ($approvalDate !== '') {

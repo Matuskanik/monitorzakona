@@ -135,6 +135,7 @@ class LawProcessor
                 $contentHash = hash('sha256', $masterId . $lawData['url'] . time()); // Use unique hash
                 
                 $aiSummaryJson = json_encode([
+                    'human_title' => '',
                     'summary_paragraph' => 'Text z tohto zákona sa nepodarilo extrahovať ani pomocou OCR technológie. Dokumenty môžu byť poškodené, príliš nízkej kvality, alebo v nepodporovanom formáte.',
                     'affected_groups' => ['Informácie nie sú dostupné'],
                     'positives' => [],
@@ -146,6 +147,7 @@ class LawProcessor
                 $lawId = $this->db->saveLaw([
                     'master_id' => $masterId,
                     'title' => $lawData['title'],
+                    'human_title' => null,
                     'approval_date' => $lawData['approval_date'],
                     'source_url' => $lawData['url'],
                     'content_hash' => $contentHash,
@@ -211,6 +213,7 @@ class LawProcessor
             $lawId = $this->db->saveLaw([
                 'master_id' => $masterId,
                 'title' => $lawData['title'],
+                'human_title' => !empty($aiSummary['human_title']) ? trim($aiSummary['human_title']) : null,
                 'approval_date' => $lawData['approval_date'],
                 'source_url' => $lawData['url'],
                 'content_hash' => $contentHash,
